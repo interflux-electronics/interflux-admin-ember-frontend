@@ -1,0 +1,15 @@
+<Page id="images">
+  <LinkTo @route="index">Back</LinkTo>
+
+  <section class="record">
+    {{outlet}}
+  </section>
+
+  <section class="search">
+    <h1>Images</h1>
+    {{#each @images as |image index|}}
+      <p>{{index}} - <LinkTo @route="images.image" @model="{{image.id}}">{{image.cdnPath}}</LinkTo></p>
+    {{/each}}
+  </section>
+
+</Page>
