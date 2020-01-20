@@ -1,0 +1,270 @@
+// Styles are derived from the Sketch design system
+//
+// Important: We don't apply styles directly to HTML elements (<h1> to <h6>)
+// because most <h1> are styled like <h1> on desktop, but is styled as an <h3> on
+// mobile. Similarilly, many <p> are styled like <h3> on desktop, but as <p> on
+// mobile. Because we cannot responsively change the HTML elements without
+// creating duplicates or using JS, the best approach is to using mixins:
+//
+// h1 {
+//   @include widescreen {
+//     @include h1-widescreen;
+//   }
+//   @include desktop {
+//     @include h1-desktop;
+//   }
+//   @include tablet {
+//     @include h3-tablet;
+//   }
+//   @include mobile {
+//     @include h3-mobile;
+//   }
+// }
+//
+// Note that all headings that have not been explicitly assigned a mixin, will
+// be pink in colour, so you can spot your to-do's.
+//
+// Important 2: By decoupling the HTML elements from their styles, we can choose the
+// most SEO-friendly and dev-friendly semantics for our HTML.
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $rubik-bold; // Important, we explicitly name fonts, no weights used
+  font-size: inherit; // Use browser defaults for now
+  font-style: normal; // Important, we use weightless fonts
+  font-weight: normal; // Important, we use weightless fonts
+  line-height: 150%;
+  margin: 0;
+  // color: pink; // On purpose, read above
+}
+
+// H1
+
+@mixin h1 {
+  font-family: $rubik-bold;
+  color: $almost-black;
+}
+
+@mixin h1-widescreen {
+  @include h1;
+  font-size: 59px;
+  line-height: 64px;
+  letter-spacing: -2.4px;
+  max-width: 590px; // 10x font-size
+}
+
+@mixin h1-desktop {
+  @include h1;
+  font-size: vw(59);
+  line-height: vw(64);
+  letter-spacing: vw(-2.4);
+  max-width: vw(590);
+}
+
+@mixin h1-tablet {
+  @include h1;
+  font-size: vw(59, 900);
+  line-height: vw(64, 900);
+  letter-spacing: vw(-2.4, 900);
+  max-width: vw(590, 900);
+}
+
+@mixin h1-mobile {
+  @include h1;
+  font-size: vw(59, 360);
+  line-height: vw(64, 360);
+  letter-spacing: vw(-2.4, 360);
+  max-width: vw(590, 360);
+}
+
+// H2
+
+@mixin h2 {
+  font-family: $rubik-bold;
+  color: $almost-black;
+}
+
+@mixin h2-widescreen {
+  @include h2;
+  font-size: 44px;
+  line-height: 48px;
+  letter-spacing: -1px;
+  max-width: 768px;
+}
+
+@mixin h2-desktop {
+  @include h2;
+  font-size: vw(44);
+  line-height: vw(48);
+  letter-spacing: vw(-1);
+  max-width: vw(768);
+}
+
+@mixin h2-tablet {
+  @include h2;
+  font-size: vw(44, 900);
+  line-height: vw(48, 900);
+  letter-spacing: vw(-1, 900);
+  max-width: vw(768, 900);
+}
+
+@mixin h2-mobile {
+  @include h2;
+  font-size: vw(44, 360);
+  line-height: vw(48, 360);
+  letter-spacing: vw(-1, 360);
+  max-width: vw(768, 360);
+}
+
+// H3
+
+@mixin h3 {
+  font-family: $rubik-bold;
+  color: $almost-black;
+}
+
+@mixin h3-widescreen {
+  @include h3;
+  font-size: 33px;
+  line-height: 40px;
+  letter-spacing: -0.9px;
+  max-width: 768px;
+}
+
+@mixin h3-desktop {
+  @include h3;
+  font-size: vw(33);
+  line-height: vw(40);
+  letter-spacing: vw(-0.9);
+  max-width: vw(768);
+}
+
+@mixin h3-tablet {
+  @include h3;
+  font-size: vw(33, 900);
+  line-height: vw(40, 900);
+  letter-spacing: vw(-0.9, 900);
+  max-width: vw(768, 900);
+}
+
+@mixin h3-mobile {
+  @include h3;
+  font-size: vw(33, 360);
+  line-height: vw(40, 360);
+  letter-spacing: vw(-0.9, 360);
+  max-width: vw(768, 360);
+}
+
+// H4
+
+@mixin h4 {
+  font-family: $rubik-medium;
+  color: $almost-black;
+}
+
+@mixin h4-widescreen {
+  @include h4;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.8px;
+  max-width: 680px;
+}
+
+@mixin h4-desktop {
+  @include h4;
+  font-size: vw(24);
+  line-height: vw(32);
+  letter-spacing: vw(-0.8);
+  max-width: vw(680);
+}
+
+@mixin h4-tablet {
+  @include h4;
+  font-size: vw(24, 900);
+  line-height: vw(32, 900);
+  letter-spacing: vw(-0.8, 900);
+  max-width: vw(680, 900);
+}
+
+@mixin h4-mobile {
+  @include h4;
+  font-size: vw(24, 360);
+  line-height: vw(32, 360);
+  letter-spacing: vw(-0.8, 360);
+  max-width: vw(680, 360);
+}
+
+// H5
+
+@mixin h5 {
+  font-family: $rubik-medium;
+  color: $almost-black;
+}
+
+@mixin h5-widescreen {
+  @include h5;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+}
+
+@mixin h5-desktop {
+  @include h5;
+  font-size: vw(18);
+  line-height: vw(24);
+  letter-spacing: vw(-0.4);
+}
+
+@mixin h5-tablet {
+  @include h5;
+  font-size: vw(18, 900);
+  line-height: vw(24, 900);
+  letter-spacing: vw(-0.4, 900);
+}
+
+@mixin h5-mobile {
+  @include h5;
+  font-size: vw(18, 360);
+  line-height: vw(24, 360);
+  letter-spacing: vw(-0.4, 360);
+}
+
+// H6
+
+@mixin h6 {
+  text-transform: uppercase;
+  font-family: $rubik-bold;
+  color: $almost-black;
+}
+
+@mixin h6-widescreen {
+  @include h6;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 2.4px;
+}
+
+@mixin h6-desktop {
+  @include h6;
+  font-size: vw(11);
+  line-height: vw(16);
+  letter-spacing: vw(2.4);
+}
+
+@mixin h6-tablet {
+  @include h6;
+  font-size: vw(11, 900);
+  line-height: vw(16, 900);
+  letter-spacing: vw(2.4, 900);
+}
+
+@mixin h6-mobile {
+  @include h6;
+  font-size: vw(11, 360);
+  line-height: vw(16, 360);
+  letter-spacing: vw(2.4, 360);
+}

@@ -1,0 +1,192 @@
+// These styles are derived fromt the Sketch design system.
+//
+// It's important we don't assign them directly to the <p> tag. In many parts of
+// the design a <p> element is styled as an <h4> on desktop, but a <p class="lead">
+// on mobile. To maintain neutrality, the <p> receives no styling and needs to
+// be explicitely defined in the CCS like so. To help spot the <p> that have not
+// been assigned a style will appear pink in the web pages.
+//
+// Usage:
+// @include desktop {
+//   @extend .h4;
+// }
+// @include mobile {
+//   @extend .p1, .lead;
+// }
+
+p {
+  margin: 0; // Reset browser defaults
+  // color: pink; // On purpose to spot unstyled paragraphs
+}
+
+// P
+
+@mixin p {
+  color: $almost-black;
+  margin: 0;
+}
+
+// P LEAD
+
+@mixin p-lead {
+  @include p;
+  font-family: $rubik-regular;
+}
+
+@mixin p-lead-widescreen {
+  @include p-lead;
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 540px;
+}
+
+@mixin p-lead-desktop {
+  @include p-lead;
+  font-size: vw(18);
+  line-height: vw(28);
+  max-width: vw(540);
+}
+
+@mixin p-lead-tablet {
+  @include p-lead;
+  font-size: vw(18, 900);
+  line-height: vw(28, 900);
+  max-width: vw(540, 900);
+}
+
+@mixin p-lead-mobile {
+  @include p-lead;
+  font-size: vw(18, 360);
+  line-height: vw(28, 360);
+  max-width: vw(540, 360);
+}
+
+@mixin p-lead-grey-widescreen {
+  @include p-lead-widescreen;
+  color: $grey-6;
+}
+
+@mixin p-lead-grey-desktop {
+  @include p-lead-desktop;
+  color: $grey-6;
+}
+
+@mixin p-lead-grey-tablet {
+  @include p-lead-tablet;
+  color: $grey-6;
+}
+
+@mixin p-lead-grey-mobile {
+  @include p-lead-mobile;
+  color: $grey-6;
+}
+
+// P BODY
+
+@mixin p-body {
+  @include p;
+  font-family: $rubik-regular;
+}
+
+@mixin p-body-widescreen {
+  @include p-body;
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 560px;
+}
+
+@mixin p-body-desktop {
+  @include p-body;
+  font-size: vw(14);
+  line-height: vw(20);
+  max-width: vw(560);
+}
+
+@mixin p-body-tablet {
+  @include p-body;
+  font-size: vw(14, 900);
+  line-height: vw(20, 900);
+  max-width: vw(560, 900);
+}
+
+@mixin p-body-mobile {
+  @include p-body;
+  font-size: vw(14, 360);
+  line-height: vw(20, 360);
+  max-width: vw(560, 360);
+}
+
+@mixin p-body-grey-widescreen {
+  @include p-body-widescreen;
+  color: $grey-6;
+}
+
+@mixin p-body-grey-desktop {
+  @include p-body-desktop;
+  color: $grey-6;
+}
+
+@mixin p-body-grey-tablet {
+  @include p-body-tablet;
+  color: $grey-6;
+}
+
+@mixin p-body-grey-mobile {
+  @include p-body-mobile;
+  color: $grey-6;
+}
+
+// P CAPTION
+
+@mixin p-caption {
+  @include p;
+  font-family: $rubik-regular;
+}
+
+@mixin p-caption-widescreen {
+  @include p-caption;
+  font-size: 11px;
+  line-height: 16px;
+  max-width: 440px;
+}
+
+@mixin p-caption-desktop {
+  @include p-caption;
+  font-size: vw(11);
+  line-height: vw(16);
+  max-width: vw(440);
+}
+
+@mixin p-caption-tablet {
+  @include p-caption;
+  font-size: vw(11, 900);
+  line-height: vw(16, 900);
+  max-width: vw(440, 900);
+}
+
+@mixin p-caption-mobile {
+  @include p-caption;
+  font-size: vw(11, 360);
+  line-height: vw(16, 360);
+  max-width: vw(440, 360);
+}
+
+@mixin p-caption-grey-widescreen {
+  @include p-caption-widescreen;
+  color: $grey-6;
+}
+
+@mixin p-caption-grey-desktop {
+  @include p-caption-desktop;
+  color: $grey-6;
+}
+
+@mixin p-caption-grey-tablet {
+  @include p-caption-tablet;
+  color: $grey-6;
+}
+
+@mixin p-caption-grey-mobile {
+  @include p-caption-mobile;
+  color: $grey-6;
+}
