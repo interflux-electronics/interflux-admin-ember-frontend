@@ -10,4 +10,5 @@ Router.map(function() {
   this.route('images', function() {
     this.route('image', {path: '/:uuid'});
   });
+  this.route('loading');
 });
