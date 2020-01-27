@@ -1,1 +1,19 @@
-{{yield}}
+<div
+  class="Input {{if @icon 'has-icon' 'no-icon'}} {{if @disabled 'disabled' 'not-disabled'}} {{if @isValidated (if @isValid 'valid' 'invalid') 'not-validated'}}"
+>
+  <input
+    type={{@type}}
+    value={{@value}}
+    placeholder={{@placeholder}}
+    disabled={{disabled}}
+    {{on 'change' onChange}}
+    {{on 'keydown' onKeyDown}}
+    {{on 'focus' this.onFocus}}
+    {{on 'blur' onBlur}}
+  >
+  {{#if @icon}}
+    <div class="icon">
+      <!-- <Icon @name={{@icon}} /> -->
+    </div>
+  {{/if}}
+</div>

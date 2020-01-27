@@ -1,3 +1,15 @@
-<main class="page">
+<main
+  id="{{@id}}"
+  class="page {{if modal.active 'no-scroll' 'scrollable'}}"
+  style="top: -{{modal.scroll}}px"
+>
+  <nav>
+    <LinkTo @route="index">
+      <Icon::Interflux />
+    </LinkTo>
+    <LinkTo @route="images">
+      <Icon::Camera />
+    </LinkTo>
+  </nav>
   {{yield}}
 </main>

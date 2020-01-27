@@ -1,0 +1,13 @@
+<modal
+  id="{{@id}}"
+  class="modal"
+>
+  <div class="overlay">
+    <LinkTo @route="images"></LinkTo>
+  </div>
+  <div class="content">
+    <div class="box">
+      {{yield}}
+    </div>
+  </div>
+</modal>

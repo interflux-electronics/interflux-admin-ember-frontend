@@ -16,44 +16,7 @@
 @import 'normalise/cross-browser';
 @import 'normalise/cross-project';
 
-// App
-// @import 'app/pods/components/app/style.scss';
-// @import 'app/pods/components/app/header/style.scss';
-// @import 'app/pods/components/app/breadcrumbs/style.scss';
-// @import 'app/pods/components/app/footer/style.scss';
-
-// Reusable UI
-// @import 'app/pods/components/ui/button/style';
-// @import 'app/pods/components/ui/field/style';
-// @import 'app/pods/components/ui/image/style';
-// @import 'app/pods/components/ui/input/style';
-// @import 'app/pods/components/ui/search/style';
-// @import 'app/pods/components/ui/textarea/style';
-// @import 'app/pods/components/ui/video/style';
-
-// Components
-// @import 'app/pods/components/page/style';
-// @import 'app/pods/components/page/section/style';
-// @import 'app/pods/components/icon/style';
-// @import 'app/pods/components/liner/style.scss';
-// @import 'app/pods/components/icon-duo/style.scss';
-
-// UI specific to this project
-// @import 'app/pods/components/feed-item/style.scss';
-// @import 'app/pods/components/feeds-page/style.scss';
-// @import 'app/pods/components/page-load/style.scss';
-// @import 'app/pods/components/load-spinner/style.scss';
-// @import 'app/pods/components/product-card/style.scss';
-// @import 'app/pods/components/product-set/style.scss';
-// @import 'app/pods/components/hero-card/style.scss';
-// @import 'app/pods/components/hero-set/style.scss';
-
-// Pages
-// @import 'app/pods/components/page/index/style.scss';
-// @import 'app/pods/components/page/product/content/style.scss';
-// @import 'app/pods/components/page/products/style.scss';
-// @import 'app/pods/components/page/products/families/style.scss';
-// @import 'app/pods/components/page/products/families/family/style.scss';
-// @import 'app/pods/components/page/products/purposes/style.scss';
-// @import 'app/pods/components/page/products/qualities/style.scss';
-// @import 'app/pods/components/page/products/names/style.scss';
+// Pods
+@import 'app/pods/application/style';
+@import 'app/pods/components/page/style';
+@import 'app/pods/components/modal/style';

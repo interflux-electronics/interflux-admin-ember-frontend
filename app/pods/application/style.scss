@@ -1,0 +1,10 @@
+body > main {
+  &.no-scroll {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+body > .modal {
+  // position: relative;
+}

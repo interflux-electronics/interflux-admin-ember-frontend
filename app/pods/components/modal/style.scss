@@ -1,0 +1,33 @@
+body > .modal {
+  > .overlay {
+    position: fixed;
+    background: rgba(black, 0.5);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    > a {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+  > .content {
+    position: relative; // <main> becomes fixed
+    top: 0;
+    width: 100vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 10%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none; // So the overlay below can be clicked
+    > .box {
+      background: white;
+      max-width: 1000px;
+      min-height: 100px;
+      box-sizing: border-box;
+      padding: 10%;
+      pointer-events: all; // So the overlay below doesn't get clicked when user interacts within white box
+    }
+  }
+}

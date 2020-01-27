@@ -1,1 +1,29 @@
-<Page::Images::Image @image={{model.image}} />
+<Modal @id="image">
+  <h1>Image</h1>
+  <p>Path: {{@model.image.cdnPath}}</p>
+  <p>Formats:</p>
+  <ul>
+    {{#each @model.image.formats as |format|}}
+      <li>{{format}}</li>
+    {{/each}}
+  </ul>
+  <p>Sizes:</p>
+  <ul>
+    {{#each @model.image.sizes as |size|}}
+      <li>{{size}}</li>
+    {{/each}}
+  </ul>
+  <p>URLs:</p>
+  <ul>
+    {{#each @model.image.files as |file|}}
+      <li>
+        <a
+          href={{file.url}}
+          target="_blank"
+        >
+          {{file.url}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</Modal>

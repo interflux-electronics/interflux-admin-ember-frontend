@@ -1,0 +1,44 @@
+<div class="temp">
+  <input {{on 'focus' this.onFocus}}>
+</div>
+
+<div class="search">
+  <p>query: {{query}}</p>
+  <p>highlight: {{highlight}}</p>
+  <p>focus: {{focus}}</p>
+  <p>selected: {{selected}}</p>
+  <p>showDropdown: {{showDropdown}}</p>
+  <!-- <button {{on 'click' this.doSomething}}>Click</button> -->
+  <Input
+    @type="search"
+    @icon="search"
+    @placeholder="Search"
+    @value={{query}}
+    @onChange={{onChange}}
+    @onKeyDown={{this.onKeyDown}}
+    @onBlur={{onBlur}}
+  />
+  {{#if showDropdown}}
+    <div className="dropdown">
+      <ul>
+        {{#if isFetching}}
+          <li>Searching ...</li>
+        {{else if fetchFailed}}
+          <li>Sorry, something went wrong ...</li>
+        {{else}}
+          {{#each options as |option|}}
+            <li
+              class="{{if (fn isActive i) 'active' 'idle'}}"
+              {{on 'click' (fn select option)}}
+              {{on 'mouseover' (fn highlight i)}}
+            >
+              {{fn labelFor option}}
+            </li>
+          {{else}}
+            <li>Sorry, could not find {{query}}</li>
+          {{/each}}
+        {{/if}}
+      </ul>
+    </div>
+  {{/if}}
+</div>
