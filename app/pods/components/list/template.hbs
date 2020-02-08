@@ -1,0 +1,23 @@
+<Input
+  @type="search"
+  @placeholder="Search"
+  @disabled={{false}}
+  @onFocus={{this.onFocus}}
+  @onBlur={{this.onBlur}}
+  @onKeyUp={{this.onKeyUp}}
+/>
+
+<ul>
+  {{#each options as |option index|}}
+    <li>
+      <LinkTo
+        @route={{@linkRoute}}
+        @model={{get option @linkModel}}
+      >
+        {{get option @label}}
+      </LinkTo>
+    </li>
+  {{else}}
+    <li>No results for "{{query}}"</li>
+  {{/each}}
+</ul>

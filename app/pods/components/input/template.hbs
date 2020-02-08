@@ -3,13 +3,11 @@
 >
   <input
     type={{@type}}
-    value={{@value}}
     placeholder={{@placeholder}}
-    disabled={{disabled}}
-    {{on 'change' onChange}}
-    {{on 'keydown' onKeyDown}}
-    {{on 'focus' this.onFocus}}
+    disabled={{@disabled}}
+    {{on 'focus' onFocus}}
     {{on 'blur' onBlur}}
+    {{on 'keyup' onKeyUp}}
   >
   {{#if @icon}}
     <div class="icon">

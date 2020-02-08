@@ -1,40 +1,31 @@
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
-export default class ReusablesInputComponent extends Component {
-  @action
-  onChange(event) {
-    console.debug('<Input> onChange', { event });
-    if (this.args.onChange) {
-      this.args.onChange(event);
-    }
-  }
-
-  @action
-  onKeyDown(event) {
-    console.debug('<Input> onKeyDown', { event });
-    if (this.args.onKeyDown) {
-      this.args.onKeyDown(event);
-    }
-  }
+export default class Input extends Component {
+  @tracked value;
 
   @action
   onFocus(event) {
-    console.debug('<Input> onFocus', { event });
     if (this.args.onFocus) {
       this.args.onFocus(event);
     }
-    // if (this.selectOnFocus === true) {
-    //   // TODO: Find Ember way
-    //   // event.target.select();
-    // }
+    // Select all text inside the <input> on focus
+    event.target.select();
   }
 
   @action
   onBlur(event) {
-    console.debug('<Input> onBlur', { event });
     if (this.args.onBlur) {
       this.args.onBlur(event);
+    }
+  }
+
+  @action
+  onKeyUp(event) {
+    this.value = event.target.value;
+    if (this.args.onKeyUp) {
+      this.args.onKeyUp(event);
     }
   }
 }

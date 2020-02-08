@@ -1,14 +1,15 @@
 main.page {
   display: flex;
-  >nav {
+  min-height: 100vh;
+  > nav {
     width: 30px;
     display: flex;
     flex-direction: column;
     background: $interflux-blue;
-    >a {
+    > a {
       width: 30px;
       height: 30px;
-      >svg {
+      > svg {
         width: 100%;
         height: auto;
         [fill] {

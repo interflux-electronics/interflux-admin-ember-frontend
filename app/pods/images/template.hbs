@@ -2,31 +2,11 @@
   <section id="search">
     <h1>Images</h1>
 
-    <Search
+    <List
       @options={{model.images}}
-      @optionLabel="cdnPath"
-      @onSearch={{this.onChange}}
-      @onSelect={{this.onSelect}}
+      @label="cdnPath"
+      @linkRoute="images.image"
+      @linkModel="id"
     />
-
-    <!-- <Search
-      @options={{model.images}}
-      @optionLabel="cdnPath"
-      @isFetching={{isFetching}}
-      @fetchFailed={{fetchFailed}}
-      @onSearch={{this.onChange}}
-      @onSelect={{this.onSelect}}
-    /> -->
-
-    {{#each @model.images as |image index|}}
-      <p>{{index}} -
-        <LinkTo
-          @route="images.image"
-          @model="{{image.id}}"
-        >
-          {{image.cdnPath}}
-        </LinkTo>
-      </p>
-    {{/each}}
   </section>
 </Page>
