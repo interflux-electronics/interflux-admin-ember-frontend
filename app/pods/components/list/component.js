@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
-export default class DemoComponent extends Component {
+export default class ListComponent extends Component {
   @tracked query;
   @tracked options;
 
@@ -15,7 +15,7 @@ export default class DemoComponent extends Component {
 
   @action
   onKeyUp(event) {
-    console.debug('<Search> onKeyUp()', event.target.value);
+    // console.debug('<List> onKeyUp()', event.target.value);
     const query = event.target.value;
     this.query = query;
     if (!query) {

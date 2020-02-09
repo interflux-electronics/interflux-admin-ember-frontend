@@ -1,0 +1,12 @@
+<Page @id="products">
+  <section>
+    <h1>Products</h1>
+
+    <List
+      @options={{model.products}}
+      @label="name"
+      @linkRoute="products.product"
+      @linkModel="id"
+    />
+  </section>
+</Page>

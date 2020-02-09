@@ -8,7 +8,10 @@ export default class Router extends EmberRouter {
 
 Router.map(function() {
   this.route('images', function() {
-    this.route('image', {path: '/:uuid'});
+    this.route('image', { path: '/:uuid' });
+  });
+  this.route('products', function() {
+    this.route('product', { path: '/:uuid' });
   });
   this.route('loading');
 });
