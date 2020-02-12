@@ -17,7 +17,7 @@ body > .modal {
     width: 100vw;
     min-height: 100vh;
     box-sizing: border-box;
-    padding: 10%;
+    padding: 30px;
     display: flex;
     justify-content: center;
     pointer-events: none; // So the overlay below can be clicked
@@ -27,7 +27,7 @@ body > .modal {
       max-width: 1000px;
       min-height: 100px;
       box-sizing: border-box;
-      padding: 10%;
+      padding: 30px;
       pointer-events: all; // So the overlay below doesn't get clicked when user interacts within white box
       img {
         max-width: 100%;

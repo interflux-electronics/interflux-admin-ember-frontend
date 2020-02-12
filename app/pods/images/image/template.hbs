@@ -3,23 +3,44 @@
     @cdnPath={{@model.image.cdnPath}}
     @sizes={{@model.image.sizes}}
     @formats={{@model.image.formats}}
-    @alt="Test"
-    @caption="Test"
+    @alt={{@model.image.alt}}
+    @caption={{@model.image.caption}}
   />
-  <p>Path: {{@model.image.cdnPath}}</p>
-  <p>Formats:</p>
-  <ul>
-    {{#each @model.image.formats as |format|}}
-      <li>{{format}}</li>
-    {{/each}}
-  </ul>
-  <p>Sizes:</p>
-  <ul>
-    {{#each @model.image.sizes as |size|}}
-      <li>{{size}}</li>
-    {{/each}}
-  </ul>
-  <p>URLs:</p>
+
+  <fieldset>
+    <label>Caption</label>
+    <input
+      type="text"
+      value="{{@model.image.caption}}"
+    >
+    <p>Text shown below the image.</p>
+  </fieldset>
+
+  <fieldset>
+    <label>Alt</label>
+    <input
+      type="text"
+      value={{@model.image.alt}}
+    >
+    <p>Text shown only to Google and screen readers.</p>
+  </fieldset>
+
+  <fieldset>
+    <label>CDN path</label>
+    <input
+      type="text"
+      value="{{@model.image.cdnPath}}"
+    >
+    <p>Where the file is stored on our CDN (<a
+        href="{{env 'cdnHost'}}/index.html"
+        target="_blank"
+        rel="nofollow noopener"
+      >
+        {{env 'cdnHost'}}
+      </a>).</p>
+  </fieldset>
+
+  <p>All available sizes and formats:</p>
   <ul>
     {{#each @model.image.files as |file|}}
       <li>
@@ -27,7 +48,7 @@
           href={{file.url}}
           target="_blank"
         >
-          {{file.url}}
+          @{{file.width}}x{{file.height}}.{{file.format}}
         </a>
       </li>
     {{/each}}
