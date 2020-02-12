@@ -23,11 +23,16 @@ body > .modal {
     pointer-events: none; // So the overlay below can be clicked
     > .box {
       background: white;
+      width: 100%;
       max-width: 1000px;
       min-height: 100px;
       box-sizing: border-box;
       padding: 10%;
       pointer-events: all; // So the overlay below doesn't get clicked when user interacts within white box
+      img {
+        max-width: 100%;
+        height: auto;
+      }
     }
   }
 }

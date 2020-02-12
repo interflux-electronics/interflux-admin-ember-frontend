@@ -1,5 +1,11 @@
 <Modal @id="image">
-  <h1>Image</h1>
+  <Image::Responsive
+    @cdnPath={{@model.image.cdnPath}}
+    @sizes={{@model.image.sizes}}
+    @formats={{@model.image.formats}}
+    @alt="Test"
+    @caption="Test"
+  />
   <p>Path: {{@model.image.cdnPath}}</p>
   <p>Formats:</p>
   <ul>

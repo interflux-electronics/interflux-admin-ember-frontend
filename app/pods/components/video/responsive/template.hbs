@@ -1,0 +1,113 @@
+{{!--
+<figure>
+   <picture>
+      <source ...>
+      <source ...>
+      <source ...>
+      <img..>
+   </picture>
+
+   ​<picture>
+     <source srcset="mdn-logo.svg" type="image/svg+xml">
+     <img src="mdn-logo.png" alt="MDN">
+   </picture>
+
+   <video controls>
+     <source src="foo.webm" type="video/webm">
+     <source src="foo.ogg" type="video/ogg">
+     <source src="foo.mov" type="video/quicktime">
+     I'm sorry; your browser doesn't support HTML5 video.
+   </video>
+
+   <figcaption>...</figcaption>
+</figure>
+ --}}
+
+<figure>
+  ​<picture class="responsive {{if loading 'loading' 'done'}}">
+    {{#each sources as |source|}}
+      <source
+        srcset={{source.url}}
+        type={{source.type}}
+      >
+    {{/each}}
+    <img
+      src={{safestSource.url}}
+      width={{width}}
+      height={{height}}
+      alt={{alt}}
+      onload={{action 'onLoad'}}
+      onerror={{action 'onError'}}
+    >
+  </picture>
+
+  {{#if caption}}
+    <figcaption>{{caption}}</figcaption>
+  {{/if}}
+</figure>
+
+
+
+
+
+<!-- {{#if loading}}
+  <i class="loading">
+    <span></span>
+  </i>
+{{/if}}
+
+{{#if loadFailed}}
+  <i class="fail">
+    <p>?</p>
+  </i>
+{{/if}}
+
+{{#if wrongFormats}}
+  <i class="wrong-format">
+    <p>X</p>
+  </i>
+{{/if}}
+
+{{#if isImage}}
+  ​<picture>
+    {{#each sources as |source|}}
+      <source
+        srcset={{source.url}}
+        type={{source.type}}
+      >
+    {{/each}}
+    <img
+      src={{safestSource.url}}
+      width={{width}}
+      height={{height}}
+      alt={{alt}}
+      onload={{action 'onLoad'}}
+      onerror={{action 'onError'}}
+    >
+  </picture>
+{{/if}}
+
+{{#if isVideo}}
+  <video
+    width={{width}}
+    height={{height}}
+    onloadeddata={{action 'onLoad'}}
+    onerror={{action 'onError'}}
+    autoplay
+    controls
+  >
+    {{#each sources as |source|}}
+      <source
+        src={{source.url}}
+        type={{source.type}}
+      >
+    {{/each}}
+    <i class="fail">
+      <p>Your browser doesn't support HTML5 video.</p>
+    </i>
+  </video>
+{{/if}}
+
+{{#if caption}}
+  <figcaption>{{caption}}</figcaption>
+{{/if}} -->

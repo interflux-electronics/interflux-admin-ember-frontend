@@ -1,0 +1,25 @@
+<figure class="responsive-image">
+  ​<picture
+    {{did-insert this.didInsertImg}}
+    {{will-destroy this.willDestroyImg}}
+  >
+    {{#if webp}}
+      <source
+        srcset="{{env 'cdnHost'}}{{@cdnPath}}@{{optimalWidth}}x{{optimalHeight}}.webp"
+        type="image/webp"
+      >
+    {{/if}}
+    <img
+      src="{{env 'cdnHost'}}{{@cdnPath}}@{{optimalWidth}}x{{optimalHeight}}.jpg"
+      width={{optimalWidth}}
+      height={{optimalHeight}}
+      alt={{@alt}}
+      onload={{this.onLoad}}
+      onerror={{this.onError}}
+    >
+  </picture>
+
+  {{#if @caption}}
+    <figcaption>{{@caption}}</figcaption>
+  {{/if}}
+</figure>
