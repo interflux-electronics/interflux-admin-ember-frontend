@@ -1,17 +1,19 @@
-// Brand colours
-$interflux-blue: #23578c;
-$interflux-blue-darker: darken($interflux-blue, 3%);
-$interflux-blue-lighter: lighten($interflux-blue, 8%);
-$interflux-light-blue: #5192d5;
-$lmpa-orange: #ff7300;
-$faint-orange: #f2ab72;
-$sac-grey: #6f6f6f;
+$blue-0: #3687d9; // Text highlight
+$blue-1: #3077bf;
+$blue-2: #2967a6;
+$blue-3: #23578c; // Logo blue
+$blue-4: #1d4773;
+$blue-5: #163759;
 
-// Commons
+$orange-0: #ff9d4d;
+$orange-1: #ff8f33;
+$orange-2: #ff8119;
+$orange-3: #ff7300; // LMPA orange
+$orange-4: #e66800;
+$orange-5: #cc5c00;
+
 $paragraph-color-1: #445260;
 $paragraph-color-2: #596979;
 $paragraph-color: #34373a;
 $title-color: #171819;
-$hyperlink-color: $interflux-light-blue;
-$hyperlink-color-hover: lighten($lmpa-orange, 0.1);
 $error-red: #ff7f7f;
