@@ -7,50 +7,72 @@
     @caption={{@model.image.caption}}
   />
 
-  <fieldset>
+  <hr>
+
+  <Fieldset>
+    <label>Model</label>
+    <input
+      type="text"
+      value="image"
+    >
+  </Fieldset>
+
+  <Fieldset>
+    <label>ID</label>
+    <input
+      type="text"
+      value={{@model.image.id}}
+    >
+  </Fieldset>
+
+  <hr>
+
+  <Fieldset>
     <label>Caption</label>
     <input
       type="text"
       value="{{@model.image.caption}}"
     >
-    <p>Text shown below the image.</p>
-  </fieldset>
+    <legend>Text shown below the image.</legend>
+  </Fieldset>
 
-  <fieldset>
+  <Fieldset>
     <label>Alt</label>
     <input
       type="text"
       value={{@model.image.alt}}
     >
-    <p>Text shown only to Google and screen readers.</p>
-  </fieldset>
+    <legend>Text shown only to Google and screen readers.</legend>
+  </Fieldset>
 
-  <fieldset>
+  <Fieldset>
     <label>CDN path</label>
     <input
       type="text"
       value="{{@model.image.cdnPath}}"
     >
-    <p>Where the file is stored on our CDN (<a
+    <legend>Where the file is stored on our CDN (<a
         href="{{env 'cdnHost'}}/index.html"
         target="_blank"
         rel="nofollow noopener"
       >
         {{env 'cdnHost'}}
-      </a>).</p>
-  </fieldset>
+      </a>).</legend>
+  </Fieldset>
 
-  <p>All available sizes and formats:</p>
-  <ul>
-    {{#each @model.image.files as |file|}}
-      <li>
-        <a
-          href={{file.url}}
-          target="_blank"
-        >
-          @{{file.width}}x{{file.height}}.{{file.format}}
-        </a>
-      </li>
-    {{/each}}
-  </ul>
+  <Fieldset>
+    <label>All available sizes and formats</label>
+    <ul>
+      {{#each @model.image.files as |file|}}
+        <li>
+          <a
+            href={{file.url}}
+            target="_blank"
+          >
+            @{{file.width}}x{{file.height}}.{{file.format}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </Fieldset>
 </Modal>

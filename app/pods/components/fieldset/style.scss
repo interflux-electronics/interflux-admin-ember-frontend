@@ -1,0 +1,19 @@
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  > div {
+    display: flex;
+    label {
+      flex: 1;
+    }
+    label + * {
+      flex: 3;
+    }
+    legend {
+      display: none;
+      position: absolute;
+    }
+  }
+}
