@@ -1,6 +1,10 @@
 <Modal @id="product">
-  <h1>Product</h1>
+  <h1>{{@model.product.name}}</h1>
+
   <p>Name: {{@model.product.name}}</p>
   <p>Slug: {{@model.product.slug}}</p>
   <p>Public: {{if @model.product.public 'Yes' 'No'}}</p>
+
+  <p>Model: product</p>
+  <p>UUID: {{@model.product.id}}</p>
 </Modal>

@@ -2,7 +2,6 @@
   <header>
     <Input
       @type="search"
-      @placeholder="Search"
       @onKeyUp={{this.onKeyUp}}
       @size="medium"
     />
@@ -22,15 +21,7 @@
             @style="blue-3"
           />
         </li>
-      {{else}}
-        <li>
-          <p>No results for "{{query}}"</p>
-        </li>
       {{/each}}
-    {{else}}
-      <li>
-        <p>None found in database</p>
-      </li>
     {{/if}}
   </ul>
 </div>

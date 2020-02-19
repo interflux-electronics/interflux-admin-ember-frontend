@@ -11,10 +11,11 @@ export default class ListComponent extends Component {
   constructor() {
     super(...arguments);
 
-    // Make the passed-down options local
+    const n = this.args.options ? this.args.options.length : 0;
+
     this.options = this.args.options;
-    this.count = this.args.options.length;
-    this.max = this.args.options.length;
+    this.count = n;
+    this.max = n;
   }
 
   @action
@@ -23,11 +24,15 @@ export default class ListComponent extends Component {
     const query = event.target.value;
     this.query = query;
     if (!query) {
-      return (this.options = this.args.options);
+      this.options = this.args.options;
+      this.count = this.max;
+      return;
     }
     // TODO: delay the rendering for it can be slow
     const optionsFiltered = this.args.options.filter(option => {
-      return option[this.args.label].includes(this.query);
+      return option[this.args.label]
+        .toLowerCase()
+        .includes(this.query.toLowerCase());
     });
     this.options = optionsFiltered;
     this.count = optionsFiltered.length;
