@@ -4,15 +4,36 @@
   style="top: -{{modal.scroll}}px"
 >
   <nav>
-    <LinkTo @route="index">
-      <Icon::Interflux />
-    </LinkTo>
-    <LinkTo @route="products">
-      <Icon::Film />
-    </LinkTo>
-    <LinkTo @route="images">
-      <Icon::Camera />
-    </LinkTo>
+    <Button::Route
+      @route="documents"
+      @text="Documents"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="products"
+      @text="Products"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="images"
+      @text="Images"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="companies"
+      @text="Companies"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="people"
+      @text="People"
+      @size="small"
+      @style="blue-4"
+    />
   </nav>
   {{yield}}
 </main>

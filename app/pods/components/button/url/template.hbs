@@ -1,0 +1,10 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#if icon}}
+    <Icon @name="{{icon}}" />
+  {{/if}}
+  {{#if text}}
+    <span>{{text}}</span>
+  {{/if}}
+{{/if}}

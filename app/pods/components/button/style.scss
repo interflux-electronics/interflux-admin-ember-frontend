@@ -1,0 +1,82 @@
+// These button-base styles are inherited by all buttons.
+// Reuse these classes as much as possible.
+// Resist styling buttons per component, instead extend this base.
+
+a,
+button {
+  &.button-base {
+    position: relative;
+    display: inline-block;
+    background: none;
+    border: 0;
+    outline: 0 !important;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+
+    // Do not set these here, use classes instead
+    // font-family: 'Lato-Black';
+    // font-size: 18px;
+    // line-height: 48px;
+    // padding: 0 28px;
+    // border-radius: 4px;
+
+    &.big {
+      font-family: $bold;
+      font-size: 18px;
+      line-height: 48px;
+      padding: 0 28px;
+      border-radius: 4px;
+      span {
+        margin: 0 4px;
+      }
+    }
+
+    &.medium {
+      font-family: $regular;
+      font-size: 15px;
+      line-height: 40px;
+      padding: 0 20px;
+      border-radius: 3px;
+      span {
+        margin: 0 4px;
+      }
+    }
+
+    &.small {
+      padding: 0 6px;
+      line-height: 24px;
+      font-family: $regular;
+      font-size: 14px;
+      border-radius: 2px;
+      span {
+        margin: 0 4px;
+      }
+    }
+
+    &.blue-3 {
+      background: $blue-3;
+      color: white;
+      &.active {
+        background: $orange-3;
+      }
+      &:hover {
+        background: $orange-2;
+      }
+    }
+
+    &.blue-4 {
+      background: $blue-4;
+      color: white;
+      &.active {
+        background: $orange-4;
+      }
+      &:hover {
+        background: $orange-3;
+      }
+    }
+  }
+}

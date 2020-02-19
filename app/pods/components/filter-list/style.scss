@@ -1,0 +1,26 @@
+.filter-list {
+  header {
+    display: flex;
+  }
+
+  header + p {
+    color: white;
+    font-size: 80%;
+    opacity: 60%;
+    margin: 8px 0 25px 2px;
+  }
+
+  ul {
+    li {
+      border-radius: 2px;
+      display: flex;
+      justify-content: flex-start;
+      & + li {
+        margin-top: 10px;
+      }
+      p {
+        color: white;
+      }
+    }
+  }
+}

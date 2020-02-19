@@ -1,0 +1,12 @@
+{{#if icon}}
+  <Icon @name="{{icon}}" />
+{{/if}}
+{{#if (and textBusy textIdle)}}
+  <span>{{if isRunning textBusy textIdle}}</span>
+{{/if}}
+{{yield}}
+{{#if error}}
+  <div class="error">
+    <p>{{error}}</p>
+  </div>
+{{/if}}

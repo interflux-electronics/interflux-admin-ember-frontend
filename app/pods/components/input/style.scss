@@ -1,3 +1,39 @@
 .input {
-  //
+  &.big {
+    input {
+      font-family: $bold;
+      font-size: 18px;
+      line-height: 48px;
+      padding: 0 28px;
+      border-radius: 4px;
+      min-width: 360px;
+    }
+  }
+
+  &.medium {
+    input {
+      font-family: $regular;
+      font-size: 15px;
+      line-height: 40px;
+      padding: 0 20px;
+      border-radius: 3px;
+      min-width: 300px;
+    }
+  }
+
+  &.small {
+    input {
+      padding: 0 6px;
+      line-height: 24px;
+      font-family: $regular;
+      font-size: 14px;
+      border-radius: 2px;
+      min-width: 120px;
+    }
+  }
+
+  input {
+    border: 0;
+    outline: 0;
+  }
 }

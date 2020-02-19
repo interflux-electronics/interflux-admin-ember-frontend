@@ -1,5 +1,5 @@
 <div
-  class="Input {{if @icon 'has-icon' 'no-icon'}} {{if @disabled 'disabled' 'not-disabled'}} {{if @isValidated (if @isValid 'valid' 'invalid') 'not-validated'}}"
+  class="input {{if @size @size 'no-size'}} {{if @icon 'has-icon' 'no-icon'}} {{if @disabled 'disabled' 'not-disabled'}} {{if @isValidated (if @isValid 'valid' 'invalid') 'not-validated'}}"
 >
   <input
     type={{@type}}

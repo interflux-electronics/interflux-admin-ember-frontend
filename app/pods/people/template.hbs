@@ -1,0 +1,12 @@
+<Page @id="people">
+  <section>
+    <h1>People</h1>
+
+    <FilterList
+      @options={{@model.people}}
+      @label="fullName"
+      @linkRoute="people.person"
+      @linkModel="id"
+    />
+  </section>
+</Page>
