@@ -14,7 +14,7 @@ Router.map(function() {
     this.route('product', { path: '/:uuid' });
   });
   this.route('documents', function() {
-    this.route('document'), { path: '/:uuid' };
+    this.route('document', { path: '/:uuid' });
   });
   this.route('companies', function() {
     this.route('company'), { path: '/:uuid' };

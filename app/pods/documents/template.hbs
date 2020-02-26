@@ -1,10 +1,10 @@
-<Page @id="companies">
+<Page @id="documents">
   <section>
     <h1>Documents</h1>
 
     <FilterList
-      @options={{@model.companies}}
-      @label="name"
+      @options={{@model.documents}}
+      @label="path"
       @linkRoute="documents.document"
       @linkModel="id"
     />

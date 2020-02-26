@@ -1,1 +1,11 @@
-{{outlet}}
+<Modal @id="document">
+  <h1>{{@model.document.name}}</h1>
+
+  <p>Name: {{@model.document.name}}</p>
+  <p>Path: {{@model.document.path}}</p>
+  <p>Language: {{@model.document.language.nameEnglish}}</p>
+  <p>Category: {{@model.document.category.name}}</p>
+
+  <p>Model: document</p>
+  <p>UUID: {{@model.document.id}}</p>
+</Modal>

@@ -8,7 +8,24 @@ export default class ProductsProductRoute extends Route {
 
   model(params) {
     return hash({
-      product: this.store.find('product', params.uuid)
+      // product: this.store.find('product', params.uuid),
+      product: this.store.findRecord('product', params.uuid, {
+        include: [
+          'documents',
+          'documents.language',
+          'product-family'
+          // 'product-images',
+          // 'product-images.image',
+          // 'product-variants',
+          // 'product-variants.container',
+          // 'product-processes'
+          // 'product-variant.container.image',
+          // 'features'
+          // 'related-articles',
+          // 'related-products',
+          // 'related-products.main-group'
+        ].join(',')
+      })
     });
   }
 

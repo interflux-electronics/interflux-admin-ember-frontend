@@ -1,10 +1,28 @@
 <Modal @id="product">
   <h1>{{@model.product.name}}</h1>
 
+  <p>Model: product</p>
+  <p>UUID: {{@model.product.id}}</p>
+
+  <hr>
+
   <p>Name: {{@model.product.name}}</p>
   <p>Slug: {{@model.product.slug}}</p>
   <p>Public: {{if @model.product.public 'Yes' 'No'}}</p>
+  <p>Family: {{@model.product.family.nameSingle}}</p>
 
-  <p>Model: product</p>
-  <p>UUID: {{@model.product.id}}</p>
+  <hr>
+
+  <p>Documents</p>
+  {{#each @model.product.documents as |document|}}
+    <p>
+      <a
+        href="{{cdn}}/{{document.path}}"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {{document.name}} ({{document.language.nameEnglish}})
+      </a>
+    </p>
+  {{/each}}
 </Modal>
