@@ -1,16 +1,31 @@
 #!/usr/local/bin/fish
 
+echo ----------
+echo Updating production branch with master
+echo ----------
+echo git push
+git push
+echo ----------
+echo git checkout production
+git checkout production
+echo ----------
+echo git pull origin master
+git pull origin master
+echo ----------
+echo git push
+git push
+echo ----------
+
 set remote "jw@server.interflux.com"
 set path "/var/www/admin.interflux.com"
-
 set branch (git rev-parse --abbrev-ref HEAD)
 set revision (git rev-parse --short HEAD)
 
-echo ----------
-echo Deploying:
+echo Deploying to remote server
 echo Branch: $branch
 echo Revision: $revision
 echo Remote: $remote
+echo Path: $path
 echo ----------
 
 switch $branch
