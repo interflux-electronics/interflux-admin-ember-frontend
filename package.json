@@ -11,8 +11,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "./node_modules/ember-cli/bin/ember serve",
-    "build": "./node_modules/ember-cli/bin/ember build",
+    "start": "./node_modules/ember-cli/bin/ember serve --environment=development",
+    "build": "./node_modules/ember-cli/bin/ember build --environment=production",
     "test": "./node_modules/ember-cli/bin/ember test",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
