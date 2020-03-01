@@ -30,8 +30,8 @@ echo ----------
 
 switch $branch
 case production
-  echo scp remote/install.sh $remote:$path
-  scp remote/install.sh $remote:$path
+  echo scp bin/install.sh $remote:$path
+  scp bin/install.sh $remote:$path
   and echo ----------
   and echo ssh $remote "$path/install.sh $branch $revision"
   and ssh $remote "$path/install.sh $branch $revision"
