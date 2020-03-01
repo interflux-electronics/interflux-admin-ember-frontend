@@ -11,4 +11,5 @@ export default class ProductModel extends Model {
   @belongsTo('product-family') productFamily;
 
   @hasMany('document') documents;
+  @hasMany('image') images;
 }

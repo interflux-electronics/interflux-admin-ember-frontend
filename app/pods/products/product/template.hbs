@@ -1,28 +1,58 @@
 <Modal @id="product">
   <h1>{{@model.product.name}}</h1>
-
-  <p>Model: product</p>
-  <p>UUID: {{@model.product.id}}</p>
+  <h2>Product</h2>
 
   <hr>
 
   <p>Name: {{@model.product.name}}</p>
   <p>Slug: {{@model.product.slug}}</p>
-  <p>Public: {{if @model.product.public 'Yes' 'No'}}</p>
-  <p>Family: {{@model.product.family.nameSingle}}</p>
+  <p>Family: {{@model.product.family.namePlural}}</p>
 
   <hr>
 
-  <p>Documents</p>
-  {{#each @model.product.documents as |document|}}
-    <p>
-      <a
-        href="{{cdn}}/{{document.path}}"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {{document.name}} ({{document.language.nameEnglish}})
-      </a>
-    </p>
+  <p>Can be seen: Yes</p>
+  <p>Can be ordered: Yes</p>
+  <p>Recommended: No</p>
+  <p>New: No</p>
+  <p>Replaced by better product? Yes - IF 2005M</p>
+
+  <hr>
+
+  <p>Features:</p>
+  {{#each @model.product.features as |feature|}}
+    <p>{{feature.id}}</p>
   {{/each}}
+  <hr>
+
+  <p>Images:</p>
+  {{#each @model.product.images as |image|}}
+    <Image::Responsive
+      @path={{image.path}}
+      @sizes={{image.sizes}}
+      @formats={{image.formats}}
+      @alt={{image.alt}}
+      @caption={{image.caption}}
+    />
+  {{/each}}
+
+  <hr>
+
+  <p>Documents:</p>
+  <ul>
+    {{#each @model.product.documents as |document|}}
+      <li>
+        <Button::Url
+          @href="{{cdn}}/{{document.path}}"
+          @text="{{document.name}} ({{document.language.nameEnglish}})"
+          @icon="pdf"
+          @size="medium"
+          @style="white grey-border"
+        />
+      </li>
+    {{/each}}
+  </ul>
+
+  <hr>
+
+  <p>Database UUID: {{@model.product.id}}</p>
 </Modal>

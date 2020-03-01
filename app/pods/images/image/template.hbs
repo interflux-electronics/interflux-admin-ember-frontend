@@ -1,6 +1,6 @@
 <Modal @id="image">
   <Image::Responsive
-    @cdnPath={{@model.image.cdnPath}}
+    @path={{@model.image.path}}
     @sizes={{@model.image.sizes}}
     @formats={{@model.image.formats}}
     @alt={{@model.image.alt}}
@@ -49,14 +49,14 @@
     <label>CDN path</label>
     <input
       type="text"
-      value="{{@model.image.cdnPath}}"
+      value="{{@model.image.path}}"
     >
     <legend>Where the file is stored on our CDN (<a
-        href="{{env 'cdnHost'}}/index.html"
+        href="{{cdn}}/index.html"
         target="_blank"
         rel="nofollow noopener"
       >
-        {{env 'cdnHost'}}
+        {{cdn}}
       </a>).</legend>
   </Fieldset>
 

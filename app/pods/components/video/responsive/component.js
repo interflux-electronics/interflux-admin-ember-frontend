@@ -93,7 +93,7 @@ export default class VideoResponsiveComponent extends Component {}
 //
 //   setOptimalSize() {
 //     // Exit early if params are missing
-//     if (!this.cdnPath || !this.sizes) {
+//     if (!this.path || !this.sizes) {
 //       this.set('loading', false);
 //       this.set('loadFailed', true);
 //       // TODO: Warn
@@ -101,12 +101,12 @@ export default class VideoResponsiveComponent extends Component {}
 //       return;
 //     }
 //
-//     if (!this.cdnPath.startsWith('/')) {
+//     if (!this.path.startsWith('/')) {
 //       console.warn('Please start all cdnPaths with /');
 //       // TODO: Log report
 //     }
 //
-//     let src = cdnHost + this.cdnPath;
+//     let src = cdnHost + this.path;
 //
 //     // SVG don't need to be made responsive.
 //     // They only need the CDN to be prepended.

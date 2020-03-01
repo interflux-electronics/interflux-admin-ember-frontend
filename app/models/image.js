@@ -2,13 +2,15 @@ import Model, { attr } from '@ember-data/model';
 import ENV from 'interflux/config/environment';
 
 export default class ImageModel extends Model {
-  @attr('string') cdnPath;
+  @attr('string') path;
   @attr('array') sizes;
   @attr('array') formats;
+  @attr('string') alt;
+  @attr('string') caption;
 
   get files() {
     const arr = [];
-    const path = this.cdnPath;
+    const path = this.path;
 
     this.formats.forEach(format => {
       this.sizes.forEach(size => {
@@ -21,7 +23,7 @@ export default class ImageModel extends Model {
           height,
           format,
           url
-        })
+        });
       });
     });
 

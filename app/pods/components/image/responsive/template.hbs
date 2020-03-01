@@ -8,14 +8,14 @@
       <!--
     {{#if webp}}
       <source
-        srcset="{{env 'cdnHost'}}{{@cdnPath}}@{{optimalWidth}}x{{optimalHeight}}.webp"
+        srcset="{{cdn}}{{@path}}@{{optimalWidth}}x{{optimalHeight}}.webp"
         type="image/webp"
       >
     {{/if}}
     -->
 
       <img
-        src="{{env 'cdnHost'}}{{@cdnPath}}@{{this.optimalWidth}}x{{this.optimalHeight}}.jpg"
+        src="{{cdn}}/{{@path}}@{{this.optimalWidth}}x{{this.optimalHeight}}.jpg"
         width={{this.optimalWidth}}
         height={{this.optimalHeight}}
         alt={{@alt}}

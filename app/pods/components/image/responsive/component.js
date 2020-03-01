@@ -17,14 +17,13 @@ export default class ImageResponsiveComponent extends Component {
 
   @action
   didInsert(element) {
-    console.debug('<Image::Responsive> didInsertImg()');
+    console.debug('<Image::Responsive> didInsertImg()', { element });
     this.computeOptimalSize(element);
   }
 
   @action
   willDestroy(element) {
-    console.debug('<Image::Responsive> didInsertImg()');
-    this.computeOptimalSize(element);
+    console.debug('<Image::Responsive> willDestroy()', { element });
   }
 
   @action

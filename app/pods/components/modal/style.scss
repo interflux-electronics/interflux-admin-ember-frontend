@@ -35,4 +35,31 @@ body > .modal {
       }
     }
   }
+  h1 {
+    font-family: $extrabold;
+    font-size: 30px;
+    line-height: 100%;
+  }
+  h2 {
+    font-family: $semibold;
+    font-size: 20px;
+    color: $blue-0;
+    line-height: 100%;
+  }
+  h1 + h2 {
+    margin-top: 14px;
+  }
+  p {
+    font-size: 16px;
+    margin: 16px 0;
+  }
+  hr {
+    margin: 16px 0;
+    border: 0;
+    height: 1px;
+    background: #eee;
+  }
+  li + li {
+    margin-top: 10px;
+  }
 }

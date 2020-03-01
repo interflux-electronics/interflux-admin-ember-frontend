@@ -78,5 +78,19 @@ button {
         background: $orange-3;
       }
     }
+
+    &.white {
+      background: white;
+      &:hover {
+        background: $grey-1;
+      }
+    }
+
+    &.grey-border {
+      border: 1px solid $grey-1;
+      &:hover {
+        border-color: $grey-2;
+      }
+    }
   }
 }
