@@ -1,1 +1,45 @@
-{{outlet}}
+<Modal @id="document">
+  <h1>{{@model.company.businessName}}</h1>
+
+  <hr>
+
+  <p>Business name: {{@model.company.businessName}}</p>
+  <p>Legal name: {{@model.company.legalName}}</p>
+  <p>Phone: {{@model.company.phone}}</p>
+  <p>Fax: {{@model.company.fax}}</p>
+  <p>Website: {{@model.company.website}}</p>
+  <ul>
+    {{#each @model.company.emails as |email|}}
+      <li>Email: {{email}}</li>
+    {{/each}}
+  </ul>
+
+  <hr>
+
+  <p>Address: {{@model.company.address}}</p>
+  <p>Country: {{@model.company.country.nameEnglish}}</p>
+  <p>Coordinates: {{@model.company.latitude}}, {{@model.company.longitude}}</p>
+
+  <hr>
+
+  <p>Market:</p>
+  <ul>
+    {{#each @model.company.markets as |market|}}
+      <li>{{market.nameEnglish}}</li>
+    {{/each}}
+  </ul>
+
+  <hr>
+
+  <p>Members:</p>
+  <ul>
+    {{#each @model.company.members as |member|}}
+      <li>{{member.person.firstName}} {{member.person.lastName}}</li>
+    {{/each}}
+  </ul>
+
+  <hr>
+
+  <p>Model: company</p>
+  <p>UUID: {{@model.company.id}}</p>
+</Modal>
