@@ -1,0 +1,11 @@
+<Page @id="countries">
+  <section>
+    <h1>Countries</h1>
+    <FilterList
+      @options={{@model.countries}}
+      @label="nameEnglish"
+      @linkRoute="countries.country"
+      @linkModel="id"
+    />
+  </section>
+</Page>

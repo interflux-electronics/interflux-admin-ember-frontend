@@ -13,7 +13,7 @@ export default class ListComponent extends Component {
 
     const n = this.args.options ? this.args.options.length : 0;
 
-    this.options = this.args.options;
+    this.options = this.args.options.sortBy(this.args.label);
     this.count = n;
     this.max = n;
   }
@@ -34,7 +34,7 @@ export default class ListComponent extends Component {
         .toLowerCase()
         .includes(this.query.toLowerCase());
     });
-    this.options = optionsFiltered;
+    this.options = optionsFiltered.sortBy(this.args.label);
     this.count = optionsFiltered.length;
   }
 
@@ -42,6 +42,7 @@ export default class ListComponent extends Component {
   layout() {
     console.debug('layout');
   }
+
   @action
   sort() {
     console.debug('sort');

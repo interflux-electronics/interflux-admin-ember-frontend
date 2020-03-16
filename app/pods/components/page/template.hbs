@@ -5,12 +5,6 @@
 >
   <nav>
     <Button::Route
-      @route="documents"
-      @text="Documents"
-      @size="small"
-      @style="blue-4"
-    />
-    <Button::Route
       @route="products"
       @text="Products"
       @size="small"
@@ -19,6 +13,12 @@
     <Button::Route
       @route="images"
       @text="Images"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="documents"
+      @text="Documents"
       @size="small"
       @style="blue-4"
     />
@@ -34,6 +34,27 @@
       @size="small"
       @style="blue-4"
     />
+    <hr>
+    <Button::Route
+      @route="leads"
+      @text="Leads"
+      @size="small"
+      @style="blue-4"
+    />
+    <hr>
+    <Button::Route
+      @route="countries"
+      @text="Countries"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="languages"
+      @text="Languages"
+      @size="small"
+      @style="blue-4"
+    />
+    <hr>
   </nav>
   {{yield}}
 </main>

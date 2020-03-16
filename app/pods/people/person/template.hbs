@@ -1,1 +1,25 @@
-{{outlet}}
+<Modal @id="person">
+  <h1>{{@model.person.fullName}}</h1>
+  <h2>Person</h2>
+
+  <hr>
+
+  <p>First name: {{@model.person.firstName}}</p>
+  <p>Last name: {{@model.person.lastName}}</p>
+  <p>Chinese name: {{@model.person.chineseName}}</p>
+
+  <!-- <hr> -->
+
+  <!-- <p>Phone (personal): {{@model.person.phone}}</p> -->
+  <!-- <p>Email (personal): {{@model.person.email}}</p> -->
+
+  <hr>
+
+  <p>Member of:</p>
+  <p>TODO: Company 1</p>
+  <p>TODO: Company 2</p>
+
+  <hr>
+
+  <p>Database UUID: {{@model.person.id}}</p>
+</Modal>

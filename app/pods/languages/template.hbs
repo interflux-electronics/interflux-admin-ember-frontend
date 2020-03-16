@@ -1,0 +1,11 @@
+<Page @id="languages">
+  <section>
+    <h1>Languages</h1>
+    <FilterList
+      @options={{@model.languages}}
+      @label="nameEnglish"
+      @linkRoute="languages.language"
+      @linkModel="id"
+    />
+  </section>
+</Page>

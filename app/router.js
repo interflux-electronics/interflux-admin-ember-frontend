@@ -20,7 +20,17 @@ Router.map(function() {
     this.route('company', { path: '/:uuid' });
   });
   this.route('people', function() {
-    this.route('person'), { path: '/:uuid' };
+    this.route('person', { path: '/:uuid' });
   });
+  this.route('leads', function() {
+    this.route('lead', { path: '/:uuid' });
+  });
+  this.route('countries', function() {
+    this.route('country', { path: '/:uuid' });
+  });
+  this.route('languages', function() {
+    this.route('language', { path: '/:uuid' });
+  });
+
   this.route('loading');
 });

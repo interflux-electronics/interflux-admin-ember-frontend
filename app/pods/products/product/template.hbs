@@ -10,20 +10,6 @@
 
   <hr>
 
-  <p>Can be seen: Yes</p>
-  <p>Can be ordered: Yes</p>
-  <p>Recommended: No</p>
-  <p>New: No</p>
-  <p>Replaced by better product? Yes - IF 2005M</p>
-
-  <hr>
-
-  <p>Features:</p>
-  {{#each @model.product.features as |feature|}}
-    <p>{{feature.id}}</p>
-  {{/each}}
-  <hr>
-
   <p>Images:</p>
   {{#each @model.product.images as |image|}}
     <Image::Responsive
@@ -51,6 +37,34 @@
       </li>
     {{/each}}
   </ul>
+
+  <hr>
+
+  <!-- <p>Can be seen: Yes</p>
+  <p>Can be ordered: Yes</p>
+  <p>Recommended: No</p>
+  <p>New: No</p>
+  <p>Replaced by better product? Yes - IF 2005M</p>
+
+  <hr> -->
+
+  <p>Features: (TODO)</p>
+  <p>feature 1</p>
+  <p>feature 2</p>
+  <p>feature 3</p>
+  <!-- {{#each @model.product.features as |feature|}}
+    <p>{{feature.id}}</p>
+  {{/each}} -->
+
+  <hr>
+
+  <p>Variants: (TODO)</p>
+  <p>variant 1</p>
+  <p>variant 2</p>
+  <p>variant 3</p>
+  <!-- {{#each @model.product.features as |feature|}}
+    <p>{{feature.id}}</p>
+  {{/each}} -->
 
   <hr>
 

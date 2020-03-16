@@ -1,0 +1,33 @@
+<Modal @id="country">
+  <h1>{{@model.country.nameEnglish}}</h1>
+
+  <hr>
+
+  <p>English name: {{@model.country.nameEnglish}}</p>
+  <p>Native name: {{@model.country.nameNative}}</p>
+  <p>Two letter code: {{@model.country.twoLetterCode}}</p>
+  <p>Three letter code: {{@model.country.threeLetterCode}}</p>
+  <p>Numeric code: {{@model.country.numericCode}}</p>
+
+  <hr>
+
+  <p>Region: {{@model.country.region}}</p>
+  <p>Subregion: {{@model.country.subregion}}</p>
+  <p>Area: {{@model.country.area}} km<sup>2</sup></p>
+  <p>Population: {{@model.country.population}}</p>
+  <p>Flag: {{@model.country.flagUrl}}</p>
+  <p>Timezones: {{@model.country.timezones}}</p>
+  <p>Top level web domains:
+    {{#each @model.country.topLevelDomains as |code|}}
+      {{code}}
+    {{/each}}</p>
+  <p>Phone prefix:
+    {{#each @model.country.callingCodes as |code|}}
+      +{{code}}
+    {{/each}}
+  </p>
+
+  <hr>
+
+  <p>Database UUID: {{@model.country.id}}</p>
+</Modal>

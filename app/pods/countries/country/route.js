@@ -2,13 +2,13 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 
-export default class ProductsProductRoute extends Route {
+export default class CountriesCountryRoute extends Route {
   @service store;
   @service modal;
 
   model(params) {
     return hash({
-      person: this.store.findRecord('person', params.uuid)
+      country: this.store.findRecord('country', params.uuid)
     });
   }
 

@@ -1,0 +1,12 @@
+<Page @id="leads">
+  <section>
+    <h1>Leads</h1>
+
+    <FilterList
+      @options={{@model.leads}}
+      @label="label"
+      @linkRoute="leads.lead"
+      @linkModel="id"
+    />
+  </section>
+</Page>
