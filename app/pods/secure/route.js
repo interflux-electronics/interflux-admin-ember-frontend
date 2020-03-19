@@ -11,7 +11,7 @@ export default class SecureRoute extends Route {
     if (!this.auth.token) {
       console.warn('Missing auth token');
       console.warn('Redirecting back to login page');
-      // this.transitionTo('login');
+      this.transitionTo('login');
     }
   }
 
@@ -21,12 +21,12 @@ export default class SecureRoute extends Route {
   // and resets all authentication data.
   // See: app/initializers/handle-route-errors.js
   model() {
-    // return hash({
-    //   user: this.store.findRecord('user', 'auth-user')
-    // });
+    return hash({
+      user: this.store.findRecord('user', 'auth-user')
+    });
   }
 
   afterModel(model) {
-    // this.auth.user = model.user;
+    this.auth.user = model.user;
   }
 }
