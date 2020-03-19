@@ -6,3 +6,4 @@ public/
 tmp/
 vendor/
 lighthouse/
+app/index.html
