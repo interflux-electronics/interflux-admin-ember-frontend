@@ -1,6 +1,9 @@
 .filter-list {
   header {
     display: flex;
+    .input {
+      max-width: 400px;
+    }
   }
 
   header + p {
