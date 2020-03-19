@@ -38,6 +38,9 @@ case production
   echo ----------
   echo git checkout master
   git checkout master
+  and echo ----------
+  and echo Deploy successful!
+  and echo ----------
 case '*'
     echo Aborting - Only the branch production is deployable.
     echo ----------
