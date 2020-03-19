@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency-decorators';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class AuthService extends Service {
   @service api;
@@ -12,8 +13,12 @@ export default class AuthService extends Service {
   user = null;
   expiry = null;
 
+  @tracked error = null;
+
   @task()
   *getToken(email, password) {
+    this.error = null;
+
     const url = `${this.api.host}/${this.api.namespace}/auth-token`;
 
     const request = new Request(url, {
@@ -29,11 +34,18 @@ export default class AuthService extends Service {
 
     // Read the JSON from the Body (async promise)
     // When back-end sends no JSON back, then status code should be 204
-    const json = yield response.json().catch(error => {
+    const body = yield response.json().catch(error => {
       return console.error(error);
     });
 
-    const { token, expiry } = json.auth;
+    if (response.status !== 200) {
+      console.warn('Could not log in');
+      console.warn({ response, body });
+      this.error = `${response.status} ${response.statusText}`;
+      return;
+    }
+
+    const { token, expiry } = body.auth;
 
     this.remember(token, expiry);
 

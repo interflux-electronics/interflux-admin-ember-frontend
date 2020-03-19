@@ -11,4 +11,14 @@
   .input + .input {
     margin-top: 20px;
   }
+  .error {
+    position: relative;
+    p {
+      position: absolute;
+      top: 20px;
+      line-height: 150%;
+      text-align: right;
+      right: 0;
+    }
+  }
 }

@@ -37,12 +37,17 @@
         <div>
           <Button::Action
             @action={{this.submit}}
-            @text={{if this.auth.logIn.isRunning 'Logging in ...' 'Log in'}}
+            @text={{if this.auth.getToken.isRunning 'Logging in ...' 'Log in'}}
             @size="medium"
             @style="orange-3"
           />
         </div>
       </div>
+      {{#if this.auth.error}}
+        <div class="error">
+          <p>Sorry, was unable to log in:<br>{{this.auth.error}}</p>
+        </div>
+      {{/if}}
     </div>
   </section>
 </Page>
