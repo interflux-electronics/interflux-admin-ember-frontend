@@ -1,5 +1,6 @@
 import config from 'interflux/config/environment';
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 import {
   AbortError,
   ConflictError,
@@ -21,6 +22,8 @@ const { isDevelopment, isProduction, isTest } = config;
 
 export function initialize() {
   Route.reopen({
+    auth: service(),
+
     actions: {
       error(error) {
         // The request to the server was aborted
@@ -51,7 +54,9 @@ export function initialize() {
           );
         } else if (error instanceof UnauthorizedError) {
           console.error('401 - You are not authorised to make this request.');
-          // TODO: pass in original route in so after login we redirect user to where they wanted to be
+          console.warn('Reseting authentication data');
+          console.warn('Redirecting to login');
+          this.auth.forget();
           this.transitionTo('login');
         } else if (error instanceof ForbiddenError) {
           console.error('403 - You are not allowed to make this request.');

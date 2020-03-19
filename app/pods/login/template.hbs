@@ -1,7 +1,6 @@
 <Page @id="login">
   <section class="center">
     <div class="liner">
-      <p>-{{this.email}}</p>
       <Input
         @value={{this.email}}
         @placeholder="Email"
@@ -11,7 +10,6 @@
         @onChange={{fn (mut this.email)}}
         @onEnter={{this.submit}}
       />
-      <p>-{{this.password}}</p>
       <Input
         @value={{this.password}}
         @placeholder="Password"

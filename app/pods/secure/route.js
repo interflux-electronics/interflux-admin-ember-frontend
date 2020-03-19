@@ -10,7 +10,9 @@ export default class SecureRoute extends Route {
   beforeModel() {
     if (!this.auth.token) {
       console.warn('Missing auth token');
-      console.warn('Redirecting back to login page');
+      console.warn('Reseting authentication data');
+      console.warn('Redirecting to login');
+      this.auth.forget();
       this.transitionTo('login');
     }
   }
