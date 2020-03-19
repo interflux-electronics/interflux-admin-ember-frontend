@@ -56,8 +56,7 @@ export function initialize() {
           console.error('401 - You are not authorised to make this request.');
           console.warn('Reseting authentication data');
           console.warn('Redirecting to login');
-          this.auth.forget();
-          this.transitionTo('login');
+          this.auth.reset();
         } else if (error instanceof ForbiddenError) {
           console.error('403 - You are not allowed to make this request.');
         } else if (error instanceof NotFoundError) {

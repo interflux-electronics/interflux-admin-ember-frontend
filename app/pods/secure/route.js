@@ -12,8 +12,7 @@ export default class SecureRoute extends Route {
       console.warn('Missing auth token');
       console.warn('Reseting authentication data');
       console.warn('Redirecting to login');
-      this.auth.forget();
-      this.transitionTo('login');
+      this.auth.reset();
     }
   }
 

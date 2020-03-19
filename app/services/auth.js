@@ -1,13 +1,16 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency-decorators';
+import { action } from '@ember/object';
 
 export default class AuthService extends Service {
   @service api;
+  @service store;
   @service router;
 
   token = null;
   user = null;
+  expiry = null;
 
   @task()
   *getToken(email, password) {
@@ -38,7 +41,6 @@ export default class AuthService extends Service {
   }
 
   remember(token, expiry) {
-    console.debug('auth.remember()', { token, expiry });
     this.token = token;
     this.expiry = expiry;
     localStorage.setItem('token', token);
@@ -46,97 +48,17 @@ export default class AuthService extends Service {
   }
 
   revive() {
-    console.debug('auth.revive()');
     this.token = localStorage.getItem('token');
     this.expiry = localStorage.getItem('expiry');
   }
 
-  forget() {
-    console.debug('auth.forget()');
+  @action
+  reset() {
     this.token = null;
+    this.user = null;
     this.expiry = null;
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiry');
+    localStorage.clear();
+    this.store.unloadAll();
+    this.router.transitionTo('login');
   }
 }
-
-// import Service from '@ember/service';
-// import { inject as service } from '@ember/service';
-// import { task } from 'ember-concurrency';
-//
-// export default Service.extend({
-//   store: service(),
-//   fetch: service(),
-//
-//   user: undefined, // The record of the authenticated user
-//   token: undefined, // The authentication token given by the API
-//   expiry: undefined, // The date at which the API will invalidate the auth token
-//
-//   // TODO
-//   // fetchUser: task(function*() {
-//   //   const token = this.token || 'no-token';
-//   //   const payload = { token };
-//   //   const data = yield this.fetch.post.perform('/auth/fetch-user', payload);
-//   //
-//   //   const validToken = data.response.status === 200 ? true : false;
-//   //
-//   //   if (validToken) {
-//   //     console.debug('Auth | Token is valid');
-//   //   } else {
-//   //     console.warn('Auth | Token is not valid');
-//   //     throw 'Auth token is not valid';
-//   //   }
-//   //
-//   //   // // The API returns the user with ID, needed in verifyPassword()
-//   //   // this.store.push(data.json);
-//   //   //
-//   //   // // Find the user in the store and set it on this service
-//   //   // const user = this.store.peekRecord('user', data.json.data.id);
-//   //   // this.set('user', user);
-//   // }),
-//
-//   verifyToken: task(function*() {
-//     const token = this.token || 'no-token';
-//     const payload = { token };
-//     const data = yield this.fetch.post.perform('/auth/verify-token', payload);
-//
-//     const validToken = data.response.status === 200 ? true : false;
-//
-//     if (validToken) {
-//       console.debug('Auth | Token is valid');
-//     } else {
-//       console.warn('Auth | Token is not valid');
-//       throw 'Auth token is not valid';
-//     }
-//   }),
-//
-
-//
-//   restore() {
-//     if (this.isFastBoot) {
-//       return;
-//     }
-//     const token = localStorage.getItem('token');
-//     const expiry = localStorage.getItem('expiry');
-//
-//     if (token) {
-//       console.debug('Auth | Found token in localStorage, restoring...');
-//     } else {
-//       console.debug('Auth | No token found in localStorage.');
-//     }
-//
-//     this.setProperties({ token, expiry });
-//   },
-//
-//   logout() {
-//     console.debug('Auth | Log out');
-//     this.forget();
-//     localStorage.clear();
-//     this.store.unloadAll();
-//   }
-//
-//   // setAttr(key, value) {
-//   //   console.log('Auth service: setting', key, 'to', value);
-//   //   this.set(key, value);
-//   // },
-// });
