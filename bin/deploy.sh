@@ -35,6 +35,9 @@ case production
   and echo ----------
   and echo ssh $remote "$path/install.sh $branch $revision"
   and ssh $remote "$path/install.sh $branch $revision"
+  echo ----------
+  echo git checkout master
+  git checkout master
 case '*'
     echo Aborting - Only the branch production is deployable.
     echo ----------
