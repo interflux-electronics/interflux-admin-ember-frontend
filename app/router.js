@@ -37,4 +37,6 @@ Router.map(function() {
   this.route('login');
   this.route('help');
   this.route('loading');
+
+  this.route('catchall', { path: '*:' });
 });
