@@ -1,4 +1,6 @@
 .input {
+  width: 100%; // Always be as wide as the parent
+
   &.big {
     input {
       font-family: $bold;
@@ -15,7 +17,7 @@
       font-family: $regular;
       font-size: 15px;
       line-height: 40px;
-      padding: 0 20px;
+      padding: 0 16px;
       border-radius: 3px;
       min-width: 300px;
     }
@@ -30,6 +32,9 @@
       border-radius: 2px;
       min-width: 120px;
     }
+    & + .input.small {
+      margin-top: 10px;
+    }
   }
 
   input {
@@ -37,5 +42,10 @@
     outline: 0;
     background: rgba(white, 0.1);
     color: white;
+    width: 100%; // Always be as wide as the parent
+    box-sizing: border-box;
+    @include placeholder {
+      color: rgba(white, 0.3);
+    }
   }
 }

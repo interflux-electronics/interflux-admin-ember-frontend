@@ -1,11 +1,13 @@
 <Page @id="documents">
+  <Nav />
+
   <section>
     <h1>Documents</h1>
 
     <FilterList
       @options={{@model.documents}}
       @label="path"
-      @linkRoute="documents.document"
+      @linkRoute="secure.documents.document"
       @linkModel="id"
     />
   </section>

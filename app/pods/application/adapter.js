@@ -8,33 +8,19 @@
 // https://github.com/ember-cli/ember-fetch
 //
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
-import ENV from 'interflux/config/environment';
 import { pluralize } from 'ember-inflector';
+import { inject as service } from '@ember/service';
 
 export default class ApplicationAdapter extends JSONAPIAdapter {
-  // @service session;
+  @service api;
 
-  host = ENV.apiHost;
-  namespace = ENV.apiNamespace;
+  host = this.api.host;
+  namespace = this.api.namespace;
 
   // Dynamically set the headers on each request.
   // Docs: https://guides.emberjs.com/release/models/customizing-adapters/
   get headers() {
-    const headers = {};
-
-    // With the Content-Type header 'application/vnd.api+json' we say that
-    // what we send to the API is JSON API compliant.
-    headers['Content-Type'] = 'application/vnd.api+json';
-
-    // With the Accept header 'application/vnd.api+json' we say that what we
-    // expect back from the API is JSON API compliant data.
-    headers['Accept'] = 'application/vnd.api+json';
-
-    // The Authorization header is a JWT token added to all requests and
-    // verified by the back-end on each protected endpoint.
-    headers['Authorization'] = 'xxx';
-
-    return headers;
+    return this.api.headers;
   }
 
   // Convert the Ember model name to something Rails would recognise:

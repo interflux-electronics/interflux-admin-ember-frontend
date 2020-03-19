@@ -1,11 +1,13 @@
 <Page @id="companies">
+  <Nav />
+
   <section>
     <h1>Companies</h1>
 
     <FilterList
       @options={{@model.companies}}
       @label="businessName"
-      @linkRoute="companies.company"
+      @linkRoute="secure.companies.company"
       @linkModel="id"
     />
   </section>

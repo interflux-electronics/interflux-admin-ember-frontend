@@ -1,0 +1,14 @@
+#login.page {
+  .liner {
+    max-width: 300px;
+    width: 100%;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .input + .input {
+    margin-top: 20px;
+  }
+}

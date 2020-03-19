@@ -1,10 +1,12 @@
 <Page @id="products">
+  <Nav />
+
   <section>
     <h1>People</h1>
     <FilterList
       @options={{@model.people}}
       @label="fullName"
-      @linkRoute="people.person"
+      @linkRoute="secure.people.person"
       @linkModel="id"
     />
   </section>

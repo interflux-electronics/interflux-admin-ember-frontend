@@ -1,12 +1,15 @@
-{{#if icon}}
-  <Icon @name="{{icon}}" />
-{{/if}}
-{{#if (and textBusy textIdle)}}
-  <span>{{if isRunning textBusy textIdle}}</span>
-{{/if}}
-{{yield}}
-{{#if error}}
-  <div class="error">
-    <p>{{error}}</p>
-  </div>
-{{/if}}
+<button
+  class="button-base button-task {{@size}} {{@style}}"
+  {{on 'click' this.perform}}
+>
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{#if @icon}}
+      <!-- <Icon @name="{{@icon}}" /> -->
+    {{/if}}
+    {{#if @text}}
+      <span>{{@text}}</span>
+    {{/if}}
+  {{/if}}
+</button>

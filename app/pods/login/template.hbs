@@ -1,0 +1,50 @@
+<Page @id="login">
+  <section class="center">
+    <div class="liner">
+      <p>-{{this.email}}</p>
+      <Input
+        @value={{this.email}}
+        @placeholder="Email"
+        @type="email"
+        @size="medium"
+        @disabled={{this.auth.logIn.isRunning}}
+        @onChange={{fn (mut this.email)}}
+        @onEnter={{this.submit}}
+      />
+      <p>-{{this.password}}</p>
+      <Input
+        @value={{this.password}}
+        @placeholder="Password"
+        @type="password"
+        @size="medium"
+        @disabled={{this.auth.logIn.isRunning}}
+        @onChange={{fn (mut this.password)}}
+        @onEnter={{this.submit}}
+      />
+      <div class="buttons">
+        <div>
+          <Button::Route
+            @route={{@model.backRoute}}
+            @text="Back"
+            @size="small"
+            @style="blue-3"
+          />
+          <Button::Route
+            @route="help"
+            @text="Need help?"
+            @size="small"
+            @style="blue-3"
+          />
+        </div>
+        <div>
+          <Button::Action
+            @action={{this.submit}}
+            @text={{if this.auth.logIn.isRunning 'Logging in ...' 'Log in'}}
+            @size="medium"
+            @style="orange-3"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Page>

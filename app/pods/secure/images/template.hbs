@@ -1,11 +1,13 @@
 <Page @id="images">
+  <Nav />
+
   <section>
     <h1>Images</h1>
 
     <FilterList
       @options={{@model.images}}
       @label="path"
-      @linkRoute="images.image"
+      @linkRoute="secure.images.image"
       @linkModel="id"
     />
   </section>

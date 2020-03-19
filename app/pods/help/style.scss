@@ -1,0 +1,8 @@
+#help.page {
+  p,
+  a {
+    & + a {
+      margin-top: 20px;
+    }
+  }
+}

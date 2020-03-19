@@ -1,10 +1,12 @@
 <Page @id="countries">
+  <Nav />
+
   <section>
     <h1>Countries</h1>
     <FilterList
       @options={{@model.countries}}
       @label="nameEnglish"
-      @linkRoute="countries.country"
+      @linkRoute="secure.countries.country"
       @linkModel="id"
     />
   </section>

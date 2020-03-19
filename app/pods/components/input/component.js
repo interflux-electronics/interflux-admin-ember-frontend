@@ -23,9 +23,27 @@ export default class Input extends Component {
 
   @action
   onKeyUp(event) {
-    this.value = event.target.value;
-    if (this.args.onKeyUp) {
-      this.args.onKeyUp(event);
+    const value = event.target.value;
+    const valueChanged = value !== this.value;
+    if (valueChanged) {
+      // Update local value
+      this.value = value;
+
+      // Fire up event
+      if (this.args.onChange) {
+        this.args.onChange(value);
+      }
     }
+
+    if (event.key === 'Enter') {
+      if (this.args.onEnter) {
+        this.args.onEnter(event);
+      }
+    }
+
+    // JW: Use case?
+    // if (this.args.onKeyUp) {
+    //   this.args.onKeyUp(event);
+    // }
   }
 }

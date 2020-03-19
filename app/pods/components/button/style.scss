@@ -30,9 +30,9 @@ button {
       line-height: 48px;
       padding: 0 28px;
       border-radius: 4px;
-      span {
-        margin: 0 4px;
-      }
+      // span {
+      //   margin: 0 4px;
+      // }
     }
 
     &.medium {
@@ -41,9 +41,9 @@ button {
       line-height: 40px;
       padding: 0 20px;
       border-radius: 3px;
-      span {
-        margin: 0 4px;
-      }
+      // span {
+      //   margin: 0 4px;
+      // }
     }
 
     &.small {
@@ -52,8 +52,19 @@ button {
       font-family: $regular;
       font-size: 14px;
       border-radius: 2px;
-      span {
-        margin: 0 4px;
+      // span {
+      //   margin: 0 4px;
+      // }
+    }
+
+    &.blue-2 {
+      background: $blue-2;
+      color: white;
+      &.active {
+        background: $orange-2;
+      }
+      &:hover {
+        background: $orange-1;
       }
     }
 
@@ -79,6 +90,17 @@ button {
       }
     }
 
+    &.orange-3 {
+      background: $orange-3;
+      color: white;
+      &.active {
+        background: $orange-5;
+      }
+      &:hover {
+        background: $orange-4;
+      }
+    }
+
     &.white {
       background: white;
       &:hover {
@@ -90,6 +112,16 @@ button {
       border: 1px solid $grey-1;
       &:hover {
         border-color: $grey-2;
+      }
+    }
+
+    &.link {
+      background: none;
+      color: white;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+        background: none;
       }
     }
   }

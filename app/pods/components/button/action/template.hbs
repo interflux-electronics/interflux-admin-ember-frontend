@@ -1,10 +1,15 @@
-{{#if hasBlock}}
-  {{yield}}
-{{else}}
-  {{#if icon}}
-    <Icon @name="{{icon}}" />
+<button
+  class="button-base button-action {{@size}} {{@style}}"
+  {{on 'click' this.args.action}}
+>
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{#if @icon}}
+      <!-- <Icon @name="{{@icon}}" /> -->
+    {{/if}}
+    {{#if @text}}
+      <span>{{@text}}</span>
+    {{/if}}
   {{/if}}
-  {{#if text}}
-    <span>{{text}}</span>
-  {{/if}}
-{{/if}}
+</button>

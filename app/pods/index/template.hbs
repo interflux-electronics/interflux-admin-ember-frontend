@@ -1,1 +1,16 @@
-<Page @id="home" />
+<Page @id="home">
+  <section class="center">
+    <img
+      src="{{cdn}}/images/logos/primary-interflux-electronics-symbol-1.svg"
+      width="100"
+      height="100"
+    >
+    <p>Welcome to <strong>Interflux Admin</strong></p>
+    <Button::Route
+      @route="login"
+      @text="Log in"
+      @size="small"
+      @style="blue-2"
+    />
+  </section>
+</Page>
