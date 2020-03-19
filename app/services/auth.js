@@ -9,10 +9,9 @@ export default class AuthService extends Service {
   @service store;
   @service router;
 
-  token = null;
-  user = null;
-  expiry = null;
-
+  @tracked token = null;
+  @tracked user = null;
+  @tracked expiry = null;
   @tracked error = null;
 
   @task()
