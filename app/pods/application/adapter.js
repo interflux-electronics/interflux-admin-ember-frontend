@@ -29,4 +29,10 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   pathForType(type) {
     return pluralize(type);
   }
+
+  // Never show local records until after findAll has completed loading the remote records
+  // https://api.emberjs.com/ember-data/3.10/classes/DS.Adapter/methods?anchor=shouldReloadAll
+  shouldReloadAll() {
+    return true;
+  }
 }
