@@ -2,7 +2,7 @@
   <header>
     <Input
       @type="search"
-      @onKeyUp={{this.onKeyUp}}
+      @onChange={{fn (mut this.query)}}
       @size="medium"
     />
   </header>
@@ -10,18 +10,16 @@
   <p><strong>{{this.count}}</strong> results out of {{max}}</p>
 
   <ul>
-    {{#if @options}}
-      {{#each options as |option index|}}
-        <li>
-          <Button::Route
-            @route={{@linkRoute}}
-            @model={{get option @linkModel}}
-            @text={{get option @label}}
-            @size="small"
-            @style="blue-3"
-          />
-        </li>
-      {{/each}}
-    {{/if}}
+    {{#each this.options as |option index|}}
+      <li>
+        <Button::Route
+          @route={{@linkRoute}}
+          @model={{get option @linkModel}}
+          @text={{get option @label}}
+          @size="small"
+          @style="blue-3"
+        />
+      </li>
+    {{/each}}
   </ul>
 </div>

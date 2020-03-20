@@ -1,50 +1,30 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class ListComponent extends Component {
-  @tracked query;
-  @tracked options;
-  @tracked count;
-  @tracked max;
+  @tracked query = '';
 
-  constructor() {
-    super(...arguments);
-
-    const n = this.args.options ? this.args.options.length : 0;
-
-    this.options = this.args.options.sortBy(this.args.label);
-    this.count = n;
-    this.max = n;
+  get count() {
+    return this.options.length || 0;
   }
 
-  @action
-  onKeyUp(event) {
-    // console.debug('<FilterList> onKeyUp()', event.target.value);
-    const query = event.target.value;
-    this.query = query;
-    if (!query) {
-      this.options = this.args.options;
-      this.count = this.max;
-      return;
-    }
-    // TODO: delay the rendering for it can be slow
-    const optionsFiltered = this.args.options.filter(option => {
+  get max() {
+    return this.args.options.length || 0;
+  }
+
+  get options() {
+    const filtered = this.args.options.filter(option => {
+      // If no query is present, return all options
+      if (!this.query) {
+        return true;
+      }
+      // Return only the options that have the query in their label
       return option[this.args.label]
         .toLowerCase()
         .includes(this.query.toLowerCase());
     });
-    this.options = optionsFiltered.sortBy(this.args.label);
-    this.count = optionsFiltered.length;
-  }
 
-  @action
-  layout() {
-    console.debug('layout');
-  }
-
-  @action
-  sort() {
-    console.debug('sort');
+    // Sort the options alphabetically by their labels
+    return filtered.sortBy(this.args.label);
   }
 }
