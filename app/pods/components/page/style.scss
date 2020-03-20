@@ -11,7 +11,6 @@ main.page {
       justify-content: center;
       flex-direction: column;
       p {
-        color: white;
         margin: 0;
         & + p {
           margin-top: 16px;
@@ -22,6 +21,9 @@ main.page {
       font-size: 30px;
       color: white;
       margin-bottom: 30px;
+    }
+    > p {
+      color: white;
     }
   }
 }
