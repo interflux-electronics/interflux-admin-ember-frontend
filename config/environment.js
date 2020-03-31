@@ -47,7 +47,7 @@ module.exports = function(env) {
   const ENV = {
     appName: PKG.name,
     modulePrefix: PKG.name,
-    podModulePrefix: `${PKG.name}/pods`,
+    podModulePrefix: `${PKG.name}/routables`,
     environment: env,
     rootURL: '/',
     locationType: 'history',
