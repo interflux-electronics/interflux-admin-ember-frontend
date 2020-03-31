@@ -25,8 +25,7 @@ const appHosts = {
 // Where the CDN is located
 const cdnHosts = {
   development: 'http://localhost:9000',
-  production: 'https://cdn-interflux.fra1.cdn.digitaloceanspaces.com'
-  // production: 'https://cdn.interflux.com'
+  production: 'https://cdn.interflux.com'
 };
 
 // The mobile browser's theme colour
