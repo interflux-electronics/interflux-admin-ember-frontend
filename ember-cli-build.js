@@ -13,14 +13,6 @@ module.exports = function(defaults) {
 
     // Adds CSS browser prefixes
     autoprefixer: {
-      browsers: [
-        '> 1%',
-        'Explorer > 10',
-        'Firefox >= 17',
-        'Chrome >= 10',
-        'Safari >= 6',
-        'iOS >= 6'
-      ],
       cascade: false,
       remove: false
     },
