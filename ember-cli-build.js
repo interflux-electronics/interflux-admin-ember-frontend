@@ -7,7 +7,7 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     // Makes SASS listen to file changes in the component folders
     sassOptions: {
-      includePaths: ['app/routables/components'],
+      includePaths: ['app/routables'],
       overwrite: true
     },
 
