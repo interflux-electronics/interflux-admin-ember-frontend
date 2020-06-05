@@ -3,7 +3,7 @@
   <LinkTo
     @route={{@route}}
     @model={{@model}}
-    class="button-route button-base {{if @size @size 'medium'}} {{if @style @style 'primary'}}"
+    class="button-route button {{if @size @size 'medium'}} {{if @style @style 'primary'}}"
   >
     {{#if hasBlock}}
       {{yield}}
@@ -17,7 +17,7 @@
 {{else}}
   <LinkTo
     @route={{@route}}
-    class="button-route button-base {{if @size @size 'medium'}} {{if @style @style 'primary'}}"
+    class="button-route button {{if @size @size 'medium'}} {{if @style @style 'primary'}}"
   >
     {{#if hasBlock}}
       {{yield}}

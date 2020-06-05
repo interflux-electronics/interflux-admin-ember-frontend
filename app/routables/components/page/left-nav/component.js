@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 
-export default class NavComponent extends Component {
+export default class LeftNavComponent extends Component {
   @service auth;
 }

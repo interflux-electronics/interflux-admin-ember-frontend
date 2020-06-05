@@ -27,9 +27,9 @@ module.exports = function(defaults) {
       enabled: ENV.isProduction
     },
 
-    // Enable source maps for debugging and Sentry
+    // Enable source maps in all environments because it helps debugging.
     sourcemaps: {
-      enabled: ENV.isProduction,
+      enabled: true,
       extensions: ['js']
     },
 

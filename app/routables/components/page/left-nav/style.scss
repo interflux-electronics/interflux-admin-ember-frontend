@@ -1,0 +1,39 @@
+main.page.left-nav {
+  display: flex;
+  background: $blue-4;
+  > nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: $blue-5;
+    padding: 10px 10px;
+    a {
+      & + a {
+        margin-top: 10px;
+      }
+    }
+    hr {
+      background: $blue-4;
+      border: 0;
+      margin: 0;
+      height: 1px;
+      margin: 10px 0 10px -10px;
+      width: calc(100% + 20px);
+    }
+    img {
+      width: 55px;
+      border-radius: 1px;
+      height: auto;
+    }
+  }
+  > div {
+    padding: 30px;
+    p {
+      color: white;
+    }
+    h1 {
+      color: white;
+      margin-bottom: 30px;
+    }
+  }
+}

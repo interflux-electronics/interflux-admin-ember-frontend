@@ -1,0 +1,75 @@
+<Page
+  @id={{@id}}
+  @class="left-nav"
+>
+  <nav>
+    <img
+      src="{{cdn}}/images/logos/secondary-interflux-electronics-symbol-1.svg"
+      width="100"
+      height="100"
+    >
+    <hr>
+    <Button::Route
+      @route="secure.products"
+      @text="Products"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="secure.images"
+      @text="Images"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="secure.documents"
+      @text="Documents"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="secure.companies"
+      @text="Companies"
+      @size="small"
+      @style="blue-4"
+    />
+    <Button::Route
+      @route="secure.people"
+      @text="People"
+      @size="small"
+      @style="blue-4"
+    />
+    <hr>
+    <Button::Route
+      @route="secure.leads"
+      @text="Leads"
+      @size="small"
+      @style="blue-4"
+    />
+    <hr>
+    <Button::Action
+      @action={{this.auth.reset}}
+      @text="Log out"
+      @size="small"
+      @style="blue-4"
+    />
+    <hr>
+    <!-- <Button::Route
+    @route="secure.countries"
+    @text="Countries"
+    @size="small"
+    @style="blue-4"
+  /> -->
+    <!-- <Button::Route
+    @route="secure.languages"
+    @text="Languages"
+    @size="small"
+    @style="blue-4"
+  /> -->
+    <!-- <hr> -->
+  </nav>
+
+  <div>
+    {{yield}}
+  </div>
+</Page>

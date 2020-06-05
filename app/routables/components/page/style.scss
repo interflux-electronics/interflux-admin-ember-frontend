@@ -1,32 +1,8 @@
-body {
-  background: $blue-4;
-}
+// Agnostic
 main.page {
-  display: flex;
   min-height: 100vh;
-  background: $blue-4;
-  > section {
+  &.no-scroll {
+    position: fixed;
     width: 100%;
-    padding: 30px;
-    &.center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      p {
-        margin: 0;
-        & + p {
-          margin-top: 16px;
-        }
-      }
-    }
-    > h1 {
-      font-size: 30px;
-      color: white;
-      margin-bottom: 30px;
-    }
-    p {
-      color: white;
-    }
   }
 }

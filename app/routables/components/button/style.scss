@@ -1,12 +1,12 @@
-// These button-base styles are inherited by all buttons.
+// These button styles are inherited by all buttons.
 // Reuse these classes as much as possible.
 // Resist styling buttons per component, instead extend this base.
 
 a,
 button {
-  &.button-base {
+  &.button {
     position: relative;
-    display: inline-block;
+    display: block;
     background: none;
     border: 0;
     outline: 0 !important;
