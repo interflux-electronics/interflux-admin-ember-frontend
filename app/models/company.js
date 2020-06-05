@@ -10,6 +10,7 @@ export default class CompanyModel extends Model {
   @attr('string') website;
   @attr('string') latitude;
   @attr('string') longitude;
+  @attr('boolean') public;
 
   @belongsTo('country') country;
 

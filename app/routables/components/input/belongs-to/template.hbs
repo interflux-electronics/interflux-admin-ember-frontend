@@ -1,0 +1,9 @@
+<div class="input belongs-to">
+  <Input @value={{get @value @key}} />
+
+  <div class="dropdown">
+    {{#each @options as |option|}}
+      <p>{{get option @key}}</p>
+    {{/each}}
+  </div>
+</div>

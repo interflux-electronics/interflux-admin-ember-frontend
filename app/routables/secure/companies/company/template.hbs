@@ -1,45 +1,139 @@
-<Modal @id="document">
-  <h1>{{@model.company.businessName}}</h1>
+{{#with @model.company as |company|}}
 
-  <hr>
+  <Modal @id="document">
 
-  <p>Business name: {{@model.company.businessName}}</p>
-  <p>Legal name: {{@model.company.legalName}}</p>
-  <p>Phone: {{@model.company.phone}}</p>
-  <p>Fax: {{@model.company.fax}}</p>
-  <p>Website: {{@model.company.website}}</p>
-  <ul>
-    {{#each @model.company.emails as |email|}}
-      <li>Email: {{email}}</li>
-    {{/each}}
-  </ul>
+    <h1>{{company.businessName}}</h1>
+    {{#if company.hasDirtyAttributes}}
+      <p>dirty</p>
+    {{else}}
+      <p>no changes</p>
+    {{/if}}
 
-  <hr>
+    <hr>
 
-  <p>Address: {{@model.company.address}}</p>
-  <p>Country: {{@model.company.country.nameEnglish}}</p>
-  <p>Coordinates: {{@model.company.latitude}}, {{@model.company.longitude}}</p>
+    <Fieldset>
+      <label>Business name</label>
+      <Input
+        @value={{company.businessName}}
+        @key-down={{fn (mut company.businessName)}}
+      />
+    </Fieldset>
 
-  <hr>
+    <Fieldset>
+      <label>Legal name</label>
+      <Input
+        @value={{company.legalName}}
+        @key-down={{fn (mut company.legalName)}}
+      />
+    </Fieldset>
 
-  <p>Market:</p>
-  <ul>
-    {{#each @model.company.markets as |market|}}
-      <li>{{market.nameEnglish}}</li>
-    {{/each}}
-  </ul>
+    <Fieldset>
+      <label>Phone</label>
+      <Input
+        @value={{company.phone}}
+        @key-down={{fn (mut company.phone)}}
+      />
+    </Fieldset>
 
-  <hr>
+    <Fieldset>
+      <label>Fax</label>
+      <Input
+        @value={{company.fax}}
+        @key-down={{fn (mut company.fax)}}
+      />
+    </Fieldset>
 
-  <p>Members:</p>
-  <ul>
-    {{#each @model.company.members as |member|}}
-      <li>{{member.person.firstName}} {{member.person.lastName}}</li>
-    {{/each}}
-  </ul>
+    <Fieldset>
+      <label>Website</label>
+      <Input
+        @value={{company.website}}
+        @key-down={{fn (mut company.website)}}
+      />
+    </Fieldset>
 
-  <hr>
+    <Fieldset>
+      <label>Emails</label>
+      <Fieldset::Hint @text="Use commas to separate multiple emails" />
+      <Input
+        @value={{company.emails}}
+        @key-down={{fn (mut company.emails)}}
+      />
+    </Fieldset>
 
-  <p>Model: company</p>
-  <p>UUID: {{@model.company.id}}</p>
-</Modal>
+    <hr>
+
+    <Fieldset>
+      <label>Address</label>
+      <Textarea
+        @value={{company.address}}
+        @key-down={{fn (mut company.address)}}
+        cols="80"
+        rows="6"
+      />
+      <!--  -->
+    </Fieldset>
+
+    <Fieldset>
+      <label>Country</label>
+      <Input::BelongsTo
+        @value={{company.country}}
+        @options={{@model.countries}}
+        @key="nameEnglish"
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <label>Latitude</label>
+      <Input
+        @value={{company.latitude}}
+        @key-down={{fn (mut company.latitude)}}
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <label>Longitude</label>
+      <Input
+        @value={{company.longitude}}
+        @key-down={{fn (mut company.longitude)}}
+      />
+    </Fieldset>
+
+    <hr>
+
+    <!-- <p>Market:</p>
+
+    <ul>
+      {{#each company.markets as |market|}}
+        <li>{{market.nameEnglish}}</li>
+      {{/each}}
+    </ul>
+
+    <hr> -->
+
+    <!-- <p>Members:</p>
+    <ul>
+      {{#each company.members as |member|}}
+        <li>{{member.person.firstName}} {{member.person.lastName}}</li>
+      {{/each}}
+    </ul>
+
+    <hr> -->
+
+    <hr>
+
+    <p>Show on website?</p>
+    <Input::Boolean
+      @value={{company.public}}
+      @textTrue="Yes"
+      @textFalse="No"
+      @onToggle={{fn (mut company.public)}}
+    />
+
+    {{#if company.public}}
+      <p>Position in list?</p>
+      <Input::Number />
+    {{/if}}
+
+  </Modal>
+
+{{/with}}

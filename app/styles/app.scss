@@ -24,18 +24,20 @@
 @import 'app/routables/login/style';
 @import 'app/routables/help/style';
 
-// Agnostic components
-@import 'app/routables/components/page/style';
-@import 'app/routables/components/section/style';
+// Components
 @import 'app/routables/components/button/style';
-@import 'app/routables/components/buttons/style';
 @import 'app/routables/components/buttons/horizontal/style';
-@import 'app/routables/components/modal/style';
-@import 'app/routables/components/input/style';
-@import 'app/routables/components/image/responsive/style';
-@import 'app/routables/components/filter-list/style';
+@import 'app/routables/components/buttons/style';
 @import 'app/routables/components/fieldset/style';
-
-// Opinionated components
+@import 'app/routables/components/fieldset/hint/style';
+@import 'app/routables/components/filter-list/style';
+@import 'app/routables/components/image/responsive/style';
+@import 'app/routables/components/input/string/style';
+@import 'app/routables/components/input/number/style';
+@import 'app/routables/components/input/belongs-to/style';
+@import 'app/routables/components/modal/style';
 @import 'app/routables/components/page/center/style';
 @import 'app/routables/components/page/left-nav/style';
+@import 'app/routables/components/page/style';
+@import 'app/routables/components/section/style';
+@import 'app/routables/components/input/boolean/style';

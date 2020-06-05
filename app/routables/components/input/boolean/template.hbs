@@ -1,0 +1,7 @@
+<div class="input boolean {{@value}}">
+  <p {{on 'click' (fn this.set false)}}>{{@textFalse}}</p>
+  <div {{on 'click' this.toggle}}>
+    <i></i>
+  </div>
+  <p {{on 'click' (fn this.set true)}}>{{@textTrue}}</p>
+</div>

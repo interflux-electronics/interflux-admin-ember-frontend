@@ -1,6 +1,6 @@
 <Page::Center @id="login">
   <Section>
-    <Input
+    <Input::String
       @value={{this.email}}
       @placeholder="Email"
       @type="email"
@@ -9,7 +9,7 @@
       @onChange={{fn (mut this.email)}}
       @onEnter={{this.submit}}
     />
-    <Input
+    <Input::String
       @value={{this.password}}
       @placeholder="Password"
       @type="password"

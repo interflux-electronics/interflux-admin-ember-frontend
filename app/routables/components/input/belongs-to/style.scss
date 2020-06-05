@@ -1,0 +1,10 @@
+.input.belongs-to {
+  .dropdown {
+    max-height: 100px;
+    background: #eee;
+    overflow: hidden;
+  }
+  input {
+    color: red;
+  }
+}
