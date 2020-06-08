@@ -12,7 +12,7 @@
     <hr>
 
     <Fieldset>
-      <label>Business name</label>
+      <Label>Business name</Label>
       <Input
         @value={{company.businessName}}
         @key-down={{fn (mut company.businessName)}}
@@ -20,7 +20,7 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Legal name</label>
+      <Label>Legal name</Label>
       <Input
         @value={{company.legalName}}
         @key-down={{fn (mut company.legalName)}}
@@ -28,7 +28,7 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Phone</label>
+      <Label>Phone</Label>
       <Input
         @value={{company.phone}}
         @key-down={{fn (mut company.phone)}}
@@ -36,7 +36,7 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Fax</label>
+      <Label>Fax</Label>
       <Input
         @value={{company.fax}}
         @key-down={{fn (mut company.fax)}}
@@ -44,7 +44,7 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Website</label>
+      <Label>Website</Label>
       <Input
         @value={{company.website}}
         @key-down={{fn (mut company.website)}}
@@ -52,8 +52,13 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Emails</label>
-      <Fieldset::Hint @text="Use commas to separate multiple emails" />
+      <Label
+        @text="Emails"
+        @hint="Use commas to separate multiple emails"
+      />
+      <!--
+      <Label>Emails</Label>
+      <Fieldset::Hint @text="Use commas to separate multiple emails" /> -->
       <Input
         @value={{company.emails}}
         @key-down={{fn (mut company.emails)}}
@@ -63,7 +68,7 @@
     <hr>
 
     <Fieldset>
-      <label>Address</label>
+      <Label>Address</Label>
       <Textarea
         @value={{company.address}}
         @key-down={{fn (mut company.address)}}
@@ -74,7 +79,7 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Country</label>
+      <Label>Country</Label>
       <Input::BelongsTo
         @value={{company.country}}
         @options={{@model.countries}}
@@ -83,7 +88,7 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Latitude</label>
+      <Label>Latitude</Label>
       <Input
         @value={{company.latitude}}
         @key-down={{fn (mut company.latitude)}}
@@ -91,7 +96,7 @@
     </Fieldset>
 
     <Fieldset>
-      <label>Longitude</label>
+      <Label>Longitude</Label>
       <Input
         @value={{company.longitude}}
         @key-down={{fn (mut company.longitude)}}
@@ -121,17 +126,24 @@
 
     <hr>
 
-    <p>Show on website?</p>
-    <Input::Boolean
-      @value={{company.public}}
-      @textTrue="Yes"
-      @textFalse="No"
-      @onToggle={{fn (mut company.public)}}
-    />
+    <Fieldset>
+      <Label>Show on website?</Label>
+      <Input::Boolean
+        @value={{company.public}}
+        @textTrue="Yes"
+        @textFalse="No"
+        @onToggle={{fn (mut company.public)}}
+      />
+    </Fieldset>
 
     {{#if company.public}}
-      <p>Position in list?</p>
-      <Input::Number />
+      <Fieldset>
+        <Label>Position in list?</Label>
+        <Input
+          @value={{company.order}}
+          @key-down={{fn (mut company.order)}}
+        />
+      </Fieldset>
     {{/if}}
 
   </Modal>

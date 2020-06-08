@@ -1,0 +1,18 @@
+<label>
+  <span>
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{@text}}
+    {{/if}}
+  </span>
+  {{#if @hint}}
+    <legend
+      {{on 'click' this.toggleHint}}
+      class={{if this.showHint 'show' 'hide'}}
+    >
+      <i>?</i>
+      <p><span>{{@hint}}</span></p>
+    </legend>
+  {{/if}}
+</label>

@@ -23,8 +23,8 @@ body > .modal {
     pointer-events: none; // So the overlay below can be clicked
     > .box {
       background: white;
-      width: 100%;
-      max-width: 1000px;
+      width: 700px; // Too opinionated
+      max-width: 100%;
       min-height: 100px;
       box-sizing: border-box;
       padding: 30px;
@@ -49,10 +49,10 @@ body > .modal {
   h1 + h2 {
     margin-top: 14px;
   }
-  p {
-    font-size: 16px;
-    margin: 16px 0;
-  }
+  // p {
+  //   font-size: 16px;
+  //   margin: 16px 0;
+  // }
   hr {
     margin: 16px 0;
     border: 0;
