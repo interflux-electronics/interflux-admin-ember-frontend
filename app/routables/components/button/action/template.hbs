@@ -1,6 +1,7 @@
 <button
-  class="button button-action {{@size}} {{@style}}"
+  class="button action {{@size}} {{@style}}"
   {{on 'click' this.args.action}}
+  disabled={{@disabled}}
 >
   {{#if hasBlock}}
     {{yield}}

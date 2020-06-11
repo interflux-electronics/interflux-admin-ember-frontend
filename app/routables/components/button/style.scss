@@ -108,6 +108,14 @@ button {
       }
     }
 
+    &.green {
+      background: $green-1;
+      color: white;
+      &:hover {
+        background: $green-2;
+      }
+    }
+
     &.grey-border {
       border: 1px solid $grey-1;
       &:hover {
@@ -118,10 +126,25 @@ button {
     &.link {
       background: none;
       color: white;
-      text-decoration: underline;
+      text-decoration: none;
       &:hover {
-        text-decoration: none;
+        text-decoration: underline;
         background: none;
+      }
+      &.grey {
+        color: $grey-3;
+        &:hover {
+          color: $blue-0;
+        }
+      }
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      background: $grey-1;
+      color: $grey-5;
+      &:hover {
+        background: $grey-1;
       }
     }
   }

@@ -1,9 +1,15 @@
 <div class="input belongs-to">
-  <Input @value={{get @value @key}} />
+  <Input
+    @value={{get @value @key}}
+    @key-up={{fn this.filter}}
+  />
 
-  <div class="dropdown">
+  <ul
+    class="dropdown"
+    {{did-insert this.onInsert}}
+  >
     {{#each @options as |option|}}
-      <p>{{get option @key}}</p>
+      <li {{on 'click' (fn this.select option)}}>{{get option @key}}</li>
     {{/each}}
-  </div>
+  </ul>
 </div>

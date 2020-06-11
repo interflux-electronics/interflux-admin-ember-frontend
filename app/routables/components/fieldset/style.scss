@@ -5,8 +5,8 @@ fieldset {
 
   > div {
     display: grid;
+    grid-template-columns: auto auto auto;
     grid-template-rows: auto auto;
-    grid-template-columns: auto auto auto auto;
     grid-template-areas:
       'label tooltip status'
       'input input input';
@@ -21,13 +21,12 @@ fieldset {
     }
     input {
       font-size: 16px;
-      line-height: 42px;
-      padding: 0 16px;
+      line-height: 44px;
+      padding: 0 17px;
       border: 1px solid #ddd;
       border-radius: 3px;
       margin-top: 5px;
-      font-family: $regular;
-      max-width: 400px;
+      max-width: 100%;
       transition: border-color 300ms $easeOutExpo;
       outline: 0;
       box-shadow: 0;
@@ -43,16 +42,18 @@ fieldset {
     textarea {
       font-size: 16px;
       line-height: 150%;
-      padding: 0 16px;
+      padding: 15px 17px;
       border: 1px solid #ddd;
       border-radius: 3px;
       margin-top: 5px;
       font-family: $regular;
-      max-width: 500px;
+      max-width: 100%;
+      min-width: 100%;
       transition: border-color 300ms $easeOutExpo;
       outline: 0;
       box-shadow: 0;
       color: $paragraph-color-1;
+      box-sizing: border-box;
       &:hover {
         border-color: #bbb;
       }

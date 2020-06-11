@@ -1,0 +1,13 @@
+<div
+  class="search-list"
+  {{did-insert this.onInsert}}
+>
+  <Input
+    @type="text"
+    @onChange={{fn this.filter}}
+    @placeholder={{@input-placeholder}}
+    @class={{@input-class}}
+  />
+  <p>{{this.count}} / {{max}}</p>
+  {{yield}}
+</div>

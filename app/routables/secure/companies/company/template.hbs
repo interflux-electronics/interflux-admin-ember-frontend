@@ -3,11 +3,6 @@
   <Modal @id="document">
 
     <h1>{{company.businessName}}</h1>
-    {{#if company.hasDirtyAttributes}}
-      <p>dirty</p>
-    {{else}}
-      <p>no changes</p>
-    {{/if}}
 
     <hr>
 
@@ -56,9 +51,6 @@
         @text="Emails"
         @hint="Use commas to separate multiple emails"
       />
-      <!--
-      <Label>Emails</Label>
-      <Fieldset::Hint @text="Use commas to separate multiple emails" /> -->
       <Input
         @value={{company.emails}}
         @key-down={{fn (mut company.emails)}}
@@ -73,7 +65,7 @@
         @value={{company.address}}
         @key-down={{fn (mut company.address)}}
         cols="80"
-        rows="6"
+        rows="3"
       />
       <!--  -->
     </Fieldset>
@@ -127,7 +119,10 @@
     <hr>
 
     <Fieldset>
-      <Label>Show on website?</Label>
+      <Label
+        @text="Show on website"
+        @hint="If yes, this company will be shown on app.interflux.com. If no, this company is hidden from the world and can only be seen by Interflux members who are logged in on admin.interflux.com."
+      />
       <Input::Boolean
         @value={{company.public}}
         @textTrue="Yes"
@@ -138,7 +133,10 @@
 
     {{#if company.public}}
       <Fieldset>
-        <Label>Position in list?</Label>
+        <Label
+          @text="Position in list?"
+          @hint="Leave empty to sort alphabetically. Enter an integer to sort this company above the alphabetically sorted companies."
+        />
         <Input
           @value={{company.order}}
           @key-down={{fn (mut company.order)}}
@@ -146,6 +144,29 @@
       </Fieldset>
     {{/if}}
 
+    <hr>
+
+    <Buttons::Horizontal>
+      <div class="left"></div>
+      <div class="right">
+        {{#if company.hasDirtyAttributes}}
+          <Button::Action
+            @action={{company.rollbackAttributes}}
+            @text="reset changes"
+            @size="medium"
+            @style="grey link"
+          />
+        {{/if}}
+
+        <Button::Action
+          @action={{fn this.save company}}
+          @text={{if company.hasDirtyAttributes (if company.isSaving 'Saving...' 'save changes') 'no changes'}}
+          @disabled={{if company.hasDirtyAttributes false true}}
+          @size="medium"
+          @style="green"
+        />
+      </div>
+    </Buttons::Horizontal>
   </Modal>
 
 {{/with}}

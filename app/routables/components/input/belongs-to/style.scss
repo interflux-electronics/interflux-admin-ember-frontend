@@ -1,10 +1,24 @@
 .input.belongs-to {
-  .dropdown {
-    max-height: 100px;
+  input {
+    color: black;
+  }
+  ul {
+    max-height: 150px;
     background: #eee;
     overflow: hidden;
-  }
-  input {
-    color: red;
+    &.hide {
+      display: none;
+    }
+    li {
+      line-height: 30px;
+      margin: 0;
+      padding: 0 17px;
+      &.hide {
+        display: none;
+      }
+      &.focus {
+        background: $orange-3;
+      }
+    }
   }
 }
