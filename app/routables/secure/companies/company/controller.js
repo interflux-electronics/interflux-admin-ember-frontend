@@ -11,4 +11,10 @@ export default class SecureCompaniesCompanyController extends Controller {
     await record.save();
     console.log('saved!');
   }
+
+  @action
+  reset(record) {
+    record.rollbackAttributes();
+    console.log('reset!');
+  }
 }

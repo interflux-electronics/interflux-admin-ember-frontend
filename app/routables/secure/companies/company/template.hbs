@@ -151,7 +151,7 @@
       <div class="right">
         {{#if company.hasDirtyAttributes}}
           <Button::Action
-            @action={{company.rollbackAttributes}}
+            @action={{fn this.reset company}}
             @text="reset changes"
             @size="medium"
             @style="grey link"
