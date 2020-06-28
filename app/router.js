@@ -6,30 +6,36 @@ export default class Router extends EmberRouter {
   rootURL = config.rootURL;
 }
 
-Router.map(function() {
-  this.route('secure', function() {
-    this.route('products', function() {
+Router.map(function () {
+  this.route('secure', function () {
+    this.route('products', function () {
       this.route('product', { path: '/:uuid' });
     });
-    this.route('images', function() {
+    this.route('families', function () {
+      this.route('family', { path: '/:uuid' });
+    });
+    this.route('features', function () {
+      this.route('feature', { path: '/:uuid' });
+    });
+    this.route('images', function () {
       this.route('image', { path: '/:uuid' });
     });
-    this.route('documents', function() {
+    this.route('documents', function () {
       this.route('document', { path: '/:uuid' });
     });
-    this.route('companies', function() {
+    this.route('companies', function () {
       this.route('company', { path: '/:uuid' });
     });
-    this.route('people', function() {
+    this.route('people', function () {
       this.route('person', { path: '/:uuid' });
     });
-    this.route('leads', function() {
+    this.route('leads', function () {
       this.route('lead', { path: '/:uuid' });
     });
-    this.route('countries', function() {
+    this.route('countries', function () {
       this.route('country', { path: '/:uuid' });
     });
-    this.route('languages', function() {
+    this.route('languages', function () {
       this.route('language', { path: '/:uuid' });
     });
   });

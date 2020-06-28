@@ -1,46 +1,177 @@
-<Modal @id="product">
-  <h1>{{@model.product.name}}</h1>
-  <h2>Product</h2>
+{{#with @model.product as |product|}}
+  <Modal @id="product">
+    <h1>{{product.name}}</h1>
+    <h2>Product</h2>
 
-  <hr>
+    <hr>
 
-  <p>Name: {{@model.product.name}}</p>
-  <p>Slug: {{@model.product.slug}}</p>
-  <p>Family: {{@model.product.family.namePlural}}</p>
+    <Fieldset>
+      <Label>Name</Label>
+      <Input::String
+        @contenteditable={{true}}
+        @value={{product.name}}
+        @onKeyUp={{fn (mut product.name)}}
+      />
+    </Fieldset>
 
-  <hr>
+    <Fieldset>
+      <Label>Name</Label>
+      <Input
+        @value={{product.name}}
+        @key-down={{fn (mut product.name)}}
+      />
+    </Fieldset>
 
-  <p>Images:</p>
-  {{#each @model.product.images as |image|}}
-    <Image::Responsive
-      @path={{image.path}}
-      @sizes={{image.sizes}}
-      @formats={{image.formats}}
-      @alt={{image.alt}}
-      @caption={{image.caption}}
-    />
-  {{/each}}
+    <Fieldset>
+      <Label>Family</Label>
+      <Input
+        @value={{product.family.namePlural}}
+        @key-down={{fn (mut product.family.namePlural)}}
+      />
+    </Fieldset>
 
-  <hr>
+    <Fieldset>
+      <Label>Pitch</Label>
+      <Textarea
+        @value={{product.pitch}}
+        @key-down={{fn (mut product.pitch)}}
+        cols="80"
+        rows="3"
+      />
+      <!--  -->
+    </Fieldset>
 
-  <p>Documents:</p>
-  <ul>
-    {{#each @model.product.documents as |document|}}
-      <li>
-        <Button::Url
-          @href="{{cdn}}/{{document.path}}"
-          @text="{{document.name}} ({{document.language.nameEnglish}})"
-          @icon="pdf"
-          @size="medium"
-          @style="white grey-border"
-        />
-      </li>
+    <hr>
+
+    <Fieldset>
+      <!-- <Label
+        @text="Can be ordered?"
+      /> -->
+      <Input::Boolean
+        @value={{product.orderable}}
+        @textTrue="Can be ordered"
+        @textFalse="Out of production"
+        @onToggle={{fn (mut product.orderable)}}
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <!-- <Label
+        @text="Public?"
+        @hint="If yes, this product will be shown on app.interflux.com. If no, this product is hidden from the world and can only be seen by Interflux members who are logged in on admin.interflux.com."
+      /> -->
+      <Input::Boolean
+        @value={{product.public}}
+        @textTrue="Public"
+        @textFalse="Private"
+        @onToggle={{fn (mut product.public)}}
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <!-- <Label
+        @text="Featured?"
+      /> -->
+      <Input::Boolean
+        @value={{product.featured}}
+        @textTrue="Featured"
+        @textFalse="Normal"
+        @onToggle={{fn (mut product.featured)}}
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <!-- <Label
+        @text="Featured?"
+      /> -->
+      <Input::Boolean
+        @value={{product.popular}}
+        @textTrue="Mark as popular"
+        @textFalse="Normal"
+        @onToggle={{fn (mut product.popular)}}
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <!-- <Label
+        @text="Featured?"
+      /> -->
+      <Input::Boolean
+        @value={{product.new}}
+        @textTrue="Mark as new"
+        @textFalse="Normal"
+        @onToggle={{fn (mut product.new)}}
+      />
+    </Fieldset>
+
+    <hr>
+
+    <p>Recommended for:</p>
+    {{#each product.processes as |process|}}
+      <p>{{process.name}}</p>
     {{/each}}
-  </ul>
 
-  <hr>
+    <p>Key advantages:</p>
+    {{#each product.qualities as |quality|}}
+      <p>{{quality.name}}</p>
+    {{/each}}
 
-  <!-- <p>Can be seen: Yes</p>
+    <hr>
+
+    <p>Images:</p>
+    {{#each product.images as |image|}}
+      <!-- <Image::Responsive
+        @path={{image.path}}
+        @sizes={{image.sizes}}
+        @formats={{image.formats}}
+      /> -->
+      <Fieldset>
+        <Label>Alt</Label>
+        <Input
+          @value={{image.alt}}
+          @key-down={{fn (mut image.alt)}}
+        />
+      </Fieldset>
+      <Fieldset>
+        <Label>Caption</Label>
+        <Input
+          @value={{image.caption}}
+          @key-down={{fn (mut image.caption)}}
+        />
+      </Fieldset>
+      <Fieldset>
+        <!-- <Label
+          @text="Featured?"
+        /> -->
+        <Input::Boolean
+          @value={{image.public}}
+          @textTrue="Public"
+          @textFalse="Private"
+          @onToggle={{fn (mut image.public)}}
+        />
+      </Fieldset>
+    {{/each}}
+
+    <hr>
+
+    <p>Documents:</p>
+    <ul>
+      {{#each product.documents as |document|}}
+        <li>
+          <Button::Url
+            @href="{{cdn}}/{{document.path}}"
+            @text="{{document.name}} ({{document.language.nameEnglish}})"
+            @icon="pdf"
+            @size="medium"
+            @style="white grey-border"
+          />
+        </li>
+      {{/each}}
+    </ul>
+
+    <hr>
+
+    <!-- <p>Can be seen: Yes</p>
   <p>Can be ordered: Yes</p>
   <p>Recommended: No</p>
   <p>New: No</p>
@@ -48,25 +179,38 @@
 
   <hr> -->
 
-  <p>Features: (TODO)</p>
-  <p>feature 1</p>
-  <p>feature 2</p>
-  <p>feature 3</p>
-  <!-- {{#each @model.product.features as |feature|}}
-    <p>{{feature.id}}</p>
-  {{/each}} -->
 
-  <hr>
 
-  <p>Variants: (TODO)</p>
+    <hr>
+
+    <!-- <p>Variants: (TODO)</p>
   <p>variant 1</p>
   <p>variant 2</p>
-  <p>variant 3</p>
-  <!-- {{#each @model.product.features as |feature|}}
+  <p>variant 3</p> -->
+    <!-- {{#each product.features as |feature|}}
     <p>{{feature.id}}</p>
   {{/each}} -->
 
-  <hr>
+    <!-- <Buttons::Horizontal>
+      <div class="left"></div>
+      <div class="right">
+        {{#if product.hasDirtyAttributes}}
+          <Button::Action
+            @action={{fn this.reset product}}
+            @text="reset changes"
+            @size="medium"
+            @style="grey link"
+          />
+        {{/if}}
 
-  <p>Database UUID: {{@model.product.id}}</p>
-</Modal>
+        <Button::Action
+          @action={{fn this.save product}}
+          @text={{if product.hasDirtyAttributes (if product.isSaving 'Saving...' 'save changes') 'no changes'}}
+          @disabled={{if product.hasDirtyAttributes false true}}
+          @size="medium"
+          @style="green"
+        />
+      </div>
+    </Buttons::Horizontal> -->
+  </Modal>
+{{/with}}

@@ -22,7 +22,23 @@ export default class InputString extends Component {
   }
 
   @action
+  onKeyDown(event) {
+    const forbidden = false;
+    if (forbidden) {
+      event.preventDefault();
+    }
+  }
+
+  @action
+  onKeyUpp(event) {
+    console.log('onKeyUpp', { event });
+    console.log(event.target.innerText);
+    this.args.onKeyUp(event.target.innerText);
+  }
+
+  @action
   onKeyUp(event) {
+    console.log({ event });
     const value = event.target.value;
     const valueChanged = value !== this.value;
     if (valueChanged) {

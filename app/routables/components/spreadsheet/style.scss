@@ -1,0 +1,176 @@
+.spreadsheet {
+  .tools {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    > div {
+      display: flex;
+    }
+    .input {
+      position: relative;
+      display: flex;
+      background: white;
+      box-shadow: 0 3px 0 rgba(black, 0.2);
+      p {
+        padding: 0 36px 0 12px;
+        line-height: 36px;
+      }
+      p[contenteditable] {
+        outline: 0;
+        border: 0;
+        border-radius: 0;
+        min-width: 170px;
+        color: $paragraph-color-1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: all 400ms $easeOutExpo;
+        &:focus {
+          min-width: 200px;
+          & + p {
+            display: none;
+          }
+        }
+      }
+      p.placeholder {
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: $grey-3;
+        user-select: none;
+        pointer-events: none;
+      }
+    }
+    .icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 36px;
+      width: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      svg {
+        width: 50%;
+        height: 50%;
+        [fill] {
+          fill: $grey-3;
+        }
+      }
+    }
+  }
+
+  .data {
+    display: flex;
+    .column {
+      &:last-child {
+        width: 100%;
+      }
+      header {
+        display: flex;
+        cursor: pointer;
+        // border-bottom: 2px solid $blue-3;
+        h2 {
+          color: white;
+          font-size: 14px;
+          padding: 0 12px;
+          line-height: 36px;
+          font-family: $regular;
+          user-select: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          opacity: 0.7;
+        }
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 36px;
+          height: 36px;
+          margin-left: -12px;
+          svg {
+            height: 12px;
+            width: auto;
+            [fill] {
+              fill: white;
+            }
+          }
+        }
+      }
+      li {
+        height: 36px;
+        border: 1px solid $blue-3;
+        margin-top: -1px;
+        border-left: 0;
+        border-right: 0;
+        display: flex;
+        align-items: center;
+        padding-right: 10px;
+        cursor: pointer;
+        &.highlight {
+          background-color: $blue-3;
+        }
+        &.hide {
+          display: none;
+        }
+        p {
+          color: white;
+          font-size: 16px;
+          padding: 0 12px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          mark {
+            position: relative;
+            background: none;
+            color: white;
+            font-family: $bold;
+            &:after {
+              content: ' ';
+              position: absolute;
+              width: 100%;
+              height: 2px;
+              bottom: 0;
+              left: 0;
+              background: white;
+            }
+          }
+        }
+        input {
+          font-size: 16px;
+          line-height: 36px;
+          border: 0;
+          padding: 0 12px;
+          outline: 0;
+          color: $blue-5;
+          width: 100%;
+          opacity: 0.3;
+          transition: opacity 200ms ease;
+          &:hover,
+          &:focus {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    hr {
+      margin: 0;
+      height: 3px;
+      background: $blue-3;
+      border: 0;
+    }
+    p {
+      font-size: 14px;
+      padding: 0 12px;
+      line-height: 36px;
+      font-family: $light;
+      font-family: $regular;
+      opacity: 0.7;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<Page::LeftNav @id="families">
+  <section>
+    <h1>Families</h1>
+
+    <Spreadsheet
+      @records={{@model}}
+      @columns={{array
+        (hash key='namePlural' label='Name')
+      }}
+      @onSelect={{transition-to 'secure.families.family'}}
+      @linkRoute='secure.families.family'
+      @linkModel='id'
+    />
+  </section>
+</Page::LeftNav>
