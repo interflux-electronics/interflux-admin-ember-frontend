@@ -5,6 +5,7 @@ main.page.left-nav {
     display: flex;
     flex-direction: column;
     background: $blue-5;
+    flex-shrink: 0;
     &.expanded {
       width: 180px;
     }
