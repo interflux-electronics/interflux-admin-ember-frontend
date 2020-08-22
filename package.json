@@ -11,12 +11,13 @@
     "test": "tests"
   },
   "scripts": {
-    "lint:js": "eslint .",
-    "start": "./node_modules/ember-cli/bin/ember serve --environment=development",
+    "start": "ember serve --environment=development",
+    "serve": "ember serve --environment=development",
     "build": "ember build --environment=production",
     "test": "npm-run-all lint:* test:*",
     "test:ember": "ember test",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
+    "lint:js": "eslint .",
     "lint:hbs": "ember-template-lint .",
     "deploy": "./bin/deploy.sh"
   },
