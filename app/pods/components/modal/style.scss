@@ -1,7 +1,7 @@
 body > .modal {
   > .overlay {
     position: fixed;
-    background: rgba(black, 0.5);
+    background: rgba($blue-5, 0.8);
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -20,6 +20,7 @@ body > .modal {
     padding: 30px;
     display: flex;
     justify-content: center;
+    align-items: center;
     pointer-events: none; // So the overlay below can be clicked
     > .box {
       background: white;

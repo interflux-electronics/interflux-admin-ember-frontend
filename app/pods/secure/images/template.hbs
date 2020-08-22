@@ -1,0 +1,14 @@
+<Page::LeftNav @id="images">
+  <section>
+    <h1>Images</h1>
+
+    <Spreadsheet
+      @records={{@model.images}}
+      @columns={{array
+        (hash key='path' label='Path')
+        (hash key='formats' label='Formats')
+      }}
+      @linkRoute='secure.images.image'
+    />
+  </section>
+</Page::LeftNav>
