@@ -8,7 +8,7 @@ export default class DocumentsDocumentRoute extends Route {
 
   model(params) {
     return hash({
-      document: this.store.find('document', params.uuid)
+      document: this.store.find('document', params.id)
     });
   }
 

@@ -8,7 +8,7 @@ export default class CountriesCountryRoute extends Route {
 
   model(params) {
     return hash({
-      country: this.store.findRecord('country', params.uuid)
+      country: this.store.findRecord('country', params.id)
     });
   }
 

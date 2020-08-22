@@ -8,7 +8,7 @@ export default class ProductsProductRoute extends Route {
 
   model(params) {
     return hash({
-      product: this.store.findRecord('product', params.uuid, {
+      product: this.store.findRecord('product', params.id, {
         include: ['documents', 'images', 'features'].join(',')
       })
     });

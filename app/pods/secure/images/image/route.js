@@ -8,7 +8,7 @@ export default class ImagesImageRoute extends Route {
 
   model(params) {
     return hash({
-      image: this.store.find('image', params.uuid)
+      image: this.store.find('image', params.id)
     });
   }
 

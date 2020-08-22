@@ -8,7 +8,7 @@ export default class ProductsProductRoute extends Route {
 
   model(params) {
     return hash({
-      lead: this.store.findRecord('lead', params.uuid, {})
+      lead: this.store.findRecord('lead', params.id, {})
     });
   }
 

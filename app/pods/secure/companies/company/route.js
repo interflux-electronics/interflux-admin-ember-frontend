@@ -9,7 +9,7 @@ export default class CompaniesCompanyRoute extends Route {
   model(params) {
     return hash({
       countries: this.modelFor('secure.companies').countries,
-      company: this.store.findRecord('company', params.uuid, {
+      company: this.store.findRecord('company', params.id, {
         include: [
           // 'markets'
           // 'members',

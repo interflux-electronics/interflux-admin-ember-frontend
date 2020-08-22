@@ -8,7 +8,7 @@ export default class FeatureRoute extends Route {
 
   model(params) {
     return hash({
-      feature: this.store.findRecord('feature', params.uuid, {
+      feature: this.store.findRecord('feature', params.id, {
         include: [
           // 'markets'
           // 'members',
