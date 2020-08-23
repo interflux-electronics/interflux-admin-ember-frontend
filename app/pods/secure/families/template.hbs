@@ -1,13 +1,11 @@
-<Page::LeftNav @id="families">
-  <section>
-    <h1>Families</h1>
+<Page::Content @id="families">
+  <h1>Families</h1>
 
-    <Spreadsheet
-      @records={{@model}}
-      @columns={{array
+  <Spreadsheet
+    @records={{@model}}
+    @columns={{array
         (hash key='namePlural' label='Name')
       }}
-      @linkRoute='secure.families.family'
-    />
-  </section>
-</Page::LeftNav>
+    @linkRoute='secure.families.family'
+  />
+</Page::Content>

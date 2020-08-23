@@ -1,7 +1,7 @@
-<main
-  id="{{@id}}"
-  class="page {{if modal.active 'no-scroll' 'scrollable'}}{{if @class (concat ' ' @class)}}"
+<div
+  id="page"
+  class="{{if modal.active 'no-scroll' 'scrollable'}}{{if @class (concat ' ' @class)}}"
   style={{this.safeStyle}}
 >
   {{yield}}
-</main>
+</div>

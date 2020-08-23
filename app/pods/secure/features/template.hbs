@@ -1,14 +1,12 @@
-<Page::LeftNav @id="features">
-  <section>
-    <h1>Features</h1>
+<Page::Content @id="features">
+  <h1>Features</h1>
 
-    <Spreadsheet
-      @records={{@model.features}}
-      @columns={{array
+  <Spreadsheet
+    @records={{@model.features}}
+    @columns={{array
         (hash key='name' label='Name')
         (hash key='category' label="category")
       }}
-      @linkRoute="secure.features.feature"
-    />
-  </section>
-</Page::LeftNav>
+    @linkRoute="secure.features.feature"
+  />
+</Page::Content>

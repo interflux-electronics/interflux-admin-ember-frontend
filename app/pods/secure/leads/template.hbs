@@ -1,12 +1,10 @@
-<Page::LeftNav @id="leads">
-  <section>
-    <h1>Leads</h1>
+<Page::Content @id="leads">
+  <h1>Leads</h1>
 
-    <FilterList
-      @options={{@model.leads}}
-      @label="label"
-      @linkRoute="secure.leads.lead"
-      @linkModel="id"
-    />
-  </section>
-</Page::LeftNav>
+  <FilterList
+    @options={{@model.leads}}
+    @label="label"
+    @linkRoute="secure.leads.lead"
+    @linkModel="id"
+  />
+</Page::Content>

@@ -8,8 +8,8 @@ export default class DocumentsRoute extends Route {
   model() {
     return hash({
       documents: this.store.findAll('document'),
-      languages: this.store.findAll('language')
-      // categories: this.store.findAll('document-category'),
+      languages: this.store.findAll('language'),
+      delay: new Promise((res) => setTimeout(res, 2000)),
     });
   }
 }

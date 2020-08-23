@@ -1,6 +1,6 @@
 // All headings, paragraphs and buttons will inherit these font styles from the <body>
 body {
-  font-family: $nunito-sans-regular; // Important, we explicitly name fonts, no weights used
+  font-family: $regular; // Important, we explicitly name fonts, no weights used
   font-style: normal; // Important, we use weightless fonts
   font-weight: normal; // Important, we use weightless fonts
   font-size: 16px;
@@ -75,7 +75,7 @@ h5,
 h6,
 strong {
   font-weight: normal; // We use font-families instead of weights
-  font-family: $nunito-sans-bold;
+  font-family: $bold;
 }
 
 h1,

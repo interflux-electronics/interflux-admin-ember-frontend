@@ -9,7 +9,7 @@ import {
   ServerError,
   TimeoutError,
   UnauthorizedError,
-  ForbiddenError
+  ForbiddenError,
 } from '@ember-data/adapter/error';
 
 const { isDevelopment, isProduction, isTest } = config;
@@ -85,12 +85,14 @@ export function initialize() {
           // const firstError = error.errors[0];
           // console.error(firstError.status, firstError.code, firstError.detail);
         }
-      }
-    }
+
+        return true;
+      },
+    },
   });
 }
 
 export default {
   name: 'handle-route-errors',
-  initialize
+  initialize,
 };

@@ -1,11 +1,9 @@
-<Page::LeftNav @id="products">
-  <section>
-    <h1>Products</h1>
-    <FilterList
-      @options={{@model.products}}
-      @label="name"
-      @linkRoute="secure.products.product"
-      @linkModel="id"
-    />
-  </section>
-</Page::LeftNav>
+<Page::Content @id="products">
+  <h1>Products</h1>
+  <FilterList
+    @options={{@model.products}}
+    @label="name"
+    @linkRoute="secure.products.product"
+    @linkModel="id"
+  />
+</Page::Content>

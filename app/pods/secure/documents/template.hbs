@@ -1,13 +1,10 @@
-<Page::LeftNav @id="documents">
-  <section>
-    <h1>Documents</h1>
-
-    <Spreadsheet
-      @records={{@model.documents}}
-      @columns={{array
-        (hash key='path' label='Path')
-      }}
-      @linkRoute='secure.documents.document'
-    />
-  </section>
-</Page::LeftNav>
+<Page::Content @id="documents">
+  <h1>Documents</h1>
+  <Spreadsheet
+    @records={{@model.documents}}
+    @columns={{array
+          (hash key='path' label='Path')
+        }}
+    @linkRoute='secure.documents.document'
+  />
+</Page::Content>

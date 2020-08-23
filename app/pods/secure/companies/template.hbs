@@ -1,12 +1,10 @@
-<Page::LeftNav @id="companies">
-  <section>
-    <h1>Companies</h1>
+<Page::Content @id="companies">
+  <h1>Companies</h1>
 
-    <FilterList
-      @options={{@model.companies}}
-      @label="businessName"
-      @linkRoute="secure.companies.company"
-      @linkModel="id"
-    />
-  </section>
-</Page::LeftNav>
+  <FilterList
+    @options={{@model.companies}}
+    @label="businessName"
+    @linkRoute="secure.companies.company"
+    @linkModel="id"
+  />
+</Page::Content>
