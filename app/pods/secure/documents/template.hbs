@@ -3,7 +3,9 @@
   <Spreadsheet
     @records={{@model.documents}}
     @columns={{array
-          (hash key='path' label='Path')
+      (hash key='category.name' label='Category')
+          (hash key='name' label='Name')
+          (hash key='language.nameEnglish' label='Language')
         }}
     @linkRoute='secure.documents.document'
   />
