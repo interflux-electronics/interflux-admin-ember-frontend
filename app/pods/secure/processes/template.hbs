@@ -1,3 +1,12 @@
 <Page::Content @id="processes">
   <h1>Processes</h1>
+
+  <Spreadsheet
+    @records={{@model.processes}}
+    @linkRoute="secure.processes.process"
+    @columns={{array
+      (hash key='name' label='Name')
+      (hash key='category' label="category")
+    }}
+  />
 </Page::Content>

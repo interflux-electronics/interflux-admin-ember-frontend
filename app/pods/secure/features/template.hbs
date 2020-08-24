@@ -3,10 +3,10 @@
 
   <Spreadsheet
     @records={{@model.features}}
-    @columns={{array
-        (hash key='name' label='Name')
-        (hash key='category' label="category")
-      }}
     @linkRoute="secure.features.feature"
+    @columns={{array
+      (hash key='name' label='Name')
+      (hash key='category' label="category")
+    }}
   />
 </Page::Content>

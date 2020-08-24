@@ -2,10 +2,10 @@
   <h1>Families</h1>
 
   <Spreadsheet
-    @records={{@model}}
-    @columns={{array
-        (hash key='namePlural' label='Name')
-      }}
+    @records={{@model.families}}
     @linkRoute='secure.families.family'
+    @columns={{array
+      (hash key='namePlural' label='Name')
+    }}
   />
 </Page::Content>

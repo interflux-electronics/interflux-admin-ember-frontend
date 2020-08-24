@@ -1,7 +1,13 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { hash } from 'rsvp';
 
-export default class SecureFamiliesRoute extends Route {
+export default class FamiliesRoute extends Route {
+  @service store;
+
   model() {
-    return this.store.findAll('product-family');
+    return hash({
+      families: this.store.findAll('product-family'),
+    });
   }
 }

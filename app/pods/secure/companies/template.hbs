@@ -1,10 +1,13 @@
 <Page::Content @id="companies">
   <h1>Companies</h1>
 
-  <FilterList
-    @options={{@model.companies}}
-    @label="businessName"
-    @linkRoute="secure.companies.company"
-    @linkModel="id"
+  <Spreadsheet
+    @records={{@model.companies}}
+    @linkRoute='secure.companies.company'
+    @columns={{array
+      (hash key='businessName' label='Name')
+      (hash key='country.nameEnglish' label='Country')
+      (hash key='public' label='Public')
+    }}
   />
 </Page::Content>

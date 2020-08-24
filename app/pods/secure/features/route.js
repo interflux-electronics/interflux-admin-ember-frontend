@@ -7,7 +7,11 @@ export default class FeaturesRoute extends Route {
 
   model() {
     return hash({
-      features: this.store.findAll('feature'),
+      features: this.store.query('feature', {
+        filter: {
+          category: 'quality'
+        }
+      })
     });
   }
 }
