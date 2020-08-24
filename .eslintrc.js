@@ -17,7 +17,8 @@ module.exports = {
   },
   rules: {
     'ember/no-jquery': 'error',
-    'no-console': 'off'
+    'no-console': 'off',
+    'comma-dangle': 'error'
   },
   overrides: [
     // node files
