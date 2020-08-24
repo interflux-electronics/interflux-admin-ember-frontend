@@ -1,58 +1,32 @@
-# interflux
+# Interflux Admin
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This Ember front-end is the UI where Interflux team members log in to make changes to resources in their database and website.
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
-
 * [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/)
+* [NVM](https://github.com/nvm-sh/nvm)
 * [Yarn](https://yarnpkg.com/)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
 
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd interflux`
+* `cd admin.interflux.com`
+* `nvm install`
 * `yarn install`
 
-## Running / Development
+## Serving
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+* `yarn serve`
 
-### Code Generators
+## Building
 
-Make use of the many generators for code, try `ember help generate` for more details
+* `yarn build`
 
-### Running Tests
+## Deploying
 
-* `ember test`
-* `ember test --server`
+* `yarn deploy`
 
-### Linting
+## Branches
 
-* `yarn lint:hbs`
-* `yarn lint:js`
-* `yarn lint:js --fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+We have two branches: `master` and `production`. Developers branch of and merge back into `master` and never need access to `production`. The `production` branch is a representation of what is currently live on our servers and only needs to be checked out for recreating bugs found in production, but not in master.
