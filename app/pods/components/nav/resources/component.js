@@ -4,21 +4,94 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class NavResourcesComponent extends Component {
-  @service auth;
+  @service router;
 
   @tracked expanded = true;
 
-  handleInsert() {
-    console.log('inserted <nav>');
-  }
-
-  get navClass() {
+  get isExpanded() {
     return this.expanded ? 'expanded' : 'collapsed';
   }
 
   @action
-  handleHamburgerClick(event) {
+  toggleExpansion() {
     this.expanded = !this.expanded;
-    console.log(event.currentTarget);
+  }
+
+  @action
+  collapse() {
+    this.expanded = false;
+  }
+
+  get currentRoute() {
+    return this.router.currentRoute ? this.router.currentRoute.name : '-';
+  }
+
+  get resources() {
+    const arr = [
+      {
+        label: 'Product',
+        route: 'secure.products',
+        icon: 'svg/prescription-bottle'
+      },
+      {
+        label: 'Families',
+        route: 'secure.families',
+        icon: 'svg/flask'
+      },
+      {
+        label: 'Processes',
+        route: 'secure.processes',
+        icon: 'svg/microchip'
+      },
+      {
+        label: 'Features',
+        route: 'secure.features',
+        icon: 'svg/medal'
+      },
+      {
+        label: 'Documents',
+        route: 'secure.documents',
+        icon: 'svg/document'
+      },
+      {
+        label: 'Images',
+        route: 'secure.images',
+        icon: 'svg/camera'
+      },
+      {
+        label: 'Videos',
+        route: 'secure.videos',
+        icon: 'svg/film'
+      },
+      {
+        label: 'Companies',
+        route: 'secure.companies',
+        icon: 'svg/building'
+      },
+      {
+        label: 'People',
+        route: 'secure.people',
+        icon: 'svg/street-view'
+      },
+      {
+        label: 'Orders',
+        route: 'secure.orders',
+        icon: 'svg/truck'
+      },
+      {
+        label: 'Leads',
+        route: 'secure.leads',
+        icon: 'svg/seedling'
+      }
+    ];
+
+    // Evaluate per resource whether its route is active
+    arr.forEach((resource) => {
+      resource.isActive = this.currentRoute.startsWith(resource.route)
+        ? 'active'
+        : 'idle';
+    });
+
+    return arr;
   }
 }
