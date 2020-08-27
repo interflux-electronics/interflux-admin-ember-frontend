@@ -73,6 +73,13 @@ Router.map(function () {
     this.route('leads', function () {
       this.route('lead', { path: '/:id' });
     });
+
+    this.route('user', function() {
+      this.route('download');
+      this.route('issue');
+      this.route('help');
+      this.route('preferences');
+    });
   });
 
   this.route('login');
