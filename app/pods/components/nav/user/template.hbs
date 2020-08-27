@@ -4,10 +4,11 @@
     <Svg::UserCircle />
   </div>
 
-  <!-- <Button::Action
-    @action={{this.auth.reset}}
-    @text="Log out"
-    @size="small"
-    @style="blue-4"
-  /> -->
+  <div class="dropdown {{this.showDropdown}}">
+    <a href={{href-to 'secure.user.preferences'}}>preferences</a>
+    <a href={{href-to 'secure.user.download'}}>download app</a>
+    <a href={{href-to 'secure.user.issue'}}>report issue</a>
+    <a href={{href-to 'secure.user.help'}}>ask help</a>
+    <button onclick={{this.auth.reset}}>logout</button>
+  </div>
 </nav>
