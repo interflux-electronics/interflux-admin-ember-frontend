@@ -3,10 +3,17 @@
   class="{{isExpanded}}"
 >
   <button onclick={{this.toggleExpansion}}>
-    <div class="icon">
-      <Svg::Hamburger />
+    <div class="clip">
+      <div class="fade"></div>
+      <div class="icon">
+        <Svg::Hamburger />
+      </div>
+      <h1>Interflux</h1>
     </div>
-    <h1>Interflux</h1>
+
+    <div class="float">
+      <p>Interflux</p>
+    </div>
   </button>
 
   {{#each this.resources as |resource|}}
@@ -15,10 +22,17 @@
       class={{resource.isActive}}
       onclick={{collapse}}
     >
-      <div class="icon">
-        {{component resource.icon}}
+      <div class="clip">
+        <div class="fade"></div>
+        <div class="icon">
+          {{component resource.icon}}
+        </div>
+        <p>{{resource.label}}</p>
       </div>
-      <p>{{resource.label}}</p>
+
+      <div class="float">
+        <p>{{resource.label}}</p>
+      </div>
     </a>
   {{/each}}
 </nav>
