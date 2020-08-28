@@ -17,6 +17,8 @@ Router.map(function () {
     this.route('families-loading');
     this.route('families-error');
     this.route('families', function () {
+      this.route('family-loading');
+      this.route('family-error');
       this.route('family', { path: '/:id' });
     });
 
@@ -74,7 +76,7 @@ Router.map(function () {
       this.route('lead', { path: '/:id' });
     });
 
-    this.route('user', function() {
+    this.route('user', function () {
       this.route('download');
       this.route('issue');
       this.route('help');

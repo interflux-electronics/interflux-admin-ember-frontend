@@ -1,3 +1,3 @@
 import Route from '@ember/routing/route';
 
-export default class CompaniesLoadingRoute extends Route {}
+export default class SecureLoadingRoute extends Route {}

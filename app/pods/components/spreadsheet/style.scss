@@ -13,7 +13,7 @@
       box-shadow: 0 3px 0 rgba(black, 0.2);
       p {
         padding: 0 36px 0 12px;
-        line-height: 36px;
+        line-height: 36px !important;
       }
       p[contenteditable] {
         outline: 0;
@@ -73,10 +73,10 @@
         // border-bottom: 2px solid $blue-3;
         h2 {
           color: white;
-          font-size: 14px;
+          font-size: 15px;
           padding: 0 12px;
-          line-height: 36px;
-          font-family: $regular;
+          line-height: 40px;
+          font-family: $bold;
           user-select: none;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -100,7 +100,7 @@
         }
       }
       li {
-        height: 36px;
+        height: 40px;
         border: 1px solid $blue-3;
         margin-top: -1px;
         border-left: 0;
@@ -117,7 +117,7 @@
         }
         p {
           color: white;
-          font-size: 16px;
+          font-size: 15px;
           padding: 0 12px;
           white-space: nowrap;
           text-overflow: ellipsis;

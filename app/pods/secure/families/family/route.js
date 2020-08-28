@@ -1,4 +1,13 @@
-import Route from '@ember/routing/route';
+import ModalRoute from 'interflux/pods/components/modal/route';
+import { hash } from 'rsvp';
 
-export default class SecureFamiliesFamilyRoute extends Route {
+export default class FamilyRoute extends ModalRoute {
+  model(params) {
+    return hash({
+      family: this.store.findRecord('product-family', params.id, {
+        // include: ['documents', 'images', 'features'].join(',')
+      }),
+      delay: new Promise((resolve) => setTimeout(resolve, 3000))
+    });
+  }
 }

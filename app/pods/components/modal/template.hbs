@@ -3,8 +3,12 @@
     <LinkTo @route={{parentRoute}}></LinkTo>
   </div>
   <div class="content">
-    <div class="box">
-      {{yield}}
-    </div>
+    {{#if @loading}}
+      <p>Loading ...</p>
+    {{else}}
+      <div class="box">
+        {{yield}}
+      </div>
+    {{/if}}
   </div>
 </div>

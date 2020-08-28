@@ -22,14 +22,17 @@
     justify-content: center;
     align-items: center;
     pointer-events: none; // So the overlay below can be clicked
+    > p {
+      color: white;
+    }
     > .box {
-      background: white;
       width: 500px; // Too opinionated
       max-width: 100%;
       min-height: 100px;
       box-sizing: border-box;
       padding: 30px;
       pointer-events: all; // So the overlay below doesn't get clicked when user interacts within white box
+      background: white;
       img {
         max-width: 100%;
         height: auto;
@@ -50,10 +53,6 @@
   h1 + h2 {
     margin-top: 14px;
   }
-  // p {
-  //   font-size: 16px;
-  //   margin: 16px 0;
-  // }
   hr {
     margin: 16px 0;
     border: 0;
