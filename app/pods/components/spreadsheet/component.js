@@ -7,6 +7,7 @@ export default class SpreadsheetComponent extends Component {
   @tracked count;
   @tracked total;
   @tracked matches;
+  @tracked hasMatches;
   @tracked query = '';
   @tracked data;
   @tracked highlighted;
@@ -19,11 +20,6 @@ export default class SpreadsheetComponent extends Component {
     this.count = n;
     this.total = n;
     this.matches = this.args.records.mapBy('id');
-  }
-
-  @action
-  autoFocus(inputElement) {
-    inputElement.focus();
   }
 
   @action
@@ -113,6 +109,7 @@ export default class SpreadsheetComponent extends Component {
 
     this.matches = matches;
     this.count = matches.length;
+    this.hasMatches = matches.length ? true : false;
 
     if (matches.length) {
       const id = matches[0];
@@ -130,6 +127,10 @@ export default class SpreadsheetComponent extends Component {
   @action
   setSortColumn(index) {
     this.sortColumn = index;
+  }
+
+  get sortUp() {
+    return true;
   }
 
   // TODO
