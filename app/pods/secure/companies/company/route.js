@@ -1,11 +1,7 @@
-import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import ModalRoute from 'interflux/pods/components/modal/route';
 import { hash } from 'rsvp';
 
-export default class CompaniesCompanyRoute extends Route {
-  @service store;
-  @service modal;
-
+export default class CompanyRoute extends ModalRoute {
   model(params) {
     return hash({
       countries: this.modelFor('secure.companies').countries,
@@ -28,36 +24,7 @@ export default class CompaniesCompanyRoute extends Route {
           // 'related-products.main-group'
         ].join(',')
       })
+      // delay: new Promise((resolve, reject) => setTimeout(resolve, 3000))
     });
-  }
-
-  renderTemplate() {
-    this.render({
-      into: 'application',
-      outlet: 'modal'
-    });
-  }
-
-  // Prevent <main> page from scrolling
-  activate() {
-    console.debug('activate');
-    this.modal.setProperties({
-      active: true,
-      scroll: window.pageYOffset || document.documentElement.scrollTop
-    });
-    console.log(window.pageYOffset || document.documentElement.scrollTop);
-    window.scrollTo(0, 0);
-  }
-
-  // Allow <main> page to scroll again
-  deactivate() {
-    console.debug('deactivate');
-    const scroll = this.modal.scroll;
-    this.modal.setProperties({
-      active: false,
-      scroll: 0
-    });
-    console.log(scroll);
-    window.scrollTo(0, scroll);
   }
 }

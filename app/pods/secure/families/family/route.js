@@ -6,8 +6,8 @@ export default class FamilyRoute extends ModalRoute {
     return hash({
       family: this.store.findRecord('product-family', params.id, {
         // include: ['documents', 'images', 'features'].join(',')
-      }),
-      delay: new Promise((resolve) => setTimeout(resolve, 3000))
+      })
+      // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }
 }

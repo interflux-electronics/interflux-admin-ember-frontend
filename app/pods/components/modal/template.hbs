@@ -5,6 +5,11 @@
   <div class="content">
     {{#if @loading}}
       <p>Loading ...</p>
+    {{else if @error}}
+      <div class="box">
+        <p>Sorry, something went wrong.</p>
+        <p>Please warn <a href="mailto:j.werkhoven@interflux.com">j.werkhoven@interflux.com</a></p>
+      </div>
     {{else}}
       <div class="box">
         {{yield}}
