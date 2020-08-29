@@ -7,6 +7,7 @@ nav#resources {
   background-image: url('/assets/images/terrain-outline-pattern.svg');
   background-position: center right;
   flex-shrink: 0;
+  box-shadow: inset -8px 0 8px rgba(black, 0.05);
   &.collapsed {
     a,
     button {
