@@ -1,0 +1,33 @@
+<figure class="responsive-image">
+  <picture
+    {{did-insert this.didInsert}}
+    {{will-destroy this.willDestroy}}
+  >
+    {{#if this.showImage}}
+      <!-- Until webp solves the chroma, we won't be using it -->
+      <!--
+    {{#if webp}}
+      <source
+        srcset="{{cdn}}{{@path}}@{{optimalWidth}}x{{optimalHeight}}.webp"
+        type="image/webp"
+      >
+    {{/if}}
+    -->
+
+      <img
+        src="{{cdn}}/{{@path}}@{{this.optimalWidth}}x{{this.optimalHeight}}.jpg"
+        width={{this.optimalWidth}}
+        height={{this.optimalHeight}}
+        alt={{@alt}}
+        onload={{this.onLoad}}
+        onerror={{this.onError}}
+      >
+    {{/if}}
+  </picture>
+
+  {{#if @caption}}
+    <figcaption>{{@caption}}</figcaption>
+  {{/if}}
+
+  <!-- TODO: max size button -->
+</figure>

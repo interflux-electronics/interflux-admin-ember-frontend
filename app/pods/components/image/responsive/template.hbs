@@ -1,33 +1,31 @@
-<figure class="responsive-image">
+<figure
+  class="responsive-image {{this.orientation}}{{if @class ' '}}{{@class}}"
+  {{on 'click' this.onClick}}
+>
   <picture
-    {{did-insert this.didInsert}}
-    {{will-destroy this.willDestroy}}
+    {{did-insert this.register}}
+    data-path={{this.path}}
   >
-    {{#if this.showImage}}
-      <!-- Until webp solves the chroma, we won't be using it -->
-      <!--
-    {{#if webp}}
-      <source
-        srcset="{{cdn}}{{@path}}@{{optimalWidth}}x{{optimalHeight}}.webp"
-        type="image/webp"
-      >
-    {{/if}}
-    -->
-
-      <img
-        src="{{cdn}}/{{@path}}@{{this.optimalWidth}}x{{this.optimalHeight}}.jpg"
-        width={{this.optimalWidth}}
-        height={{this.optimalHeight}}
-        alt={{@alt}}
-        onload={{this.onLoad}}
-        onerror={{this.onError}}
-      >
-    {{/if}}
+    {{this.html}}
   </picture>
 
-  {{#if @caption}}
-    <figcaption>{{@caption}}</figcaption>
+  {{#if this.showLoading}}
+    <div class="loading">
+      <LoadSpinner @icon="cup" />
+    </div>
   {{/if}}
 
-  <!-- TODO: max size button -->
+  {{#if this.showError}}
+    <div class="error">
+      <Image
+        @src="{{cdn}}/images/logos/secondary-interflux-electronics-symbol-1.svg"
+        @width="400"
+        @height="400"
+      />
+    </div>
+  {{/if}}
+
+  {{#if @image.caption}}
+    <figcaption>{{@image.caption}}</figcaption>
+  {{/if}}
 </figure>

@@ -1,0 +1,13 @@
+<ul class="image-grid">
+  {{#each this.sortedImages as |image|}}
+    <li>
+      <a href="{{href-to 'secure.images.image' image.id}}">
+        <Image::Responsive
+          @path={{image.path}}
+          @sizes={{image.sizes}}
+          @formats={{image.formats}}
+        />
+      </a>
+    </li>
+  {{/each}}
+</ul>
