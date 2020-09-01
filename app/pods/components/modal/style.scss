@@ -29,37 +29,43 @@
       width: 500px; // Too opinionated
       max-width: 100%;
       min-height: 100px;
-      box-sizing: border-box;
-      padding: 30px;
       pointer-events: all; // So the overlay below doesn't get clicked when user interacts within white box
       background: white;
-      img {
+      > h1 {
+        font-family: $extrabold;
+        font-size: 24px;
+        line-height: 130%;
+        text-align: center;
+        padding: 34px;
+      }
+      > h2 {
+        font-family: $semibold;
+        font-size: 15px;
+        line-height: 130%;
+        padding: 22px;
+        color: #8c8c8c;
+        background: #eeeeee;
+        text-align: center;
+      }
+      > p {
+        padding: 40px;
+      }
+      > fieldset {
+        padding: 15px 40px;
+      }
+      > figure {
         max-width: 100%;
         height: auto;
       }
+      > figure + h2 {
+        margin-top: 4px;
+      }
+      > h2 + fieldset {
+        margin-top: 30px;
+      }
+      > fieldset + h2 {
+        margin-top: 30px;
+      }
     }
-  }
-  h1 {
-    font-family: $extrabold;
-    font-size: 30px;
-    line-height: 100%;
-  }
-  h2 {
-    font-family: $semibold;
-    font-size: 20px;
-    color: $blue-0;
-    line-height: 100%;
-  }
-  h1 + h2 {
-    margin-top: 14px;
-  }
-  hr {
-    margin: 16px 0;
-    border: 0;
-    height: 1px;
-    background: #eee;
-  }
-  li + li {
-    margin-top: 10px;
   }
 }

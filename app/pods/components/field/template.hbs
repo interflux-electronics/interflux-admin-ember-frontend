@@ -1,0 +1,9 @@
+<fieldset>
+  {{#if @label}}
+    <label>{{@label}}</label>
+  {{/if}}
+  {{#if @legend}}
+    <p>{{@legend}}</p>
+  {{/if}}
+  {{yield}}
+</fieldset>

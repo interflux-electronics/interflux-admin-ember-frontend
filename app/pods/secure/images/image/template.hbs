@@ -3,76 +3,41 @@
     @path={{@model.image.path}}
     @sizes={{@model.image.sizes}}
     @formats={{@model.image.formats}}
-    @alt={{@model.image.alt}}
-    @caption={{@model.image.caption}}
   />
 
-  <hr>
+  <h2>Properties</h2>
 
-  <Fieldset>
-    <label>Model</label>
-    <input
-      type="text"
-      value="image"
-    >
-  </Fieldset>
+  <Field::String
+    @label="Hidden metatags"
+    @legend="These words will be visible to Google bots and screen readers only. These are essential for good SEO."
+    @hint="Make sure to include product name, product family and somethign unique."
+    @value={{@model.image.alt}}
+  />
 
-  <Fieldset>
-    <label>ID</label>
-    <input
-      type="text"
-      value={{@model.image.id}}
-    >
-  </Fieldset>
+  <Field::String
+    @label="Visible text"
+    @legend="This optional bit of text will be shown on top of the image. For example 'Copyright Ersa' or on a product page we can distinguish between '10 liter' and '25 liter' soldering flux images."
+    @value={{@model.image.caption}}
+  />
 
-  <hr>
+  <h2>Available sizes &amp; formats</h2>
+  <ul>
+    {{#each @model.image.files as |file|}}
+      <li>
+        <a
+          href={{file.url}}
+          target="_blank"
+        >
+          @{{file.width}}x{{file.height}}.{{file.format}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
 
-  <Fieldset>
-    <label>Caption</label>
-    <input
-      type="text"
-      value="{{@model.image.caption}}"
-    >
-    <legend>Text shown below the image.</legend>
-  </Fieldset>
-
-  <Fieldset>
-    <label>Alt</label>
-    <input
-      type="text"
-      value={{@model.image.alt}}
-    >
-    <legend>Text shown only to Google and screen readers.</legend>
-  </Fieldset>
-
-  <Fieldset>
-    <label>CDN path</label>
-    <input
-      type="text"
-      value="{{@model.image.path}}"
-    >
-    <legend>Where the file is stored on our CDN (<a
-        href="{{cdn}}/index.html"
-        target="_blank"
-        rel="nofollow noopener"
-      >
-        {{cdn}}
-      </a>).</legend>
-  </Fieldset>
-
-  <Fieldset>
-    <label>All available sizes and formats</label>
-    <ul>
-      {{#each @model.image.files as |file|}}
-        <li>
-          <a
-            href={{file.url}}
-            target="_blank"
-          >
-            @{{file.width}}x{{file.height}}.{{file.format}}
-          </a>
-        </li>
-      {{/each}}
-    </ul>
-  </Fieldset>
+  <h2>Referenced by</h2>
+  <ul>
+    <li>
+      <a href="#">IF 2005M</a>
+    </li>
+  </ul>
 </Modal>
