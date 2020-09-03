@@ -3,15 +3,17 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const ENV = require('./config/environment')(EmberApp.env());
 
-const theme = {};
+// To make CSS environment aware we assign a new src to output map.
+// The src changes with the environment.
+const cssMap = {};
 
-theme[ENV.environment] = `/assets/app.css`;
+cssMap[ENV.environment] = `/assets/app.css`;
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     outputPaths: {
       app: {
-        css: theme
+        css: cssMap
       }
     },
 
