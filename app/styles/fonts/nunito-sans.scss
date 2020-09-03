@@ -1,69 +1,58 @@
 @font-face {
   font-family: 'Nunito Sans ExtraLight';
-  src: url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-ExtraLight.woff2')
+  src: url('#{$cdn}/fonts/nunito-sans/NunitoSans-ExtraLight.woff2')
       format('woff2'),
-    url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-ExtraLight.woff')
-      format('woff');
+    url('#{$cdn}/fonts/nunito-sans/NunitoSans-ExtraLight.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito Sans Light';
-  src: url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Light.woff2')
-      format('woff2'),
-    url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Light.woff')
-      format('woff');
+  src: url('#{$cdn}/fonts/nunito-sans/NunitoSans-Light.woff2') format('woff2'),
+    url('#{$cdn}/fonts/nunito-sans/NunitoSans-Light.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito Sans Regular';
-  src: url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Regular.woff2')
-      format('woff2'),
-    url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Regular.woff')
-      format('woff');
+  src: url('#{$cdn}/fonts/nunito-sans/NunitoSans-Regular.woff2') format('woff2'),
+    url('#{$cdn}/fonts/nunito-sans/NunitoSans-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito Sans SemiBold';
-  src: url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-SemiBold.woff2')
+  src: url('#{$cdn}/fonts/nunito-sans/NunitoSans-SemiBold.woff2')
       format('woff2'),
-    url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-SemiBold.woff')
-      format('woff');
+    url('#{$cdn}/fonts/nunito-sans/NunitoSans-SemiBold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito Sans Bold';
-  src: url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Bold.woff2')
-      format('woff2'),
-    url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Bold.woff')
-      format('woff');
+  src: url('#{$cdn}/fonts/nunito-sans/NunitoSans-Bold.woff2') format('woff2'),
+    url('#{$cdn}/fonts/nunito-sans/NunitoSans-Bold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito Sans ExtraBold';
-  src: url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-ExtraBold.woff2')
+  src: url('#{$cdn}/fonts/nunito-sans/NunitoSans-ExtraBold.woff2')
       format('woff2'),
-    url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-ExtraBold.woff')
-      format('woff');
+    url('#{$cdn}/fonts/nunito-sans/NunitoSans-ExtraBold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito Sans Black';
-  src: url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Black.woff2')
-      format('woff2'),
-    url('https://cdn.interflux.com/fonts/nunito-sans/NunitoSans-Black.woff')
-      format('woff');
+  src: url('#{$cdn}/fonts/nunito-sans/NunitoSans-Black.woff2') format('woff2'),
+    url('#{$cdn}/fonts/nunito-sans/NunitoSans-Black.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

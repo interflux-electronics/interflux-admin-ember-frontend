@@ -32,7 +32,7 @@ const cdnHosts = {
 // https://developers.google.com/web/fundamentals/design-and-ux/browser-customization/
 const themeColour = '#23578c';
 
-module.exports = function(env) {
+module.exports = function (env) {
   // Environment flags
   const isDevelopment = env === 'development';
   const isProduction = env === 'production';

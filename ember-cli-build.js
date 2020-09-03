@@ -3,35 +3,45 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const ENV = require('./config/environment')(EmberApp.env());
 
+const theme = {};
+
+theme[ENV.environment] = `/assets/app.css`;
+
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
+    outputPaths: {
+      app: {
+        css: theme
+      }
+    },
+
     // Makes SASS listen to file changes in the component folders
     sassOptions: {
       includePaths: ['app/pods'],
       overwrite: true,
-      sourceMap: false,
+      sourceMap: false
     },
 
     // Adds CSS browser prefixes
     autoprefixer: {
       cascade: false,
-      remove: false,
+      remove: false
     },
 
     // Prevent CSS minification in development and tests
     minifyCSS: {
-      enabled: ENV.isProduction,
+      enabled: ENV.isProduction
     },
 
     // Prevent JS minification in development and tests
     minifyJS: {
-      enabled: ENV.isProduction,
+      enabled: ENV.isProduction
     },
 
     // Enable source maps in all environments because it helps debugging.
     sourcemaps: {
       enabled: true,
-      extensions: ['js'],
+      extensions: ['js']
     },
 
     fingerprint: {
@@ -48,15 +58,15 @@ module.exports = function (defaults) {
         'webp',
         'webm',
         'woff',
-        'woff2',
+        'woff2'
       ],
       replaceExtensions: ['html', 'css', 'scss', 'js'],
-      customHash: ENV.gitRevision,
+      customHash: ENV.gitRevision
     },
 
     'ember-fetch': {
-      preferNative: true,
-    },
+      preferNative: true
+    }
   });
 
   return app.toTree();
