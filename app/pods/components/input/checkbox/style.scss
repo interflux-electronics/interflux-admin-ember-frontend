@@ -1,0 +1,35 @@
+.input.checkbox {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+
+  &.true {
+    > div {
+      background: #ff9d4d;
+      svg {
+        opacity: 1;
+      }
+    }
+  }
+  &.false {
+  }
+
+  > div {
+    background: #ddd;
+    height: 24px;
+    width: 24px;
+    margin: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+
+    > svg {
+      opacity: 0;
+    }
+  }
+
+  > p {
+  }
+}
