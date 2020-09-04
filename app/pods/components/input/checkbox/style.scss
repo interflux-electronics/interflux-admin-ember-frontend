@@ -12,7 +12,26 @@
       }
     }
   }
-  &.false {
+  &.pending {
+    > div {
+      opacity: 0.9;
+      background: repeating-linear-gradient(
+        -45deg,
+        $green-1,
+        $green-1 8px,
+        $green-2 8px,
+        $green-2 16px
+      );
+      animation: slide 600ms linear infinite;
+      @keyframes slide {
+        from {
+          background-position: 0;
+        }
+        to {
+          background-position: 24px;
+        }
+      }
+    }
   }
 
   > div {
