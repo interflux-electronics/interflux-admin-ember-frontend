@@ -7,12 +7,9 @@
   &.true {
     > div {
       background: #ff9d4d;
-      svg {
-        opacity: 1;
-      }
     }
   }
-  &.pending {
+  &.saving {
     > div {
       opacity: 0.9;
       background: repeating-linear-gradient(
@@ -43,12 +40,5 @@
     align-items: center;
     justify-content: center;
     border-radius: 2px;
-
-    > svg {
-      opacity: 0;
-    }
-  }
-
-  > p {
   }
 }

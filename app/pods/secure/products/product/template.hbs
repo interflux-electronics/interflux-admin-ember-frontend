@@ -70,6 +70,7 @@
       <Input::Checkbox
         @value={{product.featured}}
         @textLabel='Mark as "featured" on website'
+        @saving=true
         @onToggle={{fn (mut product.featured)}}
       />
     </Fieldset>
