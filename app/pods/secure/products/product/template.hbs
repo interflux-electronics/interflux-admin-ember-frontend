@@ -38,69 +38,47 @@
         cols="80"
         rows="3"
       />
-      <!--  -->
     </Fieldset>
 
     <hr>
 
     <Fieldset>
-      <!-- <Label
-        @text="Can be ordered?"
-      /> -->
-      <Input::Boolean
-        @value={{product.orderable}}
-        @textTrue="Can be ordered"
-        @textFalse="Out of production"
-        @onToggle={{fn (mut product.orderable)}}
-      />
-    </Fieldset>
-
-    <Fieldset>
-      <!-- <Label
-        @text="Public?"
-        @hint="If yes, this product will be shown on app.interflux.com. If no, this product is hidden from the world and can only be seen by Interflux members who are logged in on admin.interflux.com."
-      /> -->
-      <Input::Boolean
+      <Input::Checkbox
         @value={{product.public}}
-        @textTrue="Public"
-        @textFalse="Private"
+        @textLabel="Visible on website"
         @onToggle={{fn (mut product.public)}}
       />
     </Fieldset>
 
     <Fieldset>
-      <!-- <Label
-        @text="Featured?"
-      /> -->
-      <Input::Boolean
-        @value={{product.featured}}
-        @textTrue="Featured"
-        @textFalse="Normal"
-        @onToggle={{fn (mut product.featured)}}
+      <Input::Checkbox
+        @value={{product.new}}
+        @textLabel='Mark as "new" on website'
+        @onToggle={{fn (mut product.new)}}
       />
     </Fieldset>
 
     <Fieldset>
-      <!-- <Label
-        @text="Featured?"
-      /> -->
-      <Input::Boolean
+      <Input::Checkbox
         @value={{product.popular}}
-        @textTrue="Mark as popular"
-        @textFalse="Normal"
+        @textLabel='Mark as "popular" on website'
         @onToggle={{fn (mut product.popular)}}
       />
     </Fieldset>
 
     <Fieldset>
-      <!-- <Label
-        @text="Featured?"
-      /> -->
-      <Input::Boolean
-        @value={{product.new}}
-        @textTrue="Mark as new"
-        @textFalse="Normal"
-        @onToggle={{fn (mut product.new)}}
+      <Input::Checkbox
+        @value={{product.featured}}
+        @textLabel='Mark as "featured" on website'
+        @onToggle={{fn (mut product.featured)}}
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <Input::Checkbox
+        @value={{product.orderable}}
+        @textLabel='Mark as "out of production"'
+        @onToggle={{fn (mut product.orderable)}}
       />
     </Fieldset>
 
