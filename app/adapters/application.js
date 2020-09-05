@@ -7,7 +7,7 @@
 // instead of the dreaded jQuery $.ajax().
 // https://github.com/ember-cli/ember-fetch
 //
-import JSONAPIAdapter from 'ember-data/adapters/json-api';
+import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import { pluralize } from 'ember-inflector';
 import { inject as service } from '@ember/service';
 

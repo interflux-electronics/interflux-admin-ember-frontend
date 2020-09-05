@@ -1,13 +1,14 @@
 <button
   class="button action {{@size}} {{@style}}"
-  {{on 'click' this.args.action}}
+  {{on 'click' @action}}
   disabled={{@disabled}}
+  type="button"
 >
   {{#if hasBlock}}
     {{yield}}
   {{else}}
     {{#if @icon}}
-      <!-- <Icon @name="{{@icon}}" /> -->
+      {{!-- <Icon @name="{{@icon}}" /> --}}
     {{/if}}
     {{#if @text}}
       <span>{{@text}}</span>

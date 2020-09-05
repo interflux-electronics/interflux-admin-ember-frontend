@@ -9,7 +9,7 @@ import {
   ServerError,
   TimeoutError,
   UnauthorizedError,
-  ForbiddenError,
+  ForbiddenError
 } from '@ember-data/adapter/error';
 
 const { isDevelopment, isProduction, isTest } = config;
@@ -43,7 +43,6 @@ export function initialize() {
             console.error('Looks like we did not hit Mirage.');
           } else {
             console.error('This should never show.');
-            debugger;
           }
         }
         if (error instanceof InvalidError) {
@@ -87,12 +86,12 @@ export function initialize() {
         }
 
         return true;
-      },
-    },
+      }
+    }
   });
 }
 
 export default {
   name: 'handle-route-errors',
-  initialize,
+  initialize
 };

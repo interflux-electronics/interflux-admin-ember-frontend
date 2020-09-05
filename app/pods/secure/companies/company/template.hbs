@@ -6,7 +6,7 @@
 
     <hr>
 
-    <Fieldset>
+    {{!-- <Fieldset>
       <Label>Business name</Label>
       <Input
         @value={{company.businessName}}
@@ -67,8 +67,7 @@
         cols="80"
         rows="3"
       />
-      <!--  -->
-    </Fieldset>
+      </Fieldset>
 
     <Fieldset>
       <Label>Country</Label>
@@ -95,9 +94,9 @@
       />
     </Fieldset>
 
-    <hr>
+    <hr> --}}
 
-    <!-- <p>Market:</p>
+    {{!-- <p>Market:</p>
 
     <ul>
       {{#each company.markets as |market|}}
@@ -105,19 +104,19 @@
       {{/each}}
     </ul>
 
-    <hr> -->
+    <hr> --}}
 
-    <!-- <p>Members:</p>
+    {{!-- <p>Members:</p>
     <ul>
       {{#each company.members as |member|}}
         <li>{{member.person.firstName}} {{member.person.lastName}}</li>
       {{/each}}
     </ul>
 
-    <hr> -->
+    <hr> --}}
 
-    <hr>
 
+    {{!-- <hr>
     <Fieldset>
       <Label
         @text="Show on website"
@@ -142,9 +141,9 @@
           @key-down={{fn (mut company.order)}}
         />
       </Fieldset>
-    {{/if}}
+    {{/if}} --}}
 
-    <hr>
+    {{!-- <hr>
 
     <Buttons::Horizontal>
       <div class="left"></div>
@@ -166,7 +165,7 @@
           @style="green"
         />
       </div>
-    </Buttons::Horizontal>
+    </Buttons::Horizontal> --}}
   </Modal>
 
 {{/with}}

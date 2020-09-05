@@ -3,7 +3,7 @@
     <h1>{{product.name}}</h1>
     <h2>Product</h2>
 
-    <hr>
+    {{!-- <hr>
 
     <Fieldset>
       <Label>Name</Label>
@@ -38,15 +38,11 @@
         cols="80"
         rows="3"
       />
-      <!--  -->
-    </Fieldset>
+      </Fieldset>
 
     <hr>
 
     <Fieldset>
-      <!-- <Label
-        @text="Can be ordered?"
-      /> -->
       <Input::Boolean
         @value={{product.orderable}}
         @textTrue="Can be ordered"
@@ -56,10 +52,6 @@
     </Fieldset>
 
     <Fieldset>
-      <!-- <Label
-        @text="Public?"
-        @hint="If yes, this product will be shown on app.interflux.com. If no, this product is hidden from the world and can only be seen by Interflux members who are logged in on admin.interflux.com."
-      /> -->
       <Input::Boolean
         @value={{product.public}}
         @textTrue="Public"
@@ -69,9 +61,6 @@
     </Fieldset>
 
     <Fieldset>
-      <!-- <Label
-        @text="Featured?"
-      /> -->
       <Input::Boolean
         @value={{product.featured}}
         @textTrue="Featured"
@@ -81,9 +70,6 @@
     </Fieldset>
 
     <Fieldset>
-      <!-- <Label
-        @text="Featured?"
-      /> -->
       <Input::Boolean
         @value={{product.popular}}
         @textTrue="Mark as popular"
@@ -93,9 +79,6 @@
     </Fieldset>
 
     <Fieldset>
-      <!-- <Label
-        @text="Featured?"
-      /> -->
       <Input::Boolean
         @value={{product.new}}
         @textTrue="Mark as new"
@@ -120,11 +103,6 @@
 
     <p>Images:</p>
     {{#each product.images as |image|}}
-      <!-- <Image::Responsive
-        @path={{image.path}}
-        @sizes={{image.sizes}}
-        @formats={{image.formats}}
-      /> -->
       <Fieldset>
         <Label>Alt</Label>
         <Input
@@ -140,9 +118,6 @@
         />
       </Fieldset>
       <Fieldset>
-        <!-- <Label
-          @text="Featured?"
-        /> -->
         <Input::Boolean
           @value={{image.public}}
           @textTrue="Public"
@@ -159,7 +134,7 @@
       {{#each product.documents as |document|}}
         <li>
           <Button::Url
-            @href="{{cdn}}/{{document.path}}"
+            @href={{concat (cdn) "/" document.path}}
             @text="{{document.name}} ({{document.language.nameEnglish}})"
             @icon="pdf"
             @size="medium"
@@ -167,50 +142,6 @@
           />
         </li>
       {{/each}}
-    </ul>
-
-    <hr>
-
-    <!-- <p>Can be seen: Yes</p>
-  <p>Can be ordered: Yes</p>
-  <p>Recommended: No</p>
-  <p>New: No</p>
-  <p>Replaced by better product? Yes - IF 2005M</p>
-
-  <hr> -->
-
-
-
-    <hr>
-
-    <!-- <p>Variants: (TODO)</p>
-  <p>variant 1</p>
-  <p>variant 2</p>
-  <p>variant 3</p> -->
-    <!-- {{#each product.features as |feature|}}
-    <p>{{feature.id}}</p>
-  {{/each}} -->
-
-    <!-- <Buttons::Horizontal>
-      <div class="left"></div>
-      <div class="right">
-        {{#if product.hasDirtyAttributes}}
-          <Button::Action
-            @action={{fn this.reset product}}
-            @text="reset changes"
-            @size="medium"
-            @style="grey link"
-          />
-        {{/if}}
-
-        <Button::Action
-          @action={{fn this.save product}}
-          @text={{if product.hasDirtyAttributes (if product.isSaving 'Saving...' 'save changes') 'no changes'}}
-          @disabled={{if product.hasDirtyAttributes false true}}
-          @size="medium"
-          @style="green"
-        />
-      </div>
-    </Buttons::Horizontal> -->
+    </ul> --}}
   </Modal>
 {{/with}}

@@ -2,9 +2,11 @@
   {{#if @contenteditable}}
     <p
       contenteditable="true"
-      {{on 'keydown' onKeyDown}}
-      {{on 'keyup' onKeyUpp}}
-    >{{@value}}</p>
+      {{on 'keydown' this.onKeyDown}}
+      {{on 'keyup' this.onKeyUpp}}
+      role="textbox"
+    >
+      {{@value}}</p>
   {{else}}
     <input
       value={{@value}}
@@ -14,15 +16,15 @@
       autocapitalize='off'
       autocomplete='off'
       autocorrect='off'
-      spellcheck=false
-      {{on 'focus' onFocus}}
-      {{on 'blur' onBlur}}
-      {{on 'keyup' onKeyUp}}
+      spellcheck='false'
+      {{on 'focus' this.onFocus}}
+      {{on 'blur' this.onBlur}}
+      {{on 'keyup' this.onKeyUp}}
       autofocus='true'
     >
     {{#if @icon}}
       <div class="icon">
-        <!-- <Icon @name={{@icon}} /> -->
+        {{!-- <Icon @name={{@icon}} /> --}}
       </div>
     {{/if}}
   {{/if}}

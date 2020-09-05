@@ -1,6 +1,6 @@
 <div
   id="page"
-  class="{{if modal.active 'no-scroll' 'scrollable'}}{{if @class (concat ' ' @class)}}"
+  class="{{if this.modal.active 'no-scroll' 'scrollable'}}{{if @class (concat ' ' @class)}}"
   style={{this.safeStyle}}
 >
   {{yield}}

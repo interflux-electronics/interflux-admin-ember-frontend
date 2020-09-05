@@ -1,6 +1,7 @@
 <figure
   class="responsive-image {{this.orientation}}{{if @class ' '}}{{@class}}"
   {{on 'click' this.onClick}}
+  role="button"
 >
   <picture
     {{did-insert this.register}}
@@ -18,7 +19,7 @@
   {{#if this.showError}}
     <div class="error">
       <Image
-        @src="{{cdn}}/images/logos/secondary-interflux-electronics-symbol-1.svg"
+        @src={{concat (cdn) "/images/logos/secondary-interflux-electronics-symbol-1.svg"}}
         @width="400"
         @height="400"
       />

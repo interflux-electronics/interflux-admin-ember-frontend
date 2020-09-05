@@ -1,8 +1,11 @@
 <nav
   id="resources"
-  class="{{isExpanded}}"
+  class={{this.isExpanded}}
 >
-  <button onclick={{this.toggleExpansion}}>
+  <button
+    onclick={{this.toggleExpansion}}
+    type="button"
+  >
     <div class="clip">
       <div class="fade"></div>
       <div class="icon">
@@ -18,9 +21,9 @@
 
   {{#each this.resources as |resource|}}
     <a
-      href="{{href-to resource.route}}"
+      href={{href-to resource.route}}
       class={{resource.isActive}}
-      onclick={{collapse}}
+      onclick={{this.collapse}}
     >
       <div class="clip">
         <div class="fade"></div>

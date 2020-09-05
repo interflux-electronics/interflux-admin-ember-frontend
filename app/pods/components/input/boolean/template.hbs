@@ -1,7 +1,20 @@
 <div class="input boolean {{@value}}">
-  <p {{on 'click' (fn this.set false)}}>{{@textFalse}}</p>
-  <div {{on 'click' this.toggle}}>
+  <p
+    {{on 'click' (fn this.set false)}}
+    role="button"
+  >
+    {{@textFalse}}
+  </p>
+  <div
+    {{on 'click' this.toggle}}
+    role="button"
+  >
     <i></i>
   </div>
-  <p {{on 'click' (fn this.set true)}}>{{@textTrue}}</p>
+  <p
+    {{on 'click' (fn this.set true)}}
+    role="button"
+  >
+    {{@textTrue}}
+  </p>
 </div>

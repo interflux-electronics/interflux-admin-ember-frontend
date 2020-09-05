@@ -9,7 +9,12 @@
     {{did-insert this.onInsert}}
   >
     {{#each @options as |option|}}
-      <li {{on 'click' (fn this.select option)}}>{{get option @key}}</li>
+      <li
+        {{on 'click' (fn this.select option)}}
+        role="button"
+      >
+        {{get option @key}}
+      </li>
     {{/each}}
   </ul>
 </div>

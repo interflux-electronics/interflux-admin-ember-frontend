@@ -7,7 +7,7 @@ export default class FamiliesRoute extends Route {
 
   model() {
     return hash({
-      families: this.store.findAll('product-family'),
+      families: this.store.findAll('product-family')
     });
   }
 }

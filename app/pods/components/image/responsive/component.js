@@ -19,7 +19,7 @@ export default class ImageResponsiveComponent extends Component {
     this.picture = element;
   }
 
-  @computed('picture', 'args.{path,image}')
+  @computed('args.{image,path}', 'picture', 'valid')
   get html() {
     if (!this.valid) {
       console.warn('<ResponsiveImage> missing path, sizes or formats');
@@ -38,19 +38,19 @@ export default class ImageResponsiveComponent extends Component {
     const sizes = this.sizes;
     const pixelRatio = window.devicePixelRatio || 1;
     const optimalWidth = picture.offsetWidth * pixelRatio;
-    const distances = sizes.map(size => {
+    const distances = sizes.map((size) => {
       const width = size.split('x')[0];
       return width - optimalWidth;
     });
 
-    const larger = distances.filter(d => d >= 0);
-    const smaller = distances.filter(d => d < 0);
+    const larger = distances.filter((d) => d >= 0);
+    const smaller = distances.filter((d) => d < 0);
 
     const closestDistance = larger.length
       ? Math.min(...larger)
       : Math.max(...smaller);
 
-    return sizes.find(size => {
+    return sizes.find((size) => {
       const width = size.split('x')[0];
       return width - optimalWidth === closestDistance;
     });
@@ -127,7 +127,7 @@ export default class ImageResponsiveComponent extends Component {
     return true;
   }
 
-  @computed('args.{path,image}')
+  @computed('args.{image,path}', 'sizes', 'valid')
   get orientation() {
     if (!this.valid) {
       return 'invalid';

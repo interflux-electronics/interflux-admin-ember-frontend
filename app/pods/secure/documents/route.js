@@ -9,7 +9,7 @@ export default class DocumentsRoute extends Route {
     return hash({
       documents: this.store.findAll('document'),
       languages: this.store.findAll('language'),
-      categories: this.store.findAll('document-category'),
+      categories: this.store.findAll('document-category')
     });
   }
 }

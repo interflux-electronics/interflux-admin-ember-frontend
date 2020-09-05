@@ -9,6 +9,11 @@
     <a href={{href-to 'secure.user.download'}}>download app</a>
     <a href={{href-to 'secure.user.issue'}}>report issue</a>
     <a href={{href-to 'secure.user.help'}}>ask help</a>
-    <button onclick={{this.auth.reset}}>logout</button>
+    <button
+      onclick={{this.auth.reset}}
+      type="button"
+    >
+      logout
+    </button>
   </div>
 </nav>
