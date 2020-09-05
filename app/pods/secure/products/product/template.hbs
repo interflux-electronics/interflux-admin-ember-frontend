@@ -38,11 +38,16 @@
         cols="80"
         rows="3"
       />
+<<<<<<< HEAD
       </Fieldset>
+=======
+    </Fieldset>
+>>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
 
     <hr>
 
     <Fieldset>
+<<<<<<< HEAD
       <Input::Boolean
         @value={{product.orderable}}
         @textTrue="Can be ordered"
@@ -53,37 +58,65 @@
 
     <Fieldset>
       <Input::Boolean
+=======
+      <Input::Checkbox
+>>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
         @value={{product.public}}
-        @textTrue="Public"
-        @textFalse="Private"
+        @textLabel="Visible on website"
         @onToggle={{fn (mut product.public)}}
       />
     </Fieldset>
 
     <Fieldset>
+<<<<<<< HEAD
       <Input::Boolean
         @value={{product.featured}}
         @textTrue="Featured"
         @textFalse="Normal"
         @onToggle={{fn (mut product.featured)}}
+=======
+      <Input::Checkbox
+        @value={{product.new}}
+        @textLabel='Mark as "new" on website'
+        @onToggle={{fn (mut product.new)}}
+>>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
       />
     </Fieldset>
 
     <Fieldset>
+<<<<<<< HEAD
       <Input::Boolean
+=======
+      <Input::Checkbox
+>>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
         @value={{product.popular}}
-        @textTrue="Mark as popular"
-        @textFalse="Normal"
+        @textLabel='Mark as "popular" on website'
         @onToggle={{fn (mut product.popular)}}
       />
     </Fieldset>
 
     <Fieldset>
+<<<<<<< HEAD
       <Input::Boolean
         @value={{product.new}}
         @textTrue="Mark as new"
         @textFalse="Normal"
         @onToggle={{fn (mut product.new)}}
+=======
+      <Input::Checkbox
+        @value={{product.featured}}
+        @textLabel='Mark as "featured" on website'
+        @saving=true
+        @onToggle={{fn (mut product.featured)}}
+      />
+    </Fieldset>
+
+    <Fieldset>
+      <Input::Checkbox
+        @value={{product.orderable}}
+        @textLabel='Mark as "out of production"'
+        @onToggle={{fn (mut product.orderable)}}
+>>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
       />
     </Fieldset>
 
