@@ -19,7 +19,8 @@
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
     "lint:js": "eslint .",
     "lint:hbs": "ember-template-lint .",
-    "deploy": "./bin/deploy.sh"
+    "setup": "remote/setup.sh",
+    "deploy": "remote/deploy.sh"
   },
   "devDependencies": {
     "@ember/optional-features": "^1.3.0",
