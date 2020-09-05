@@ -17,6 +17,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: 'echo "TODO"'
-      - run: 'yarn -v'
-      - run: 'node -v'
+      - run: 'yarn install'
       - run: 'yarn test'
