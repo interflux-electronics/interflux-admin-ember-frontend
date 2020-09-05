@@ -6,7 +6,7 @@
 
   &.true {
     > div {
-      background: #ff9d4d;
+      background: $orange-0;
     }
   }
   &.saving {
@@ -40,5 +40,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 2px;
+    > svg {
+      fill: #fff;
+    }
   }
 }

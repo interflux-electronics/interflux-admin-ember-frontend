@@ -1,9 +1,9 @@
 <div class="input checkbox {{@value}} {{if @saving 'saving'}}" {{on 'click' this.toggle}}>
   <div>
     {{#if @saving}}
-      <Svg::Ellipsis @fill="#fff" />
+      <Svg::Ellipsis />
     {{else if @value}}
-      <Svg::Check @fill="#fff" />
+      <Svg::Check />
     {{/if}}
   </div>
   <p>{{@textLabel}}</p>
