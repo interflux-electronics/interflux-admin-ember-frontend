@@ -1,4 +1,8 @@
-<div class="input checkbox {{@value}} {{if @saving 'saving'}}" {{on 'click' this.toggle}}>
+<div
+  class="input checkbox {{@value}} {{if @saving 'saving'}}"
+  {{on 'click' this.toggle}}
+  role="button"
+>
   <div>
     {{#if @saving}}
       <Svg::Ellipsis />
