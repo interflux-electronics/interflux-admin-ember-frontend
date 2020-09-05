@@ -3,12 +3,12 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - "**"
-      - "!production"
+      - '**'
+      - '!production'
   pull_request:
     branches:
-      - "**"
-      - "!production"
+      - '**'
+      - '!production'
 
 jobs:
   test:
@@ -17,3 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: 'echo "TODO"'
+      - run: 'yarn -v'
+      - run: 'node -v'
+      - run: 'yarn test'
