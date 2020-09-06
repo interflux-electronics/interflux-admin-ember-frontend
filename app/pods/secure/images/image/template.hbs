@@ -7,14 +7,14 @@
 
   <h2>Properties</h2>
 
-  <Field::String
+  <Input::String
     @label="Hidden metatags"
     @legend="These words will be visible to Google bots and screen readers only. These are essential for good SEO."
     @hint="Make sure to include product name, product family and somethign unique."
     @value={{@model.image.alt}}
   />
 
-  <Field::String
+  <Input::String
     @label="Visible text"
     @legend="This optional bit of text will be shown on top of the image. For example 'Copyright Ersa' or on a product page we can distinguish between '10 liter' and '25 liter' soldering flux images."
     @value={{@model.image.caption}}
