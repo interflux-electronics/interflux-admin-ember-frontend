@@ -16,7 +16,8 @@ module('Integration | Component | button', function (hooks) {
       <Button
         @route={{this.route}}
         @text={{this.text}}
-      />`);
+      />
+    `);
 
     const a = this.element.querySelector('a');
 
@@ -35,7 +36,8 @@ module('Integration | Component | button', function (hooks) {
       <Button
         @url={{this.url}}
         @text={{this.text}}
-      />`);
+      />
+    `);
 
     const a = this.element.querySelector('a');
 
@@ -60,7 +62,8 @@ module('Integration | Component | button', function (hooks) {
       <Button
         @text={{this.text}}
         @onClick={{this.onClick}}
-      />`);
+      />
+    `);
 
     const button = this.element.querySelector('button');
 
@@ -71,5 +74,39 @@ module('Integration | Component | button', function (hooks) {
     await click('button');
 
     assert.equal(buttonWasClicked, true);
+  });
+
+  test('it renders @theme', async function (assert) {
+    assert.expect(1);
+
+    this.set('theme', 'secondary');
+
+    await render(hbs`
+      <Button
+        @theme={{this.theme}}
+      />
+    `);
+
+    const button = this.element.querySelector('button');
+
+    assert.equal(button.className, 'button secondary no-icon');
+  });
+
+  test('it renders @icon', async function (assert) {
+    assert.expect(2);
+
+    this.set('icon', 'chevron-right');
+
+    await render(hbs`
+      <Button
+        @icon={{this.icon}}
+      />
+    `);
+
+    const button = this.element.querySelector('button');
+    const svg = this.element.querySelector('button svg');
+
+    assert.equal(button.className, 'button primary chevron-right');
+    assert.notEqual(svg, undefined);
   });
 });
