@@ -1,0 +1,9 @@
+{{#if hasBlock}}
+  {{yield}}
+{{/if}}
+{{#if @icon}}
+  {{component (concat 'svg/' @icon)}}
+{{/if}}
+{{#if @text}}
+  <span>{{@text}}</span>
+{{/if}}

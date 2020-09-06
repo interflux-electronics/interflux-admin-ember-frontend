@@ -17,7 +17,7 @@ button {
     user-select: none;
     cursor: pointer;
 
-    // Do not set these here, use classes instead
+    // Do not set the following rules up here:
     // font-family: 'Lato-Black';
     // font-size: 18px;
     // line-height: 48px;
@@ -146,6 +146,41 @@ button {
       &:hover {
         background: $grey-1;
       }
+    }
+
+    &.outline {
+      font-size: 16px;
+      color: white;
+      border: 2px solid $blue-4;
+      border-radius: 2px;
+      background: $blue-5;
+      line-height: 34px;
+      padding: 0 12px;
+      &:hover,
+      &:focus {
+        border-color: white;
+        background: $blue-4;
+      }
+      svg {
+        height: 13px;
+        width: auto;
+        margin-left: 10px;
+        [fill] {
+          fill: white;
+        }
+      }
+    }
+
+    &.chevron-right {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+
+    &.chevron-left {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
     }
   }
 }
