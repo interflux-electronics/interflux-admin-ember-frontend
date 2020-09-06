@@ -29,8 +29,8 @@
 {{else if @url}}
   {{!--
     For buttons which open URLs outside of the Ember app, pass down a @url, no @route.
-    Note that all such external links will open in a new tab.
-    For security we add noopener and noreferrer.
+    Note the `target` attribute. We open all external links in a new tab.
+    The `rel` attribute we add for security.
    --}}
   <a
     href={{@url}}
@@ -50,12 +50,12 @@
     For buttons that fire Javascript events, pass down methods into @onClick.
     Don't pass down @route, nor @url.
     This will generate the semantic <button>.
-    The role is added for improved accessibility.
+    The `type` attribute is added for improved accessibility.
    --}}
   <button
     onclick={{this.handleClick}}
     class="{{@size}} {{@style}} {{@icon}}"
-    role="button"
+    type="button"
   >
     <Button::Content
       @text={{@text}}
