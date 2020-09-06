@@ -1,53 +1,50 @@
-<Page::Layout::Center @id="login">
+<Page @id="login">
   <Section>
-    <Input::String
-      @value={{this.email}}
-      @placeholder="Email"
-      @type="email"
-      @size="medium"
-      @disabled={{this.auth.logIn.isRunning}}
-      @onChange={{fn (mut this.email)}}
-      @onEnter={{this.submit}}
-    />
-    <Input::String
-      @value={{this.password}}
-      @placeholder="Password"
-      @type="password"
-      @size="medium"
-      @disabled={{this.auth.logIn.isRunning}}
-      @onChange={{fn (mut this.password)}}
-      @onEnter={{this.submit}}
-    />
+    <form>
+      <div class="row one">
+        <Input::String
+          @value={{this.email}}
+          @placeholder="Email"
+          @type="email"
+          @theme="tertiary"
+          @disabled={{this.auth.getToken.isRunning}}
+          @onChange={{fn (mut this.email)}}
+          @onEnter={{this.submit}}
+        />
+      </div>
 
-    <Buttons::Horizontal>
-      <div class="left">
-        <Button::Route
-          @route="index"
-          @text="Home"
-          @size="small"
-          @style="blue-3"
+      <div class="row two">
+        <Input::String
+          @value={{this.password}}
+          @placeholder="Password"
+          @type="password"
+          @theme="tertiary"
+          @disabled={{this.auth.getToken.isRunning}}
+          @onChange={{fn (mut this.password)}}
+          @onEnter={{this.submit}}
         />
-        <Button::Route
-          @route="help"
-          @text="Need help?"
-          @size="small"
-          @style="blue-3"
-        />
-      </div>
-      <div class="right">
-        <Button::Action
-          @action={{this.submit}}
-          @text={{if this.auth.getToken.isRunning 'Logging in ...' 'Log in'}}
-          @size="medium"
-          @style="orange-3"
-        />
-      </div>
-    </Buttons::Horizontal>
 
-    {{#if this.auth.error}}
-      <div class="error">
-        <p>Sorry, was unable to log in:<br>{{this.auth.error}}</p>
+        <Button
+          @onClick={{this.submit}}
+          @icon={{if this.auth.getToken.isRunning 'ellipsis' 'chevron-right'}}
+          @theme="tertiary"
+          @disabled={{if this.auth.getToken.isRunning true}}
+        />
       </div>
-    {{/if}}
+
+      {{#if this.auth.error}}
+        <div class="row three">
+          <p>Error: {{this.auth.error}}</p>
+        </div>
+      {{/if}}
+    </form>
+
+    <div class="back">
+      <Button
+        @route="index"
+        @theme="tertiary"
+        @icon="chevron-left"
+      />
+    </div>
   </Section>
-</Page::Layout::Center>
+</Page>
