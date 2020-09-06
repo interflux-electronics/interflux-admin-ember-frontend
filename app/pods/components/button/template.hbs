@@ -6,7 +6,7 @@
   {{#if @model}}
     <a
       href={{href-to @route @model}}
-      class="button {{@size}} {{@style}} {{@icon}}"
+      class={{classes}}
     >
       <Button::Content
         @text={{@text}}
@@ -16,7 +16,7 @@
   {{else}}
     <a
       href={{href-to @route}}
-      class="button {{@size}} {{@style}} {{@icon}}"
+      class={{classes}}
     >
       <Button::Content
         @text={{@text}}
@@ -36,7 +36,7 @@
     href={{@url}}
     target="_blank"
     rel="noopener noreferrer"
-    class="button {{@size}} {{@style}} {{@icon}}"
+    class={{classes}}
   >
     <Button::Content
       @text={{@text}}
@@ -54,7 +54,7 @@
    --}}
   <button
     onclick={{this.handleClick}}
-    class="{{@size}} {{@style}} {{@icon}}"
+    class={{classes}}
     type="button"
   >
     <Button::Content

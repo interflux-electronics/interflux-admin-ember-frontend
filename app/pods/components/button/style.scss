@@ -148,15 +148,19 @@ button {
       }
     }
 
-    &.outline {
+    &.tertiary {
       font-size: 16px;
       color: white;
       border: 2px solid $blue-4;
       border-radius: 2px;
       background: $blue-5;
       line-height: 34px;
+      height: 34px;
       padding: 0 12px;
-      &:hover,
+      &:hover {
+        border-color: $blue-0;
+        background: $blue-4;
+      }
       &:focus {
         border-color: white;
         background: $blue-4;
@@ -164,7 +168,6 @@ button {
       svg {
         height: 13px;
         width: auto;
-        margin-left: 10px;
         [fill] {
           fill: white;
         }
@@ -175,6 +178,9 @@ button {
       display: flex;
       align-items: center;
       flex-direction: row-reverse;
+      svg + span {
+        margin-right: 10px;
+      }
     }
 
     &.chevron-left {
