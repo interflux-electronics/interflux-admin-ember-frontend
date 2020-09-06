@@ -1,6 +1,8 @@
 // Agnostic
-#page {
+.page {
   min-height: 100vh;
+
+  // Allows modals to scroll without the page below scrolling as well
   &.no-scroll {
     position: fixed;
     width: 100%;

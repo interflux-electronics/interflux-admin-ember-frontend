@@ -1,18 +1,48 @@
 #login.page {
-  .buttons {
-    margin-top: 20px;
-  }
-  .input + .input {
-    margin-top: 20px;
-  }
-  .error {
+  background-color: $blue-5;
+  background-image: url('#{$cdn}/images/admin/terrain-contour-pattern.svg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .liner {
+    display: flex;
+    justify-content: center;
     position: relative;
-    p {
+    .back {
       position: absolute;
-      top: 20px;
-      line-height: 150%;
-      text-align: right;
-      right: 0;
+      height: 100%;
+      left: 30px;
+      top: 0;
+      display: flex;
+      align-items: center;
+    }
+    form {
+      width: 250px;
+      .row {
+        display: flex;
+        align-items: center;
+        fieldset {
+          width: 100%;
+          & + button {
+            margin-left: 10px;
+          }
+        }
+        &.three {
+          position: relative;
+          height: 0;
+          p {
+            position: absolute;
+            top: 10px;
+            color: white;
+            font-size: 15px;
+            text-align: right;
+            width: 100%;
+          }
+        }
+        &.one {
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 }

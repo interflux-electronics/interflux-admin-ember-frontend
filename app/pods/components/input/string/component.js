@@ -1,12 +1,24 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-export default class InputString extends Component {
-  @tracked value;
+export default class FieldStringComponent extends Component {
+  @tracked value = '';
+  @tracked hasFocus = false;
+
+  get type() {
+    return this.args.type || 'text';
+  }
+
+  get autofocus() {
+    return this.args.autofocus || false;
+  }
 
   @action
   onFocus(event) {
+    // Notify the <Field> component that the <input> has focus
+    this.hasFocus = true;
+    // Fire @onFocus events in parent component
     if (this.args.onFocus) {
       this.args.onFocus(event);
     }
@@ -16,50 +28,34 @@ export default class InputString extends Component {
 
   @action
   onBlur(event) {
+    // Notify the <Field> component that the <input> no longer has focus
+    this.hasFocus = true;
+    // Fire @onBlur events in parent component
     if (this.args.onBlur) {
       this.args.onBlur(event);
     }
   }
 
   @action
-  onKeyDown(event) {
-    const forbidden = false;
-    if (forbidden) {
-      event.preventDefault();
-    }
-  }
-
-  @action
-  onKeyUpp(event) {
-    console.log('onKeyUpp', { event });
-    console.log(event.target.innerText);
-    this.args.onKeyUp(event.target.innerText);
-  }
-
-  @action
   onKeyUp(event) {
-    console.log({ event });
     const value = event.target.value;
     const valueChanged = value !== this.value;
+
     if (valueChanged) {
-      // Update local value
+      // Remember locally so we can later test if value changed
       this.value = value;
 
-      // Fire up event
+      // Fire @onChange only if the value changed
       if (this.args.onChange) {
         this.args.onChange(value);
       }
     }
 
+    // Fire @onEnter if enter was pressed
     if (event.key === 'Enter') {
       if (this.args.onEnter) {
         this.args.onEnter(event);
       }
     }
-
-    // JW: Use case?
-    // if (this.args.onKeyUp) {
-    //   this.args.onKeyUp(event);
-    // }
   }
 }

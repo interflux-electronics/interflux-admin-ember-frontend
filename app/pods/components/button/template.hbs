@@ -1,0 +1,87 @@
+{{#if @route}}
+  {{!--
+    For buttons which open an Ember route, pass down @route and where needed the @model.
+    Note how all <a> receive button classes, so they look like buttons but behave like links.
+
+    Usage:
+    <Button
+      @route="products.product"
+      @model={{this.product.id}}
+      @text={{this.product.name}}
+    />
+   --}}
+  {{#if @model}}
+    <a
+      href={{href-to @route @model}}
+      class={{this.classes}}
+    >
+      <Button::Content
+        @text={{@text}}
+        @icon={{@icon}}
+      />
+    </a>
+  {{else}}
+    <a
+      href={{href-to @route}}
+      class={{this.classes}}
+    >
+      <Button::Content
+        @text={{@text}}
+        @icon={{@icon}}
+      >
+        {{yield}}
+      </Button::Content>
+    </a>
+  {{/if}}
+{{else if @url}}
+  {{!--
+    For buttons which open URLs outside of the Ember app, pass down a @url, no @route.
+    Note the `target` attribute. We open all external links in a new tab.
+    The `rel` attribute we add for security.
+
+    Usage:
+    <Button
+      @text="external.com"
+      @url="https://external.com"
+    />
+   --}}
+  <a
+    href={{@url}}
+    target="_blank"
+    rel="noopener noreferrer"
+    class={{this.classes}}
+  >
+    <Button::Content
+      @text={{@text}}
+      @icon={{@icon}}
+    >
+      {{yield}}
+    </Button::Content>
+  </a>
+{{else}}
+  {{!--
+    For buttons that fire Javascript events, pass down methods into @onClick.
+    Don't pass down @route, nor @url.
+    This will generate the semantic <button>.
+    The `type` attribute is added for improved accessibility.
+
+    Usage:
+    <Button
+      @text="Add to cart"
+      @icon="shopping-cart"
+      @onClick={{this.addToCart}}
+    />
+   --}}
+  <button
+    onclick={{this.handleClick}}
+    class={{this.classes}}
+    type="button"
+  >
+    <Button::Content
+      @text={{@text}}
+      @icon={{@icon}}
+    >
+      {{yield}}
+    </Button::Content>
+  </button>
+{{/if}}

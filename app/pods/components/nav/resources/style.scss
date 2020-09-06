@@ -4,7 +4,7 @@ nav#resources {
   display: flex;
   flex-direction: column;
   background-color: $blue-5;
-  background-image: url('/assets/images/terrain-outline-pattern.svg');
+  background-image: url('#{$cdn}/images/admin/terrain-contour-pattern.svg');
   background-position: center right;
   flex-shrink: 0;
   box-shadow: inset -8px 0 8px rgba(black, 0.05);

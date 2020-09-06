@@ -7,6 +7,9 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
+  this.route('login');
+  this.route('loading');
+
   this.route('secure', function () {
     this.route('companies', function () {
       this.route('company', { path: '/:id' });
@@ -59,10 +62,6 @@ Router.map(function () {
       this.route('preferences');
     });
   });
-
-  this.route('login');
-  this.route('help');
-  this.route('loading');
 
   this.route('catchall', { path: '*:' });
 });

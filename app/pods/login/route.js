@@ -1,8 +1,13 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default class LoginRoute extends Route {
-  model(params, transition) {
-    let backRoute = transition.from ? transition.from.name : 'index';
-    return { backRoute };
+  @service auth;
+
+  beforeModel() {
+    if (this.auth.token) {
+      console.warn('Found auth token, redirecting to secure.index');
+      this.transitionTo('secure.index');
+    }
   }
 }
