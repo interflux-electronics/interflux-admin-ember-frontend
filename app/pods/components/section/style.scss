@@ -1,8 +1,10 @@
 // Agnostic
 section {
+  width: 100%;
   .liner {
     box-sizing: border-box;
     max-width: 1200px;
+    min-width: 320px;
     padding: 30px;
     margin: 0 auto;
   }

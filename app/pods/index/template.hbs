@@ -1,17 +1,23 @@
-<Page::Layout::Center @id="home">
+<Page @id="home">
   <Section>
-    <img
-      src={{concat (cdn) "/images/logos/primary-interflux-electronics-symbol-1.svg"}}
-      width="100"
-      height="100"
-      alt="interflux electronics"
-    >
-    <p>Welcome to <strong>Interflux Admin</strong></p>
-    <Button::Route
-      @route="login"
-      @text="Log in"
-      @size="small"
-      @style="blue-3"
-    />
+    <div class="left">
+      <img
+        src={{concat (cdn) "/images/logos/primary-interflux-electronics-symbol-1.svg"}}
+        width="100"
+        height="100"
+        alt="interflux electronics"
+      >
+      <p>Welcome to <strong>Interflux Admin</strong></p>
+    </div>
+
+    <div class="right">
+      <Button
+        @route="login"
+        @text="Log in"
+        @size="medium"
+        @style="outline"
+        @icon="chevron-right"
+      />
+    </div>
   </Section>
-</Page::Layout::Center>
+</Page>
