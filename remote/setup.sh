@@ -4,9 +4,9 @@ set -e
 set -o pipefail
 
 user=bot
-server=sydney.floatplane.dev
-domain=moovin.rentals
-repo=git@github.com:janwerkhoven/moovin.rentals.git
+server=server.interflux.com
+domain=admin.interflux.com
+repo=git@github.com:interflux-electronics/admin.interflux.com.git
 
 echo "----------"
 echo "Setting up $domain on server $server"
