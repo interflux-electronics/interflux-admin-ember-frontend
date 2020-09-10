@@ -89,7 +89,7 @@ module('Integration | Component | button', function (hooks) {
 
     const button = this.element.querySelector('button');
 
-    assert.equal(button.className, 'button secondary no-icon');
+    assert.ok(button.classList.contains('secondary'));
   });
 
   test('it renders @icon', async function (assert) {
@@ -106,7 +106,7 @@ module('Integration | Component | button', function (hooks) {
     const button = this.element.querySelector('button');
     const svg = this.element.querySelector('button svg');
 
-    assert.equal(button.className, 'button primary chevron-right');
+    assert.ok(button.classList.contains('chevron-right'));
     assert.notEqual(svg, undefined);
   });
 });
