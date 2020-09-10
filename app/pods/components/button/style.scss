@@ -16,6 +16,7 @@ button {
     white-space: nowrap;
     user-select: none;
     cursor: pointer;
+    flex-shrink: 0;
 
     // Do not set the following rules up here:
     // font-family: 'Lato-Black';
@@ -156,7 +157,11 @@ button {
       background: $blue-5;
       line-height: 34px;
       height: 34px;
+      min-width: 34px;
       padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       &:hover {
         border-color: $blue-0;
         background: $blue-4;
@@ -166,27 +171,50 @@ button {
         background: $blue-4;
       }
       svg {
-        height: 13px;
-        width: auto;
         [fill] {
           fill: white;
         }
       }
-    }
-
-    &.chevron-right {
-      display: flex;
-      align-items: center;
-      flex-direction: row-reverse;
-      svg + span {
-        margin-right: 10px;
+      &.no-text {
+        padding: 0;
       }
-    }
-
-    &.chevron-left {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
+      &.chevron-right {
+        flex-direction: row-reverse;
+        svg {
+          width: auto;
+          height: 13px;
+          & + span {
+            margin-right: 10px;
+          }
+        }
+      }
+      &.chevron-left {
+        svg {
+          width: auto;
+          height: 13px;
+        }
+      }
+      &.ellipsis {
+        svg {
+          width: 18px;
+          height: auto;
+        }
+      }
+      &.busy {
+        border-color: $blue-0;
+        background-image: url('#{$cdn}/images/admin/diagonals-blue.svg');
+        background-size: 30px 30px;
+        animation: button-loading 1200ms linear infinite;
+        cursor: wait;
+        @keyframes button-loading {
+          from {
+            background-position: 0;
+          }
+          to {
+            background-position: -30px -30px;
+          }
+        }
+      }
     }
   }
 }

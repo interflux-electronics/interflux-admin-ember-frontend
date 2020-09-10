@@ -12,4 +12,8 @@ export default class LoginController extends Controller {
   submit() {
     this.auth.getToken.perform(this.email, this.password);
   }
+
+  get isBusy() {
+    return this.auth.getToken.isRunning;
+  }
 }

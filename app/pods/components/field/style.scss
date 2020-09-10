@@ -73,6 +73,10 @@ fieldset {
       &:focus {
         border-color: white;
       }
+      &[disabled] {
+        border-color: $blue-5;
+        cursor: not-allowed;
+      }
     }
   }
   p + input {

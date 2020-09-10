@@ -1,0 +1,11 @@
+#secure-loading.page {
+  background-color: $blue-5;
+  background-image: url('#{$cdn}/images/admin/terrain-contour-pattern.svg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    color: white;
+    text-align: center;
+  }
+}

@@ -25,10 +25,10 @@
         />
 
         <Button
-          @onClick={{this.submit}}
-          @icon={{if this.auth.getToken.isRunning 'ellipsis' 'chevron-right'}}
           @theme="tertiary"
-          @disabled={{if this.auth.getToken.isRunning true}}
+          @icon={{if this.isBusy 'ellipsis' 'chevron-right'}}
+          @onClick={{this.submit}}
+          @isBusy={{this.isBusy}}
         />
       </div>
 

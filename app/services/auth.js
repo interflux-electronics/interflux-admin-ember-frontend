@@ -27,13 +27,13 @@ export default class AuthService extends Service {
       body: JSON.stringify({ email, password })
     });
 
-    const response = yield fetch(request).catch(error => {
+    const response = yield fetch(request).catch((error) => {
       return console.error(error);
     });
 
     // Read the JSON from the Body (async promise)
     // When back-end sends no JSON back, then status code should be 204
-    const body = yield response.json().catch(error => {
+    const body = yield response.json().catch((error) => {
       return console.error(error);
     });
 

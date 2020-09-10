@@ -19,6 +19,8 @@
 // Pages
 @import 'app/pods/index/style';
 @import 'app/pods/login/style';
+@import 'app/pods/secure-loading/style';
+@import 'app/pods/secure/style';
 
 // Components
 @import 'app/pods/components/button/style';
@@ -34,8 +36,6 @@
 @import 'app/pods/components/nav/resources/style';
 @import 'app/pods/components/nav/user/style';
 @import 'app/pods/components/page/content/style';
-@import 'app/pods/components/page/layout/center/style';
-@import 'app/pods/components/page/layout/horizontal/style';
 @import 'app/pods/components/page/style';
 @import 'app/pods/components/section/style';
 @import 'app/pods/components/spreadsheet/style';
