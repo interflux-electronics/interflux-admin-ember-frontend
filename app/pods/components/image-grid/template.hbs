@@ -1,13 +1,25 @@
-<ul class="image-grid">
-  {{#each this.sortedImages as |image|}}
-    <li>
-      <a href="{{href-to 'secure.images.image' image.id}}">
-        <Image::Responsive
-          @path={{image.path}}
-          @sizes={{image.sizes}}
-          @formats={{image.formats}}
-        />
-      </a>
-    </li>
-  {{/each}}
-</ul>
+<div class="image-grid">
+  <ul>
+    {{#each this.sortedImages as |image|}}
+      <li>
+        <a href="{{href-to 'secure.images.image' image.id}}">
+          <Image::Responsive
+            @path={{image.path}}
+            @sizes={{image.sizes}}
+            @formats={{image.formats}}
+          />
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+
+  {{#if this.showButton}}
+    <div class="button">
+      <Button
+        @text="Show next 50"
+        @theme="tertiary"
+        @onClick={{this.showNext50}}
+      />
+    </div>
+  {{/if}}
+</div>
