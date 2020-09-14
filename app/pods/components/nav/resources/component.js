@@ -54,16 +54,6 @@ export default class NavResourcesComponent extends Component {
         icon: 'svg/document'
       },
       {
-        label: 'Images',
-        route: 'secure.images',
-        icon: 'svg/camera'
-      },
-      {
-        label: 'Videos',
-        route: 'secure.videos',
-        icon: 'svg/film'
-      },
-      {
         label: 'Companies',
         route: 'secure.companies',
         icon: 'svg/building'
@@ -74,15 +64,25 @@ export default class NavResourcesComponent extends Component {
         icon: 'svg/street-view'
       },
       {
-        label: 'Orders',
-        route: 'secure.orders',
-        icon: 'svg/truck'
+        label: 'Images',
+        route: 'secure.images',
+        icon: 'svg/camera'
       },
       {
-        label: 'Leads',
-        route: 'secure.leads',
-        icon: 'svg/seedling'
+        label: 'Videos',
+        route: 'secure.videos',
+        icon: 'svg/film'
       }
+      // {
+      //   label: 'Orders',
+      //   route: 'secure.orders',
+      //   icon: 'svg/truck'
+      // },
+      // {
+      //   label: 'Leads',
+      //   route: 'secure.leads',
+      //   icon: 'svg/seedling'
+      // }
     ];
 
     // Evaluate per resource whether its route is active
