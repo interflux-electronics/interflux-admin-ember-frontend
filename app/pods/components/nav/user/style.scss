@@ -55,6 +55,7 @@ nav#user {
       box-shadow: 0 1px 4px rgba(black, 0.2);
       margin-top: 6px;
       transition: background 300ms $easeOutExpo;
+      white-space: nowrap;
       &:hover {
         background: $blue-0;
         &:first-child {
