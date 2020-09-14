@@ -1,6 +1,3 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
 
-export default class SecureIndexController extends Controller {
-  @service auth;
-}
+export default class SecureIndexController extends Controller {}

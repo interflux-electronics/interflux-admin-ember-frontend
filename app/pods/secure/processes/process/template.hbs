@@ -1,1 +1,5 @@
-{{outlet}}
+{{#with @model.process as |process|}}
+  <Modal @id="process">
+    <h1>{{process.name}}</h1>
+  </Modal>
+{{/with}}
