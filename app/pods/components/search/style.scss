@@ -100,7 +100,6 @@
       p {
         background: #eee;
         color: $paragraph-color-1;
-        border-radius: 0 0 3px 3px;
         line-height: 28px;
         font-size: 15px;
         padding: 0 15px;
@@ -115,7 +114,6 @@
     p.error {
       font-size: 15px;
       line-height: 36px;
-      border-radius: 0 0 3px 3px;
     }
     p.searching {
       color: white;
@@ -124,6 +122,7 @@
       background-image: url('#{$cdn}/images/admin/diagonals-blue.svg');
       background-size: 30px 30px;
       animation: button-loading 1400ms linear infinite;
+      box-shadow: $blue-0 0 0 0 1px;
     }
     p.saving {
       color: white;

@@ -70,7 +70,6 @@ export default class BelongsToRelationFieldComponent extends Component {
     const response = await this.store.query(model, {
       filter: { nameEnglish: `${query}*` }
     });
-    this.isSearching = false;
 
     // Here we sort results that start with the query to the top and the rest below.
     // Both groups are sorted alphabetically before being merged into one array.
@@ -89,6 +88,12 @@ export default class BelongsToRelationFieldComponent extends Component {
     } else {
       console.warn('dropping response for:', query);
     }
+
+    // We add an intentional delay to allow the <Search> component to render the results before
+    // ending the loading its loading state.
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    this.isSearching = false;
   }
 
   // SELECTING

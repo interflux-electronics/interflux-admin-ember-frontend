@@ -137,7 +137,7 @@ export default class SearchComponent extends Component {
   }
 
   @action
-  onMouseEnter(i) {
+  onMouseOverButton(i) {
     if (this.highlight != i) {
       this.highlight = i;
     }

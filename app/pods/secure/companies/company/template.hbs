@@ -71,7 +71,7 @@
 
     <h2>Website</h2>
 
-    <!-- <Input::Boolean
+    {{!-- <Input::Boolean
       @value={{company.public}}
       @onChange={{fn (mut company.public)}}
     >
@@ -104,24 +104,24 @@
       @label='Sort alphabetically'
       @value={{this.sortAlphabetically}}
       @onChange={{fn (mut this.sortAlphabetically)}}
-    /> -->
+    /> --}}
 
     <p>Interflux Electronics will be sorted to the very top, below all Interflux Group members alphabetically, then all distributors alphabetically. To make an exception, search and select another company to appear right below it.</p>
 
-    <!-- <Input::BelongsTo
+    {{!-- <Input::BelongsTo
       @label='Sort right below company'
       @value={{company.sortBelowCountry}}
       @onChange={{fn (mut company.sortBelowCountry)}}
-    /> -->
+    /> --}}
 
     <p>When website visitors indicate they are located in Germany we will suggest them to contact our distributors from Germany. When visitors indicate they are from East Asia, we suggest Interflux Singapore.</p>
     <p>Choose below all the countries for which we want to recommend Interflux Bejing:</p>
 
-    <!-- <Input::HasMany
+    {{!-- <Input::HasMany
       @label='Recommended to visitors from country'
       @value={{company.markets}}
       @onChange={{fn (mut company.markets)}}
-    /> -->
+    /> --}}
 
     <h2>People</h2>
 
@@ -129,10 +129,11 @@
 
     <h2>Database</h2>
 
-    <Input
+    <Field::String
       @label='UUID'
-      @value={{company.id}}
-      @onChange={{fn (mut company.id)}}
+      @record={{company}}
+      @attribute='id'
+      @disabled="true"
     />
   </Modal>
 

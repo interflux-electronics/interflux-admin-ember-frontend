@@ -28,26 +28,26 @@
       <div class="dropdown">
         {{#if @isSearching}}
           <p class="searching">Searching ...</p>
-        {{/if}}
+        {{else}}
+          {{#if this.showPleaseType}}
+            <p>Type to search</p>
+          {{/if}}
 
-        {{#if this.showPleaseType}}
-          <p>Type to search</p>
-        {{/if}}
-
-        {{#if this.showResults}}
-          {{#each this.buttons as |btn i|}}
-            {{#if btn.shown}}
-              <button
-                type="button"
-                class={{btn.classes}}
-                {{on 'mouseenter' (fn this.onMouseEnter i)}}
-                {{on 'mousedown' (fn this.onMouseDown btn.record)}}
-              >
-                {{btn.label}}
-              </button>
-            {{/if}}
-          {{/each}}
-          <p>{{this.recordCount}} results</p>
+          {{#if this.showResults}}
+            {{#each this.buttons as |btn i|}}
+              {{#if btn.shown}}
+                <button
+                  type="button"
+                  class={{btn.classes}}
+                  {{on 'mouseover' (fn this.onMouseOverButton i)}}
+                  {{on 'mousedown' (fn this.onMouseDown btn.record)}}
+                >
+                  {{btn.label}}
+                </button>
+              {{/if}}
+            {{/each}}
+            <p>{{this.recordCount}} results</p>
+          {{/if}}
         {{/if}}
       </div>
     {{/if}}
