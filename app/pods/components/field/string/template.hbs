@@ -1,0 +1,70 @@
+<Field
+  @id={{this.id}}
+  @component="string"
+  @label={{@label}}
+  @legend={{@legend}}
+  @size={{@size}}
+  @theme={{@theme}}
+  @hasFocus={{this.hasFocus}}
+  @hasHover={{this.hasHover}}
+  @isDirty={{this.isDirty}}
+>
+  {{#if @multiline}}
+    <Textarea
+      {{!-- computed --}}
+      @id={{this.id}}
+      @value={{this.value}}
+      @theme={{this.theme}}
+      {{!-- passed down --}}
+      @placeholder={{@placeholder}}
+      @autofocus={{@autofocus}}
+      @disabled={{@disabled}}
+      {{!-- events --}}
+      @onFocus={{this.onFocus}}
+      @onBlur={{this.onBlur}}
+      @onKeyDown={{this.onKeyDown}}
+      @onKeyUp={{this.onKeyUp}}
+      @onMouseOver={{this.onMouseOver}}
+      @onMouseOut={{this.onMouseOut}}
+    />
+  {{else}}
+    <Input
+      {{!-- computed --}}
+      @id={{this.id}}
+      @value={{this.value}}
+      @theme={{this.theme}}
+      @type={{this.type}}
+      {{!-- passed down --}}
+      @placeholder={{@placeholder}}
+      @autofocus={{@autofocus}}
+      @disabled={{@disabled}}
+      {{!-- events --}}
+      @onFocus={{this.onFocus}}
+      @onBlur={{this.onBlur}}
+      @onKeyDown={{this.onKeyDown}}
+      @onKeyUp={{this.onKeyUp}}
+      @onMouseOver={{this.onMouseOver}}
+      @onMouseOut={{this.onMouseOut}}
+      {{!-- @status="idle|dirty|saving|warning|error|disabled" --}}
+      {{!-- @isDisabled={{@disabled}} --}}
+      {{!-- @isDirty="false" --}}
+      {{!-- @isSaving="false" --}}
+      {{!-- @isValid="true" --}}
+      {{!-- @suggestion="" --}}
+      {{!-- @warning="" --}}
+      {{!-- @error="" --}}
+    />
+  {{/if}}
+  {{#if this.showDropdown}}
+    <div class="dropdown">
+      <div class="content">
+        {{#if this.showSave}}
+          <p class="save">Press enter to save</p>
+        {{/if}}
+        {{#if this.isSaving}}
+          <p class="saving">Saving ...</p>
+        {{/if}}
+      </div>
+    </div>
+  {{/if}}
+</Field>

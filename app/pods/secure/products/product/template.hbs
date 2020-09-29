@@ -7,7 +7,7 @@
 
     <Fieldset>
       <Label>Name</Label>
-      <Input::String
+      <Input
         @contenteditable={{true}}
         @value={{product.name}}
         @onKeyUp={{fn (mut product.name)}}
@@ -59,7 +59,7 @@
     <Fieldset>
       <Input::Boolean
 =======
-      <Input::Checkbox
+      <Checkbox
 >>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
         @value={{product.public}}
         @textLabel="Visible on website"
@@ -75,7 +75,7 @@
         @textFalse="Normal"
         @onToggle={{fn (mut product.featured)}}
 =======
-      <Input::Checkbox
+      <Checkbox
         @value={{product.new}}
         @textLabel='Mark as "new" on website'
         @onToggle={{fn (mut product.new)}}
@@ -87,7 +87,7 @@
 <<<<<<< HEAD
       <Input::Boolean
 =======
-      <Input::Checkbox
+      <Checkbox
 >>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
         @value={{product.popular}}
         @textLabel='Mark as "popular" on website'
@@ -103,7 +103,7 @@
         @textFalse="Normal"
         @onToggle={{fn (mut product.new)}}
 =======
-      <Input::Checkbox
+      <Checkbox
         @value={{product.featured}}
         @textLabel='Mark as "featured" on website'
         @saving=true
@@ -112,7 +112,7 @@
     </Fieldset>
 
     <Fieldset>
-      <Input::Checkbox
+      <Checkbox
         @value={{product.orderable}}
         @textLabel='Mark as "out of production"'
         @onToggle={{fn (mut product.orderable)}}

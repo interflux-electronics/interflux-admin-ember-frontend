@@ -1,171 +1,139 @@
 {{#with @model.company as |company|}}
 
-  <Modal @id="document">
+  <Modal @id='document'>
 
     <h1>{{company.businessName}}</h1>
 
-    <hr>
+    <h2>Contact details</h2>
 
-    {{!-- <Fieldset>
-      <Label>Business name</Label>
-      <Input
-        @value={{company.businessName}}
-        @key-down={{fn (mut company.businessName)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Business name'
+      @record={{company}}
+      @attribute='businessName'
+    />
 
-    <Fieldset>
-      <Label>Legal name</Label>
-      <Input
-        @value={{company.legalName}}
-        @key-down={{fn (mut company.legalName)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Legal name'
+      @record={{company}}
+      @attribute='legalName'
+    />
 
-    <Fieldset>
-      <Label>Phone</Label>
-      <Input
-        @value={{company.phone}}
-        @key-down={{fn (mut company.phone)}}
-      />
-    </Fieldset>
+    <Field::BelongsToRelation
+      @label='Country'
+      @record={{company}}
+      @relation='country'
+      @filterOn='nameEnglish'
+    />
 
-    <Fieldset>
-      <Label>Fax</Label>
-      <Input
-        @value={{company.fax}}
-        @key-down={{fn (mut company.fax)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Address'
+      @record={{company}}
+      @attribute='address'
+      @multiline='true'
+    />
 
-    <Fieldset>
-      <Label>Website</Label>
-      <Input
-        @value={{company.website}}
-        @key-down={{fn (mut company.website)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Phone'
+      @record={{company}}
+      @attribute='phone'
+    />
 
-    <Fieldset>
-      <Label
-        @text="Emails"
-        @hint="Use commas to separate multiple emails"
-      />
-      <Input
-        @value={{company.emails}}
-        @key-down={{fn (mut company.emails)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Fax'
+      @record={{company}}
+      @attribute='fax'
+    />
 
-    <hr>
+    <Field::String
+      @label='Email'
+      @type='email'
+      @record={{company}}
+      @attribute='email'
+    />
 
-    <Fieldset>
-      <Label>Address</Label>
-      <Textarea
-        @value={{company.address}}
-        @key-down={{fn (mut company.address)}}
-        cols="80"
-        rows="3"
-      />
-      </Fieldset>
+    <Field::String
+      @label='Website'
+      @record={{company}}
+      @attribute='website'
+    />
 
-    <Fieldset>
-      <Label>Country</Label>
-      <Input::BelongsTo
-        @value={{company.country}}
-        @options={{@model.countries}}
-        @key="nameEnglish"
-      />
-    </Fieldset>
+    <Field::String
+      @label='Longitude'
+      @record={{company}}
+      @attribute='longitude'
+    />
 
-    <Fieldset>
-      <Label>Latitude</Label>
-      <Input
-        @value={{company.latitude}}
-        @key-down={{fn (mut company.latitude)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Latitude'
+      @record={{company}}
+      @attribute='latitude'
+    />
 
-    <Fieldset>
-      <Label>Longitude</Label>
-      <Input
-        @value={{company.longitude}}
-        @key-down={{fn (mut company.longitude)}}
-      />
-    </Fieldset>
+    <h2>Website</h2>
 
-    <hr> --}}
+    <!-- <Input::Boolean
+      @value={{company.public}}
+      @onChange={{fn (mut company.public)}}
+    >
+      <p>Show on the <a
+          href='https://interflux.com/en/contact'
+          target='_blank'
+          rel='noopener noreferrer'
+        >contact page</a> of our website</p>
+    </Input::Boolean>
 
-    {{!-- <p>Market:</p>
+    <Input::Boolean
+      @label='Mark as Interflux Headquarters'
+      @value={{company.isHQ}}
+      @onChange={{fn (mut company.isHQ)}}
+    />
 
-    <ul>
-      {{#each company.markets as |market|}}
-        <li>{{market.nameEnglish}}</li>
-      {{/each}}
-    </ul>
+    <Input::Boolean
+      @label='Mark as Interflux Group member'
+      @value={{company.isGroupMember}}
+      @onChange={{fn (mut company.isGroupMember)}}
+    />
 
-    <hr> --}}
+    <Input::Boolean
+      @label='Mark as trusted distributor'
+      @value={{company.isDistributor}}
+      @onChange={{fn (mut company.isDistributor)}}
+    />
 
-    {{!-- <p>Members:</p>
-    <ul>
-      {{#each company.members as |member|}}
-        <li>{{member.person.firstName}} {{member.person.lastName}}</li>
-      {{/each}}
-    </ul>
+    <Input::Boolean
+      @label='Sort alphabetically'
+      @value={{this.sortAlphabetically}}
+      @onChange={{fn (mut this.sortAlphabetically)}}
+    /> -->
 
-    <hr> --}}
+    <p>Interflux Electronics will be sorted to the very top, below all Interflux Group members alphabetically, then all distributors alphabetically. To make an exception, search and select another company to appear right below it.</p>
 
+    <!-- <Input::BelongsTo
+      @label='Sort right below company'
+      @value={{company.sortBelowCountry}}
+      @onChange={{fn (mut company.sortBelowCountry)}}
+    /> -->
 
-    {{!-- <hr>
-    <Fieldset>
-      <Label
-        @text="Show on website"
-        @hint="If yes, this company will be shown on app.interflux.com. If no, this company is hidden from the world and can only be seen by Interflux members who are logged in on admin.interflux.com."
-      />
-      <Input::Boolean
-        @value={{company.public}}
-        @textTrue="Yes"
-        @textFalse="No"
-        @onToggle={{fn (mut company.public)}}
-      />
-    </Fieldset>
+    <p>When website visitors indicate they are located in Germany we will suggest them to contact our distributors from Germany. When visitors indicate they are from East Asia, we suggest Interflux Singapore.</p>
+    <p>Choose below all the countries for which we want to recommend Interflux Bejing:</p>
 
-    {{#if company.public}}
-      <Fieldset>
-        <Label
-          @text="Position in list?"
-          @hint="Leave empty to sort alphabetically. Enter an integer to sort this company above the alphabetically sorted companies."
-        />
-        <Input
-          @value={{company.order}}
-          @key-down={{fn (mut company.order)}}
-        />
-      </Fieldset>
-    {{/if}} --}}
+    <!-- <Input::HasMany
+      @label='Recommended to visitors from country'
+      @value={{company.markets}}
+      @onChange={{fn (mut company.markets)}}
+    /> -->
 
-    {{!-- <hr>
+    <h2>People</h2>
 
-    <Buttons::Horizontal>
-      <div class="left"></div>
-      <div class="right">
-        {{#if company.hasDirtyAttributes}}
-          <Button::Action
-            @action={{fn this.reset company}}
-            @text="reset changes"
-            @size="medium"
-            @style="grey link"
-          />
-        {{/if}}
+    <p>TODO</p>
 
-        <Button::Action
-          @action={{fn this.save company}}
-          @text={{if company.hasDirtyAttributes (if company.isSaving 'Saving...' 'save changes') 'no changes'}}
-          @disabled={{if company.hasDirtyAttributes false true}}
-          @size="medium"
-          @style="green"
-        />
-      </div>
-    </Buttons::Horizontal> --}}
+    <h2>Database</h2>
+
+    <Input
+      @label='UUID'
+      @value={{company.id}}
+      @onChange={{fn (mut company.id)}}
+    />
   </Modal>
 
 {{/with}}

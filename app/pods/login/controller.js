@@ -5,8 +5,8 @@ import { action } from '@ember/object';
 export default class LoginController extends Controller {
   @service auth;
 
-  email = null;
-  password = null;
+  email;
+  password;
 
   @action
   submit() {
@@ -15,5 +15,21 @@ export default class LoginController extends Controller {
 
   get isBusy() {
     return this.auth.getToken.isRunning;
+  }
+
+  @action
+  onKeyDown(event) {
+    if (event.code === 'Enter') {
+      this.submit();
+    }
+  }
+
+  @action
+  onKeyUp(event) {
+    const input = event.target;
+    const key = input.id;
+    const value = input.value;
+
+    this[key] = value;
   }
 }

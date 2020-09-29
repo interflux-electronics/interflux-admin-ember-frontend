@@ -2,7 +2,8 @@
   <Section>
     <form>
       <div class="row one">
-        <Input::String
+        <Input
+          @id="email"
           @value={{this.email}}
           @placeholder="Email"
           @type="email"
@@ -10,11 +11,14 @@
           @disabled={{this.auth.getToken.isRunning}}
           @onChange={{fn (mut this.email)}}
           @onEnter={{this.submit}}
+          @onKeyDown={{this.onKeyDown}}
+          @onKeyUp={{this.onKeyUp}}
         />
       </div>
 
       <div class="row two">
-        <Input::String
+        <Input
+          @id="password"
           @value={{this.password}}
           @placeholder="Password"
           @type="password"
@@ -22,6 +26,8 @@
           @disabled={{this.auth.getToken.isRunning}}
           @onChange={{fn (mut this.password)}}
           @onEnter={{this.submit}}
+          @onKeyDown={{this.onKeyDown}}
+          @onKeyUp={{this.onKeyUp}}
         />
 
         <Button

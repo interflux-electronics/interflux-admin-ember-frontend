@@ -1,0 +1,21 @@
+<div class="textarea {{this.classes}}">
+  <div class="wrapper">
+    <textarea
+      id={{@id}}
+      value={{@value}}
+      placeholder={{@placeholder}}
+      autofocus={{@autofocus}}
+      disabled={{@disabled}}
+      {{on 'focus' this.onFocus}}
+      {{on 'blur' this.onBlur}}
+      {{on 'keydown' this.onKeyDown}}
+      {{on 'keyup' this.onKeyUp}}
+      {{on 'mouseover' this.onMouseOver}}
+      {{on 'mouseout' this.onMouseOut}}
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
+    ></textarea>
+  </div>
+</div>

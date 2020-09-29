@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
-export default class ToggleComponent extends Component {
+export default class BooleanFieldComponent extends Component {
   @action
   toggle() {
     this.args.onToggle(!this.args.value);

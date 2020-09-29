@@ -21,11 +21,14 @@
       .row {
         display: flex;
         align-items: center;
-        fieldset {
+        .input {
           width: 100%;
           & + button {
             margin-left: 10px;
           }
+        }
+        &.one {
+          margin-bottom: 10px;
         }
         &.three {
           position: relative;
@@ -38,9 +41,6 @@
             text-align: right;
             width: 100%;
           }
-        }
-        &.one {
-          margin-bottom: 10px;
         }
       }
     }

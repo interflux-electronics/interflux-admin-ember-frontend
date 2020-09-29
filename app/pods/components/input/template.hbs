@@ -1,0 +1,25 @@
+<div class="input {{this.classes}}">
+  <div class="wrapper">
+    <input
+      id={{@id}}
+      value={{@value}}
+      type={{@type}}
+      placeholder={{@placeholder}}
+      autofocus={{@autofocus}}
+      disabled={{@disabled}}
+      {{on 'focus' this.onFocus}}
+      {{on 'blur' this.onBlur}}
+      {{on 'keydown' this.onKeyDown}}
+      {{on 'keyup' this.onKeyUp}}
+      {{on 'mouseover' this.onMouseOver}}
+      {{on 'mouseout' this.onMouseOut}}
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
+    >
+    {{#if this.showSave}}
+      <p>Press enter to save.</p>
+    {{/if}}
+  </div>
+</div>

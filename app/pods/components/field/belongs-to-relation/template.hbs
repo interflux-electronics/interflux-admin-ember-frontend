@@ -1,0 +1,29 @@
+<Field
+  {{!-- mandatory --}}
+  @id={{this.id}}
+  @hasFocus={{this.hasFocus}}
+  @isDirty={{this.isDirty}}
+  {{!-- optional --}}
+  @component="belongs-to"
+  @label={{@label}}
+  @legend={{@legend}}
+  @theme={{@theme}}
+>
+  <Search
+    {{!-- mandatory --}}
+    @id={{this.id}}
+    @currentRecord={{this.currentRecord}}
+    @recordsForQuery={{this.recordsForQuery}}
+    @filterOn={{@filterOn}}
+    @isSearching={{this.isSearching}}
+    @onFocus={{this.onFocus}}
+    @onBlur={{this.onBlur}}
+    @onSearch={{this.onSearch}}
+    @onSelect={{this.onSelect}}
+    {{!-- optional --}}
+    @theme={{@theme}}
+    @placeholder={{@placeholder}}
+    @autofocus={{@autofocus}}
+    @disabled={{@disabled}}
+  />
+</Field>

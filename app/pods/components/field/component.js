@@ -9,15 +9,35 @@ import Component from '@glimmer/component';
 // save-fail       Error message --> hide on dismiss or when user starts correcting
 
 export default class FieldComponent extends Component {
-  get classes() {
-    return [this.size, this.theme].join(' ');
-  }
+  // args.size
+  // args.theme
+  // args.hasFocus
+  // args.hasHover
+  // args.isDirty
 
-  get size() {
-    return this.args.size || 'medium';
+  get classes() {
+    return [
+      this.args.component,
+      this.theme,
+      this.focus,
+      this.hover,
+      this.dirty
+    ].join(' ');
   }
 
   get theme() {
     return this.args.theme || 'primary';
+  }
+
+  get focus() {
+    return this.args.hasFocus ? 'focus' : 'no-focus';
+  }
+
+  get hover() {
+    return this.args.hasHover ? 'hover' : 'no-hover';
+  }
+
+  get dirty() {
+    return this.args.isDirty ? 'dirty' : 'clean';
   }
 }
