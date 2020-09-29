@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | button/content', function (hooks) {
+module('Integration | Component | <Button::Content>', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders @text', async function (assert) {

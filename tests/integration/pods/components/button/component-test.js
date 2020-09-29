@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | button', function (hooks) {
+module('Integration | Component | <Button>', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders <a> to a route', async function (assert) {
