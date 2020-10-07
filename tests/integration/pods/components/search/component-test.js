@@ -35,8 +35,8 @@ module('Integration | Component | <Search>', function (hooks) {
       />
     `);
 
-    const outer = this.element.querySelector('.search');
     const input = this.element.querySelector('input');
+    const outer = this.element.querySelector('.input');
 
     assert.equal(input.id, id);
     assert.ok(outer.classList.contains(theme));

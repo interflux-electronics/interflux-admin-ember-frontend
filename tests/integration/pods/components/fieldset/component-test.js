@@ -3,24 +3,33 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | fieldset', function(hooks) {
+module('Integration | Component | <Fieldset>', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it links <label> and <input> IDs', async function (assert) {
+    assert.expect(3);
 
-    await render(hbs`<Fieldset />`);
+    const id = 'field-123';
+    const str = 'First name';
 
-    assert.equal(this.element.textContent.trim(), '');
+    this.set('id', id);
+    this.set('label', str);
 
     // Template block usage:
     await render(hbs`
-      <Fieldset>
-        template block text
+      <Fieldset
+        @id={{this.id}}
+        @label={{this.label}}
+      >
+        <input id={{this.id}}>
       </Fieldset>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    const label = this.element.querySelector('label');
+    const input = this.element.querySelector('input');
+
+    assert.equal(input.id, id);
+    assert.equal(label.getAttribute('for'), id);
+    assert.equal(label.innerText, str);
   });
 });
