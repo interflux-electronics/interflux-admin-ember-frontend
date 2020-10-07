@@ -41,7 +41,6 @@ export default class TextareaComponent extends InputComponent {
   @action
   resize() {
     const height = this.textarea.getBoundingClientRect().height;
-    console.log('keydown', height);
     this.textarea.parentElement.parentElement.style = `height: ${height}px;`;
   }
 }
