@@ -7,7 +7,7 @@ import EmberObject from '@ember/object';
 module('Integration | Component | <Search>', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it render @id and @theme', async function (assert) {
+  test('it renders @id and @theme', async function (assert) {
     assert.expect(2);
 
     const id = 'field-123';
@@ -20,25 +20,23 @@ module('Integration | Component | <Search>', function (hooks) {
 
     this.set('id', id);
     this.set('theme', theme);
-    this.set('recordsForQuery', arr);
-    this.set('currentRecord', arr[0]);
+    this.set('value', arr[0]);
     this.set('filterOn', 'firstName');
 
     // Template block usage:
     await render(hbs`
       <Search
         @id={{this.id}}
-        @theme="primary"
-        @currentRecord={{this.currentRecord}}
-        @recordsForQuery={{this.recordsForQuery}}
-        @filterOn={{this.filterOn}}
+        @theme={{this.theme}}
+        @value={{this.value}}
+        @searchFilter={{this.filterOn}}
       />
     `);
 
+    const search = this.element.querySelector('.search');
     const input = this.element.querySelector('input');
-    const outer = this.element.querySelector('.input');
 
+    assert.ok(search.classList.contains(theme));
     assert.equal(input.id, id);
-    assert.ok(outer.classList.contains(theme));
   });
 });
