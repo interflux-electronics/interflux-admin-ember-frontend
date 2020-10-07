@@ -1,0 +1,45 @@
+{{#if (eq @state 'idle')}}
+  <div class="icon">
+    <Svg::Check />
+  </div>
+{{/if}}
+
+{{#if (or (eq @state 'dirty') (eq @state 'saving'))}}
+  <div class="action">
+    <Button
+      @theme="save"
+      @text={{if @isSaving null 'save'}}
+      @icon={{if @isSaving 'ellipsis'}}
+      @onClick={{@onSave}}
+      @isBusy={{@isSaving}}
+    />
+  </div>
+{{/if}}
+
+{{#if (eq @state 'warning')}}
+  <div class="icon">
+    <Svg::Warning />
+  </div>
+  {{#if @hasFocus}}
+    {{#if (eq @warning 'not-blank')}}
+      <p class="message">Please enter a value.</p>
+    {{else if (eq @warning 'is-url')}}
+      <p class="message">Please enter a URL which starts with "https://".</p>
+    {{else}}
+      <p class="message">Please enter a valid value.</p>
+    {{/if}}
+  {{/if}}
+{{/if}}
+
+{{#if (eq @state 'error')}}
+  <div class="icon">
+    <Svg::Error />
+  </div>
+  {{#if @hasFocus}}
+    <p class="message">Sorry, something didn't quite go as planned. Nobody should ever see this message, so please tell Jan: <a
+        href="mailto:j.werkhoven@interflux.com"
+        target="_blank"
+        rel="noreferrer noopener"
+      >j.werkhoven@interflux.com</a> about error: <strong>{{@error}}</strong>.</p>
+  {{/if}}
+{{/if}}

@@ -3,7 +3,7 @@
     <input
       id={{@id}}
       value={{@value}}
-      type={{@type}}
+      type={{this.type}}
       placeholder={{@placeholder}}
       autofocus={{@autofocus}}
       disabled={{@disabled}}
@@ -18,8 +18,6 @@
       autocorrect='off'
       spellcheck='false'
     >
-    {{#if this.showSave}}
-      <p>Press enter to save.</p>
-    {{/if}}
+    {{yield}}
   </div>
 </div>

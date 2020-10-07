@@ -18,4 +18,9 @@ export default class CompanyModel extends Model {
 
   // @hasMany('member') member;
   // @hasMany('market') country;
+
+  // validations = {
+  //   businessName: ['not-blank', 'only-letters'],
+  //   website: ['is-url-or-blank']
+  // };
 }

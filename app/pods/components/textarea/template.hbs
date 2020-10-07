@@ -1,8 +1,12 @@
 <div class="textarea {{this.classes}}">
   <div class="wrapper">
-    <textarea
+    {{!-- We don't use the <textarea> element because it does not expand as you type. --}}
+    {{!-- Instead we use a contenteditable <p> --}}
+    <p
       id={{@id}}
-      value={{@value}}
+      role="textbox"
+      contenteditable
+      aria-multiline
       placeholder={{@placeholder}}
       autofocus={{@autofocus}}
       disabled={{@disabled}}
@@ -16,6 +20,11 @@
       autocomplete='off'
       autocorrect='off'
       spellcheck='false'
-    ></textarea>
+      rows={{this.rows}}
+      {{did-insert this.onInsert}}
+      {{on 'paste' this.onPaste}}
+    ></p>
+
+    {{yield}}
   </div>
 </div>

@@ -3,24 +3,34 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class InputComponent extends Component {
-  @tracked hasFocus = false;
-  @tracked hasHover = false;
+  @tracked focus = false;
+  @tracked hover = false;
 
   get classes() {
     return [
-      this.args.theme || 'no-theme',
-      this.hasFocus ? 'focus' : 'no-focus',
-      this.hasHover ? 'hover' : 'no-hover'
+      this.args.theme || 'primary',
+      this.args.state || 'no-state',
+      this.hover ? 'hover' : 'no-hover',
+      this.focus ? 'focus' : 'no-focus'
     ].join(' ');
+  }
+
+  get type() {
+    return this.args.type || 'text';
+  }
+
+  @action
+  selectText(input) {
+    input.select();
   }
 
   // EVENTS
 
   @action
   onFocus(event) {
-    this.hasFocus = true;
+    this.focus = true;
 
-    event.target.select();
+    this.selectText(event.target);
 
     if (this.args.onFocus) {
       this.args.onFocus(event);
@@ -29,7 +39,7 @@ export default class InputComponent extends Component {
 
   @action
   onBlur(event) {
-    this.hasFocus = false;
+    this.focus = false;
 
     if (this.args.onBlur) {
       this.args.onBlur(event);
@@ -38,7 +48,7 @@ export default class InputComponent extends Component {
 
   @action
   onMouseOver(event) {
-    this.hasHover = true;
+    this.hover = true;
 
     if (this.args.onMouseOver) {
       this.args.onMouseOver(event);
@@ -47,7 +57,7 @@ export default class InputComponent extends Component {
 
   @action
   onMouseOut(event) {
-    this.hasHover = false;
+    this.hover = false;
 
     if (this.args.onMouseOut) {
       this.args.onMouseOut(event);

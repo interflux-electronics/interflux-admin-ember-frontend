@@ -1,4 +1,4 @@
-import Component from '@glimmer/component';
+import FieldComponent from '../component';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -16,31 +16,8 @@ import { action } from '@ember/object';
 //   @placholder="Search me"
 // />
 
-export default class BelongsToRelationFieldComponent extends Component {
-  @service form;
+export default class BelongsToRelationFieldComponent extends FieldComponent {
   @service store;
-
-  id; // Unique across the app
-
-  constructor() {
-    super(...arguments);
-    const id = this.form.getUniqueId();
-    this.id = `field-${id}`;
-  }
-
-  // FOCUS
-
-  @tracked hasFocus = false;
-
-  @action
-  onFocus() {
-    this.hasFocus = true;
-  }
-
-  @action
-  onBlur() {
-    this.hasFocus = false;
-  }
 
   // SEARCHING
 
@@ -107,35 +84,6 @@ export default class BelongsToRelationFieldComponent extends Component {
     console.debug('selected', newRelation[this.args.filterOn]);
     this.args.record.set(this.args.relation, newRelation);
     console.debug('saving');
-    this.args.record.save();
+    this.save();
   }
-
-  // SAVING
-
-  // @tracked changes;
-
-  // Is true when this attribute has unsaved changes (aka dirty)
-  // get isDirty() {
-  //   // It's important to create const out of these values so they trigger the recomputations
-  //   const { value } = this;
-  //   const { record, attribute } = this.args;
-  //   const change = record.changedAttributes()[attribute];
-  //   if (!change || !record.hasDirtyAttributes) {
-  //     return false;
-  //   }
-  //   const lastSavedValue = change[0];
-  //   return value !== lastSavedValue;
-  // }
-
-  // get isValid() {
-  //   return true;
-  // }
-
-  // get showSave() {
-  //   return this.isValid && this.isDirty;
-  // }
-
-  // get isSaving() {
-  //   return this.args.record.isSaving;
-  // }
 }

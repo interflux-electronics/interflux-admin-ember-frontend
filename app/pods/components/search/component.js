@@ -89,23 +89,16 @@ export default class SearchComponent extends Component {
     return this.rangeMin + 6;
   }
 
-  // REGISTER
+  // FOCUS
 
   input; // The <input> element in the template
-
-  @action
-  onInsertInput(element) {
-    this.input = element;
-  }
-
-  // FOCUS
 
   @action
   onFocus(event) {
     this.hasFocus = true;
 
-    // Select all text in the <input> for easy deletion
-    event.target.select();
+    // Remember the <input> element for later, so we can remove focus
+    this.input = event.target;
 
     if (this.args.onFocus) {
       this.args.onFocus(event);

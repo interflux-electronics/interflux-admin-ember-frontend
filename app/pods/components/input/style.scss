@@ -1,35 +1,172 @@
-.input {
+.input,
+.textarea {
   &.primary {
-    &.hover {
-      input {
-        border-color: $blue-0;
+    height: 46px;
+
+    &.error {
+      &.focus {
+        .wrapper {
+          box-shadow: $error-red 0 0 0 2px, 0 2px 10px rgba(black, 0.15);
+        }
+      }
+      .wrapper {
+        box-shadow: $error-red 0 0 0 2px;
+      }
+      .icon {
+        svg {
+          width: 22px;
+          path {
+            fill: $error-red;
+          }
+        }
+      }
+      p.message {
+        background: $error-red;
+        color: white;
       }
     }
-    &.focus {
-      input {
-        border-color: $blue-0;
-        box-shadow: 0 2px 10px rgba(black, 0.15);
+
+    &.warning {
+      &.focus {
+        .wrapper {
+          box-shadow: $orange-0 0 0 0 2px, 0 2px 10px rgba(black, 0.15);
+        }
+      }
+      .wrapper {
+        box-shadow: $orange-0 0 0 0 2px;
+      }
+      .icon {
+        svg {
+          path {
+            fill: $orange-0;
+          }
+        }
+      }
+      p.message {
+        background: $orange-0;
+        color: white;
       }
     }
-    &.dirty {
-      input {
-        border-color: $green-1;
-        border-radius: 3px 3px 0 0;
+
+    &.dirty,
+    &.saving {
+      &.focus {
+        .wrapper {
+          box-shadow: $green-1 0 0 0 1px, 0 2px 10px rgba(black, 0.15);
+        }
+      }
+      .wrapper {
+        box-shadow: $green-1 0 0 0 1px;
       }
     }
-    input {
-      font-size: 16px;
-      line-height: 44px;
-      padding: 0 15px;
-      border: 1px solid #ddd;
+
+    &.idle {
+      &.hover {
+        .wrapper {
+          box-shadow: $blue-0 0 0 0 1px;
+        }
+        .icon svg path {
+          fill: $green-1;
+        }
+      }
+      &.focus {
+        .wrapper {
+          box-shadow: $blue-0 0 0 0 1px, 0 2px 10px rgba(black, 0.15);
+        }
+        .icon svg path {
+          fill: $green-1;
+        }
+      }
+      .icon {
+        svg {
+          path {
+            fill: #ccc;
+          }
+        }
+      }
+    }
+
+    .wrapper {
+      background: white;
+      box-shadow: #ddd 0 0 0 1px;
       border-radius: 3px;
-      max-width: 100%;
+      position: relative;
       transition: border-color 300ms $easeOutExpo;
+      overflow: hidden;
+    }
+
+    input,
+    textarea,
+    [role='textbox'] {
+      font-size: 16px;
+      line-height: 46px;
+      padding: 0 44px 0 15px;
+      border: 0;
+      max-width: 100%;
       outline: 0;
-      box-shadow: 0;
+      box-shadow: none;
       color: $paragraph-color-1;
       width: 100%;
       box-sizing: border-box;
+      background: white;
+
+      /* clears the 'X' from Internet Explorer */
+      &::-ms-clear,
+      &::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      /* clears the 'X' from Chrome */
+      &::-webkit-search-decoration,
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        display: none;
+      }
+    }
+    .icon,
+    .action {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 46px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 24px;
+        height: auto;
+        path {
+          fill: #ccc;
+        }
+      }
+    }
+    .icon {
+      width: 46px;
+      pointer-events: none;
+    }
+    .action {
+      width: 70px;
+      padding: 0 9px;
+      button {
+        width: 100%;
+      }
+    }
+    p.message {
+      font-size: 15px;
+      line-height: 150%;
+      padding: 7px 15px;
+      background: #eee;
+      color: $paragraph-color-1;
+      a {
+        color: $paragraph-color-1;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
 
@@ -63,36 +200,5 @@
         cursor: not-allowed;
       }
     }
-  }
-
-  .dropdown {
-    position: relative;
-    box-shadow: 0 2px 10px rgba(black, 0.15);
-    .content {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-    }
-    p {
-      color: white;
-      border-radius: 0 0 3px 3px;
-      box-sizing: border-box;
-      padding: 8px 15px;
-      &.save {
-        background: $green-1;
-      }
-      &.saving {
-        background-color: $green-1;
-        background-image: url('#{$cdn}/images/admin/diagonals-green.svg');
-        background-size: 30px 30px;
-        animation: button-loading 1200ms linear infinite;
-        cursor: wait;
-      }
-    }
-  }
-
-  p + input {
-    margin-top: 5px;
   }
 }

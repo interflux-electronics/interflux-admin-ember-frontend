@@ -1,29 +1,35 @@
-<Field
-  {{!-- mandatory --}}
+<Fieldset
+  {{!-- props --}}
   @id={{this.id}}
-  @hasFocus={{this.hasFocus}}
-  @isDirty={{this.isDirty}}
-  {{!-- optional --}}
-  @component="belongs-to"
   @label={{@label}}
   @legend={{@legend}}
   @theme={{@theme}}
+  {{!-- state --}}
+  @state={{this.state}}
 >
   <Search
-    {{!-- mandatory --}}
+    {{!-- props --}}
     @id={{this.id}}
+    @theme={{@theme}}
+    @type={{@type}}
+    @placeholder={{@placeholder}}
+    @autofocus={{@autofocus}}
+    @disabled={{@disabled}}
+    {{!-- state --}}
+    @value={{this.value}}
+    @state={{this.state}}
+    @error={{this.error}}
+    {{!-- events --}}
+    @onFocus={{this.onFocus}}
+    @onBlur={{this.onBlur}}
+    @onKeyDown={{this.onKeyDown}}
+    @onKeyUp={{this.onKeyUp}}
+    @onMouseOver={{this.onMouseOver}}
+    @onMouseOut={{this.onMouseOut}}
+    {{!-- unique --}}
     @currentRecord={{this.currentRecord}}
     @recordsForQuery={{this.recordsForQuery}}
     @filterOn={{@filterOn}}
     @isSearching={{this.isSearching}}
-    @onFocus={{this.onFocus}}
-    @onBlur={{this.onBlur}}
-    @onSearch={{this.onSearch}}
-    @onSelect={{this.onSelect}}
-    {{!-- optional --}}
-    @theme={{@theme}}
-    @placeholder={{@placeholder}}
-    @autofocus={{@autofocus}}
-    @disabled={{@disabled}}
   />
-</Field>
+</Fieldset>

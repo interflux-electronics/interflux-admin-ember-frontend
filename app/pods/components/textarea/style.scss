@@ -1,27 +1,17 @@
+// The <Textarea> component is nearly identical to the <Input> and thus inherits all styles from
+// <Input>, except for these overwrites:
+
 .textarea {
-  .wrapper {
-    //
-  }
-  textarea {
-    font-size: 16px;
-    line-height: 150%;
-    padding: 15px 17px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    margin-top: 5px;
-    font-family: $regular;
-    max-width: 100%;
-    min-width: 100%;
-    transition: border-color 300ms $easeOutExpo;
-    outline: 0;
-    box-shadow: 0;
-    color: $paragraph-color-1;
-    box-sizing: border-box;
-    &:hover {
-      border-color: #bbb;
-    }
-    &:focus {
-      border-color: $blue-0;
+  &.primary {
+    height: auto;
+
+    textarea,
+    [role='textbox'] {
+      line-height: 150%;
+      padding: 11px 46px 11px 15px;
+      height: auto;
+      display: block;
+      resize: vertical;
     }
   }
 }

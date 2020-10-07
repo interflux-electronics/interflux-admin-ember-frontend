@@ -149,6 +149,54 @@ button {
       }
     }
 
+    &.save {
+      background: $green-1;
+      color: white;
+      font-size: 15px;
+      font-family: $semibold;
+      border: 0;
+      border-radius: 3px;
+      line-height: 28px;
+      height: 28px;
+      min-width: 28px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:focus,
+      &:hover {
+        box-shadow: white 0 0 0 2px, 0 0 0 4px $green-1;
+      }
+      svg {
+        [fill] {
+          fill: white;
+        }
+      }
+      &.no-text {
+        padding: 0;
+      }
+      &.ellipsis {
+        svg {
+          width: 18px;
+          height: auto;
+        }
+      }
+      &.busy {
+        background-image: url('#{$cdn}/images/admin/diagonals-green.svg');
+        background-size: 30px 30px;
+        animation: button-loading 1200ms linear infinite;
+        cursor: wait;
+        @keyframes button-loading {
+          from {
+            background-position: 0;
+          }
+          to {
+            background-position: -30px -30px;
+          }
+        }
+      }
+    }
+
     &.tertiary {
       font-size: 16px;
       color: white;

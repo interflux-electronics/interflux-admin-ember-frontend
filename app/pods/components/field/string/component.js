@@ -1,6 +1,4 @@
-import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
+import FieldComponent from '../component';
 import { action } from '@ember/object';
 
 // Usage:
@@ -15,28 +13,19 @@ import { action } from '@ember/object';
 //   @onFocus={{this.onFocus}}
 // />
 
-export default class StringFieldComponent extends Component {
-  @service form;
-
-  id; // Unique across the app
-
+export default class StringFieldComponent extends FieldComponent {
   constructor() {
     super(...arguments);
-    const id = this.form.getUniqueId();
-    this.id = `field-${id}`;
-  }
 
-  // The <input> type attribute (text, email, password, ...)
-  get type() {
-    return this.args.type || 'text';
-  }
+    const { record, attribute } = this.args;
+    const value = record.get(attribute);
 
-  // Style: primary, secondary, tertiary
-  get theme() {
-    return this.args.theme || 'primary';
-  }
+    this.lastSavedValue = value;
 
-  // VALUE
+    if (value === undefined) {
+      console.warn(`${attribute} is not an attribute on the model`);
+    }
+  }
 
   get value() {
     return this.args.record.get(this.args.attribute);
@@ -48,78 +37,56 @@ export default class StringFieldComponent extends Component {
 
   @action
   onKeyUp(event) {
-    const input = event.target;
-    const value = input.value;
+    const { multiline } = this.args;
+    const element = event.target;
+
+    // If it's an <input> we grab the value. If it's a contenteditable <p>, we grab its innerText.
+    const value = multiline ? element.innerText : element.value;
 
     // Set the new value on the record
     this.value = value;
 
-    // Fire @onEnter if enter was pressed
-    if (event.key === 'Enter') {
-      if (this.isDirty) {
-        this.args.record.save().then();
-      }
+    // Reset errors
+    this.error = null;
+
+    // On enter, save the attribute, unless it's a <Textarea>
+    if (event.key === 'Enter' && !multiline) {
+      this.save();
     }
   }
 
-  // SAVING
-
-  @tracked changes;
-
-  // Is true when this attribute has unsaved changes (aka dirty)
   get isDirty() {
-    // It's important to create const out of these values so they trigger the recomputations
-    const { value } = this;
-    const { record, attribute } = this.args;
-    const change = record.changedAttributes()[attribute];
-    if (!change || !record.hasDirtyAttributes) {
-      return false;
-    }
-    const lastSavedValue = change[0];
-    return value !== lastSavedValue;
+    return this.value !== this.lastSavedValue;
   }
 
-  get isValid() {
-    return true;
+  get warning() {
+    return null;
   }
 
-  get showDropdown() {
-    return this.showSave;
-  }
+  // get warning() {
+  //   const rules = this.args.record.validations[this.args.attribute];
+  //
+  //   // Consider value as valid if no rules are found
+  //   if (!rules) {
+  //     return null;
+  //   }
+  //
+  //   const fails = rules.find((rule) => {
+  //     return this.valuePassesRule(this.value, rule);
+  //   });
+  //
+  //   console.log('fails', fails);
+  //
+  //   return fails[0];
+  // }
 
-  get showSave() {
-    return this.isValid && this.isDirty;
-  }
-
-  get isSaving() {
-    return this.args.record.isSaving;
-  }
-
-  // FOCUS
-
-  @tracked hasFocus = false;
-
-  @action
-  onFocus() {
-    this.hasFocus = true;
-  }
-
-  @action
-  onBlur() {
-    this.hasFocus = false;
-  }
-
-  // HOVER
-
-  @tracked hasHover = false;
-
-  @action
-  onMouseOver() {
-    this.hasHover = true;
-  }
-
-  @action
-  onMouseOut() {
-    this.hasHover = false;
-  }
+  // valuePassesRule(value, rule) {
+  //   if (rule === 'not-blank') {
+  //     return value ? true : false;
+  //   }
+  //
+  //   if (rule === 'is-url') {
+  //     return value && value.startsWith('https://');
+  //   }
+  // }
 }

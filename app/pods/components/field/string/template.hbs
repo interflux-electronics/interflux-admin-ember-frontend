@@ -1,24 +1,25 @@
-<Field
+<Fieldset
+  {{!-- props --}}
   @id={{this.id}}
-  @component="string"
   @label={{@label}}
   @legend={{@legend}}
-  @size={{@size}}
   @theme={{@theme}}
+  {{!-- state --}}
+  @state={{this.state}}
   @hasFocus={{this.hasFocus}}
-  @hasHover={{this.hasHover}}
-  @isDirty={{this.isDirty}}
 >
   {{#if @multiline}}
+
     <Textarea
-      {{!-- computed --}}
+      {{!-- props --}}
       @id={{this.id}}
-      @value={{this.value}}
-      @theme={{this.theme}}
-      {{!-- passed down --}}
+      @theme={{@theme}}
       @placeholder={{@placeholder}}
       @autofocus={{@autofocus}}
       @disabled={{@disabled}}
+      {{!-- state --}}
+      @value={{this.value}}
+      @state={{this.state}}
       {{!-- events --}}
       @onFocus={{this.onFocus}}
       @onBlur={{this.onBlur}}
@@ -26,18 +27,30 @@
       @onKeyUp={{this.onKeyUp}}
       @onMouseOver={{this.onMouseOver}}
       @onMouseOut={{this.onMouseOut}}
+    >
+    <Field::String::Messages
+      @state={{this.state}}
+      @isSaving={{this.isSaving}}
+      @hasFocus={{this.hasFocus}}
+      @warning={{this.warning}}
+      @error={{this.error}}
+      @onSave={{this.save}}
     />
+    </Textarea>
+
   {{else}}
+
     <Input
-      {{!-- computed --}}
+      {{!-- props --}}
       @id={{this.id}}
-      @value={{this.value}}
-      @theme={{this.theme}}
-      @type={{this.type}}
-      {{!-- passed down --}}
+      @theme={{@theme}}
+      @type={{@type}}
       @placeholder={{@placeholder}}
       @autofocus={{@autofocus}}
       @disabled={{@disabled}}
+      {{!-- state --}}
+      @value={{this.value}}
+      @state={{this.state}}
       {{!-- events --}}
       @onFocus={{this.onFocus}}
       @onBlur={{this.onBlur}}
@@ -45,26 +58,16 @@
       @onKeyUp={{this.onKeyUp}}
       @onMouseOver={{this.onMouseOver}}
       @onMouseOut={{this.onMouseOut}}
-      {{!-- @status="idle|dirty|saving|warning|error|disabled" --}}
-      {{!-- @isDisabled={{@disabled}} --}}
-      {{!-- @isDirty="false" --}}
-      {{!-- @isSaving="false" --}}
-      {{!-- @isValid="true" --}}
-      {{!-- @suggestion="" --}}
-      {{!-- @warning="" --}}
-      {{!-- @error="" --}}
+    >
+    <Field::String::Messages
+      @state={{this.state}}
+      @isSaving={{this.isSaving}}
+      @hasFocus={{this.hasFocus}}
+      @warning={{this.warning}}
+      @error={{this.error}}
+      @onSave={{this.save}}
     />
+    </Input>
+
   {{/if}}
-  {{#if this.showDropdown}}
-    <div class="dropdown">
-      <div class="content">
-        {{#if this.showSave}}
-          <p class="save">Press enter to save</p>
-        {{/if}}
-        {{#if this.isSaving}}
-          <p class="saving">Saving ...</p>
-        {{/if}}
-      </div>
-    </div>
-  {{/if}}
-</Field>
+</Fieldset>

@@ -1,64 +1,32 @@
-import Component from '@glimmer/component';
+import InputComponent from '../input/component';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 
-export default class TextareaComponent extends Component {
-  @tracked hasFocus = false;
-  @tracked hasHover = false;
+export default class TextareaComponent extends InputComponent {
+  // See <Input> component
 
-  get classes() {
-    return [
-      this.args.theme || 'no-theme',
-      this.hasFocus ? 'focus' : 'no-focus',
-      this.hasHover ? 'hover' : 'no-hover'
-    ].join(' ');
+  // The contenteditable <p>
+  textarea;
+
+  // On insert, add the @value to the p.contenteditable.
+  @action
+  onInsert(element) {
+    this.textarea = element;
+    this.textarea.innerText = this.args.value;
+    this.resize();
   }
 
-  // EVENTS
-
+  // Prevent HTML formatting from being pasted into the p.contenteditable.
   @action
-  onFocus(event) {
-    this.hasFocus = true;
-
-    event.target.select();
-
-    if (this.args.onFocus) {
-      this.args.onFocus(event);
-    }
+  onPaste(event) {
+    event.preventDefault();
+    const text = event.clipboardData.getData('text/plain');
+    document.execCommand('insertHTML', false, text);
   }
 
+  // Unlike <Input> we don't select the text on focus.
   @action
-  onBlur(event) {
-    this.hasFocus = false;
-
-    if (this.args.onBlur) {
-      this.args.onBlur(event);
-    }
-  }
-
-  @action
-  onMouseOver(event) {
-    this.hasHover = true;
-
-    if (this.args.onMouseOver) {
-      this.args.onMouseOver(event);
-    }
-  }
-
-  @action
-  onMouseOut(event) {
-    this.hasHover = false;
-
-    if (this.args.onMouseOut) {
-      this.args.onMouseOut(event);
-    }
-  }
-
-  @action
-  onKeyDown(event) {
-    if (this.args.onKeyDown) {
-      this.args.onKeyDown(event);
-    }
+  selectText() {
+    // Do nothing.
   }
 
   @action
@@ -66,5 +34,14 @@ export default class TextareaComponent extends Component {
     if (this.args.onKeyUp) {
       this.args.onKeyUp(event);
     }
+
+    this.resize();
+  }
+
+  @action
+  resize() {
+    const height = this.textarea.getBoundingClientRect().height;
+    console.log('keydown', height);
+    this.textarea.parentElement.parentElement.style = `height: ${height}px;`;
   }
 }

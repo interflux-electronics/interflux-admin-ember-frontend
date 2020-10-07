@@ -2,7 +2,7 @@
 
   <Modal @id='document'>
 
-    <h1>{{company.businessName}}</h1>
+    <h1>{{this.title}}</h1>
 
     <h2>Contact details</h2>
 
@@ -48,7 +48,7 @@
       @label='Email'
       @type='email'
       @record={{company}}
-      @attribute='email'
+      @attribute='emails'
     />
 
     <Field::String

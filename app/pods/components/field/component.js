@@ -1,43 +1,141 @@
 import Component from '@glimmer/component';
 
-// locked          show lock icon
-// no-changes      show nothing
-// dirty-invalid   warning
-// dirty-valid     save button
-// saving          disabled save button "Saving...""
-// save-success    Done! --> timeout to idle
-// save-fail       Error message --> hide on dismiss or when user starts correcting
+import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
 export default class FieldComponent extends Component {
-  // args.size
-  // args.theme
-  // args.hasFocus
-  // args.hasHover
-  // args.isDirty
+  @service form;
+  @service auth;
 
-  get classes() {
-    return [
-      this.args.component,
-      this.theme,
-      this.focus,
-      this.hover,
-      this.dirty
-    ].join(' ');
+  id; // Unique across the app
+
+  constructor() {
+    super(...arguments);
+    const id = this.form.getUniqueId();
+    this.id = `field-${id}`;
   }
 
-  get theme() {
-    return this.args.theme || 'primary';
+  // STATE
+
+  // The value we're exposing to the user with this <Field> can be in 5 different states:
+  get state() {
+    // Server errors
+    if (this.error) {
+      return 'error';
+    }
+
+    // Validation warnings
+    if (this.warning) {
+      return 'warning';
+    }
+
+    // Valid and saving
+    if (this.isSaving) {
+      return 'saving';
+    }
+
+    // Valid and dirty
+    if (this.isDirty) {
+      return 'dirty';
+    }
+
+    // Saved, no changes
+    return 'idle';
   }
 
-  get focus() {
-    return this.args.hasFocus ? 'focus' : 'no-focus';
+  // On top of that
+  @tracked hasFocus = false;
+  @tracked hasHover = false;
+  @tracked isSaving = false;
+  @tracked error;
+
+  // This method needs to be overwriten by the components that inherit this component.
+  get isDirty() {
+    console.warn('isDirty() is missing on', this.id, this.args.label);
+    return false;
   }
 
-  get hover() {
-    return this.args.hasHover ? 'hover' : 'no-hover';
+  // This method needs to be overwriten by the components that inherit this component.
+  get warnings() {
+    console.warn('warnings() is missing on', this.id, this.args.label);
+    return 'missing-method';
   }
 
-  get dirty() {
-    return this.args.isDirty ? 'dirty' : 'clean';
+  // FOCUS
+
+  @action
+  onFocus() {
+    this.hasFocus = true;
+  }
+
+  @action
+  onBlur() {
+    this.hasFocus = false;
+  }
+
+  // HOVER
+
+  @action
+  onMouseOver() {
+    this.hasHover = true;
+  }
+
+  @action
+  onMouseOut() {
+    this.hasHover = false;
+  }
+
+  // SAVE
+
+  @tracked lastSavedValue;
+
+  @action
+  async save() {
+    console.debug('saving');
+
+    // Reset errors, allow second save attempt
+    this.error = null;
+
+    // Show saving state
+    this.isSaving = true;
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Remember the value
+    const value = this.value;
+
+    this.args.record
+      .save({
+        adapterOptions: {
+          whitelist: [this.args.attribute]
+        }
+      })
+      .then(() => {
+        console.debug('save successful');
+        this.lastSavedValue = value;
+      })
+      .catch((response) => {
+        console.error('save failed');
+        console.error(response);
+
+        if (response.errors && response.errors[0] && response.errors[0].code) {
+          const code = response.errors[0].code;
+
+          if (code === 'forbidden-attribute') {
+            // this.args.record.rollbackAttributes();
+          }
+          if (code === 'token-expired') {
+            this.auth.reset(); // redirect to login
+          }
+
+          this.error = code;
+        } else {
+          this.error = 'unknown';
+        }
+      })
+      .finally(() => {
+        this.isSaving = false;
+      });
   }
 }
