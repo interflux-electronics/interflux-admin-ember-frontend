@@ -25,16 +25,18 @@
 // Components
 @import 'app/pods/components/button/style';
 @import 'app/pods/components/checkbox/style';
-@import 'app/pods/components/fieldset/style';
 @import 'app/pods/components/image-grid/style';
 @import 'app/pods/components/image/responsive/style';
-@import 'app/pods/components/input/style';
 @import 'app/pods/components/modal/style';
 @import 'app/pods/components/nav/resources/style';
 @import 'app/pods/components/nav/user/style';
 @import 'app/pods/components/page/content/style';
 @import 'app/pods/components/page/style';
-@import 'app/pods/components/search/style';
 @import 'app/pods/components/section/style';
 @import 'app/pods/components/spreadsheet/style';
+
+// Forms
+@import 'app/pods/components/fieldset/style';
+@import 'app/pods/components/input/style';
 @import 'app/pods/components/textarea/style';
+@import 'app/pods/components/search/style';

@@ -44,22 +44,17 @@ export default class FieldComponent extends Component {
     return 'idle';
   }
 
-  // On top of that
   @tracked hasFocus = false;
   @tracked hasHover = false;
   @tracked isSaving = false;
   @tracked error;
 
-  // This method needs to be overwriten by the components that inherit this component.
   get isDirty() {
-    console.warn('isDirty() is missing on', this.id, this.args.label);
-    return false;
+    return this.value !== this.lastSavedValue;
   }
 
-  // This method needs to be overwriten by the components that inherit this component.
   get warnings() {
-    console.warn('warnings() is missing on', this.id, this.args.label);
-    return 'missing-method';
+    return null;
   }
 
   // FOCUS

@@ -6,30 +6,52 @@
   @theme={{@theme}}
   {{!-- state --}}
   @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
 >
   <Search
     {{!-- props --}}
     @id={{this.id}}
     @theme={{@theme}}
-    @type={{@type}}
     @placeholder={{@placeholder}}
     @autofocus={{@autofocus}}
     @disabled={{@disabled}}
     {{!-- state --}}
     @value={{this.value}}
     @state={{this.state}}
-    @error={{this.error}}
     {{!-- events --}}
     @onFocus={{this.onFocus}}
     @onBlur={{this.onBlur}}
-    @onKeyDown={{this.onKeyDown}}
+    {{!-- @onKeyDown={{this.onKeyDown}}--}}
     @onKeyUp={{this.onKeyUp}}
-    @onMouseOver={{this.onMouseOver}}
-    @onMouseOut={{this.onMouseOut}}
+    {{!-- @onMouseOver={{this.onMouseOver}}--}}
+    {{!-- @onMouseOut={{this.onMouseOut}}--}}
     {{!-- unique --}}
-    @currentRecord={{this.currentRecord}}
-    @recordsForQuery={{this.recordsForQuery}}
-    @filterOn={{@filterOn}}
-    @isSearching={{this.isSearching}}
-  />
+    @onSelect={{this.onSelect}}
+    @searchModel={{@relation}}
+    @searchFilter={{@filterOn}}
+    @error={{this.error}}
+  >
+    {{#if (eq this.state 'saving')}}
+      <div class="action">
+        <Button
+          @theme="save"
+          @icon="ellipsis"
+          @isBusy="true"
+        />
+      </div>
+    {{/if}}
+
+    {{#if (eq this.state 'error')}}
+      <div class="icon">
+        <Svg::Error />
+      </div>
+      {{#if this.hasFocus}}
+        <p class="message">Sorry, something didn't quite go as planned. Nobody should ever see this message, so please <a
+            href="mailto:j.werkhoven@interflux.com"
+            target="_blank"
+            rel="noreferrer noopener"
+          >tell Jan</a> that you encounter <strong>error {{this.error}}</strong>.</p>
+      {{/if}}
+    {{/if}}
+  </Search>
 </Fieldset>

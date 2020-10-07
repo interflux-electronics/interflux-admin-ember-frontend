@@ -55,14 +55,6 @@ export default class StringFieldComponent extends FieldComponent {
     }
   }
 
-  get isDirty() {
-    return this.value !== this.lastSavedValue;
-  }
-
-  get warning() {
-    return null;
-  }
-
   // get warning() {
   //   const rules = this.args.record.validations[this.args.attribute];
   //

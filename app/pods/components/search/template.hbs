@@ -1,55 +1,61 @@
-<div class="search">
-  <Input
-    {{!-- props --}}
-    @id={{@id}}
-    @type="search"
-    @theme={{@theme}}
-    @placeholder={{@placeholder}}
-    @autofocus={{@autofocus}}
-    @disabled={{@disabled}}
-    {{!-- state --}}
-    @value={{this.value}}
-    @error={{@error}}
-    {{!-- events --}}
-    @onFocus={{this.onFocus}}
-    @onBlur={{this.onBlur}}
-    @onKeyDown={{this.onKeyDown}}
-    @onKeyUp={{this.onKeyUp}}
-    @onMouseOver={{this.onMouseOver}}
-    @onMouseOut={{this.onMouseOut}}
-  >
+<div class="search {{this.classes}}">
+  <div class="wrapper">
+    <input
+      id={{@id}}
+      value={{this.value}}
+      type="search"
+      placeholder={{@placeholder}}
+      autofocus={{@autofocus}}
+      disabled={{@disabled}}
+      {{on 'focus' this.onFocus}}
+      {{on 'blur' this.onBlur}}
+      {{on 'keydown' this.onKeyDown}}
+      {{on 'keyup' this.onKeyUp}}
+      {{on 'mouseover' this.onMouseOver}}
+      {{on 'mouseout' this.onMouseOut}}
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
+    >
 
-  <div class="icon">
-    <Svg::Search />
-  </div>
+    {{#if (eq @state 'idle')}}
+      <div class="icon">
+        <Svg::Search />
+      </div>
+    {{/if}}
 
-  {{#if this.hasFocus}}
-    <div class="dropdown">
-      {{#if @isSearching}}
-        <p class="searching">Searching ...</p>
-      {{else}}
-        {{#if this.showPleaseType}}
-          <p>Type to search</p>
-        {{/if}}
+    {{#unless @error}}
+      {{#if this.focus}}
+        {{#if @isSearching}}
+          <p class="message searching">Searching ...</p>
+        {{else}}
+          {{#if this.showPleaseType}}
+            <p class="message">Type to search</p>
+          {{/if}}
 
-        {{#if this.showResults}}
-          {{#each this.buttons as |btn i|}}
-            {{#if btn.shown}}
-              <button
-                type="button"
-                class={{btn.classes}}
-                {{on 'mouseover' (fn this.onMouseOverButton i)}}
-                {{on 'mousedown' (fn this.onMouseDown btn.record)}}
-              >
-                {{btn.label}}
-              </button>
-            {{/if}}
-          {{/each}}
-          <p>{{this.recordCount}} results</p>
+          {{#if this.showResults}}
+            <div class="results">
+
+              {{#each this.buttons as |btn i|}}
+                {{#if btn.shown}}
+                  <button
+                    type="button"
+                    class={{btn.classes}}
+                    {{on 'mouseover' (fn this.onMouseOverButton i)}}
+                    {{on 'mousedown' (fn this.onMouseDown btn.record)}}
+                  >
+                    {{btn.label}}
+                  </button>
+                {{/if}}
+              {{/each}}
+              <p class="message">{{this.recordCount}} results</p>
+            </div>
+          {{/if}}
         {{/if}}
       {{/if}}
-    </div>
-  {{/if}}
+    {{/unless}}
 
-  </Input>
+    {{yield}}
+  </div>
 </div>
