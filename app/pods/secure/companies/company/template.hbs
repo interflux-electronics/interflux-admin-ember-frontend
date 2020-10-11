@@ -4,22 +4,7 @@
 
     <h1>{{this.title}}</h1>
 
-    <h2>Contact details</h2>
-
-    <p>Boolean: {{company.public}}</p>
-
-    <Field::Boolean
-      @label="Show contact on our website With multiple lines o of text, some bolded words and mark down links which can be clicked without the checkbox being toggled."
-      @record={{company}}
-      @attribute='public'
-    />
-
-
-    <Field::Boolean
-      @label="Show contact on our website"
-      @record={{company}}
-      @attribute='public'
-    />
+    <h2>Name</h2>
 
     <Field::String
       @label='Business name'
@@ -32,6 +17,8 @@
       @record={{company}}
       @attribute='legalName'
     />
+
+    <h2>Address</h2>
 
     <Field::BelongsToRelation
       @label='Country'
@@ -48,6 +35,20 @@
     />
 
     <Field::String
+      @label='Longitude'
+      @record={{company}}
+      @attribute='longitude'
+    />
+
+    <Field::String
+      @label='Latitude'
+      @record={{company}}
+      @attribute='latitude'
+    />
+
+    <h2>Contact</h2>
+
+    <Field::String
       @label='Phone'
       @record={{company}}
       @attribute='phone'
@@ -60,95 +61,66 @@
     />
 
     <Field::String
-      @label='Email'
-      @type='email'
-      @record={{company}}
-      @attribute='emails'
-    />
-
-    <Field::String
       @label='Website'
       @record={{company}}
       @attribute='website'
     />
 
     <Field::String
-      @label='Longitude'
+      @label='Email for general enquiries'
+      @type='email'
       @record={{company}}
-      @attribute='longitude'
+      @attribute='emails'
     />
 
     <Field::String
-      @label='Latitude'
+      @label='Email for technical support'
+      @type='email'
       @record={{company}}
-      @attribute='latitude'
+      @attribute='emails'
     />
 
-    <h2>Website</h2>
+    <Field::String
+      @label='Email for placing orders'
+      @type='email'
+      @record={{company}}
+      @attribute='emails'
+    />
 
-    <p>You can choose to show contacts on the <a
-        href='https://interflux.com/en/contact'
-        target='_blank'
-        rel='noopener noreferrer'
-      >contact page</a> of our website.</p>
+    <Field::String
+      @label='Email for accounting questions'
+      @type='email'
+      @record={{company}}
+      @attribute='emails'
+    />
 
+    <Field::String
+      @label='Email'
+      @type='email'
+      @record={{company}}
+      @attribute='emails'
+    />
 
+    <h2>Members</h2>
 
-    <!-- <Field::Boolean
-      @value={{company.public}}
-      @onChange={{fn (mut company.public)}}
+    <p>TODO</p>
+
+    <h2>Markets</h2>
+
+    <p>TODO</p>
+
+    <h2>Visibility</h2>
+
+    <Field::Boolean
+      @record={{company}}
+      @attribute='public'
     >
-      <p>Show on the <a
+      <label>Show {{company.businessName}} on the <a
           href='https://interflux.com/en/contact'
           target='_blank'
           rel='noopener noreferrer'
-        >contact page</a> of our website</p>
-    </Field::Boolean> -->
-
-    <!-- <Field::Boolean
-      @label='Mark as Interflux Headquarters'
-      @value={{company.isHQ}}
-      @onChange={{fn (mut company.isHQ)}}
-    /> -->
-
-    <!-- <Field::Boolean
-      @label='Mark as Interflux Group member'
-      @value={{company.isGroupMember}}
-      @onChange={{fn (mut company.isGroupMember)}}
-    /> -->
-
-    <!-- <Field::Boolean
-      @label='Mark as trusted distributor'
-      @value={{company.isDistributor}}
-      @onChange={{fn (mut company.isDistributor)}}
-    /> -->
-
-    <!-- <Field::Boolean
-      @label='Sort alphabetically'
-      @value={{this.sortAlphabetically}}
-      @onChange={{fn (mut this.sortAlphabetically)}}
-    /> -->
-
-    <p>Interflux Electronics will be sorted to the very top, below all Interflux Group members alphabetically, then all distributors alphabetically. To make an exception, search and select another company to appear right below it.</p>
-
-    {{!-- <Input::BelongsTo
-      @label='Sort right below company'
-      @value={{company.sortBelowCountry}}
-      @onChange={{fn (mut company.sortBelowCountry)}}
-    /> --}}
-
-    <p>When website visitors indicate they are located in Germany we will suggest them to contact our distributors from Germany. When visitors indicate they are from East Asia, we suggest Interflux Singapore.</p>
-    <p>Choose below all the countries for which we want to recommend Interflux Bejing:</p>
-
-    {{!-- <Input::HasMany
-      @label='Recommended to visitors from country'
-      @value={{company.markets}}
-      @onChange={{fn (mut company.markets)}}
-    /> --}}
-
-    <h2>People</h2>
-
-    <p>TODO</p>
+        >contact page</a> of our website</label>
+    </Field::Boolean>
 
     <h2>Database</h2>
 
@@ -156,7 +128,7 @@
       @label='UUID'
       @record={{company}}
       @attribute='id'
-      @disabled="true"
+      @disabled={{true}}
     />
   </Modal>
 

@@ -6,6 +6,7 @@
   tabindex="0"
   {{on 'click' this.onClick}}
   {{on 'keydown' this.onKeyDown}}
+  {{did-insert this.onInsert}}
 >
   {{#if @checked}}
     <Svg::Check />

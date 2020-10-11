@@ -6,9 +6,17 @@ export default class CheckboxComponent extends Component {
     return [this.args.checked ? 'checked' : 'not-checked'].join(' ');
   }
 
+  input; // the <input> element
+
+  @action
+  onInsert(element) {
+    this.input = element;
+  }
+
   @action
   onClick() {
     this.args.onClick();
+    this.input.blur();
   }
 
   @action
@@ -18,7 +26,7 @@ export default class CheckboxComponent extends Component {
 
     if (pressedSpace || pressedEnter) {
       event.preventDefault();
-      this.onClick();
+      this.args.onClick();
     }
   }
 }

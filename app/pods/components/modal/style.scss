@@ -31,6 +31,7 @@
       min-height: 100px;
       pointer-events: all; // So the overlay below doesn't get clicked when user interacts within white box
       background: white;
+      padding-bottom: 40px;
       > h1 {
         font-family: $extrabold;
         font-size: 24px;
@@ -51,19 +52,21 @@
         padding: 40px;
         font-size: 16px;
         line-height: 24px;
-        a {
-          text-decoration: underline;
+      }
+      p > a,
+      label > a {
+        text-decoration: underline;
+        color: $blue-0;
+        background: white;
+        outline: 0;
+        border-radius: 3px;
+        white-space: nowrap;
+        &:hover {
+          color: $orange-3;
+        }
+        &:focus {
           color: $blue-0;
-          background: white;
-          outline: 0;
-          border-radius: 3px;
-          &:hover {
-            color: $orange-3;
-          }
-          &:focus {
-            color: $orange-3;
-            box-shadow: white 0 0 0 2px, 0 0 0 4px $orange-3;
-          }
+          box-shadow: white 0 0 0 1px, 0 0 0 3px $blue-0;
         }
       }
       > fieldset {
