@@ -6,6 +6,21 @@
 
     <h2>Contact details</h2>
 
+    <p>Boolean: {{company.public}}</p>
+
+    <Field::Boolean
+      @label="Show contact on our website With multiple lines o of text, some bolded words and mark down links which can be clicked without the checkbox being toggled."
+      @record={{company}}
+      @attribute='public'
+    />
+
+
+    <Field::Boolean
+      @label="Show contact on our website"
+      @record={{company}}
+      @attribute='public'
+    />
+
     <Field::String
       @label='Business name'
       @record={{company}}
@@ -71,7 +86,15 @@
 
     <h2>Website</h2>
 
-    {{!-- <Input::Boolean
+    <p>You can choose to show contacts on the <a
+        href='https://interflux.com/en/contact'
+        target='_blank'
+        rel='noopener noreferrer'
+      >contact page</a> of our website.</p>
+
+
+
+    <!-- <Field::Boolean
       @value={{company.public}}
       @onChange={{fn (mut company.public)}}
     >
@@ -80,31 +103,31 @@
           target='_blank'
           rel='noopener noreferrer'
         >contact page</a> of our website</p>
-    </Input::Boolean>
+    </Field::Boolean> -->
 
-    <Input::Boolean
+    <!-- <Field::Boolean
       @label='Mark as Interflux Headquarters'
       @value={{company.isHQ}}
       @onChange={{fn (mut company.isHQ)}}
-    />
+    /> -->
 
-    <Input::Boolean
+    <!-- <Field::Boolean
       @label='Mark as Interflux Group member'
       @value={{company.isGroupMember}}
       @onChange={{fn (mut company.isGroupMember)}}
-    />
+    /> -->
 
-    <Input::Boolean
+    <!-- <Field::Boolean
       @label='Mark as trusted distributor'
       @value={{company.isDistributor}}
       @onChange={{fn (mut company.isDistributor)}}
-    />
+    /> -->
 
-    <Input::Boolean
+    <!-- <Field::Boolean
       @label='Sort alphabetically'
       @value={{this.sortAlphabetically}}
       @onChange={{fn (mut this.sortAlphabetically)}}
-    /> --}}
+    /> -->
 
     <p>Interflux Electronics will be sorted to the very top, below all Interflux Group members alphabetically, then all distributors alphabetically. To make an exception, search and select another company to appear right below it.</p>
 

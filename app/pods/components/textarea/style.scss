@@ -4,6 +4,7 @@
 .textarea {
   &.primary {
     height: auto;
+    min-height: calc(11px * 2 + 4 * 24px);
 
     textarea,
     [role='textbox'] {
@@ -12,6 +13,7 @@
       height: auto;
       display: block;
       resize: vertical;
+      min-height: calc(11px * 2 + 4 * 24px);
     }
   }
 }

@@ -12,8 +12,7 @@ export default class FieldComponent extends Component {
 
   constructor() {
     super(...arguments);
-    const id = this.form.getUniqueId();
-    this.id = `field-${id}`;
+    this.id = this.form.getUniqueId();
   }
 
   // STATE

@@ -1,9 +1,14 @@
-<fieldset class={{this.classes}}>
-  {{#if @label}}
-    <label for={{@id}}>{{@label}}</label>
-  {{/if}}
-  {{#if @legend}}
-    <p>{{@legend}}</p>
-  {{/if}}
-  {{yield}}
+<fieldset
+  id="field-{{@id}}"
+  class={{this.classes}}
+>
+  <div class="liner">
+    {{#if @label}}
+      <label for="input-{{@id}}">{{@label}}</label>
+    {{/if}}
+    {{#if @legend}}
+      <p>{{@legend}}</p>
+    {{/if}}
+    {{yield}}
+  </div>
 </fieldset>

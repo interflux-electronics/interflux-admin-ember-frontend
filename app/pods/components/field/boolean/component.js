@@ -1,17 +1,31 @@
-import Component from '@glimmer/component';
+import FieldComponent from '../component';
 import { action } from '@ember/object';
 
-export default class BooleanFieldComponent extends Component {
-  @action
-  toggle() {
-    this.args.onToggle(!this.args.value);
+export default class BooleanFieldComponent extends FieldComponent {
+  constructor() {
+    super(...arguments);
+
+    const { record, attribute } = this.args;
+    const value = record.get(attribute);
+
+    this.lastSavedValue = value;
+
+    if (value === undefined) {
+      console.warn(`${attribute} is not an attribute on the model`);
+    }
+  }
+
+  get value() {
+    return this.args.record.get(this.args.attribute);
+  }
+
+  set value(value) {
+    this.args.record.set(this.args.attribute, value);
   }
 
   @action
-  set(value) {
-    if (this.args.value === value) {
-      return;
-    }
-    this.args.onToggle(value);
+  onClick() {
+    this.value = !this.value;
+    this.save();
   }
 }
