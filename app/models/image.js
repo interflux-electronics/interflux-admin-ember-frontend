@@ -16,7 +16,7 @@ export default class ImageModel extends Model {
       this.sizes.forEach(size => {
         const split = size.split('x');
         const [width, height] = split;
-        const url = `${ENV.cdnHost}${path}@${size}.${format}`;
+        const url = `${ENV.cdnHost}/${path}@${size}.${format}`;
 
         arr.push({
           width,
