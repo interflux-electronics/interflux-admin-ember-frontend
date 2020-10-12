@@ -3,7 +3,7 @@
     <Svg::Lock />
   </div>
 {{else}}
-  {{#if (eq @state 'idle')}}
+  {{#if (and (eq @state 'idle') @hasFocus)}}
     <div class="icon">
       <Svg::Check />
     </div>
