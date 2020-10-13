@@ -1,44 +1,54 @@
-<Modal @id="image">
-  <Image::Responsive
-    @path={{@model.image.path}}
-    @sizes={{@model.image.sizes}}
-    @formats={{@model.image.formats}}
-  />
+{{#with @model.image as |image|}}
 
-  <h2>Properties</h2>
+  <Modal @id="image">
+    <Image::Responsive
+      @path={{image.path}}
+      @sizes={{image.sizes}}
+      @formats={{image.formats}}
+    />
 
-  <Input
-    @label="Hidden metatags"
-    @legend="These words will be visible to Google bots and screen readers only. These are essential for good SEO."
-    @hint="Make sure to include product name, product family and somethign unique."
-    @value={{@model.image.alt}}
-  />
+    <h2>SEO</h2>
 
-  <Input
-    @label="Visible text"
-    @legend="This optional bit of text will be shown on top of the image. For example 'Copyright Ersa' or on a product page we can distinguish between '10 liter' and '25 liter' soldering flux images."
-    @value={{@model.image.caption}}
-  />
+    <Field::String
+      @label='Label'
+      @legend="The label is shown on top of the image in the left bottom corner. This is optional and can help visitors distinguish between 25L and 10L drums."
+      @record={{image}}
+      @attribute='caption'
+    />
 
-  <h2>Available sizes &amp; formats</h2>
-  <ul>
-    {{#each @model.image.files as |file|}}
-      <li>
-        <a
-          href={{file.url}}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          @{{file.width}}x{{file.height}}.{{file.format}}
-        </a>
-      </li>
-    {{/each}}
-  </ul>
+    <Field::String
+      @label='Hidden keywords'
+      @legend="This text is only read by Google bots and blind people with screen readers. These are essential for good SEO. Please always include the product name and add something unique."
+      @record={{image}}
+      @attribute='alt'
+    />
 
-  <h2>Referenced by</h2>
-  <ul>
-    <li>
-      <a href="#">IF 2005M</a>
-    </li>
-  </ul>
-</Modal>
+    <Field::BelongsToRelation
+      @label='Copyright'
+      @legend="Under construction"
+      @record={{image}}
+      @relation='company'
+      @filterOn='businessName'
+      @disabled={{true}}
+    />
+
+    <h2>Available sizes &amp; formats</h2>
+    <ul class="list">
+      {{#each @model.image.files as |file|}}
+        <li>
+          <a
+            href={{file.url}}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            @{{file.width}}x{{file.height}}.{{file.format}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+
+    <h2>Related to</h2>
+    <p>Under construction</p>
+  </Modal>
+
+{{/with}}

@@ -85,6 +85,12 @@
       > fieldset + h2 {
         margin-top: 30px;
       }
+      ul.list {
+        padding: 40px;
+        li {
+          line-height: 30px;
+        }
+      }
     }
   }
 }

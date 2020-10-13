@@ -235,9 +235,12 @@ export default class SearchComponent extends Component {
     // TODO: catch and show server errors
     this.isSearching = true;
     const model = this.args.searchModel;
-    const response = await this.store.query(model, {
-      filter: { nameEnglish: `${query}*` }
-    });
+
+    const key = this.args.searchFilter;
+    const filter = {};
+    filter[key] = `${query}*`;
+
+    const response = await this.store.query(model, { filter });
 
     // Here we sort results that start with the query to the top and the rest below.
     // Both groups are sorted alphabetically before being merged into one array.

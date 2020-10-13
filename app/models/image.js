@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, belongsTo } from '@ember-data/model';
 import ENV from 'interflux/config/environment';
 
 export default class ImageModel extends Model {
@@ -7,6 +7,8 @@ export default class ImageModel extends Model {
   @attr('array') formats;
   @attr('string') alt;
   @attr('string') caption;
+
+  @belongsTo('company') company;
 
   get files() {
     const arr = [];
