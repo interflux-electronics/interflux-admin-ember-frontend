@@ -10,7 +10,7 @@ module('Integration | Component | <Search>', function (hooks) {
   test('it renders @id and @theme', async function (assert) {
     assert.expect(2);
 
-    const id = 'field-123';
+    const id = '123';
     const theme = 'primary';
     const arr = [
       EmberObject.create({ firstName: 'Tom' }),
@@ -37,6 +37,6 @@ module('Integration | Component | <Search>', function (hooks) {
     const input = this.element.querySelector('input');
 
     assert.ok(search.classList.contains(theme));
-    assert.equal(input.id, id);
+    assert.equal(input.id, `input-${id}`);
   });
 });
