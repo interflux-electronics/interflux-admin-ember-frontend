@@ -27,8 +27,10 @@ export default class LoginController extends Controller {
   @action
   onKeyUp(event) {
     const input = event.target;
-    const key = input.id;
+    const key = input.id.replace('input-', '');
     const value = input.value;
+
+    console.log(key, value);
 
     this[key] = value;
   }
