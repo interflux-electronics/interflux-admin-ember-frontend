@@ -1,180 +1,88 @@
 {{#with @model.product as |product|}}
   <Modal @id="product">
     <h1>{{product.name}}</h1>
-    <h2>Product</h2>
 
-    {{!-- <hr>
+    <h2>Properties</h2>
 
-    <Fieldset>
-      <Label>Name</Label>
-      <Input
-        @contenteditable={{true}}
-        @value={{product.name}}
-        @onKeyUp={{fn (mut product.name)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Name'
+      @record={{product}}
+      @attribute='slug'
+    />
 
-    <Fieldset>
-      <Label>Name</Label>
-      <Input
-        @value={{product.name}}
-        @key-down={{fn (mut product.name)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Label'
+      @record={{product}}
+      @attribute='label'
+    />
 
-    <Fieldset>
-      <Label>Family</Label>
-      <Input
-        @value={{product.family.namePlural}}
-        @key-down={{fn (mut product.family.namePlural)}}
-      />
-    </Fieldset>
+    <Field::String
+      @label='Pitch'
+      @record={{product}}
+      @attribute='pitch'
+      @multiline='true'
+    />
 
-    <Fieldset>
-      <Label>Pitch</Label>
-      <Textarea
-        @value={{product.pitch}}
-        @key-down={{fn (mut product.pitch)}}
-        cols="80"
-        rows="3"
-      />
-<<<<<<< HEAD
-      </Fieldset>
-=======
-    </Fieldset>
->>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
+    <Field::BelongsToRelation
+      @label='Family'
+      @record={{product}}
+      @relation='family'
+      @filterOn='nameSingle'
+    />
 
-    <hr>
+    <h2>State</h2>
 
-    <Fieldset>
-<<<<<<< HEAD
-      <Input::Boolean
-        @value={{product.orderable}}
-        @textTrue="Can be ordered"
-        @textFalse="Out of production"
-        @onToggle={{fn (mut product.orderable)}}
-      />
-    </Fieldset>
+    <Field::Boolean
+      @label='Public'
+      @record={{product}}
+      @attribute='public'
+    />
 
-    <Fieldset>
-      <Input::Boolean
-=======
-      <Checkbox
->>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
-        @value={{product.public}}
-        @textLabel="Visible on website"
-        @onToggle={{fn (mut product.public)}}
-      />
-    </Fieldset>
+    <Field::Boolean
+      @label='Orderable'
+      @record={{product}}
+      @attribute='orderable'
+    />
 
-    <Fieldset>
-<<<<<<< HEAD
-      <Input::Boolean
-        @value={{product.featured}}
-        @textTrue="Featured"
-        @textFalse="Normal"
-        @onToggle={{fn (mut product.featured)}}
-=======
-      <Checkbox
-        @value={{product.new}}
-        @textLabel='Mark as "new" on website'
-        @onToggle={{fn (mut product.new)}}
->>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
-      />
-    </Fieldset>
+    <Field::Boolean
+      @label='Featured'
+      @record={{product}}
+      @attribute='featured'
+    />
 
-    <Fieldset>
-<<<<<<< HEAD
-      <Input::Boolean
-=======
-      <Checkbox
->>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
-        @value={{product.popular}}
-        @textLabel='Mark as "popular" on website'
-        @onToggle={{fn (mut product.popular)}}
-      />
-    </Fieldset>
+    <Field::Boolean
+      @label='Popular'
+      @record={{product}}
+      @attribute='popular'
+    />
 
-    <Fieldset>
-<<<<<<< HEAD
-      <Input::Boolean
-        @value={{product.new}}
-        @textTrue="Mark as new"
-        @textFalse="Normal"
-        @onToggle={{fn (mut product.new)}}
-=======
-      <Checkbox
-        @value={{product.featured}}
-        @textLabel='Mark as "featured" on website'
-        @saving=true
-        @onToggle={{fn (mut product.featured)}}
-      />
-    </Fieldset>
+    <Field::Boolean
+      @label='New'
+      @record={{product}}
+      @attribute='new'
+    />
 
-    <Fieldset>
-      <Checkbox
-        @value={{product.orderable}}
-        @textLabel='Mark as "out of production"'
-        @onToggle={{fn (mut product.orderable)}}
->>>>>>> adf19f8b6c263e09813514d637e2b13a17454004
-      />
-    </Fieldset>
+    <h2>Images</h2>
 
-    <hr>
+    <Field::BelongsToRelation
+      @label='Avatar'
+      @record={{product}}
+      @relation='avatar'
+      @filterOn='path'
+    />
 
-    <p>Recommended for:</p>
-    {{#each product.processes as |process|}}
-      <p>{{process.name}}</p>
-    {{/each}}
+    <p>TODO: images</p>
+    <p>TODO: processes</p>
+    <p>TODO: qualities</p>
+    <p>TODO: documents</p>
 
-    <p>Key advantages:</p>
-    {{#each product.qualities as |quality|}}
-      <p>{{quality.name}}</p>
-    {{/each}}
+    <h2>Database</h2>
 
-    <hr>
-
-    <p>Images:</p>
-    {{#each product.images as |image|}}
-      <Fieldset>
-        <Label>Alt</Label>
-        <Input
-          @value={{image.alt}}
-          @key-down={{fn (mut image.alt)}}
-        />
-      </Fieldset>
-      <Fieldset>
-        <Label>Caption</Label>
-        <Input
-          @value={{image.caption}}
-          @key-down={{fn (mut image.caption)}}
-        />
-      </Fieldset>
-      <Fieldset>
-        <Input::Boolean
-          @value={{image.public}}
-          @textTrue="Public"
-          @textFalse="Private"
-          @onToggle={{fn (mut image.public)}}
-        />
-      </Fieldset>
-    {{/each}}
-
-    <hr>
-
-    <p>Documents:</p>
-    <ul>
-      {{#each product.documents as |document|}}
-        <li>
-          <Button::Url
-            @href={{concat (cdn) "/" document.path}}
-            @text="{{document.name}} ({{document.language.nameEnglish}})"
-            @icon="pdf"
-            @size="medium"
-            @style="white grey-border"
-          />
-        </li>
-      {{/each}}
-    </ul> --}}
+    <Field::String
+      @label='UUID'
+      @record={{product}}
+      @attribute='id'
+      @disabled='true'
+    />
   </Modal>
 {{/with}}

@@ -11,14 +11,20 @@
     @checked={{this.value}}
     @onClick={{this.onClick}}
   />
+
+  {{#if (eq this.state 'saving')}}
+    <div class="icon saving"></div>
+  {{/if}}
+
   {{#if (eq this.state 'error')}}
-    <div class="icon">
-      <Svg::Error />
-    </div>
-    <p class="message">Sorry, something didn't quite go as planned. Nobody should ever see this message, so please <a
+    <p class="message error">Sorry, something didn't quite go as planned. Nobody should ever see this message, so please <a
         href="mailto:j.werkhoven@interflux.com"
         target="_blank"
         rel="noreferrer noopener"
-      >tell Jan</a> that you encounter <strong>error {{this.error}}</strong>.</p>
+      >tell Jan</a> that you encounter <strong>error {{this.error}}</strong>.
+      <div class="icon">
+        <Svg::Error />
+      </div>
+    </p>
   {{/if}}
 </Fieldset>
