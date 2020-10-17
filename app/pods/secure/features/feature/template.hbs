@@ -1,5 +1,56 @@
 {{#with @model.feature as |feature|}}
   <Modal @id="feature">
-    <h1>{{feature.name}}</h1>
+    <h1>{{feature.text}}</h1>
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Name'
+      @record={{feature}}
+      @attribute='name'
+    />
+
+    <Field::String
+      @label='Gist'
+      @record={{feature}}
+      @attribute='gist'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='Icon'
+      @record={{feature}}
+      @attribute='icon'
+    />
+
+    <Field::String
+      @label='Category'
+      @record={{feature}}
+      @attribute='category'
+    />
+
+    <h2>Products</h2>
+
+    <p>TODO: show all linked products</p>
+
+    <h2>Products</h2>
+
+    <p>TODO: show all linked families</p>
+
+    <h2>Website</h2>
+
+    <Field::Boolean
+      @label='Has page'
+      @record={{feature}}
+      @attribute='hasPage'
+    />
+
+    <h2>Database</h2>
+
+    <Field::String
+      @label='UUID'
+      @record={{feature}}
+      @attribute='id'
+      @disabled='true'
+    />
   </Modal>
 {{/with}}

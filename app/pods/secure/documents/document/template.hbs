@@ -1,11 +1,51 @@
-<Modal @id="document">
-  <h1>{{@model.document.name}}</h1>
+{{#with @model.document as |document|}}
+  <Modal @id="document">
+    <h1>{{document.name}}</h1>
+    <h2>Properties</h2>
 
-  <p>Name: {{@model.document.name}}</p>
-  <p>Path: {{@model.document.path}}</p>
-  <p>Language: {{@model.document.language.nameEnglish}}</p>
-  <p>Category: {{@model.document.category.name}}</p>
+    <Field::String
+      @label='Name'
+      @record={{document}}
+      @attribute='name'
+    />
 
-  <p>Model: document</p>
-  <p>UUID: {{@model.document.id}}</p>
-</Modal>
+    <Field::BelongsToRelation
+      @label='Category'
+      @record={{document}}
+      @relation='category'
+      @filterOn='name'
+    />
+
+    <Field::BelongsToRelation
+      @label='Language'
+      @record={{document}}
+      @relation='language'
+      @filterOn='nameEnglish'
+    />
+
+    <h2>Permanent link</h2>
+
+    <p>This PDF will <mark>always</mark> be available on this link:</p>
+    <p>
+      <a
+        href={{document.url}}
+        target="_blank"
+        rel="noopener noreferrer"
+      >{{document.url}}</a>
+    </p>
+    <p>That means, you no longer have to attach 8 megabyte PDFs to emails. Instead you can simply copy paste this link into your email. You will save space in your outbox and their inbox. Also, attached PDFs will get outdated, whereas this link will open the most recent version.</p>
+
+    <h2>Products</h2>
+
+    <p>TODO: show all linked products</p>
+
+    <h2>Database</h2>
+
+    <Field::String
+      @label='UUID'
+      @record={{document}}
+      @attribute='id'
+      @disabled='true'
+    />
+  </Modal>
+{{/with}}

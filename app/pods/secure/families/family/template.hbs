@@ -1,4 +1,39 @@
-<Modal @id="family">
-  <h1>{{@model.family.namePlural}}</h1>
-  <h2>Family</h2>
-</Modal>
+{{#with @model.family as |family|}}
+  <Modal @id="family">
+    <h1>{{family.namePlural}}</h1>
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Plural name'
+      @record={{family}}
+      @attribute='namePlural'
+    />
+
+    <Field::String
+      @label='Singular name'
+      @record={{family}}
+      @attribute='nameSingle'
+    />
+
+    <h2>Products</h2>
+
+    <p>TODO: show all linked products</p>
+
+    <h2>Website</h2>
+
+    <Field::String
+      @label='Order'
+      @record={{family}}
+      @attribute='order'
+    />
+
+    <h2>Database</h2>
+
+    <Field::String
+      @label='UUID'
+      @record={{family}}
+      @attribute='id'
+      @disabled='true'
+    />
+  </Modal>
+{{/with}}

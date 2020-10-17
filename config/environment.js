@@ -28,6 +28,12 @@ const cdnHosts = {
   production: 'https://cdn.interflux.com'
 };
 
+// Where the CDN is located
+const wwwHosts = {
+  development: 'http://localhost:4400',
+  production: 'https://app.interflux.com'
+};
+
 // The mobile browser's theme colour
 // https://developers.google.com/web/fundamentals/design-and-ux/browser-customization/
 const themeColour = '#23578c';
@@ -42,6 +48,7 @@ module.exports = function (env) {
   const apiHost = apiHosts[env];
   const appHost = appHosts[env];
   const cdnHost = cdnHosts[env];
+  const wwwHost = wwwHosts[env];
 
   const ENV = {
     appName: PKG.name,
@@ -64,6 +71,7 @@ module.exports = function (env) {
     apiHost,
     appHost,
     cdnHost,
+    wwwHost,
     apiNamespace,
     gitBranch,
     gitRevision,

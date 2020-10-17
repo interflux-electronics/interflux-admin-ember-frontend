@@ -7,7 +7,8 @@
     <Field::String
       @label='Name'
       @record={{product}}
-      @attribute='slug'
+      @attribute='name'
+      @disabled='true'
     />
 
     <Field::String
@@ -29,6 +30,13 @@
       @relation='family'
       @filterOn='nameSingle'
     />
+
+    <h2>Website</h2>
+
+    <p>Link:</p>
+    <p>
+      <a href={{product.url}}>{{product.url}}</a>
+    </p>
 
     <h2>State</h2>
 

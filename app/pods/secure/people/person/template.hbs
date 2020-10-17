@@ -1,20 +1,75 @@
-<Modal @id="person">
-  <h1>{{@model.person.fullName}}</h1>
-  <h2>Person</h2>
+{{#with @model.person as |person|}}
+  <Modal @id="person">
+    <h1>{{person.fullName}}</h1>
+    <h2>Properties</h2>
 
-  <hr>
+    <Field::String
+      @label='First name'
+      @record={{person}}
+      @attribute='firstName'
+    />
 
-  <p>First name: {{@model.person.firstName}}</p>
-  <p>Last name: {{@model.person.lastName}}</p>
-  <p>Chinese name: {{@model.person.chineseName}}</p>
+    <Field::String
+      @label='Last name'
+      @record={{person}}
+      @attribute='lastName'
+    />
 
-  <hr>
+    <Field::String
+      @label='Chinese name'
+      @record={{person}}
+      @attribute='chineseName'
+    />
 
-  <p>Member of:</p>
-  <p>TODO: Company 1</p>
-  <p>TODO: Company 2</p>
+    <Field::String
+      @label='Phone'
+      @record={{person}}
+      @attribute='phone'
+    />
 
-  <hr>
+    <Field::String
+      @label='Email'
+      @record={{person}}
+      @attribute='email'
+    />
 
-  <p>Database UUID: {{@model.person.id}}</p>
-</Modal>
+    <Field::Boolean
+      @label='Is male?'
+      @record={{person}}
+      @attribute='male'
+    />
+
+    <h2>Companies</h2>
+
+    <p>TODO: Show all linked companies</p>
+
+    <h2>Website</h2>
+
+    <Field::Boolean
+      @label='Show on website?'
+      @record={{person}}
+      @attribute='male'
+    />
+
+    <Field::Boolean
+      @label='Show email?'
+      @record={{person}}
+      @attribute='male'
+    />
+
+    <Field::Boolean
+      @label='Show phone?'
+      @record={{person}}
+      @attribute='male'
+    />
+
+    <h2>Database</h2>
+
+    <Field::String
+      @label='UUID'
+      @record={{person}}
+      @attribute='id'
+      @disabled='true'
+    />
+  </Modal>
+{{/with}}

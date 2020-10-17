@@ -1,5 +1,6 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import { alias } from '@ember/object/computed';
+import ENV from 'interflux/config/environment';
 
 export default class ProductModel extends Model {
   @alias('id') slug;
@@ -29,5 +30,9 @@ export default class ProductModel extends Model {
 
   get processes() {
     return this.features.filterBy('category', 'process');
+  }
+
+  get url() {
+    return `${ENV.wwwHost}/en/products/${this.family.get('slug')}/${this.slug}`;
   }
 }

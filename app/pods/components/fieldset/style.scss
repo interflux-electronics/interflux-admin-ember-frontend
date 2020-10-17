@@ -97,6 +97,9 @@ fieldset {
         > a {
           background: transparent !important;
           color: white !important;
+          &:focus {
+            box-shadow: $error-red 0 0 0 1px, 0 0 0 3px white !important;
+          }
         }
         .icon {
           position: absolute;

@@ -1,6 +1,8 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class DocumentCategoryModel extends Model {
   @attr('string') slug;
   @attr('string') name;
+
+  @hasMany('document') documents;
 }
