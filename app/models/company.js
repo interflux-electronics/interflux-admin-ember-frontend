@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class CompanyModel extends Model {
   @attr('string') businessName;
@@ -20,8 +20,8 @@ export default class CompanyModel extends Model {
 
   @belongsTo('country') country;
 
-  // @hasMany('member') member;
-  // @hasMany('market') country;
+  @hasMany('person') members;
+  @hasMany('country') markets;
 
   // validations = {
   //   businessName: ['not-blank', 'only-letters'],

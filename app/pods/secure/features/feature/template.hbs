@@ -28,13 +28,23 @@
       @attribute='category'
     />
 
-    <h2>Products</h2>
+    <h2>Relations</h2>
 
-    <p>TODO: show all linked products</p>
+    <Field::HasManyRelations
+      @label="Products"
+      @record={{feature}}
+      @relation='products'
+      @relationLabel='name'
+      @route='secure.products.product'
+    />
 
-    <h2>Products</h2>
-
-    <p>TODO: show all linked families</p>
+    <Field::HasManyRelations
+      @label="Families"
+      @record={{feature}}
+      @relation='families'
+      @relationLabel='namePlural'
+      @route='secure.products.product'
+    />
 
     <h2>Website</h2>
 
@@ -47,7 +57,7 @@
     <h2>Database</h2>
 
     <Field::String
-      @label='UUID'
+      @label='ID'
       @record={{feature}}
       @attribute='id'
       @disabled='true'

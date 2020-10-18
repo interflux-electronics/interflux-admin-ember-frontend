@@ -15,9 +15,15 @@
       @attribute='nameSingle'
     />
 
-    <h2>Products</h2>
+    <h2>Relations</h2>
 
-    <p>TODO: show all linked products</p>
+    <Field::HasManyRelations
+      @label="Products"
+      @record={{family}}
+      @relation='products'
+      @relationLabel='name'
+      @route='secure.products.product'
+    />
 
     <h2>Website</h2>
 

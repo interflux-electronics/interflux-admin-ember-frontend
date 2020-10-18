@@ -32,6 +32,15 @@
       pointer-events: all; // So the overlay below doesn't get clicked when user interacts within white box
       background: white;
       padding-bottom: 40px;
+      &.error {
+        padding-top: 40px;
+        text-align: center;
+        svg {
+          width: 30px;
+          height: 30px;
+          margin-bottom: 20px;
+        }
+      }
       > h1 {
         font-family: $extrabold;
         font-size: 24px;
@@ -49,7 +58,7 @@
         text-align: center;
       }
       > p {
-        padding: 40px;
+        padding: 0 40px;
         font-size: 16px;
         line-height: 24px;
       }

@@ -4,7 +4,7 @@ import { hash } from 'rsvp';
 export default class OrderRoute extends ModalRoute {
   model(/*params*/) {
     return hash({
-      // order: this.store.findRecord('order', params.id, {})
+      // order: this.store.findRecord('order', params.id, { reload: true })
       // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }

@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class PersonModel extends Model {
   @attr('string') firstName;
@@ -7,6 +7,8 @@ export default class PersonModel extends Model {
   @attr('string') phone;
   @attr('string') email;
   @attr('boolean') male;
+
+  @hasMany('company') companies;
 
   get fullName() {
     return [this.firstName, this.lastName, this.chineseName].join(' ');

@@ -35,9 +35,15 @@
     </p>
     <p>That means, you no longer have to attach 8 megabyte PDFs to emails. Instead you can simply copy paste this link into your email. You will save space in your outbox and their inbox. Also, attached PDFs will get outdated, whereas this link will open the most recent version.</p>
 
-    <h2>Products</h2>
+    <h2>Relations</h2>
 
-    <p>TODO: show all linked products</p>
+    <Field::HasManyRelations
+      @label="Products"
+      @record={{document}}
+      @relation='products'
+      @relationLabel='name'
+      @route='secure.products.product'
+    />
 
     <h2>Database</h2>
 

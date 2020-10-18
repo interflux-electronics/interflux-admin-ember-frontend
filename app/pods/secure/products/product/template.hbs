@@ -79,10 +79,37 @@
       @filterOn='path'
     />
 
-    <p>TODO: images</p>
-    <p>TODO: processes</p>
-    <p>TODO: qualities</p>
-    <p>TODO: documents</p>
+    <Field::HasManyRelations
+      @label='Images'
+      @record={{product}}
+      @relation='images'
+      @relationLabel='alt'
+      @route='secure.images.image'
+    />
+
+    <Field::HasManyRelations
+      @label='Processes'
+      @record={{product}}
+      @relation='processes'
+      @relationLabel='text'
+      @route='secure.processes.process'
+    />
+
+    <Field::HasManyRelations
+      @label='Features'
+      @record={{product}}
+      @relation='features'
+      @relationLabel='text'
+      @route='secure.features.feature'
+    />
+
+    <Field::HasManyRelations
+      @label='Documents'
+      @record={{product}}
+      @relation='documents'
+      @relationLabel='name'
+      @route='secure.documents.document'
+    />
 
     <h2>Database</h2>
 

@@ -4,7 +4,10 @@ import { hash } from 'rsvp';
 export default class DocumentRoute extends ModalRoute {
   model(params) {
     return hash({
-      document: this.store.find('document', params.id)
+      document: this.store.findRecord('document', params.id, {
+        include: ['products'].join(','),
+        reload: true
+      })
       // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }

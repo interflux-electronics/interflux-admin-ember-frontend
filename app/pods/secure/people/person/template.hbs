@@ -39,9 +39,15 @@
       @attribute='male'
     />
 
-    <h2>Companies</h2>
+    <h2>Relations</h2>
 
-    <p>TODO: Show all linked companies</p>
+    <Field::HasManyRelations
+      @label='Companies'
+      @record={{person}}
+      @relation='companies'
+      @relationLabel='businessName'
+      @route='secure.companies.company'
+    />
 
     <h2>Website</h2>
 

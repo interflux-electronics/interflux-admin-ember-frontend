@@ -1,1 +1,21 @@
-{{yield}}
+<Fieldset
+  {{!-- props --}}
+  @id={{this.id}}
+  @label={{@label}}
+  @legend={{@legend}}
+  @component="has-many"
+  @theme={{@theme}}
+  {{!-- state --}}
+  @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
+>
+  <ul>
+    {{#each this.relatedRecords as |record|}}
+      <li>
+        <a href={{href-to @route record.id}}>{{record.label}}</a>
+      </li>
+    {{else}}
+      <p>None</p>
+    {{/each}}
+  </ul>
+</Fieldset>

@@ -94,13 +94,23 @@
       @attribute='emailAccounting'
     />
 
-    <h2>Members</h2>
+    <h2>Relations</h2>
 
-    <p>TODO</p>
+    <Field::HasManyRelations
+      @label='Members'
+      @record={{company}}
+      @relation='members'
+      @relationLabel='fullName'
+      @route='secure.people.person'
+    />
 
-    <h2>Markets</h2>
-
-    <p>TODO</p>
+    <Field::HasManyRelations
+      @label='Markets'
+      @record={{company}}
+      @relation='markets'
+      @relationLabel='nameEnglish'
+      @route='secure.companies.company'
+    />
 
     <h2>Visibility</h2>
 
@@ -118,7 +128,7 @@
     <h2>Database</h2>
 
     <Field::String
-      @label='UUID'
+      @label='ID'
       @record={{company}}
       @attribute='id'
       @disabled={{true}}
