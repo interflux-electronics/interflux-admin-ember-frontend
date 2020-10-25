@@ -213,6 +213,7 @@ export default class SearchComponent extends Component {
 
   @tracked isSearching;
   @tracked recordsForQuery;
+  @tracked error = false;
 
   mostRecentQuery;
 
@@ -223,6 +224,7 @@ export default class SearchComponent extends Component {
 
     // First we reset our previous search results
     this.recordsForQuery = null;
+    this.error = false;
 
     // Prevent empty queries from being requested (no use case)
     if (!query) {
@@ -240,7 +242,12 @@ export default class SearchComponent extends Component {
     const filter = {};
     filter[key] = `${query}*`;
 
-    const response = await this.store.query(model, { filter });
+    const response = await this.store
+      .query(model, { filter })
+      .catch((response) => {
+        console.error(response);
+        this.error = true;
+      });
 
     // Here we sort results that start with the query to the top and the rest below.
     // Both groups are sorted alphabetically before being merged into one array.

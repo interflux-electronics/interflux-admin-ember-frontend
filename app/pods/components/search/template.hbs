@@ -49,7 +49,12 @@
                   </button>
                 {{/if}}
               {{/each}}
-              <p class="message">{{this.recordCount}} results</p>
+
+              {{#if this.error}}
+                <p class="message error">Search broke</p>
+              {{else}}
+                <p class="message">{{this.recordCount}} results</p>
+              {{/if}}
             </div>
           {{/if}}
         {{/if}}

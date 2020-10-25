@@ -1,5 +1,12 @@
 {{#with @model.product as |product|}}
   <Modal @id="product">
+    {{#if product.image}}
+      <Image::Responsive
+        @path={{product.image.path}}
+        @sizes={{product.image.sizes}}
+        @formats={{product.image.formats}}
+      />
+    {{/if}}
     <h1>{{product.name}}</h1>
 
     <h2>Properties</h2>
@@ -9,6 +16,13 @@
       @record={{product}}
       @attribute='name'
       @disabled='true'
+    />
+
+    <Field::BelongsToRelation
+      @label='Family'
+      @record={{product}}
+      @relation='productFamily'
+      @filterOn='nameSingle'
     />
 
     <Field::String
@@ -24,21 +38,157 @@
       @multiline='true'
     />
 
-    <Field::BelongsToRelation
-      @label='Family'
+    <Field::HasManyRelations
+      @label='Processes'
       @record={{product}}
-      @relation='family'
-      @filterOn='nameSingle'
+      @relation='processes'
+      @relationLabel='text'
+      @route='secure.processes.process'
+    />
+
+    <Field::HasManyRelations
+      @label='Qualities'
+      @record={{product}}
+      @relation='qualities'
+      @relationLabel='text'
+      @route='secure.features.feature'
+    />
+
+    <h2>Images</h2>
+
+    <Fieldset
+      @label='The avatar'
+      @legend='If you had to present this product with only one image, which one would you choose? The avatar is the single most representative image of this product and will be shown everywhere on our website, on Google and in social media links.'
+    >
+      <ul class="images">
+        <li class="avatar">
+          <Image::Responsive
+            @path={{product.image.path}}
+            @sizes={{product.image.sizes}}
+            @formats={{product.image.formats}}
+          />
+
+          <div class="buttons">
+            <Button
+              @text="View details"
+              @theme="secondary"
+              @route='secure.images.image'
+              @model={{product.image.id}}
+            />
+          </div>
+        </li>
+      </ul>
+    </Fieldset>
+
+    <Fieldset
+      @label='Shown on website'
+      @legend='These images will be shown on the product page of {{product.name}}. Make sure all available sizes, containers, alloys and shapes of {{product.name}} are shown on our website.'
+    >
+      <ul class="images">
+        {{#each this.publicImages as |relation|}}
+          <li>
+            <p>{{relation.rank}}{{if (eq relation.image.id product.image.id) ' - avatar'}}</p>
+
+            <Image::Responsive
+              @path={{relation.image.path}}
+              @sizes={{relation.image.sizes}}
+              @formats={{relation.image.formats}}
+            />
+
+            <div class="buttons">
+              {{#if (not (eq relation.image.id product.image.id))}}
+                <Button
+                  @text="Make avatar"
+                  @theme="secondary"
+                  @onClick={{fn this.setAvatar relation}}
+                />
+              {{/if}}
+              {{#if (not (eq relation.rank 1))}}
+                <Button
+                  @text="Move up"
+                  @theme="secondary"
+                  @onClick={{fn this.moveImageUp relation}}
+                />
+              {{/if}}
+              {{#if (not (eq relation.rank this.publicImageCount))}}
+                <Button
+                  @text="Move down"
+                  @theme="secondary"
+                  @onClick={{fn this.moveImageDown relation}}
+                />
+              {{/if}}
+              <Button
+                @text="Hide from website"
+                @theme="secondary"
+                @onClick={{fn this.hideImage relation}}
+              />
+              <Button
+                @text="View details"
+                @theme="secondary"
+                @route='secure.images.image'
+                @model={{relation.image.id}}
+              />
+            </div>
+          </li>
+        {{else}}
+          <p>- none -</p>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <Fieldset
+      @label='Hidden images'
+      @legend='These images are for internal use only and will not be shown on our website.'
+    >
+      <ul class="images">
+        {{#each this.hiddenImages as |relation|}}
+          <li>
+            <Image::Responsive
+              @path={{relation.image.path}}
+              @sizes={{relation.image.sizes}}
+              @formats={{relation.image.formats}}
+            />
+
+            <div class="buttons">
+              <Button
+                @text="Show on website"
+                @theme="secondary"
+                @onClick={{fn this.showImage relation}}
+              />
+
+              <Button
+                @text="View details"
+                @theme="secondary"
+                @route='secure.images.image'
+                @model={{relation.image.id}}
+              />
+            </div>
+          </li>
+        {{else}}
+          <p>- none -</p>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <h2>Documents</h2>
+
+    <Field::HasManyRelations
+      @label='Documents'
+      @record={{product}}
+      @relation='documents'
+      @relationLabel='name'
+      @route='secure.documents.document'
     />
 
     <h2>Website</h2>
 
     <p>Link:</p>
     <p>
-      <a href={{product.url}}>{{product.url}}</a>
+      <Button
+        @url={{product.url}}
+        @text="{{product.url}}"
+      />
     </p>
-
-    <h2>State</h2>
 
     <Field::Boolean
       @label='Public'
@@ -70,51 +220,10 @@
       @attribute='new'
     />
 
-    <h2>Images</h2>
-
-    <Field::BelongsToRelation
-      @label='Avatar'
-      @record={{product}}
-      @relation='avatar'
-      @filterOn='path'
-    />
-
-    <Field::HasManyRelations
-      @label='Images'
-      @record={{product}}
-      @relation='images'
-      @relationLabel='alt'
-      @route='secure.images.image'
-    />
-
-    <Field::HasManyRelations
-      @label='Processes'
-      @record={{product}}
-      @relation='processes'
-      @relationLabel='text'
-      @route='secure.processes.process'
-    />
-
-    <Field::HasManyRelations
-      @label='Features'
-      @record={{product}}
-      @relation='features'
-      @relationLabel='text'
-      @route='secure.features.feature'
-    />
-
-    <Field::HasManyRelations
-      @label='Documents'
-      @record={{product}}
-      @relation='documents'
-      @relationLabel='name'
-      @route='secure.documents.document'
-    />
-
     <h2>Database</h2>
 
     <Field::String
-      @label='UUID'
+      @label='Database ID'
       @record={{product}}
       @attribute='id'
       @disabled='true'

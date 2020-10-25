@@ -42,6 +42,10 @@ figure.responsive-image {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    svg {
+      height: 50%;
+      width: auto;
+    }
   }
   .error {
     img {

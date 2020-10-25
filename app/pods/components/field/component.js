@@ -94,15 +94,13 @@ export default class FieldComponent extends Component {
     // Show saving state
     this.isSaving = true;
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     // Remember the value
     const value = this.value;
 
     this.args.record
       .save({
         adapterOptions: {
-          whitelist: [this.args.attribute]
+          whitelist: [this.args.attribute || this.args.relation]
         }
       })
       .then(() => {

@@ -9,13 +9,21 @@
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <ul>
-    {{#each this.relatedRecords as |record|}}
-      <li>
-        <a href={{href-to @route record.id}}>{{record.label}}</a>
-      </li>
-    {{else}}
-      <p>None</p>
-    {{/each}}
-  </ul>
+  {{#if (has-block)}}
+    {{yield this.relations}}
+  {{else}}
+    <ul>
+      {{#each this.relations as |relation|}}
+        <li>
+          <a href={{href-to @route relation.record.id}}>{{relation.label}}</a>
+        </li>
+      {{else}}
+        <p>None</p>
+      {{/each}}
+    </ul>
+    <Button
+      @text="Add"
+      @theme="save"
+    />
+  {{/if}}
 </Fieldset>

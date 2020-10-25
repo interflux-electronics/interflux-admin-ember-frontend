@@ -1,5 +1,4 @@
 {{#with @model.image as |image|}}
-
   <Modal @id="image">
     <Image::Responsive
       @path={{image.path}}
@@ -7,17 +6,27 @@
       @formats={{image.formats}}
     />
 
-    <h2>SEO</h2>
+    <h2>Used by</h2>
+
+    <Field::HasManyRelations
+      @label='Products'
+      @record={{image}}
+      @relation='products'
+      @relationLabel='name'
+      @route='secure.products.product'
+    />
+
+    <h2>Meta data</h2>
 
     <Field::String
-      @label='Label'
+      @label='Visible text'
       @legend="The label is shown on top of the image in the left bottom corner. This is optional and can help visitors distinguish between 25L and 10L drums."
       @record={{image}}
       @attribute='caption'
     />
 
     <Field::String
-      @label='Hidden keywords'
+      @label='Hidden text'
       @legend="This text is only read by Google bots and blind people with screen readers. These are essential for good SEO. Please always include the product name and add something unique."
       @record={{image}}
       @attribute='alt'
@@ -25,14 +34,23 @@
 
     <Field::BelongsToRelation
       @label='Copyright'
-      @legend="Under construction"
       @record={{image}}
-      @relation='company'
+      @relation='copyrightCompany'
       @filterOn='businessName'
-      @disabled={{true}}
+      @disabled='true'
     />
 
-    <h2>Available sizes &amp; formats</h2>
+    <Field::String
+      @label='Database ID'
+      @record={{image}}
+      @attribute='id'
+      @disabled='true'
+    />
+
+    <h2>CDN</h2>
+
+    <p>Available sizes &amp; formats</p>
+
     <ul class="list">
       {{#each @model.image.files as |file|}}
         <li>
@@ -46,9 +64,5 @@
         </li>
       {{/each}}
     </ul>
-
-    <h2>Related to</h2>
-    <p>Under construction</p>
   </Modal>
-
 {{/with}}

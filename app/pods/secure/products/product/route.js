@@ -5,7 +5,13 @@ export default class ProductRoute extends ModalRoute {
   model(params) {
     return hash({
       product: this.store.findRecord('product', params.id, {
-        include: ['documents', 'images', 'features'].join(','),
+        include: [
+          'image',
+          'features',
+          'documents',
+          'product_images',
+          'product_images.image'
+        ].join(','),
         reload: true
       })
       // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))

@@ -17,10 +17,10 @@ export default class ProductModel extends Model {
   @belongsTo('product-family') productFamily;
   @alias('productFamily') family;
 
-  @belongsTo('image') image;
-  @alias('image') avatar;
+  @belongsTo('image', { inverse: 'product' }) image;
+  @hasMany('image', { inverse: 'products' }) images;
+  @hasMany('product-image') productImages;
 
-  @hasMany('image') images;
   @hasMany('feature') features;
   @hasMany('document') documents;
 
