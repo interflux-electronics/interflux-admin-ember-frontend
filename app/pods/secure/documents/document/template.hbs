@@ -9,19 +9,19 @@
       @attribute='name'
     />
 
-    <Field::BelongsToRelation
+    <Field::OneToMany
       @label='Category'
       @record={{document}}
       @relation='category'
       @filterOn='name'
     />
 
-    <Field::BelongsToRelation
+    {{!-- <Field::OneToMany
       @label='Language'
       @record={{document}}
       @relation='language'
       @filterOn='nameEnglish'
-    />
+    /> --}}
 
     <h2>Permanent link</h2>
 
@@ -37,10 +37,11 @@
 
     <h2>Relations</h2>
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label="Products"
       @record={{document}}
       @relation='products'
+      @relationModel='product'
       @relationLabel='name'
       @route='secure.products.product'
     />

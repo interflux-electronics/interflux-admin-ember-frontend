@@ -1,6 +1,7 @@
-fieldset.has-many {
+fieldset.many-to-one {
   ul {
     li {
+      background: white;
       line-height: 46px;
       border: 1px solid #dddddd;
       display: flex;
@@ -38,7 +39,15 @@ fieldset.has-many {
       }
     }
   }
+  .search {
+    margin-top: 15px;
+  }
   figure {
     height: 100px;
+  }
+  &.primary {
+    &.focus {
+      background-color: white;
+    }
   }
 }

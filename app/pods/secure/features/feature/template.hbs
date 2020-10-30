@@ -9,6 +9,23 @@
       @attribute='name'
     />
 
+
+
+    <Field::String
+      @label='Icon'
+      @record={{feature}}
+      @attribute='icon'
+    />
+
+    {{#if feature.icon}}
+      <div class="icon">
+        <img
+          src={{concat (cdn) "/images/icons/" feature.icon ".svg"}}
+          alt="{{feature.name}}"
+        >
+      </div>
+    {{/if}}
+
     <Field::String
       @label='Gist'
       @record={{feature}}
@@ -17,34 +34,34 @@
     />
 
     <Field::String
-      @label='Icon'
-      @record={{feature}}
-      @attribute='icon'
-    />
-
-    <Field::String
       @label='Category'
       @record={{feature}}
       @attribute='category'
+      @disabled="true"
     />
 
     <h2>Relations</h2>
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label="Products"
-      @record={{feature}}
-      @relation='products'
-      @relationLabel='name'
-      @route='secure.products.product'
+      @baseRecord={{feature}}
+      @baseModel="feature"
+      @baseLabel="productFeatures"
+      @joinModel="product-feature"
+      @targetModel="product"
+      @targetLabel="name"
+      @targetRoute='secure.products.product'
     />
 
-    <Field::HasManyRelations
+    <!-- <Field::ManyToMany
       @label="Families"
+      @legend="Derived from the products above."
       @record={{feature}}
       @relation='families'
       @relationLabel='namePlural'
       @route='secure.products.product'
-    />
+      @disabled="true"
+    /> -->
 
     <h2>Website</h2>
 

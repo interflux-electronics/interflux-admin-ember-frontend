@@ -20,7 +20,7 @@
 
     <h2>Address</h2>
 
-    <Field::BelongsToRelation
+    <Field::OneToMany
       @label='Country'
       @record={{company}}
       @relation='country'
@@ -96,7 +96,7 @@
 
     <h2>Relations</h2>
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label='Members'
       @record={{company}}
       @relation='members'
@@ -104,7 +104,7 @@
       @route='secure.people.person'
     />
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label='Markets'
       @record={{company}}
       @relation='markets'

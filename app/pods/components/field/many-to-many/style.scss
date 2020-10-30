@@ -1,0 +1,88 @@
+fieldset.many-to-many {
+  // To avoid background colour on focus (lists are too long)
+  &.primary {
+    &.focus {
+      background-color: white;
+    }
+  }
+
+  .liner {
+    > ul {
+      > li {
+        background: white;
+        line-height: 46px;
+        border: 1px solid #dddddd;
+        display: flex;
+        justify-content: space-between;
+        & + li {
+          margin-top: -1px;
+        }
+        &:first-child {
+          border-radius: 3px 3px 0 0;
+        }
+        &:last-child {
+          border-radius: 0 0 3px 3px;
+        }
+        &:first-child:first-child {
+          border-radius: 3px;
+        }
+
+        &.no-data {
+          border-style: dashed;
+          padding: 0 15px;
+        }
+        span {
+          line-height: 46px;
+          padding: 0 15px;
+        }
+        a {
+          display: block;
+          color: $blue-0;
+          text-decoration: underline;
+          outline: 0;
+          border-radius: 3px;
+          line-height: 46px;
+          padding: 0 15px;
+          &:hover {
+            color: $orange-2;
+            text-decoration: none;
+          }
+          &:focus {
+            color: $orange-2;
+            text-decoration: none;
+            box-shadow: 0 0 0 2px $orange-2;
+          }
+        }
+        button.trash {
+          width: 46px;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+          &:hover {
+            [fill] {
+              fill: $error-red;
+            }
+          }
+          &:focus {
+            color: $error-red;
+            text-decoration: none;
+            box-shadow: 0 0 0 2px $error-red;
+          }
+          svg {
+            width: 15px;
+            height: auto;
+            [fill] {
+              fill: #dddddd;
+            }
+          }
+        }
+      }
+    }
+    > button,
+    > .search {
+      margin-top: 12px;
+    }
+  }
+}

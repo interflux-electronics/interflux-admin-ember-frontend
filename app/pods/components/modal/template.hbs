@@ -2,7 +2,10 @@
   <div class="overlay">
     <LinkTo @route={{this.parentRoute}}></LinkTo>
   </div>
-  <div class="content">
+  <div
+    class="content"
+    id={{@id}}
+  >
     {{#if @loading}}
       <p>Loading ...</p>
     {{else if @error}}

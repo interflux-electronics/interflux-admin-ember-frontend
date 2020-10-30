@@ -1,7 +1,7 @@
 import FieldComponent from '../component';
 import { action } from '@ember/object';
 
-export default class BelongsToRelationFieldComponent extends FieldComponent {
+export default class OneToManyFieldComponent extends FieldComponent {
   constructor() {
     super(...arguments);
 

@@ -30,8 +30,6 @@ export default class LoginController extends Controller {
     const key = input.id.replace('input-', '');
     const value = input.value;
 
-    console.log(key, value);
-
     this[key] = value;
   }
 }

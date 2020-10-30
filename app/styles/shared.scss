@@ -22,6 +22,7 @@
 @import 'app/pods/secure-loading/style';
 @import 'app/pods/secure/style';
 @import 'app/pods/secure/products/product/style';
+@import 'app/pods/secure/features/feature/style';
 
 // Components
 @import 'app/pods/components/button/style';
@@ -38,7 +39,7 @@
 
 // Forms
 @import 'app/pods/components/fieldset/style';
-@import 'app/pods/components/field/has-many-relations/style';
+@import 'app/pods/components/field/many-to-many/style';
 @import 'app/pods/components/input/style';
 @import 'app/pods/components/textarea/style';
 @import 'app/pods/components/search/style';

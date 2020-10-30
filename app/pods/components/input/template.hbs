@@ -5,8 +5,7 @@
       value={{@value}}
       type={{this.type}}
       placeholder={{@placeholder}}
-      autofocus={{@autofocus}}
-      disabled={{@disabled}}
+      readonly={{@disabled}}
       {{on 'focus' this.onFocus}}
       {{on 'blur' this.onBlur}}
       {{on 'keydown' this.onKeyDown}}
@@ -17,6 +16,7 @@
       autocomplete='off'
       autocorrect='off'
       spellcheck='false'
+      {{did-insert this.onInsert}}
     >
     {{yield}}
   </div>

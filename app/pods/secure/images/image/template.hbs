@@ -8,10 +8,11 @@
 
     <h2>Used by</h2>
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label='Products'
       @record={{image}}
       @relation='products'
+      @relationModel='product'
       @relationLabel='name'
       @route='secure.products.product'
     />
@@ -32,7 +33,7 @@
       @attribute='alt'
     />
 
-    <Field::BelongsToRelation
+    <Field::OneToMany
       @label='Copyright'
       @record={{image}}
       @relation='copyrightCompany'

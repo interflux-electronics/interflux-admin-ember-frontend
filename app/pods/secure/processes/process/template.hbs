@@ -30,7 +30,7 @@
 
     <h2>Relations</h2>
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label="Products"
       @record={{process}}
       @relation='products'
@@ -38,12 +38,14 @@
       @route='secure.products.product'
     />
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label="Families"
+      @legend="Derived from the products above."
       @record={{process}}
       @relation='families'
       @relationLabel='namePlural'
       @route='secure.products.product'
+      @disabled="true"
     />
 
     <h2>Website</h2>

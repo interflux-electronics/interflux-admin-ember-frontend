@@ -29,7 +29,8 @@ export default class SearchComponent extends Component {
   }
 
   get recordValue() {
-    return this.args.value.get(this.args.searchFilter);
+    const { value, searchFilter } = this.args;
+    return value ? value.get(searchFilter) : null;
   }
 
   get recordCount() {
@@ -93,8 +94,8 @@ export default class SearchComponent extends Component {
   }
 
   @action
-  selectText(input) {
-    input.select();
+  selectText() {
+    this.input.select();
   }
 
   // FOCUS
@@ -102,13 +103,24 @@ export default class SearchComponent extends Component {
   input; // The <input> element in the template
 
   @action
-  onFocus(event) {
+  onInsert(input) {
+    // Remember the <input> element for later use
+    this.input = input;
+
+    // If @autofocus was passed down, set manual focus.
+    // Why don't we use the native <input autofocus="true"> attribute? Because it triggers only once.
+    // Each consecutive time the <input> is hidden and shown, no autofocus occurs. To cope, we do
+    // this manually each time the <input> is inserted in the DOM.
+    if (this.args.autofocus) {
+      input.focus();
+    }
+  }
+
+  @action
+  onFocus() {
     this.focus = true;
 
-    // Remember the <input> element for later, so we can remove focus
-    this.input = event.target;
-
-    this.selectText(event.target);
+    this.selectText();
 
     if (this.args.onFocus) {
       this.args.onFocus(event);

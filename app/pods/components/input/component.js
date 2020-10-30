@@ -24,6 +24,15 @@ export default class InputComponent extends Component {
     input.select();
   }
 
+  // The native <input autofocus="true"> works only once. Hide and show the <input> and no focus is
+  // being set. To counter, we manually set focus each time the <input> is insert in the DOM.
+  @action
+  onInsert(input) {
+    if (this.args.autofocus) {
+      input.focus();
+    }
+  }
+
   // EVENTS
 
   @action

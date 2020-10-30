@@ -18,7 +18,7 @@
       @disabled='true'
     />
 
-    <Field::BelongsToRelation
+    <Field::OneToMany
       @label='Family'
       @record={{product}}
       @relation='productFamily'
@@ -38,15 +38,15 @@
       @multiline='true'
     />
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label='Processes'
       @record={{product}}
-      @relation='processes'
+      @relation='features'
       @relationLabel='text'
       @route='secure.processes.process'
     />
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label='Qualities'
       @record={{product}}
       @relation='qualities'
@@ -172,7 +172,7 @@
 
     <h2>Documents</h2>
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label='Documents'
       @record={{product}}
       @relation='documents'

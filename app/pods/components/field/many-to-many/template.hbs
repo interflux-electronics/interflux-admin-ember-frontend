@@ -1,0 +1,50 @@
+<Fieldset
+  @id={{this.id}}
+  @label={{@label}}
+  @legend={{@legend}}
+  @component="many-to-many"
+  @theme={{@theme}}
+  @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
+>
+  <ul>
+    {{#each this.rows as |row|}}
+      <li>
+        <a href={{href-to @targetRoute row.targetRecord.id}}>
+          {{row.text}}
+        </a>
+        <Button
+          @icon="trash"
+          @onClick={{fn this.onDestroy row.joinRecord}}
+        />
+      </li>
+    {{else}}
+      <li class="no-data">- none -</li>
+    {{/each}}
+  </ul>
+
+  {{#unless @disabled}}
+    {{#if this.showSearch}}
+      <Search
+        @id={{this.id}}
+        @value={{this.value}}
+        @state={{this.state}}
+        @placeholder="Search product"
+        @autofocus="true"
+        @onFocus={{this.onFocus}}
+        @onBlur={{this.onSearchBlur}}
+        @onKeyUp={{this.onKeyUp}}
+        @onSelect={{this.onSelect}}
+        @searchModel={{@targetModel}}
+        @searchFilter={{@targetLabel}}
+        @error={{this.error}}
+      ></Search>
+    {{else}}
+      <Button
+        @text="Add"
+        @theme="save"
+        @onClick={{this.onClickAddButton}}
+      />
+    {{/if}}
+  {{/unless}}
+</Fieldset>

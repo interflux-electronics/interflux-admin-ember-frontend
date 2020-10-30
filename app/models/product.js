@@ -20,6 +20,7 @@ export default class ProductModel extends Model {
   @belongsTo('image', { inverse: 'product' }) image;
   @hasMany('image', { inverse: 'products' }) images;
   @hasMany('product-image') productImages;
+  @hasMany('product-feature') productFeatures;
 
   @hasMany('feature') features;
   @hasMany('document') documents;

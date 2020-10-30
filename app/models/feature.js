@@ -10,6 +10,7 @@ export default class FeatureModel extends Model {
   @attr('string') category;
   @attr('boolean') hasPage;
 
+  @hasMany('product-feature') productFeatures;
   @hasMany('product') products;
 
   get families() {

@@ -30,10 +30,11 @@
 
     <h2>Relations</h2>
 
-    <Field::HasManyRelations
+    <Field::ManyToMany
       @label="Products"
       @record={{family}}
       @relation='products'
+      @relationModel='product'
       @relationLabel='name'
       @route='secure.products.product'
     />

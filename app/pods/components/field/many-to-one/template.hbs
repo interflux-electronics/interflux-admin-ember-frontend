@@ -3,7 +3,7 @@
   @id={{this.id}}
   @label={{@label}}
   @legend={{@legend}}
-  @component="has-many"
+  @component="many-to-one"
   @theme={{@theme}}
   {{!-- state --}}
   @state={{this.state}}
@@ -21,9 +21,5 @@
         <p>None</p>
       {{/each}}
     </ul>
-    <Button
-      @text="Add"
-      @theme="save"
-    />
   {{/if}}
 </Fieldset>

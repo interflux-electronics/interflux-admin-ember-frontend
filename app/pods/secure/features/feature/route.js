@@ -5,10 +5,13 @@ export default class FeatureRoute extends ModalRoute {
   model(params) {
     return hash({
       feature: this.store.findRecord('feature', params.id, {
-        include: ['products', 'products.product_family'].join(','),
+        include: [
+          'products',
+          'products.product_family',
+          'product_features'
+        ].join(','),
         reload: true
       })
-      // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }
 }

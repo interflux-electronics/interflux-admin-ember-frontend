@@ -1,6 +1,7 @@
-import Component from '@glimmer/component';
+import FieldComponent from '../component';
+import { action } from '@ember/object';
 
-export default class HasManyRelationsComponent extends Component {
+export default class ManyToOneFieldComponent extends FieldComponent {
   get relations() {
     const arr = [];
     const records = this.args.record.get(this.args.relation);
