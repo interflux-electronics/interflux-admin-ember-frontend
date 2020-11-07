@@ -1,0 +1,76 @@
+{{#with @model.use as |use|}}
+  <Modal @id="use">
+    <h1>{{use.text}}</h1>
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Process name'
+      @record={{use}}
+      @attribute='text'
+    />
+
+    <Field::String
+      @label='Explanation'
+      @legend="Explain in depth what {{use.text}} means, who it is used by and why it matters. Aim for the first paragraphs to make sense to a layman (no jargon). In the paragraphs after, feel free to get technical."
+      @record={{use}}
+      @attribute='gist'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='Icon'
+      @record={{use}}
+      @attribute='icon'
+    />
+
+    {{#if use.icon}}
+      <div class="icon">
+        <img
+          src={{concat (cdn) "/images/icons/" use.icon ".svg"}}
+          alt="{{use.name}}"
+        >
+      </div>
+    {{/if}}
+
+    <h2>Relations</h2>
+
+    <Field::ManyToMany
+      @label="Products"
+      @baseRecord={{use}}
+      @baseModel="use"
+      @baseLabel="productUses"
+      @joinModel="product-use"
+      @targetModel="product"
+      @targetLabel="name"
+      @targetRoute='secure.products.product'
+    />
+
+    <Fieldset
+      @label="Families"
+      @legend="Derived from the products above."
+    >
+      <ul class="list">
+        {{#each use.families as |family|}}
+          <li>
+            <a href={{href-to 'secure.families.family' family.id}}>
+              {{family.namePlural}}
+            </a>
+          </li>
+        {{else}}
+          <li class="dashed">
+            <span>- none -</span>
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <h2>Database</h2>
+
+    <Field::String
+      @label='ID'
+      @record={{use}}
+      @attribute='id'
+      @disabled='true'
+    />
+  </Modal>
+{{/with}}

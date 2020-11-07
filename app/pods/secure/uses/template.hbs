@@ -1,0 +1,11 @@
+<Page::Content @id="uses">
+  <h1>Processes</h1>
+
+  <Spreadsheet
+    @records={{@model.uses}}
+    @linkRoute="secure.uses.use"
+    @columns={{array
+      (hash key='text' label='Name')
+    }}
+  />
+</Page::Content>

@@ -40,12 +40,12 @@ export default class NavResourcesComponent extends Component {
       },
       {
         label: 'Processes',
-        route: 'secure.processes',
+        route: 'secure.uses',
         icon: 'svg/microchip'
       },
       {
-        label: 'Features',
-        route: 'secure.features',
+        label: 'Qualities',
+        route: 'secure.qualities',
         icon: 'svg/medal'
       },
       {

@@ -7,14 +7,17 @@ export default class ProductRoute extends ModalRoute {
       product: this.store.findRecord('product', params.id, {
         include: [
           'image',
-          'features',
           'documents',
+          'qualities',
+          'uses',
           'product_images',
-          'product_images.image'
+          'product_images.image',
+          'product_qualities',
+          'product_uses',
+          'product_documents'
         ].join(','),
         reload: true
       })
-      // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }
 }

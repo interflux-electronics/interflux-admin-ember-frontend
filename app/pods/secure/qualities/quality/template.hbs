@@ -1,0 +1,76 @@
+{{#with @model.quality as |quality|}}
+  <Modal @id="quality">
+    <h1>{{quality.text}}</h1>
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Name'
+      @record={{quality}}
+      @attribute='text'
+    />
+
+    <Field::String
+      @label='Icon'
+      @record={{quality}}
+      @attribute='icon'
+    />
+
+    <Field::String
+      @label='Explanation'
+      @legend="Explain in depth what this quality means and why it matters. Aim for the first paragraphs to make sense to a layman (no jargon). In the paragraphs after, feel free to get technical."
+      @record={{quality}}
+      @attribute='gist'
+      @multiline='true'
+    />
+
+    {{#if quality.icon}}
+      <div class="icon">
+        <img
+          src={{concat (cdn) "/images/icons/" quality.icon ".svg"}}
+          alt="{{quality.name}}"
+        >
+      </div>
+    {{/if}}
+
+    <h2>Relations</h2>
+
+    <Field::ManyToMany
+      @label="Products"
+      @baseRecord={{quality}}
+      @baseModel="quality"
+      @baseLabel="productQualities"
+      @joinModel="product-quality"
+      @targetModel="product"
+      @targetLabel="name"
+      @targetRoute='secure.products.product'
+    />
+
+    <Fieldset
+      @label="Families"
+      @legend="Derived from the products above."
+    >
+      <ul class="list">
+        {{#each quality.families as |family|}}
+          <li>
+            <a href={{href-to 'secure.families.family' family.id}}>
+              {{family.namePlural}}
+            </a>
+          </li>
+        {{else}}
+          <li class="dashed">
+            <span>- none -</span>
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <h2>Database</h2>
+
+    <Field::String
+      @label='ID'
+      @record={{quality}}
+      @attribute='id'
+      @disabled='true'
+    />
+  </Modal>
+{{/with}}

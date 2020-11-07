@@ -18,20 +18,16 @@ export default class ProductModel extends Model {
   @alias('productFamily') family;
 
   @belongsTo('image', { inverse: 'product' }) image;
+
   @hasMany('image', { inverse: 'products' }) images;
-  @hasMany('product-image') productImages;
-  @hasMany('product-feature') productFeatures;
-
-  @hasMany('feature') features;
   @hasMany('document') documents;
+  @hasMany('quality') qualities;
+  @hasMany('use') uses;
 
-  get qualities() {
-    return this.features.filterBy('category', 'quality');
-  }
-
-  get processes() {
-    return this.features.filterBy('category', 'process');
-  }
+  @hasMany('product-image') productImages;
+  @hasMany('product-document') productDocuments;
+  @hasMany('product-quality') productQualities;
+  @hasMany('product-use') productUses;
 
   get url() {
     return `${ENV.wwwHost}/en/products/${this.family.get('slug')}/${this.slug}`;

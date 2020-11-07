@@ -39,19 +39,25 @@
     />
 
     <Field::ManyToMany
-      @label='Processes'
-      @record={{product}}
-      @relation='features'
-      @relationLabel='text'
-      @route='secure.processes.process'
+      @label="Processes"
+      @baseRecord={{product}}
+      @baseModel="product"
+      @baseLabel="productUses"
+      @joinModel="product-use"
+      @targetModel="use"
+      @targetLabel="text"
+      @targetRoute='secure.uses.use'
     />
 
     <Field::ManyToMany
-      @label='Qualities'
-      @record={{product}}
-      @relation='qualities'
-      @relationLabel='text'
-      @route='secure.features.feature'
+      @label="Qualities"
+      @baseRecord={{product}}
+      @baseModel="product"
+      @baseLabel="productQualities"
+      @joinModel="product-quality"
+      @targetModel="quality"
+      @targetLabel="text"
+      @targetRoute='secure.qualities.quality'
     />
 
     <h2>Images</h2>
@@ -173,11 +179,14 @@
     <h2>Documents</h2>
 
     <Field::ManyToMany
-      @label='Documents'
-      @record={{product}}
-      @relation='documents'
-      @relationLabel='name'
-      @route='secure.documents.document'
+      @label="Documents"
+      @baseRecord={{product}}
+      @baseModel="product"
+      @baseLabel="productDocuments"
+      @joinModel="product-document"
+      @targetModel="document"
+      @targetLabel="name"
+      @targetRoute='secure.documents.document'
     />
 
     <h2>Website</h2>
@@ -186,7 +195,7 @@
     <p>
       <Button
         @url={{product.url}}
-        @text="{{product.url}}"
+        @text={{product.url}}
       />
     </p>
 

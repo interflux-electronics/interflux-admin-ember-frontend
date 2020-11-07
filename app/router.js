@@ -23,8 +23,12 @@ Router.map(function () {
       this.route('family', { path: '/:id' });
     });
 
-    this.route('features', function () {
-      this.route('feature', { path: '/:id' });
+    this.route('qualities', function () {
+      this.route('quality', { path: '/:id' });
+    });
+
+    this.route('uses', function () {
+      this.route('use', { path: '/:id' });
     });
 
     this.route('images', function () {
@@ -41,10 +45,6 @@ Router.map(function () {
 
     this.route('people', function () {
       this.route('person', { path: '/:id' });
-    });
-
-    this.route('processes', function () {
-      this.route('process', { path: '/:id' });
     });
 
     this.route('products', function () {

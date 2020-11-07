@@ -1,0 +1,11 @@
+<Page::Content @id="qualities">
+  <h1>Qualities</h1>
+
+  <Spreadsheet
+    @records={{@model.qualities}}
+    @linkRoute="secure.qualities.quality"
+    @columns={{array
+      (hash key='text' label='Name')
+    }}
+  />
+</Page::Content>
