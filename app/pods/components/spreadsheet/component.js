@@ -11,6 +11,8 @@ export default class SpreadsheetComponent extends Component {
   @tracked query = '';
   @tracked data;
   @tracked highlighted;
+  @tracked sortBy;
+  @tracked sortUp = true;
 
   @service router;
 
@@ -20,6 +22,17 @@ export default class SpreadsheetComponent extends Component {
     this.count = n;
     this.total = n;
     this.matches = this.args.records.mapBy('id');
+    this.sortBy = this.args.sortBy || this.args.columns[0].key;
+  }
+
+  get sortedRecords() {
+    const records = this.args.records.sortBy(this.sortBy);
+
+    if (this.sortUp) {
+      return records;
+    } else {
+      return records.reverse();
+    }
   }
 
   @action
@@ -122,15 +135,20 @@ export default class SpreadsheetComponent extends Component {
     this.router.transitionTo(this.args.linkRoute, id);
   }
 
-  // TODO
-  @tracked sortColumn = 0;
   @action
-  setSortColumn(index) {
-    this.sortColumn = index;
-  }
+  setSortBy(key) {
+    console.log('setSortBy', key);
+    if (this.sortBy === key) {
+      console.log('A');
+      this.sortUp = !this.sortUp;
+    } else {
+      console.log('B');
+      this.sortBy = key;
+      this.sortUp = true;
+    }
 
-  get sortUp() {
-    return true;
+    // Always reset the highlight or it may jump down the list
+    this.highlighted = null;
   }
 
   // TODO

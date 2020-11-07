@@ -31,7 +31,7 @@
     </div>
 
     <div class="right">
-      {{!-- <Button::Action
+      {{!-- <Button
         @text="Create"
         @action={{this.noop}}
       /> --}}
@@ -42,14 +42,14 @@
     class="data"
     {{did-insert this.register}}
   >
-    {{#each @columns as |column i|}}
-      <div class="column {{if (eq i this.sortColumn) 'sort'}}">
+    {{#each @columns as |column|}}
+      <div class="column {{if (eq this.sortBy column.key) 'sort'}}">
         <header
-          {{on 'click' (fn this.setSortColumn i)}}
+          {{on 'click' (fn this.setSortBy column.key)}}
           role="button"
         >
           <h2>{{column.label}}</h2>
-          {{#if (eq i this.sortColumn)}}
+          {{#if (eq this.sortBy column.key)}}
             <div class="sort">
               {{#if this.sortUp}}
                 <Svg::SortUp />
@@ -61,7 +61,7 @@
         </header>
 
         <ul>
-          {{#each @records as |record|}}
+          {{#each this.sortedRecords as |record|}}
             <li
               class="row"
               data-record={{record.id}}
