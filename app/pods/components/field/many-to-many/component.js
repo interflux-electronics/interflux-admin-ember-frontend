@@ -5,10 +5,10 @@ import { inject as service } from '@ember/service';
 
 // <Field::ManyToMany
 //   @label="Products"
-//   @baseRecord={{feature}}
-//   @baseModel="feature"
-//   @baseLabel="productFeatures"
-//   @joinModel="product-feature"
+//   @baseRecord={{quality}}
+//   @baseModel="quality"
+//   @baseLabel="productQualities"
+//   @joinModel="product-quality"
 //   @targetModel="product"
 //   @targetLabel="name"
 //   @targetRoute='secure.products.product'

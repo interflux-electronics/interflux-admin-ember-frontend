@@ -7,7 +7,7 @@
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <ul>
+  <ul class="list">
     {{#each this.rows as |row|}}
       <li>
         <a href={{href-to @targetRoute row.targetRecord.id}}>
@@ -19,7 +19,9 @@
         />
       </li>
     {{else}}
-      <li class="no-data">- none -</li>
+      <li class="dashed">
+        <span>- none -</span>
+      </li>
     {{/each}}
   </ul>
 
