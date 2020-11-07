@@ -25,10 +25,20 @@ export function initialize() {
     auth: service(),
 
     actions: {
-      error(error) {
+      error(response) {
+        console.error(`error() on "${this.routeName}" route`);
+
+        if (response.errors && response.errors[0]) {
+          const firstError = response.errors[0];
+          const { status, code, detail } = firstError;
+          if (status && code && detail) {
+            console.error([status, code, detail].join(' - '));
+          }
+        }
+
         // The request to the server was aborted
         // https://emberjs.com/api/ember-data/3.0/classes/DS.AbortError
-        if (error instanceof AbortError) {
+        if (response instanceof AbortError) {
           if (isProduction) {
             if (navigator.onLine) {
               console.error('Looks like the production API is down.');
@@ -45,32 +55,33 @@ export function initialize() {
             console.error('This should never show.');
           }
         }
-        if (error instanceof InvalidError) {
+
+        if (response instanceof InvalidError) {
           // https://emberjs.com/api/ember-data/3.0/classes/DS.InvalidError
           // Ember Data expects a source/pointer
           console.error(
             '422 - This request got rejected because of invalid data.'
           );
-        } else if (error instanceof UnauthorizedError) {
+        } else if (response instanceof UnauthorizedError) {
           console.error('401 - You are not authorised to make this request.');
           console.warn('Reseting authentication data');
           console.warn('Redirecting to login');
           this.auth.reset();
-        } else if (error instanceof ForbiddenError) {
+        } else if (response instanceof ForbiddenError) {
           console.error('403 - You are not allowed to make this request.');
-        } else if (error instanceof NotFoundError) {
+        } else if (response instanceof NotFoundError) {
           console.error('404 - The API does not know this route.');
-        } else if (error instanceof ConflictError) {
+        } else if (response instanceof ConflictError) {
           console.error('409 - The request is conflicting.');
-        } else if (error instanceof ServerError) {
+        } else if (response instanceof ServerError) {
           console.error('500 - The server is down!');
-        } else if (error instanceof TimeoutError) {
+        } else if (response instanceof TimeoutError) {
           console.error(
             '504 - The request timed out. Check your network and API load.'
           );
         } else {
           console.error('Unknown error');
-          console.error(error);
+          console.error(response);
           console.debug('DEBUG: Is Rails running?');
           console.debug('DEBUG: Do you have a model for this resource?');
           // Unknown error
@@ -85,7 +96,8 @@ export function initialize() {
           // console.error(firstError.status, firstError.code, firstError.detail);
         }
 
-        return true;
+        // Prevents error from bubbling to parent routes
+        return false;
       }
     }
   });
