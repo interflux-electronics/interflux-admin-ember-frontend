@@ -1,14 +1,14 @@
 import FieldComponent from '../component';
-import { action } from '@ember/object';
 
 export default class ManyToOneFieldComponent extends FieldComponent {
   get relations() {
+    const { record, relation, relationLabel } = this.args;
     const arr = [];
-    const records = this.args.record.get(this.args.relation);
+    const records = record.get(relation).sortBy(relationLabel);
 
     records.forEach((record) => {
       arr.push({
-        label: record.get(this.args.relationLabel),
+        label: record.get(relationLabel),
         record
       });
     });

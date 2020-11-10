@@ -12,44 +12,48 @@
     <Field::OneToMany
       @label='Category'
       @record={{document}}
-      @relation='category'
+      @relation='documentCategory'
       @filterOn='name'
+      @showAllAtStart
     />
-
-    {{!-- <Field::OneToMany
-      @label='Language'
-      @record={{document}}
-      @relation='language'
-      @filterOn='nameEnglish'
-    /> --}}
-
-    <h2>Permanent link</h2>
-
-    <p>This PDF will <mark>always</mark> be available on this link:</p>
-    <p>
-      <a
-        href={{document.url}}
-        target="_blank"
-        rel="noopener noreferrer"
-      >{{document.url}}</a>
-    </p>
-    <p>That means, you no longer have to attach 8 megabyte PDFs to emails. Instead you can simply copy paste this link into your email. You will save space in your outbox and their inbox. Also, attached PDFs will get outdated, whereas this link will open the most recent version.</p>
-
-    <h2>Relations</h2>
 
     <Field::ManyToMany
-      @label="Products"
-      @record={{document}}
-      @relation='products'
-      @relationModel='product'
-      @relationLabel='name'
-      @route='secure.products.product'
+      @label="Related products"
+      @baseRecord={{document}}
+      @baseModel="document"
+      @baseLabel="productDocuments"
+      @joinModel="product-document"
+      @targetModel="product"
+      @targetLabel="name"
+      @targetRoute='secure.products.product'
     />
 
-    <h2>Database</h2>
+    <h2>CDN</h2>
+    <p>The Interflux Content Delivery Network (CDN) is where we images, videos and PDFs that need to be accessed by our websites, emails and apps. This network is optimised to guarantee the fastest possible download speeds, no matter where you are on the planet. Fast websites means happy visitors and happy Google bots.</p>
+
+    <Fieldset
+      @label='Sharable links'
+      @legend="Copy and paste these:"
+    >
+      <ul class="list">
+        {{#each document.files as |file|}}
+          <li>
+            <a
+              href={{file.link}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {{file.label}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <p>You can copy paste these links into emails, rather than uploading the PDFs as attachements. This saves spaces in everyone's inbox and the link will always open the most up-to-date version.</p>
 
     <Field::String
-      @label='UUID'
+      @label='CDN base path'
       @record={{document}}
       @attribute='id'
       @disabled='true'

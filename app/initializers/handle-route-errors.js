@@ -82,22 +82,14 @@ export function initialize() {
         } else {
           console.error('Unknown error');
           console.error(response);
-          console.debug('DEBUG: Is Rails running?');
-          console.debug('DEBUG: Do you have a model for this resource?');
-          // Unknown error
-          // debugger;
-          // try {
-          //   const parentRoute = relativeRoute(this.routeName, '../');
-          //   this.transitionTo(parentRoute);
-          // } catch (err) {
-          //   this.transitionTo('index');
-          // }
-          // const firstError = error.errors[0];
-          // console.error(firstError.status, firstError.code, firstError.detail);
+          console.debug(
+            'DEBUG: Is Rails running? If yes, check the terminal logs.'
+          );
         }
 
-        // Prevents error from bubbling to parent routes
-        return false;
+        // Returning true allows the error to bubble up the route tree which triggers the error
+        // templates to show
+        return true;
       }
     }
   });

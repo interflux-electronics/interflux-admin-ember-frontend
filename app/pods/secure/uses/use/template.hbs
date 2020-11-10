@@ -36,6 +36,7 @@
 
     <Field::ManyToMany
       @label="Products"
+      @legend="All products which can are suitable for this process."
       @baseRecord={{use}}
       @baseModel="use"
       @baseLabel="productUses"
@@ -47,7 +48,7 @@
 
     <Fieldset
       @label="Families"
-      @legend="Derived from the products above."
+      @legend="All families from the products above."
     >
       <ul class="list">
         {{#each use.families as |family|}}
@@ -67,7 +68,7 @@
     <h2>Database</h2>
 
     <Field::String
-      @label='ID'
+      @label='Database ID'
       @record={{use}}
       @attribute='id'
       @disabled='true'

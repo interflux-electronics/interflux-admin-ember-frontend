@@ -7,6 +7,7 @@
         @formats={{product.image.formats}}
       />
     {{/if}}
+
     <h1>{{product.name}}</h1>
 
     <h2>Properties</h2>
@@ -22,17 +23,21 @@
       @label='Family'
       @record={{product}}
       @relation='productFamily'
-      @filterOn='nameSingle'
+      @filterOn='namePlural'
     />
 
+    {{!-- TODO: create sub families --}}
+
     <Field::String
-      @label='Label'
+      @label='Sub family'
+      @legend='Leave blank, unless you have a more descriptive name for this product than the family name. For example "flux pen" instead of "auxiliary".'
       @record={{product}}
       @attribute='label'
     />
 
     <Field::String
-      @label='Pitch'
+      @label='Elevator pitch'
+      @legend='Explain to someone who has never heard of Interflux in 7 to 20 seconds what this product is, which problem it solves, why it is so great and who will want to be using this {{product.name}}.'
       @record={{product}}
       @attribute='pitch'
       @multiline='true'
@@ -191,43 +196,67 @@
 
     <h2>Website</h2>
 
-    <p>Link:</p>
-    <p>
-      <Button
-        @url={{product.url}}
-        @text={{product.url}}
-      />
-    </p>
-
     <Field::Boolean
-      @label='Public'
+      @label='Show on our website'
       @record={{product}}
       @attribute='public'
     />
 
-    <Field::Boolean
-      @label='Orderable'
-      @record={{product}}
-      @attribute='orderable'
-    />
+    {{#if product.public}}
+      <Fieldset
+        @label='Public pages'
+        @legend='Copy paste these links for sharing.'
+      >
+        <ul class="list">
+          <li>
+            <a
+              href={{product.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Product page - {{product.name}}
+            </a>
+          </li>
 
-    <Field::Boolean
-      @label='Featured'
+          <li>
+            <a
+              href={{product.family.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Family page - {{capitalize product.family.namePlural}}
+            </a>
+          </li>
+        </ul>
+      </Fieldset>
+
+      {{!-- <Field::Boolean
+      @label='Featured - '
       @record={{product}}
       @attribute='featured'
-    />
+      /> --}}
 
-    <Field::Boolean
-      @label='Popular'
-      @record={{product}}
-      @attribute='popular'
-    />
+      <Field::Boolean
+        @label='Mark as popular'
+        @record={{product}}
+        @attribute='popular'
+      />
 
-    <Field::Boolean
-      @label='New'
-      @record={{product}}
-      @attribute='new'
-    />
+      <Field::Boolean
+        @label='Mark as new'
+        @record={{product}}
+        @attribute='new'
+      />
+
+      {{!-- <Field::Boolean
+        @label='Is still in production (can be ordered)'
+        @record={{product}}
+        @attribute='orderable'
+      /> --}}
+
+    {{else}}
+      <p>- {{product.name}} is hidden from our website -</p>
+    {{/if}}
 
     <h2>Database</h2>
 

@@ -5,10 +5,9 @@ export default class DocumentRoute extends ModalRoute {
   model(params) {
     return hash({
       document: this.store.findRecord('document', params.id, {
-        include: ['products'].join(','),
+        include: ['products', 'product_documents', 'cdn_files'].join(','),
         reload: true
       })
-      // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }
 }

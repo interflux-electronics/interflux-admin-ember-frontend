@@ -12,7 +12,7 @@
   {{#if (has-block)}}
     {{yield this.relations}}
   {{else}}
-    <ul>
+    <ul class="list">
       {{#each this.relations as |relation|}}
         <li>
           <a href={{href-to @route relation.record.id}}>{{relation.label}}</a>

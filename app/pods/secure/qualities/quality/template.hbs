@@ -4,15 +4,9 @@
     <h2>Properties</h2>
 
     <Field::String
-      @label='Name'
+      @label='Quality name'
       @record={{quality}}
       @attribute='text'
-    />
-
-    <Field::String
-      @label='Icon'
-      @record={{quality}}
-      @attribute='icon'
     />
 
     <Field::String
@@ -21,6 +15,14 @@
       @record={{quality}}
       @attribute='gist'
       @multiline='true'
+    />
+
+    {{!-- TODO: Turn into icon search --}}
+
+    <Field::String
+      @label='Icon'
+      @record={{quality}}
+      @attribute='icon'
     />
 
     {{#if quality.icon}}
@@ -36,6 +38,7 @@
 
     <Field::ManyToMany
       @label="Products"
+      @legend="All products that have this quality."
       @baseRecord={{quality}}
       @baseModel="quality"
       @baseLabel="productQualities"
@@ -47,7 +50,7 @@
 
     <Fieldset
       @label="Families"
-      @legend="Derived from the products above."
+      @legend="The families of the products above."
     >
       <ul class="list">
         {{#each quality.families as |family|}}
@@ -67,7 +70,7 @@
     <h2>Database</h2>
 
     <Field::String
-      @label='ID'
+      @label='Database ID'
       @record={{quality}}
       @attribute='id'
       @disabled='true'

@@ -1,7 +1,9 @@
 {{#with @model.family as |family|}}
   <Modal @id="family">
-    <h1>{{family.namePlural}}</h1>
+    <h1>{{capitalize family.namePlural}}</h1>
     <h2>Properties</h2>
+
+    <p>In some parts of the website we refer to this product family in singular and sometimes in plural tense.</p>
 
     <Field::String
       @label='Plural name'
@@ -16,27 +18,31 @@
     />
 
     <Field::String
-      @label='Position on website'
+      @label='Rank on website'
+      @legend='Use numbers to indicate how you would want to rank the product families on the website. 1 goes to the top, 9 to the bottom.'
       @record={{family}}
       @attribute='order'
     />
+
+    <h2>Relations</h2>
+
+    <Field::ManyToOne
+      @label="Products"
+      @legend="All products belonging to {{family.namePlural}}."
+      @record={{family}}
+      @relation='products'
+      @relationModel='product'
+      @relationLabel='name'
+      @route='secure.products.product'
+    />
+
+    <h2>Database</h2>
 
     <Field::String
       @label='Database ID'
       @record={{family}}
       @attribute='id'
       @disabled='true'
-    />
-
-    <h2>Relations</h2>
-
-    <Field::ManyToMany
-      @label="Products"
-      @record={{family}}
-      @relation='products'
-      @relationModel='product'
-      @relationLabel='name'
-      @route='secure.products.product'
     />
   </Modal>
 {{/with}}
