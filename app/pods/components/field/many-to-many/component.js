@@ -15,6 +15,7 @@ import { inject as service } from '@ember/service';
 // />
 
 export default class ManyToManyFieldComponent extends FieldComponent {
+  @service api;
   @service store;
 
   get rows() {
@@ -85,7 +86,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
         console.debug('success');
       })
       .catch((response) => {
-        console.error(response);
+        this.api.logError(response);
       });
   }
 

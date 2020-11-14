@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default class SearchComponent extends Component {
   @service store;
+  @service api;
 
   @tracked focus = false;
   @tracked hover = false;
@@ -49,7 +50,7 @@ export default class SearchComponent extends Component {
   get buttons() {
     const arr = [];
     const { rangeMin, rangeMax, highlight, recordsForQuery } = this;
-    const { searchFilter } = this.args;
+    const { searchFilter, searchLabel } = this.args;
 
     if (!recordsForQuery) {
       return [];
@@ -58,7 +59,7 @@ export default class SearchComponent extends Component {
     recordsForQuery.forEach((record, i) => {
       arr.push({
         record,
-        label: record[searchFilter],
+        label: searchLabel ? record[searchLabel] : record[searchFilter],
         classes: i === highlight ? 'highlight' : 'idle',
         shown: i >= rangeMin && i < rangeMax
       });
@@ -257,9 +258,13 @@ export default class SearchComponent extends Component {
     const response = await this.store
       .query(model, { filter })
       .catch((response) => {
-        console.error(response);
+        this.api.logError(response);
         this.error = true;
       });
+
+    if (this.error) {
+      return;
+    }
 
     // Here we sort results that start with the query to the top and the rest below.
     // Both groups are sorted alphabetically before being merged into one array.

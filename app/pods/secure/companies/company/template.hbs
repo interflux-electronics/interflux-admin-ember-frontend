@@ -1,13 +1,51 @@
+{{#with @model.product as |product|}}
+  <Modal @id="product">
+    {{#if product.image}}
+      <Image::Responsive
+        @path={{product.image.path}}
+        @sizes={{product.image.sizes}}
+        @formats={{product.image.formats}}
+      />
+    {{/if}}
+
+    <h1>{{product.name}}</h1>
+
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Name'
+      @record={{product}}
+      @attribute='name'
+      @disabled='true'
+    />
+
+    <Field::OneToMany
+      @label='Family'
+      @record={{product}}
+      @relation='productFamily'
+      @filterOn='namePlural'
+    />
+
+    <h2>Database</h2>
+
+    <Field::String
+      @label='Database ID'
+      @record={{product}}
+      @attribute='id'
+      @disabled='true'
+    />
+  </Modal>
+{{/with}}
+
 {{#with @model.company as |company|}}
+  <Modal @id='company'>
 
-  <Modal @id='document'>
-
-    <h1>{{this.title}}</h1>
+    <h1>{{company.businessName}}</h1>
 
     <h2>Name</h2>
 
     <Field::String
-      @label='Business name'
+      @label='Brand name'
       @record={{company}}
       @attribute='businessName'
     />
@@ -67,6 +105,13 @@
     />
 
     <Field::String
+      @label='Emails'
+      @legend='For multiple emails, use commas for seperation.'
+      @record={{company}}
+      @attribute='emails'
+    />
+
+    {{!-- <Field::String
       @label='Email for general enquiries'
       @type='email'
       @record={{company}}
@@ -92,38 +137,59 @@
       @type='email'
       @record={{company}}
       @attribute='emailAccounting'
-    />
+    /> --}}
 
     <h2>Relations</h2>
 
     <Field::ManyToMany
-      @label='Members'
-      @record={{company}}
-      @relation='members'
-      @relationLabel='fullName'
-      @route='secure.people.person'
+      @label="Members"
+      @legend="Search by first name."
+      @baseRecord={{company}}
+      @baseModel="company"
+      @baseLabel="companyMembers"
+      @joinModel="company-member"
+      @targetModel="person"
+      @targetLabel="fullName"
+      @targetFilter="firstName"
+      @targetRoute='secure.people.person'
     />
 
     <Field::ManyToMany
-      @label='Markets'
-      @record={{company}}
-      @relation='markets'
-      @relationLabel='nameEnglish'
-      @route='secure.companies.company'
+      @label="Markets"
+      @legend="The countries in which this company operates and sells."
+      @baseRecord={{company}}
+      @baseModel="company"
+      @baseLabel="companyMarkets"
+      @joinModel="company-market"
+      @targetModel="country"
+      @targetLabel="nameEnglish"
+      @targetFilter="nameEnglish"
+      @targetRoute='secure.people.person'
     />
 
     <h2>Visibility</h2>
+
+    <p>To make companies visible on the <a
+        href='https://app.interflux.com/en/contact'
+        target='_blank'
+        rel='noopener noreferrer'
+      >contact page</a> of our website, use the checkbox below.</p>
 
     <Field::Boolean
       @record={{company}}
       @attribute='public'
     >
-      <label>Show {{company.businessName}} on the <a
-          href='https://interflux.com/en/contact'
-          target='_blank'
-          rel='noopener noreferrer'
-        >contact page</a> of our website</label>
+      <label>Show on website</label>
     </Field::Boolean>
+
+    {{#if company.public}}
+      <Field::String
+        @label='Rank'
+        @legend='Companies are sorted alphabetically on our website, except for those with a rank. Those with a rank move to the top of the list. Enter a number to sort the ranked companies. Leave blank for alphabetical sort.'
+        @record={{company}}
+        @attribute='order'
+      />
+    {{/if}}
 
     <h2>Database</h2>
 

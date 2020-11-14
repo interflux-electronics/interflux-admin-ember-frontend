@@ -6,7 +6,7 @@ export default class CompanyModel extends Model {
   @attr('string') address;
   @attr('string') phone;
   @attr('string') fax;
-  // @attr('array') emails;
+  @attr('string') emails;
   @attr('string') emailGeneral;
   @attr('string') emailSupport;
   @attr('string') emailOrders;
@@ -20,11 +20,9 @@ export default class CompanyModel extends Model {
 
   @belongsTo('country') country;
 
-  @hasMany('person') members;
+  @hasMany('person') people;
   @hasMany('country') markets;
 
-  // validations = {
-  //   businessName: ['not-blank', 'only-letters'],
-  //   website: ['is-url-or-blank']
-  // };
+  @hasMany('company-member') companyMembers;
+  @hasMany('company-market') companyMarkets;
 }
