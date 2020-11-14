@@ -7,6 +7,7 @@ import { action } from '@ember/object';
 export default class FieldComponent extends Component {
   @service form;
   @service auth;
+  @service api;
 
   id; // Unique across the app
 
@@ -109,18 +110,10 @@ export default class FieldComponent extends Component {
       })
       .catch((response) => {
         console.error('save failed');
-        console.error(response);
+        this.api.logError(response);
 
         if (response.errors && response.errors[0] && response.errors[0].code) {
           const code = response.errors[0].code;
-
-          if (code === 'forbidden-attribute') {
-            // this.args.record.rollbackAttributes();
-          }
-          if (code === 'token-expired') {
-            this.auth.reset(); // redirect to login
-          }
-
           this.error = code;
         } else {
           this.error = 'unknown';
