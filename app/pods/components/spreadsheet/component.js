@@ -71,7 +71,7 @@ export default class SpreadsheetComponent extends Component {
 
   @action
   onKeyUp(event) {
-    const query = event.target.innerText;
+    const query = event.target.innerText.replace(/(\r\n|\n|\r)/gm, '');
     const queryHasChanged = query !== this.query;
     if (queryHasChanged) {
       this.query = query;
@@ -93,7 +93,6 @@ export default class SpreadsheetComponent extends Component {
   @action
   filter(query) {
     const arr = [];
-
     const regex = new RegExp(`(${query})`, 'ig');
 
     // Mark all text that matches the query with <mark>
@@ -137,12 +136,9 @@ export default class SpreadsheetComponent extends Component {
 
   @action
   setSortBy(key) {
-    console.log('setSortBy', key);
     if (this.sortBy === key) {
-      console.log('A');
       this.sortUp = !this.sortUp;
     } else {
-      console.log('B');
       this.sortBy = key;
       this.sortUp = true;
     }

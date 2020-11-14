@@ -14,4 +14,8 @@ export default class PersonModel extends Model {
   get fullName() {
     return [this.firstName, this.lastName, this.chineseName].join(' ');
   }
+
+  get memberOf() {
+    return this.companies.mapBy('businessName').join(', ');
+  }
 }
