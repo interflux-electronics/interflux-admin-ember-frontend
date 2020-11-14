@@ -15,6 +15,7 @@
       p {
         padding: 0 38px 0 14px;
         line-height: 38px !important;
+        height: 38px; // For Firefox
       }
       p[contenteditable] {
         outline: 0;
