@@ -9,10 +9,11 @@ export default class AuthService extends Service {
   @service store;
   @service router;
 
-  @tracked token = null;
-  @tracked user = null;
-  @tracked expiry = null;
-  @tracked error = null;
+  @tracked token;
+  @tracked user;
+  @tracked uuid;
+  @tracked expiry;
+  @tracked error;
 
   @task()
   *getToken(email, password) {
@@ -44,23 +45,24 @@ export default class AuthService extends Service {
       return;
     }
 
-    const { token, expiry } = body.auth;
+    const { token, expiry, uuid } = body.auth;
 
-    this.remember(token, expiry);
+    this.remember('token', token);
+    this.remember('expiry', expiry);
+    this.remember('uuid', uuid);
 
     this.router.transitionTo('secure.index');
   }
 
-  remember(token, expiry) {
-    this.token = token;
-    this.expiry = expiry;
-    localStorage.setItem('token', token);
-    localStorage.setItem('expiry', expiry);
+  remember(key, value) {
+    this[key] = value;
+    localStorage.setItem(key, value);
   }
 
   revive() {
     this.token = localStorage.getItem('token');
     this.expiry = localStorage.getItem('expiry');
+    this.uuid = localStorage.getItem('uuid');
   }
 
   @action

@@ -23,7 +23,7 @@ export default class SecureRoute extends Route {
   // See: app/initializers/handle-route-errors.js
   model() {
     return hash({
-      user: this.store.findRecord('user', 'auth-user', {
+      user: this.store.findRecord('user', this.auth.uuid, {
         include: ['person'].join(',')
       })
     });
