@@ -1,12 +1,12 @@
 <Page::Content @id="people">
-  <h1>Humans</h1>
+  <h1>Humans :)</h1>
 
   <Spreadsheet
     @records={{@model.people}}
     @linkRoute="secure.people.person"
     @columns={{array
       (hash key='fullName' label="Name")
-      (hash key='name' label='Name')
+      (hash key='emails' label='Email')
     }}
   />
 </Page::Content>

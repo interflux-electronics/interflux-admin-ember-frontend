@@ -6,9 +6,10 @@ export default class PersonModel extends Model {
   @attr('string') chineseName;
   @attr('string') phone;
   @attr('string') email;
-  @attr('boolean') male;
+  @attr('boolean') public;
 
   @hasMany('company') companies;
+  @hasMany('company-member') companyMembers;
 
   get fullName() {
     return [this.firstName, this.lastName, this.chineseName].join(' ');

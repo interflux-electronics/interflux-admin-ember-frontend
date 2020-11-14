@@ -1,42 +1,3 @@
-{{#with @model.product as |product|}}
-  <Modal @id="product">
-    {{#if product.image}}
-      <Image::Responsive
-        @path={{product.image.path}}
-        @sizes={{product.image.sizes}}
-        @formats={{product.image.formats}}
-      />
-    {{/if}}
-
-    <h1>{{product.name}}</h1>
-
-    <h2>Properties</h2>
-
-    <Field::String
-      @label='Name'
-      @record={{product}}
-      @attribute='name'
-      @disabled='true'
-    />
-
-    <Field::OneToMany
-      @label='Family'
-      @record={{product}}
-      @relation='productFamily'
-      @filterOn='namePlural'
-    />
-
-    <h2>Database</h2>
-
-    <Field::String
-      @label='Database ID'
-      @record={{product}}
-      @attribute='id'
-      @disabled='true'
-    />
-  </Modal>
-{{/with}}
-
 {{#with @model.company as |company|}}
   <Modal @id='company'>
 
@@ -110,34 +71,6 @@
       @record={{company}}
       @attribute='emails'
     />
-
-    {{!-- <Field::String
-      @label='Email for general enquiries'
-      @type='email'
-      @record={{company}}
-      @attribute='emailGeneral'
-    />
-
-    <Field::String
-      @label='Email for technical support'
-      @type='email'
-      @record={{company}}
-      @attribute='emailSupport'
-    />
-
-    <Field::String
-      @label='Email for placing orders'
-      @type='email'
-      @record={{company}}
-      @attribute='emailOrders'
-    />
-
-    <Field::String
-      @label='Email for accounting enquiries'
-      @type='email'
-      @record={{company}}
-      @attribute='emailAccounting'
-    /> --}}
 
     <h2>Relations</h2>
 

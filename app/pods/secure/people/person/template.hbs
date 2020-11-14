@@ -1,7 +1,9 @@
 {{#with @model.person as |person|}}
   <Modal @id="person">
+
     <h1>{{person.fullName}}</h1>
-    <h2>Properties</h2>
+
+    <h2>Name</h2>
 
     <Field::String
       @label='First name'
@@ -21,52 +23,34 @@
       @attribute='chineseName'
     />
 
+    <h2>Companies</h2>
+
+    <Field::ManyToMany
+      @label="Member of"
+      @baseRecord={{person}}
+      @baseModel="person"
+      @baseLabel="companyMembers"
+      @joinModel="company-member"
+      @targetModel="company"
+      @targetLabel="businessName"
+      @targetFilter="businessName"
+      @targetRoute='secure.people.person'
+    />
+
+    <h2>Contact</h2>
+
     <Field::String
-      @label='Phone'
+      @label='Personal phone'
+      @legend='Never made public. For internal communcation only.'
       @record={{person}}
       @attribute='phone'
     />
 
     <Field::String
-      @label='Email'
+      @label='Personal email'
+      @legend='Never made public. For internal communcation only.'
       @record={{person}}
       @attribute='email'
-    />
-
-    <Field::Boolean
-      @label='Is male?'
-      @record={{person}}
-      @attribute='male'
-    />
-
-    <h2>Relations</h2>
-
-    <Field::ManyToMany
-      @label='Companies'
-      @record={{person}}
-      @relation='companies'
-      @relationLabel='businessName'
-      @route='secure.companies.company'
-    />
-
-    <h2>Website</h2>
-
-    <Field::Boolean
-      @label='Show on website?'
-      @record={{person}}
-      @attribute='male'
-    />
-
-    <Field::Boolean
-      @label='Show email?'
-      @record={{person}}
-      @attribute='male'
-    />
-
-    <Field::Boolean
-      @label='Show phone?'
-      @record={{person}}
-      @attribute='male'
     />
 
     <h2>Database</h2>
