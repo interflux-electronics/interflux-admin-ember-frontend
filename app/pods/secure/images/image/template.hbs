@@ -1,45 +1,119 @@
 {{#with @model.image as |image|}}
   <Modal @id="image">
-    <Image::Responsive
+    <Image
       @path={{image.path}}
-      @sizes={{image.sizes}}
-      @formats={{image.formats}}
+      @variations={{image.variations}}
+      @caption={{image.caption}}
+      @alt={{image.alt}}
     />
 
-    <h2>Used by</h2>
+    <h1>{{image.alt}}</h1>
+
+    <h2>Properties</h2>
 
     <Field::ManyToMany
-      @label='Products'
-      @record={{image}}
-      @relation='products'
-      @relationModel='product'
-      @relationLabel='name'
-      @route='secure.products.product'
+      @label="Products"
+      @legend="Please identify the products seen in this image."
+      @baseRecord={{image}}
+      @baseModel="imagge"
+      @baseLabel="productImages"
+      @joinModel="product-image"
+      @targetModel="product"
+      @targetLabel="name"
+      @targetRoute='secure.products.product'
     />
 
-    <h2>Meta data</h2>
+    {{!-- TODO: identify processes --}}
 
     <Field::String
-      @label='Visible text'
-      @legend="The label is shown on top of the image in the left bottom corner. This is optional and can help visitors distinguish between 25L and 10L drums."
-      @record={{image}}
-      @attribute='caption'
-    />
-
-    <Field::String
-      @label='Hidden text'
-      @legend="This text is only read by Google bots and blind people with screen readers. These are essential for good SEO. Please always include the product name and add something unique."
+      @label='Hidden metadata'
+      @legend="On our website we hide metadata behind every image, which can only be read by Google and social media. These are essential for our images to rank in Google Image search. Please never leave these blank and where possible include key words like the product name (IF 2005M), family (soldering flux) and something unique (25L front view)."
       @record={{image}}
       @attribute='alt'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='Visible label'
+      @legend="The label is visible to visitors, unlike the metadata. This label can be useful for helping visitors distinguish between for SnAgCu and SnPB alloys or 25L and 10L drums. This is optional."
+      @record={{image}}
+      @attribute='caption'
+      @multiline='true'
     />
 
     <Field::OneToMany
       @label='Copyright'
+      @legend='When we receive images from other companies, we should attribute them and link to their website. The copyright link will show right below the label. Leave blank if the image belongs to Interflux.'
       @record={{image}}
-      @relation='copyrightCompany'
+      @relation='company'
       @filterOn='businessName'
-      @disabled='true'
     />
+
+    <h2>CDN</h2>
+
+    <p>Images have a big impact on the download speed and snappy user experience of any website. To guarantee our images load as fast as humanly possible we do three things:</p>
+    <p>1. We store images on a CDN. Such a network copies the images to all continents so that no matter where you are in the world, the latency between you and the server will be low.</p>
+    <p>2. We keep 14 sizes of every images on our CDN. Our website are smart enough to download only the smallest possible size which still looks sharp.</p>
+    <p>3. We use the WEBP file format, which is about 50% smaller in file size than JPG.</p>
+
+    <Fieldset
+      @label='JPG'
+      @legend="Compressed, low visual quality, downloads fast, can be used in all apps."
+    >
+      <ul class="list">
+        {{#each image.JPGs as |file|}}
+          <li>
+            <a
+              href={{file.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {{file.size}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <Fieldset
+      @label='WEBP'
+      @legend="Super compressed, 50% smaller than JPG, low visual quality, can only be used in websites."
+    >
+      <ul class="list">
+        {{#each image.WEBPs as |file|}}
+          <li>
+            <a
+              href={{file.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {{file.size}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <Fieldset
+      @label='PNG'
+      @legend="For designers, lossless, no compression, best quality, huge file size."
+    >
+      <ul class="list">
+        {{#each image.PNGs as |file|}}
+          <li>
+            <a
+              href={{file.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {{file.size}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
+
+    <h2>Database</h2>
 
     <Field::String
       @label='Database ID'
@@ -47,23 +121,5 @@
       @attribute='id'
       @disabled='true'
     />
-
-    <h2>CDN</h2>
-
-    <p>Available sizes &amp; formats</p>
-
-    <ul class="list">
-      {{#each @model.image.files as |file|}}
-        <li>
-          <a
-            href={{file.url}}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            @{{file.width}}x{{file.height}}.{{file.format}}
-          </a>
-        </li>
-      {{/each}}
-    </ul>
   </Modal>
 {{/with}}

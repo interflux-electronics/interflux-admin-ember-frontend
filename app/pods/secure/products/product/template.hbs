@@ -1,10 +1,11 @@
 {{#with @model.product as |product|}}
   <Modal @id="product">
     {{#if product.image}}
-      <Image::Responsive
+      <Image
         @path={{product.image.path}}
-        @sizes={{product.image.sizes}}
-        @formats={{product.image.formats}}
+        @variations={{product.image.variations}}
+        @caption={{product.image.caption}}
+        @alt={{product.image.alt}}
       />
     {{/if}}
 
@@ -73,10 +74,11 @@
     >
       <ul class="images">
         <li class="avatar">
-          <Image::Responsive
+          <Image
             @path={{product.image.path}}
-            @sizes={{product.image.sizes}}
-            @formats={{product.image.formats}}
+            @variations={{product.image.variations}}
+            @caption={{product.image.caption}}
+            @alt={{product.image.alt}}
           />
 
           <div class="buttons">
@@ -100,10 +102,11 @@
           <li>
             <p>{{relation.rank}}{{if (eq relation.image.id product.image.id) ' - avatar'}}</p>
 
-            <Image::Responsive
+            <Image
               @path={{relation.image.path}}
-              @sizes={{relation.image.sizes}}
-              @formats={{relation.image.formats}}
+              @variations={{relation.image.variations}}
+              @caption={{relation.image.caption}}
+              @alt={{relation.image.alt}}
             />
 
             <div class="buttons">
@@ -154,10 +157,11 @@
       <ul class="images">
         {{#each this.hiddenImages as |relation|}}
           <li>
-            <Image::Responsive
+            <Image
               @path={{relation.image.path}}
-              @sizes={{relation.image.sizes}}
-              @formats={{relation.image.formats}}
+              @variations={{relation.image.variations}}
+              @caption={{relation.image.caption}}
+              @alt={{relation.image.alt}}
             />
 
             <div class="buttons">

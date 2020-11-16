@@ -1,4 +1,14 @@
 <Page::Content @id="images">
   <h1>Images</h1>
-  <ImageGrid @images={{@model.images}} />
+
+  {{!-- <ImageGrid @images={{@model.images}} /> --}}
+
+  <Spreadsheet
+    @records={{@model.images}}
+    @linkRoute="secure.images.image"
+    @columns={{array
+      (hash key='alt' label="Hidden metadata")
+      (hash key='category' label="Group")
+    }}
+  />
 </Page::Content>

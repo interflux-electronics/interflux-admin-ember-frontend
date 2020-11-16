@@ -5,10 +5,11 @@ export default class ImageRoute extends ModalRoute {
   model(params) {
     return hash({
       image: this.store.findRecord('image', params.id, {
-        include: ['products'].join(','),
+        include: ['products', 'product_images', 'company', 'cdn_files'].join(
+          ','
+        ),
         reload: true
       })
-      // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }
 }

@@ -99,4 +99,8 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   onKeyUp() {
     this.error = null;
   }
+
+  get searchFilter() {
+    return this.args.targetFilter || this.args.targetLabel;
+  }
 }
