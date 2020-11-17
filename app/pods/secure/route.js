@@ -8,8 +8,8 @@ export default class SecureRoute extends Route {
 
   // Redirect user back to login if the auth token is missing
   beforeModel() {
-    if (!this.auth.token) {
-      console.warn('Missing auth token');
+    if (!this.auth.token || !this.auth.uuid) {
+      console.warn('Missing auth token / UUID');
       console.warn('Reseting authentication data');
       console.warn('Redirecting to login');
       this.auth.reset();
