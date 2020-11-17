@@ -126,6 +126,9 @@ export default class ImageComponent extends Component {
     if (!this.picture) {
       return 'loading';
     }
+    if (!this.args.variations) {
+      return 'invalid';
+    }
     if (!this.closestJPG) {
       return 'invalid';
     }
