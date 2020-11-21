@@ -4,6 +4,7 @@ import { alias } from '@ember/object/computed';
 export default class DocumentModel extends Model {
   @attr('string') path;
   @attr('string') name;
+  @attr('string') variations;
 
   @belongsTo('document-category') documentCategory;
   @alias('documentCategory') category;
