@@ -142,12 +142,7 @@
       <ul class="images">
         {{#each this.hiddenImages as |relation|}}
           <li>
-            <Image
-              @path={{relation.image.path}}
-              @variations={{relation.image.variations}}
-              @caption={{relation.image.caption}}
-              @alt={{relation.image.alt}}
-            />
+            <ResponsiveImage @image={{relation.image}} />
 
             <div class="buttons">
               <Button
