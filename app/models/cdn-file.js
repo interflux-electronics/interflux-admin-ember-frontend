@@ -27,11 +27,19 @@ export default class CdnFileModel extends Model {
     return this.path.endsWith('.png');
   }
 
+  get isSVG() {
+    return this.path.endsWith('.svg');
+  }
+
   get size() {
-    return this.path.split('@')[1].split('.')[0];
+    return this.path.includes('@')
+      ? this.path.split('@')[1].split('.')[0]
+      : null;
   }
 
   get width() {
-    return Number(this.path.split('@')[1].split('.')[0].split('x')[0]);
+    return this.path.includes('@')
+      ? Number(this.path.split('@')[1].split('.')[0].split('x')[0])
+      : null;
   }
 }

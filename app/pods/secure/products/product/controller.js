@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 
-export default class SecureProductsProductController extends Controller {
+export default class ProductController extends Controller {
   @alias('model.product') product;
 
   get publicImages() {

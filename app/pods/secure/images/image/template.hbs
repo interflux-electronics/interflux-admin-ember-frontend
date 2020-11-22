@@ -1,29 +1,10 @@
 {{#with @model.image as |image|}}
   <Modal @id="image">
-    <Image
-      @path={{image.path}}
-      @variations={{image.variations}}
-      @caption={{image.caption}}
-      @alt={{image.alt}}
-    />
+    <ResponsiveImage @image={{image}} />
 
     <h1>{{image.alt}}</h1>
 
     <h2>Properties</h2>
-
-    <Field::ManyToMany
-      @label="Products"
-      @legend="Please identify the products seen in this image."
-      @baseRecord={{image}}
-      @baseModel="imagge"
-      @baseLabel="productImages"
-      @joinModel="product-image"
-      @targetModel="product"
-      @targetLabel="name"
-      @targetRoute='secure.products.product'
-    />
-
-    {{!-- TODO: identify processes --}}
 
     <Field::String
       @label='Hidden metadata'
@@ -33,85 +14,153 @@
       @multiline='true'
     />
 
-    <Field::String
-      @label='Visible label'
-      @legend="The label is visible to visitors, unlike the metadata. This label can be useful for helping visitors distinguish between for SnAgCu and SnPB alloys or 25L and 10L drums. This is optional."
-      @record={{image}}
-      @attribute='caption'
-      @multiline='true'
-    />
+    {{#if this.showLabel}}
+      <Field::String
+        @label='Visible label'
+        @legend="The label is visible to visitors, unlike the metadata. This label can be useful for helping visitors distinguish between for SnAgCu and SnPB alloys or 25L and 10L drums. This is optional."
+        @record={{image}}
+        @attribute='caption'
+        @multiline='true'
+      />
+    {{/if}}
 
-    <Field::OneToMany
-      @label='Copyright'
-      @legend='When we receive images from other companies, we should attribute them and link to their website. The copyright link will show right below the label. Leave blank if the image belongs to Interflux.'
-      @record={{image}}
-      @relation='company'
-      @filterOn='businessName'
-    />
+    {{#if this.showCopyright}}
+      <Field::OneToMany
+        @label='Copyright'
+        @legend='When we receive images from other companies, we should attribute them and link to their website. The copyright link will show right below the label. Leave blank if the image belongs to Interflux.'
+        @record={{image}}
+        @relation='company'
+        @filterOn='businessName'
+      />
+    {{/if}}
+
+    {{#if this.showProducts}}
+      <h2>Relations</h2>
+      <Field::ManyToMany
+        @label="Products"
+        @legend="Please identify the products seen in this image."
+        @baseRecord={{image}}
+        @baseModel="imagge"
+        @baseLabel="productImages"
+        @joinModel="product-image"
+        @targetModel="product"
+        @targetLabel="name"
+        @targetRoute='secure.products.product'
+      />
+    {{/if}}
+
+    {{!-- TOOD
+    {{#if this.showProcesses}}
+      <h2>Relations</h2>
+      <Field::ManyToMany
+        @label="Process"
+        @legend="Please identify the process seen in this image."
+        @baseRecord={{image}}
+        @baseModel="imagge"
+        @baseLabel="productImages"
+        @joinModel="use-image"
+        @targetModel="use"
+        @targetLabel="name"
+        @targetRoute='secure.uses.use'
+      />
+    {{/if}}
+    --}}
 
     <h2>CDN</h2>
 
     <p>Images have a big impact on the download speed and snappy user experience of any website. To guarantee our images load as fast as humanly possible we do three things:</p>
     <p>1. We store images on a CDN. Such a network copies the images to all continents so that no matter where you are in the world, the latency between you and the server will be low.</p>
     <p>2. We keep 14 sizes of every images on our CDN. Our website are smart enough to download only the smallest possible size which still looks sharp.</p>
-    <p>3. We use the WEBP file format, which is about 50% smaller in file size than JPG.</p>
+    <p>3. We replace JPG with WEBP wherever possible, which is about 50% smaller in file size than JPG.</p>
+    <p>4. We use SVG instead of PNG.</p>
 
-    <Fieldset
-      @label='JPG'
-      @legend="Compressed, low visual quality, downloads fast, can be used in all apps."
-    >
-      <ul class="list">
-        {{#each image.JPGs as |file|}}
-          <li>
-            <a
-              href={{file.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {{file.size}}
-            </a>
-          </li>
-        {{/each}}
-      </ul>
-    </Fieldset>
+    {{#if image.hasJPG}}
+      <Fieldset
+        @label='JPG'
+        @legend="Compressed, small file size, low visual quality, can be used in all apps."
+      >
+        <ul class="list">
+          {{#each image.JPGs as |file|}}
+            <li>
+              <a
+                href={{file.url}}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {{file.size}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
 
-    <Fieldset
-      @label='WEBP'
-      @legend="Super compressed, 50% smaller than JPG, low visual quality, can only be used in websites."
-    >
-      <ul class="list">
-        {{#each image.WEBPs as |file|}}
-          <li>
-            <a
-              href={{file.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {{file.size}}
-            </a>
-          </li>
-        {{/each}}
-      </ul>
-    </Fieldset>
+    {{#if image.hasWEBP}}
+      <Fieldset
+        @label='WEBP'
+        @legend="Super compressed, 50% smaller than JPG, same poor visual quality as JPG, can only be used in websites."
+      >
+        <ul class="list">
+          {{#each image.WEBPs as |file|}}
+            <li>
+              <a
+                href={{file.url}}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {{file.size}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
 
-    <Fieldset
-      @label='PNG'
-      @legend="For designers, lossless, no compression, best quality, huge file size."
-    >
-      <ul class="list">
-        {{#each image.PNGs as |file|}}
-          <li>
-            <a
-              href={{file.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {{file.size}}
-            </a>
-          </li>
-        {{/each}}
-      </ul>
-    </Fieldset>
+    {{#if image.hasPNG}}
+      <Fieldset
+        @label='PNG'
+        @legend="For designers, lossless, no compression, great quality, huge file size, can be used in all apps."
+      >
+        <ul class="list">
+          {{#each image.PNGs as |file|}}
+            <li>
+              <a
+                href={{file.url}}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {{#if file.size}}
+                  {{file.size}}
+                {{else}}
+                  {{file.label}}
+                {{/if}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
+
+    {{#if image.hasSVG}}
+      <Fieldset
+        @label='SVG'
+        @legend="Best quality because is vectorised, does not use pixels, small file size, can only be used in design tools and websites."
+      >
+        <ul class="list">
+          {{#each image.SVGs as |file|}}
+            <li>
+              <a
+                href={{file.url}}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {{file.label}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
 
     <h2>Database</h2>
 

@@ -21,11 +21,31 @@ export default class ImageModel extends Model {
     return this.files.filterBy('isJPG').sortBy('width');
   }
 
+  get WEBPs() {
+    return this.files.filterBy('isWEBP').sortBy('width');
+  }
+
   get PNGs() {
     return this.files.filterBy('isPNG').sortBy('width');
   }
 
-  get WEBPs() {
-    return this.files.filterBy('isWEBP').sortBy('width');
+  get SVGs() {
+    return this.files.filterBy('isSVG');
+  }
+
+  get hasJPG() {
+    return this.JPGs.length > 0;
+  }
+
+  get hasWEBP() {
+    return this.WEBPs.length > 0;
+  }
+
+  get hasPNG() {
+    return this.PNGs.length > 0;
+  }
+
+  get hasSVG() {
+    return this.SVGs.length > 0;
   }
 }

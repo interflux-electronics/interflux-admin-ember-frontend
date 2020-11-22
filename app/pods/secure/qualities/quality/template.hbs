@@ -17,22 +17,25 @@
       @multiline='true'
     />
 
-    {{!-- TODO: Turn into icon search --}}
-
-    <Field::String
+    <Field::OneToMany
       @label='Icon'
       @record={{quality}}
-      @attribute='icon'
+      @relation='image'
+      @filterOn='alt'
     />
 
-    {{#if quality.icon}}
-      <div class="icon">
-        <img
-          src={{concat (cdn) "/images/icons/" quality.icon ".svg"}}
-          alt="{{quality.name}}"
-        >
-      </div>
-    {{/if}}
+    <div class="icon">
+      {{#if quality.image}}
+        <a href={{href-to 'secure.images.image' quality.image.id}}>
+          <ResponsiveImage @image={{quality.image}} />
+        </a>
+        <a href={{href-to 'secure.images.image' quality.image.id}}>
+          <ResponsiveImage @image={{quality.image}} />
+        </a>
+      {{else}}
+        <p>- no icon -</p>
+      {{/if}}
+    </div>
 
     <h2>Relations</h2>
 

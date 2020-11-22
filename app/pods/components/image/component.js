@@ -3,7 +3,40 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
+function arg(object, property) {
+  return {
+    get() {
+      const value = this.args[property];
+      if (!value) {
+        console.warn(`missing argument: ${property}`);
+      }
+      return value;
+    },
+    set() {
+      console.warn(`argument ${property} is read-only`);
+    }
+  };
+}
+
 export default class ImageComponent extends Component {
+  @arg image;
+
+  get variations() {
+    return this.image ? this.image.get('variations') : null;
+  }
+
+  get path() {
+    return this.image ? this.image.get('path') : null;
+  }
+
+  get caption() {
+    return this.image ? this.image.get('caption') : null;
+  }
+
+  get alt() {
+    return this.image ? this.image.get('alt') : null;
+  }
+
   // The <picture> element
   @tracked picture;
 
@@ -14,10 +47,10 @@ export default class ImageComponent extends Component {
   }
 
   get html() {
-    if (!this.args.path) {
+    if (!this.path) {
       return console.warn('no path');
     }
-    if (!this.args.variations) {
+    if (!this.variations) {
       return console.warn('no variations', this.path);
     }
     if (!this.picture) {
@@ -43,10 +76,10 @@ export default class ImageComponent extends Component {
     };
     img.onerror = () => {
       this.status = 'error';
-      console.warn('<Image> failed to load image', this.args.path);
+      console.warn('<Image> failed to load image', this.path);
     };
     const cdn = ENV['cdnHost'];
-    img.src = `${cdn}/${this.args.path}@${this.closestJPG}.jpg`;
+    img.src = `${cdn}/${this.path}@${this.closestJPG}.jpg`;
     img.width = this.closestJPG.split('x')[0];
     img.height = this.closestJPG.split('x')[1];
     if (this.alt) {
@@ -58,7 +91,7 @@ export default class ImageComponent extends Component {
     if (this.closestWEBP) {
       const source = document.createElement('source');
       source.type = 'image/webp';
-      source.srcset = `${cdn}/${this.args.path}@${this.closestWEBP}.webp`;
+      source.srcset = `${cdn}/${this.path}@${this.closestWEBP}.webp`;
       fragment.prepend(source);
     }
 
@@ -71,17 +104,17 @@ export default class ImageComponent extends Component {
   }
 
   get JPGs() {
-    return this.args.variations
+    return this.variations
       .split(',')
       .filter((x) => x.split('.')[1] === 'jpg')
-      .map((x) => x.split('.')[0]);
+      .map((x) => x.split('.')[0].replace('@', ''));
   }
 
   get WEBPs() {
-    return this.args.variations
+    return this.variations
       .split(',')
       .filter((x) => x.split('.')[1] === 'webp')
-      .map((x) => x.split('.')[0]);
+      .map((x) => x.split('.')[0].replace('@', ''));
   }
 
   get closestJPG() {
@@ -126,7 +159,7 @@ export default class ImageComponent extends Component {
     if (!this.picture) {
       return 'loading';
     }
-    if (!this.args.variations) {
+    if (!this.variations) {
       return 'invalid';
     }
     if (!this.closestJPG) {

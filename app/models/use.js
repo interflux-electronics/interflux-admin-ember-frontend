@@ -1,10 +1,12 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class UseModel extends Model {
   @attr('string') slug;
   @attr('string') icon;
   @attr('string') text;
   @attr('string') gist;
+
+  @belongsTo('image') image;
 
   @hasMany('product-use') productUses;
   @hasMany('product') products;

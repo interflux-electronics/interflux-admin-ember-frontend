@@ -6,9 +6,12 @@ export default class UseRoute extends ModalRoute {
     return hash({
       use: this.store.findRecord('use', params.id, {
         reload: true,
-        include: ['products', 'products.product_family', 'product_uses'].join(
-          ','
-        )
+        include: [
+          'image',
+          'products',
+          'products.product_family',
+          'product_uses'
+        ].join(',')
       })
     });
   }

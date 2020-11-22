@@ -30,6 +30,6 @@ export default class ProductModel extends Model {
   @hasMany('product-use') productUses;
 
   get url() {
-    return `${ENV.wwwHost}/en/products/${this.family.get('slug')}/${this.slug}`;
+    return `${ENV.wwwHost}/en/product/${this.slug}`;
   }
 }

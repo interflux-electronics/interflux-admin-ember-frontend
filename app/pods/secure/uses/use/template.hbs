@@ -17,20 +17,25 @@
       @multiline='true'
     />
 
-    <Field::String
+    <Field::OneToMany
       @label='Icon'
       @record={{use}}
-      @attribute='icon'
+      @relation='image'
+      @filterOn='alt'
     />
 
-    {{#if use.icon}}
-      <div class="icon">
-        <img
-          src={{concat (cdn) "/images/icons/" use.icon ".svg"}}
-          alt="{{use.name}}"
-        >
-      </div>
-    {{/if}}
+    <div class="icon">
+      {{#if use.image}}
+        <a href={{href-to 'secure.images.image' use.image.id}}>
+          <ResponsiveImage @image={{use.image}} />
+        </a>
+        <a href={{href-to 'secure.images.image' use.image.id}}>
+          <ResponsiveImage @image={{use.image}} />
+        </a>
+      {{else}}
+        <p>- no icon -</p>
+      {{/if}}
+    </div>
 
     <h2>Relations</h2>
 

@@ -7,6 +7,7 @@ export default class QualityRoute extends ModalRoute {
       quality: this.store.findRecord('quality', params.id, {
         reload: true,
         include: [
+          'image',
           'products',
           'products.product_family',
           'product_qualities'

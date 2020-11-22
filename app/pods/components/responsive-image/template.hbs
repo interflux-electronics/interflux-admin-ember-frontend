@@ -1,0 +1,25 @@
+<figure class="responsive-image {{this.orientation}}">
+  <picture {{did-insert this.register}}>
+    {{#if this.html}}
+      {{this.html}}
+    {{else}}
+      <p>No image</p>
+    {{/if}}
+  </picture>
+
+  {{#if @caption}}
+    <figcaption>{{@caption}}</figcaption>
+  {{/if}}
+
+  {{!-- {{#if this.showLoading}}
+    <div class="loading">
+      <LoadSpinner @icon="cup" />
+    </div>
+  {{/if}} --}}
+
+  {{!-- {{#if this.showError}}
+    <div class="error">
+      <Svg::Error />
+    </div>
+  {{/if}} --}}
+</figure>
