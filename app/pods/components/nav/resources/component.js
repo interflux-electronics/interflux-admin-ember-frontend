@@ -59,7 +59,7 @@ export default class NavResourcesComponent extends Component {
         icon: 'svg/building'
       },
       {
-        label: 'Humans',
+        label: 'People',
         route: 'secure.people',
         icon: 'svg/street-view'
       },
