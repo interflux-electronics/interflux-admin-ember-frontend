@@ -1,0 +1,84 @@
+fieldset.one-to-many {
+  // To avoid background colour on focus (lists are too long)
+  &.primary {
+    &.focus {
+      background-color: white;
+    }
+  }
+
+  ul.list {
+    > li {
+      button.trash {
+        width: 46px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        &:hover {
+          [fill] {
+            fill: $error-red;
+          }
+        }
+        &:focus {
+          color: $error-red;
+          text-decoration: none;
+          box-shadow: 0 0 0 2px $error-red;
+        }
+        svg {
+          width: 18px;
+          height: auto;
+          [fill] {
+            fill: #ccc;
+          }
+        }
+      }
+    }
+    & + button,
+    & + .search {
+      margin-top: 12px;
+    }
+  }
+
+  .icon {
+    height: 46px;
+    width: 46px;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 20px;
+      height: auto;
+    }
+    &.lock {
+      svg {
+        [fill] {
+          fill: #ccc;
+        }
+      }
+    }
+    &.error {
+      svg {
+        [fill] {
+          fill: $error-red;
+        }
+      }
+    }
+  }
+
+  p.error {
+    background: $error-red;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    margin-top: 12px;
+    > a {
+      background: transparent !important;
+      color: white !important;
+      &:focus {
+        box-shadow: $error-red 0 0 0 1px, 0 0 0 3px white !important;
+      }
+    }
+  }
+}
