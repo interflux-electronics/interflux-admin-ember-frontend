@@ -19,9 +19,11 @@
 
     <Field::OneToMany
       @label='Icon'
-      @record={{use}}
-      @relation='image'
-      @filterOn='alt'
+      @baseRecord={{use}}
+      @baseLabel='image'
+      @targetModel="image"
+      @targetFilter="alt"
+      @minKeyStrokes='2'
     />
 
     <div class="icon">

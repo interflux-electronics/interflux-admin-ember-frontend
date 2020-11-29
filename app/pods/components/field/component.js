@@ -110,8 +110,11 @@ export default class FieldComponent extends Component {
       })
       .catch((response) => {
         console.error('save failed');
+
+        // Show error in console
         this.api.logError(response);
 
+        // Show error to user
         if (response.errors && response.errors[0] && response.errors[0].code) {
           const code = response.errors[0].code;
           this.error = code;

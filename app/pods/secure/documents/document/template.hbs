@@ -11,10 +11,11 @@
 
     <Field::OneToMany
       @label='Category'
-      @record={{document}}
-      @relation='documentCategory'
-      @filterOn='name'
-      @showAllAtStart
+      @baseRecord={{document}}
+      @baseLabel='documentCategory'
+      @targetModel="document-category"
+      @targetFilter="name"
+      @minKeyStrokes='0'
     />
 
     <Field::ManyToMany

@@ -9,49 +9,6 @@ fieldset.many-to-many {
   .liner {
     > ul {
       > li {
-        // background: white;
-        // line-height: 46px;
-        // border: 1px solid #dddddd;
-        // display: flex;
-        // justify-content: space-between;
-        // & + li {
-        //   margin-top: -1px;
-        // }
-        // &:first-child {
-        //   border-radius: 3px 3px 0 0;
-        // }
-        // &:last-child {
-        //   border-radius: 0 0 3px 3px;
-        // }
-        // &:first-child:first-child {
-        //   border-radius: 3px;
-        // }
-        // &.no-data {
-        //   border-style: dashed;
-        //   padding: 0 15px;
-        // }
-        // span {
-        //   line-height: 46px;
-        //   padding: 0 15px;
-        // }
-        // a {
-        //   display: block;
-        //   color: $blue-0;
-        //   text-decoration: underline;
-        //   outline: 0;
-        //   border-radius: 3px;
-        //   line-height: 46px;
-        //   padding: 0 15px;
-        //   &:hover {
-        //     color: $orange-2;
-        //     text-decoration: none;
-        //   }
-        //   &:focus {
-        //     color: $orange-2;
-        //     text-decoration: none;
-        //     box-shadow: 0 0 0 2px $orange-2;
-        //   }
-        // }
         button.trash {
           width: 46px;
           padding: 0;
@@ -73,7 +30,7 @@ fieldset.many-to-many {
             width: 15px;
             height: auto;
             [fill] {
-              fill: #dddddd;
+              fill: #ccc;
             }
           }
         }

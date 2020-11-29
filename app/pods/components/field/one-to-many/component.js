@@ -1,34 +1,66 @@
 import FieldComponent from '../component';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class OneToManyFieldComponent extends FieldComponent {
-  constructor() {
-    super(...arguments);
+  // @arg label;
+  // @arg legend;
+  // @arg baseRecord;
+  // @arg baseLabel;
+  // @arg targetModel;
+  // @arg targetLabel;
+  // @arg targetFilter;
+  // @arg targetLabel;
+  // @arg targetRoute;
 
-    const { record, relation } = this.args;
-    const value = record.get(relation);
+  get chosenRecord() {
+    const { baseRecord, baseLabel } = this.args;
 
-    this.lastSavedValue = value;
-
-    if (value === undefined) {
-      console.warn(`${relation} is not an attribute on the model`);
-    }
+    return baseRecord.get(baseLabel);
   }
 
-  get value() {
-    return this.args.record.get(this.args.relation);
+  get chosenLabel() {
+    const { chosenRecord } = this;
+    const { targetLabel, targetFilter } = this.args;
+
+    return targetLabel
+      ? chosenRecord.get(targetLabel)
+      : chosenRecord.get(targetFilter);
   }
 
-  set value(value) {
-    this.args.record.set(this.args.relation, value);
+  @tracked showSearch = false;
+
+  @action
+  onClickEditButton() {
+    this.showSearch = true;
   }
 
   @action
-  onSelect(record) {
-    console.debug('selected', record[this.args.filterOn]);
-    this.value = record;
+  onSelect(chosenRecord) {
+    const { baseRecord, baseLabel } = this.args;
+    this.showSearch = false;
+    baseRecord[baseLabel] = chosenRecord;
     console.debug('saving');
-    this.save();
+    baseRecord
+      .save({
+        adapterOptions: {
+          whitelist: this.args.baseLabel
+        }
+      })
+      .then(() => {
+        console.debug('success');
+      })
+      .catch((response) => {
+        // Log error in console
+        this.api.logError(response);
+
+        // Show error to user
+        try {
+          this.error = response.errors[0].code || 'unknown';
+        } catch (e) {
+          this.error = 'unknown';
+        }
+      });
   }
 
   @action

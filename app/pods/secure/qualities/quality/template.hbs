@@ -19,9 +19,11 @@
 
     <Field::OneToMany
       @label='Icon'
-      @record={{quality}}
-      @relation='image'
-      @filterOn='alt'
+      @baseRecord={{quality}}
+      @baseLabel='image'
+      @targetModel="image"
+      @targetFilter="alt"
+      @minKeyStrokes='2'
     />
 
     <div class="icon">
@@ -32,8 +34,6 @@
         <a href={{href-to 'secure.images.image' quality.image.id}}>
           <ResponsiveImage @image={{quality.image}} />
         </a>
-      {{else}}
-        <p>- no icon -</p>
       {{/if}}
     </div>
 

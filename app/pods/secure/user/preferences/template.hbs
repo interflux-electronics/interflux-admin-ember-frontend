@@ -1,5 +1,31 @@
-<Page::Content>
+<Modal @id="preferences">
   <h1>Preferences</h1>
-  <p>You'll be able to manage your account preferences here.</p>
-  <p>To be confirmed.</p>
-</Page::Content>
+
+  <h2>Account</h2>
+
+  <Field::OneToMany
+    @label='User'
+    @legend='This should be you! :-)'
+    @baseRecord={{this.auth.user}}
+    @baseLabel='person'
+    @targetModel="person"
+    @targetFilter="firstName"
+    @targetLabel="fullName"
+    @targetRoute='secure.people.person'
+    @minKeyStrokes='1'
+  />
+
+  <Field::String
+    @label='Email'
+    @record={{this.auth.user}}
+    @attribute='email'
+    @disabled='true'
+  />
+
+  <Field::String
+    @label='Change password'
+    @legend='Minimum 10 characters. To improve security: Use a unique password for every website / app to improve security. Long passwords are more secure than short complex ones. If you can remember your own password, it is probably not that secure. Consider password managers. Ask Jan? :)'
+    @record={{this.auth.user}}
+    @attribute='password'
+  />
+</Modal>

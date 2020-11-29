@@ -21,9 +21,11 @@
 
     <Field::OneToMany
       @label='Country'
-      @record={{company}}
-      @relation='country'
-      @filterOn='nameEnglish'
+      @baseRecord={{company}}
+      @baseLabel='country'
+      @targetModel="country"
+      @targetFilter="nameEnglish"
+      @minKeyStrokes='2'
     />
 
     <Field::String

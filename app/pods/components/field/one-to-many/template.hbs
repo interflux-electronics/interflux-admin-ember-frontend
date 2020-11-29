@@ -1,58 +1,94 @@
 <Fieldset
-  {{!-- props --}}
   @id={{this.id}}
   @label={{@label}}
   @legend={{@legend}}
   @component="one-to-many"
   @theme={{@theme}}
-  {{!-- state --}}
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <Search
-    {{!-- props --}}
-    @id={{this.id}}
-    @theme={{@theme}}
-    @placeholder={{@placeholder}}
-    @autofocus={{@autofocus}}
-    @disabled={{@disabled}}
-    {{!-- state --}}
-    @value={{this.value}}
-    @state={{this.state}}
-    {{!-- events --}}
-    @onFocus={{this.onFocus}}
-    @onBlur={{this.onBlur}}
-    {{!-- @onKeyDown={{this.onKeyDown}}--}}
-    @onKeyUp={{this.onKeyUp}}
-    {{!-- @onMouseOver={{this.onMouseOver}}--}}
-    {{!-- @onMouseOut={{this.onMouseOut}}--}}
-    {{!-- unique --}}
-    @onSelect={{this.onSelect}}
-    @searchModel={{@relation}}
-    @searchFilter={{@filterOn}}
-    @error={{this.error}}
-  >
-    {{#if (eq this.state 'saving')}}
-      <div class="action">
-        <Button
-          @theme="save"
-          @icon="ellipsis"
-          @isBusy="true"
-        />
-      </div>
-    {{/if}}
+  <ul class="list">
+    <li class={{if this.chosenRecord 'solid' 'dashed'}}>
+      {{#if this.chosenRecord}}
+        {{#if @targetRoute}}
+          <a href={{href-to @targetRoute this.chosenRecord.id}}>
+            {{this.chosenLabel}}
+          </a>
+        {{else}}
+          <span>{{this.chosenLabel}}</span>
+        {{/if}}
 
-    {{#if (eq this.state 'error')}}
-      <div class="icon">
-        <Svg::Error />
-      </div>
-      {{#if this.hasFocus}}
-        <p class="message">Sorry, something didn't quite go as planned. Nobody should ever see this message, so please <a
-            href="mailto:j.werkhoven@interflux.com"
-            target="_blank"
-            rel="noreferrer noopener"
-          >tell Jan</a> that you encounter <strong>error {{this.error}}</strong>.</p>
+        {{#if @disabled}}
+          <div class="icon lock">
+            <Svg::Lock />
+          </div>
+        {{else}}
+          {{#unless this.error}}
+            <Button
+              @icon="trash"
+              @onClick={{fn this.onSelect null}}
+            />
+          {{/unless}}
+        {{/if}}
+      {{else}}
+        <span>- none -</span>
       {{/if}}
+
+      {{#if this.error}}
+        <div class="icon error">
+          <Svg::Error />
+        </div>
+      {{/if}}
+    </li>
+  </ul>
+
+  {{#unless @disabled}}
+    {{#if this.showSearch}}
+      <Search
+        @id={{this.id}}
+        @theme={{@theme}}
+        @placeholder="Search"
+        @autofocus="auto"
+        @disabled={{@disabled}}
+        @value={{this.value}}
+        @state={{this.state}}
+        @onFocus={{this.onFocus}}
+        @onBlur={{this.onBlur}}
+        @onKeyUp={{this.onKeyUp}}
+        @onSelect={{this.onSelect}}
+        @searchModel={{@targetModel}}
+        @searchLabel={{@targetLabel}}
+        @searchFilter={{@targetFilter}}
+        @minKeyStrokes={{@minKeyStrokes}}
+        @error={{this.error}}
+      >
+        {{#if (eq this.state 'saving')}}
+          <div class="action">
+            <Button
+              @theme="save"
+              @icon="ellipsis"
+              @isBusy="true"
+            />
+          </div>
+        {{/if}}
+      </Search>
+    {{else}}
+      {{#unless this.error}}
+        <Button
+          @text="Edit"
+          @theme="save"
+          @onClick={{this.onClickEditButton}}
+        />
+      {{/unless}}
     {{/if}}
-  </Search>
+  {{/unless}}
+
+  {{#if this.error}}
+    <p class="message error">Sorry, something didn't quite go as planned. Nobody should ever see this message, so please <a
+        href="mailto:j.werkhoven@interflux.com"
+        target="_blank"
+        rel="noreferrer noopener"
+      >tell Jan</a> that you encounter <strong>error {{this.error}}</strong>.
+    </p>
+  {{/if}}
 </Fieldset>

@@ -17,10 +17,13 @@
 
     <Field::OneToMany
       @label='Family'
-      @record={{product}}
-      @relation='productFamily'
-      @filterOn='namePlural'
+      @baseRecord={{product}}
+      @baseLabel='productFamily'
+      @targetModel="product-family"
+      @targetFilter="namePlural"
+      @minKeyStrokes='0'
     />
+
 
     {{!-- TODO: create sub families --}}
 

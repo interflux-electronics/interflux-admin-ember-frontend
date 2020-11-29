@@ -28,9 +28,11 @@
       <Field::OneToMany
         @label='Copyright'
         @legend='When we receive images from other companies, we should attribute them and link to their website. The copyright link will show right below the label. Leave blank if the image belongs to Interflux.'
-        @record={{image}}
-        @relation='company'
-        @filterOn='businessName'
+        @baseRecord={{image}}
+        @baseLabel='company'
+        @targetModel="company"
+        @targetFilter="businessName"
+        @minKeyStrokes='2'
       />
     {{/if}}
 

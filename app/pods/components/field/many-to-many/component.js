@@ -10,11 +10,24 @@ import { inject as service } from '@ember/service';
 //   @baseLabel="productQualities"
 //   @joinModel="product-quality"
 //   @targetModel="product"
-//   @targetLabel="name"
+//   @targetLabel="fullName"
+//   @targetFilter="firstName"
 //   @targetRoute='secure.products.product'
 // />
 
 export default class ManyToManyFieldComponent extends FieldComponent {
+  // @arg label;
+  // @arg legend;
+  // @arg baseRecord;
+  // @arg baseModel;
+  // @arg baseLabel;
+  // @arg joinModel;
+  // @arg targetModel;
+  // @arg targetLabel;
+  // @arg targetFilter;
+  // @arg targetLabel;
+  // @arg targetRoute;
+
   @service api;
   @service store;
 

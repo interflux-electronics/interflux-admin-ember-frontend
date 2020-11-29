@@ -4,6 +4,23 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class SearchComponent extends Component {
+  // @arg id
+  // @arg theme
+  // @arg placeholder
+  // @arg autofocus
+  // @arg disabled
+  // @arg value
+  // @arg state
+  // @arg onFocus
+  // @arg onBlur
+  // @arg onKeyUp
+  // @arg onSelect
+  // @arg searchModel
+  // @arg searchLabel
+  // @arg searchFilter
+  // @arg minKeyStrokes
+  // @arg error
+
   @service store;
   @service api;
 
@@ -39,12 +56,21 @@ export default class SearchComponent extends Component {
     return arr.length;
   }
 
-  get showPleaseType() {
-    return this.value === this.recordValue || !this.value;
+  get showResults() {
+    return this.value.length >= this.minKeyStrokes;
+    // return !(this.value === this.recordValue || !this.value);
   }
 
-  get showResults() {
-    return !this.showPleaseType;
+  get keepTypingMessage() {
+    if (!this.value) {
+      return 'Type to search';
+    }
+    const n = this.minKeyStrokes - this.value.length;
+    return `Type ${n} more character${n > 1 ? 's' : ''}`;
+  }
+
+  get minKeyStrokes() {
+    return this.args.minKeyStrokes || 0;
   }
 
   get buttons() {
@@ -122,6 +148,7 @@ export default class SearchComponent extends Component {
     this.focus = true;
 
     this.selectText();
+    this.searchDatabase();
 
     if (this.args.onFocus) {
       this.args.onFocus(event);
@@ -209,8 +236,8 @@ export default class SearchComponent extends Component {
       // Update local value
       this.value = value;
 
-      // Send search event to parent component
-      this.searchDatabase(value);
+      // Hit API and search database for query
+      this.searchDatabase();
 
       // Reset highlighted record
       this.highlight = 0;
@@ -231,7 +258,17 @@ export default class SearchComponent extends Component {
   mostRecentQuery;
 
   @action
-  async searchDatabase(query) {
+  async searchDatabase() {
+    const query = this.input.value;
+
+    if (query.length < this.minKeyStrokes) {
+      return console.warn(`not enough key strokes for search "${query}"`);
+    }
+
+    console.debug('searching', query);
+
+    const { searchModel, searchFilter } = this.args;
+
     // First we store the query for later use
     this.mostRecentQuery = query;
 
@@ -239,36 +276,31 @@ export default class SearchComponent extends Component {
     this.recordsForQuery = null;
     this.error = false;
 
-    // Prevent empty queries from being requested (no use case)
-    if (!query) {
-      return console.warn('aborting search, no query');
+    // Show loadspinner
+    this.isSearching = true;
+
+    // Prepare filters
+    // If no characters were typed, then fetch all records.
+    // If minimum 1 character was typed, do a filtered search.
+    const filter = {};
+    if (query) {
+      filter[searchFilter] = `${query}*`;
     }
 
-    console.debug('searching', query);
-
     // Then we send the API request and wait
-    // TODO: catch and show server errors
-    this.isSearching = true;
-    const model = this.args.searchModel;
-
-    const key = this.args.searchFilter;
-    const filter = {};
-    filter[key] = `${query}*`;
-
     const response = await this.store
-      .query(model, { filter })
+      .query(searchModel, { filter })
       .catch((response) => {
         this.api.logError(response);
         this.error = true;
       });
 
     if (this.error) {
-      return;
+      return console.error('search went bad');
     }
 
     // Here we sort results that start with the query to the top and the rest below.
     // Both groups are sorted alphabetically before being merged into one array.
-    const { searchFilter } = this.args;
     const condition = (record) => {
       return record[searchFilter].toLowerCase().startsWith(query.toLowerCase());
     };

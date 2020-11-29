@@ -27,13 +27,9 @@
 
     {{#unless @error}}
       {{#if this.focus}}
-        {{#if @isSearching}}
+        {{#if this.isSearching}}
           <p class="message searching">Searching ...</p>
         {{else}}
-          {{#if this.showPleaseType}}
-            <p class="message">Type to search</p>
-          {{/if}}
-
           {{#if this.showResults}}
             <div class="results">
 
@@ -56,6 +52,8 @@
                 <p class="message">{{this.recordCount}} results</p>
               {{/if}}
             </div>
+          {{else}}
+            <p class="message">{{this.keepTypingMessage}}</p>
           {{/if}}
         {{/if}}
       {{/if}}

@@ -40,11 +40,12 @@
     p.searching {
       font-size: 15px;
       line-height: 36px;
+      padding: 0 15px;
       color: white;
       background: $blue-0;
       background-color: $blue-0;
       background-image: url('#{$cdn}/images/admin/diagonals-blue.svg');
-      background-size: 30px 30px;
+      background-size: 31px 31px;
       animation: button-loading 1400ms linear infinite;
       box-shadow: $blue-0 0 0 0 1px;
     }
