@@ -28,15 +28,15 @@
 
         <Button
           @theme="tertiary"
-          @icon={{if this.isBusy 'ellipsis' 'chevron-right'}}
+          @icon={{if this.loading 'ellipsis' 'chevron-right'}}
           @onClick={{this.submit}}
-          @isBusy={{this.isBusy}}
+          @isBusy={{this.loading}}
         />
       </div>
 
-      {{#if this.auth.error}}
+      {{#if this.error}}
         <div class="row three">
-          <p>Error: {{this.auth.error}}</p>
+          <p>Error: {{this.error}}</p>
         </div>
       {{/if}}
     </form>
