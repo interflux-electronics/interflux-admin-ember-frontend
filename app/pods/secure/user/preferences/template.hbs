@@ -5,7 +5,6 @@
 
   <Field::OneToMany
     @label='User'
-    @legend='This should be you! :-)'
     @baseRecord={{this.auth.user}}
     @baseLabel='person'
     @targetModel="person"
@@ -13,6 +12,7 @@
     @targetLabel="fullName"
     @targetRoute='secure.people.person'
     @minKeyStrokes='1'
+    @disabled="true"
   />
 
   <Field::String
@@ -24,7 +24,7 @@
 
   <Field::String
     @label='Change password'
-    @legend='Minimum 10 characters. To improve security: Use a unique password for every website / app to improve security. Long passwords are more secure than short complex ones. If you can remember your own password, it is probably not that secure. Consider password managers. Ask Jan? :)'
+    @legend='Minimum 8 characters. To improve security: Use a unique password for every website / app to improve security. Long passwords are more secure than short complex ones. If you can remember your own password, it is probably not that secure. Consider password managers. Ask Jan? :)'
     @record={{this.auth.user}}
     @attribute='password'
   />
