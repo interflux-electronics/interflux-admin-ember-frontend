@@ -11,6 +11,8 @@ export default class UseModel extends Model {
   @hasMany('product-use') productUses;
   @hasMany('product') products;
 
+  @hasMany('use-image') useImages;
+
   get families() {
     return this.products.mapBy('family').uniqBy('id');
   }

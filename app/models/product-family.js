@@ -6,9 +6,11 @@ export default class ProductFamilyModel extends Model {
   @alias('id') slug;
   @attr('string') nameSingle;
   @attr('string') namePlural;
+  @attr('string') gist;
   @attr('number') order;
 
   @hasMany('product') products;
+  @hasMany('product-family-image') productFamilyImages;
 
   get url() {
     return `${ENV.wwwHost}/en/products/${this.slug}`;

@@ -18,6 +18,14 @@
     />
 
     <Field::String
+      @label='Pitch'
+      @legend='Explain to a layman in 10 seconds what this type of product family is and does. The long explanation will be done elsewhere on a blog page.'
+      @record={{family}}
+      @attribute='gist'
+      @multiline='true'
+    />
+
+    <Field::String
       @label='Rank on website'
       @legend='Use numbers to indicate how you would want to rank the product families on the website. 1 goes to the top, 9 to the bottom.'
       @record={{family}}
@@ -34,6 +42,20 @@
       @relationModel='product'
       @relationLabel='name'
       @route='secure.products.product'
+    />
+
+    <h2>Images</h2>
+
+    <Field::ManyToMany
+      @label="The 4 avatars"
+      @legend="On the product overview page we show 4 images to represent this product family."
+      @baseRecord={{family}}
+      @baseModel="productFamily"
+      @baseLabel="productFamilyImages"
+      @joinModel="product-family-image"
+      @targetModel="image"
+      @targetLabel="alt"
+      @targetRoute='secure.images.image'
     />
 
     <h2>Database</h2>

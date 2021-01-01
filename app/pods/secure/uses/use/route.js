@@ -8,6 +8,7 @@ export default class UseRoute extends ModalRoute {
         reload: true,
         include: [
           'image',
+          'use_images',
           'products',
           'products.product_family',
           'product_uses'

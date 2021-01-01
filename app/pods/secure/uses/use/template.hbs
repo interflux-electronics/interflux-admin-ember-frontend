@@ -72,6 +72,20 @@
       </ul>
     </Fieldset>
 
+    <h2>Images</h2>
+
+    <Field::ManyToMany
+      @label="The 4 avatars"
+      @legend="On the product overview page we show 4 images to represent this process."
+      @baseRecord={{use}}
+      @baseModel="use"
+      @baseLabel="useImages"
+      @joinModel="use-image"
+      @targetModel="image"
+      @targetLabel="alt"
+      @targetRoute='secure.images.image'
+    />
+
     <h2>Database</h2>
 
     <Field::String
