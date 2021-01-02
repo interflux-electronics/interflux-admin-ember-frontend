@@ -17,28 +17,6 @@
       @multiline='true'
     />
 
-    <Field::OneToMany
-      @label='Icon'
-      @baseRecord={{use}}
-      @baseLabel='image'
-      @targetModel="image"
-      @targetFilter="alt"
-      @minKeyStrokes='2'
-    />
-
-    <div class="icon">
-      {{#if use.image}}
-        <a href={{href-to 'secure.images.image' use.image.id}}>
-          <ResponsiveImage @image={{use.image}} />
-        </a>
-        <a href={{href-to 'secure.images.image' use.image.id}}>
-          <ResponsiveImage @image={{use.image}} />
-        </a>
-      {{else}}
-        <p>- no icon -</p>
-      {{/if}}
-    </div>
-
     <h2>Relations</h2>
 
     <Field::ManyToMany
@@ -74,6 +52,28 @@
 
     <h2>Images</h2>
 
+    <Field::OneToMany
+      @label='Icon'
+      @baseRecord={{use}}
+      @baseLabel='image'
+      @targetModel="image"
+      @targetFilter="alt"
+      @minKeyStrokes='2'
+    />
+
+    <div class="icon">
+      {{#if use.image}}
+        <a href={{href-to 'secure.images.image' use.image.id}}>
+          <ResponsiveImage @image={{use.image}} />
+        </a>
+        <a href={{href-to 'secure.images.image' use.image.id}}>
+          <ResponsiveImage @image={{use.image}} />
+        </a>
+      {{else}}
+        <p>- no icon -</p>
+      {{/if}}
+    </div>
+
     <Field::ManyToMany
       @label="The 4 avatars"
       @legend="On the product overview page we show 4 images to represent this process."
@@ -84,7 +84,19 @@
       @targetModel="image"
       @targetLabel="alt"
       @targetRoute='secure.images.image'
+      @disabled={{this.maxAvatarCountReached}}
     />
+
+    <Fieldset>
+      <ul class="images">
+        {{#each use.useImages as |relation|}}
+          <li>
+            <p>{{relation.image.alt}}</p>
+            <ResponsiveImage @image={{relation.image}} />
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
 
     <h2>Database</h2>
 
