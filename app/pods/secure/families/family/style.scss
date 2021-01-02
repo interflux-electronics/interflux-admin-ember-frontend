@@ -1,0 +1,31 @@
+#family {
+  ul.images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    li {
+      position: relative;
+      width: 205px;
+      height: 205px;
+      margin-bottom: 10px;
+      display: flex;
+      figure {
+        width: 100%;
+        height: auto;
+      }
+      p {
+        position: absolute;
+        display: block;
+        left: 3px;
+        top: 3px;
+        background: #eee;
+        z-index: 1;
+        font-size: 14px;
+        height: 18px;
+        line-height: 20px;
+        text-align: center;
+        padding: 0 4px;
+      }
+    }
+  }
+}

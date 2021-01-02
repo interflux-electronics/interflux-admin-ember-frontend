@@ -56,7 +56,19 @@
       @targetModel="image"
       @targetLabel="alt"
       @targetRoute='secure.images.image'
+      @disabled={{this.maxAvatarCountReached}}
     />
+
+    <Fieldset>
+      <ul class="images">
+        {{#each family.productFamilyImages as |relation|}}
+          <li>
+            <p>{{relation.image.alt}}</p>
+            <ResponsiveImage @image={{relation.image}} />
+          </li>
+        {{/each}}
+      </ul>
+    </Fieldset>
 
     <h2>Database</h2>
 
