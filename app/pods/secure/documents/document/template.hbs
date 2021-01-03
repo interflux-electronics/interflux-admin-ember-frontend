@@ -18,23 +18,20 @@
       @minKeyStrokes='0'
     />
 
-    <Field::ManyToMany
-      @label="Related products"
-      @baseRecord={{document}}
-      @baseModel="document"
-      @baseLabel="productDocuments"
-      @joinModel="product-document"
-      @targetModel="product"
-      @targetLabel="name"
-      @targetRoute='secure.products.product'
-    />
+    <h2>Website</h2>
+
+    <Field::Boolean
+      @record={{document}}
+      @attribute='public'
+    >
+      <label>Show on website</label>
+    </Field::Boolean>
 
     <h2>CDN</h2>
-    <p>The Interflux Content Delivery Network (CDN) is where we images, videos and PDFs that need to be accessed by our websites, emails and apps. This network is optimised to guarantee the fastest possible download speeds, no matter where you are on the planet. Fast websites means happy visitors and happy Google bots.</p>
 
     <Fieldset
-      @label='Sharable links'
-      @legend="Copy and paste these:"
+      @label='Permanent CDN link'
+      @legend="Copy and paste this link in emails:"
     >
       <ul class="list">
         {{#each document.files as |file|}}
@@ -51,10 +48,27 @@
       </ul>
     </Fieldset>
 
-    <p>You can copy paste these links into emails, rather than uploading the PDFs as attachements. This saves spaces in everyone's inbox and the link will always open the most up-to-date version.</p>
+    <p>Instead of uploading PDFs in emails, copy paste the link above into emails. This saves spaces in everyone's inbox and the link will always open the most up-to-date version, unlike email attachments.</p>
+    <p>The Interflux Content Delivery Network (CDN) is where we store images, videos and PDFs that need to be accessed by our websites, emails and apps. This network is optimised to guarantee the fastest possible download speeds, no matter where you are on the planet. Fast websites means happy visitors and happy Google bots.</p>
+
+    <h2>Products</h2>
+
+    <Field::ManyToMany
+      @label="Related products"
+      @legend="Add a product to this list if you want this documents to be shown on a particular product page."
+      @baseRecord={{document}}
+      @baseModel="document"
+      @baseLabel="productDocuments"
+      @joinModel="product-document"
+      @targetModel="product"
+      @targetLabel="name"
+      @targetRoute='secure.products.product'
+    />
+
+    <h2>Database</h2>
 
     <Field::String
-      @label='CDN base path'
+      @label='Database ID'
       @record={{document}}
       @attribute='id'
       @disabled='true'

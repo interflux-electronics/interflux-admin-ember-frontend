@@ -5,6 +5,7 @@ export default class DocumentModel extends Model {
   @attr('string') path;
   @attr('string') name;
   @attr('string') variations;
+  @attr('boolean') public;
 
   @belongsTo('document-category') documentCategory;
   @alias('documentCategory') category;
