@@ -17,6 +17,13 @@
       @multiline='true'
     />
 
+    <Field::String
+      @label='Rank'
+      @legend="Enter an integer. Wherever we list processes on our website, we'll sort them small numbers to the top and big numbers to the bottom. Those without integer will be sorted alphabetically below those with an integer."
+      @record={{use}}
+      @attribute='rank'
+    />
+
     <h2>Relations</h2>
 
     <Field::ManyToMany

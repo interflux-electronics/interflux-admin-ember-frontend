@@ -5,6 +5,7 @@ export default class UseModel extends Model {
   @attr('string') icon;
   @attr('string') text;
   @attr('string') gist;
+  @attr('number') rank;
 
   @belongsTo('image') image;
 
