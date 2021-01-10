@@ -40,7 +40,7 @@ fieldset.boolean {
     }
   }
   p.error {
-    background: $error-red;
+    background: $red-1;
     color: white;
     padding: 10px;
     border-radius: 2px;
@@ -49,7 +49,7 @@ fieldset.boolean {
       background: transparent !important;
       color: white !important;
       &:focus {
-        box-shadow: $error-red 0 0 0 1px, 0 0 0 3px white !important;
+        box-shadow: $red-1 0 0 0 1px, 0 0 0 3px white !important;
       }
     }
     .icon {

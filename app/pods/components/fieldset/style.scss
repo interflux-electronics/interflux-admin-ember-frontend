@@ -19,7 +19,7 @@ fieldset {
       font-family: $regular;
       font-size: 16px;
       line-height: 150%;
-      color: $paragraph-color-1;
+      color: $grey-7;
       margin-bottom: 16px;
     }
     & + fieldset {
@@ -32,12 +32,12 @@ fieldset {
     }
     &.error {
       &.focus {
-        background-color: rgba($error-red, 0.1);
+        background-color: rgba($red-1, 0.1);
       }
     }
     &.warning {
       &.focus {
-        background-color: rgba($error-red, 0.1);
+        background-color: rgba($red-1, 0.1);
       }
     }
     &.dirty,

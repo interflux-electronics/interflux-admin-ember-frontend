@@ -17,13 +17,13 @@ fieldset.one-to-many {
         border-radius: 3px;
         &:hover {
           [fill] {
-            fill: $error-red;
+            fill: $red-1;
           }
         }
         &:focus {
-          color: $error-red;
+          color: $red-1;
           text-decoration: none;
-          box-shadow: 0 0 0 2px $error-red;
+          box-shadow: 0 0 0 2px $red-1;
         }
         svg {
           width: 18px;
@@ -61,14 +61,14 @@ fieldset.one-to-many {
     &.error {
       svg {
         [fill] {
-          fill: $error-red;
+          fill: $red-1;
         }
       }
     }
   }
 
   p.error {
-    background: $error-red;
+    background: $red-1;
     color: white;
     padding: 10px;
     border-radius: 3px;
@@ -77,7 +77,7 @@ fieldset.one-to-many {
       background: transparent !important;
       color: white !important;
       &:focus {
-        box-shadow: $error-red 0 0 0 1px, 0 0 0 3px white !important;
+        box-shadow: $red-1 0 0 0 1px, 0 0 0 3px white !important;
       }
     }
   }

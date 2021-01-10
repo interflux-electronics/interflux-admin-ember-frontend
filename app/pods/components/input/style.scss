@@ -7,22 +7,22 @@
     &.error {
       &.focus {
         .wrapper {
-          box-shadow: $error-red 0 0 0 2px, 0 2px 10px rgba(black, 0.15);
+          box-shadow: $red-1 0 0 0 2px, 0 2px 10px rgba(black, 0.15);
         }
       }
       .wrapper {
-        box-shadow: $error-red 0 0 0 2px;
+        box-shadow: $red-1 0 0 0 2px;
       }
       .icon {
         svg {
           width: 22px;
           path {
-            fill: $error-red;
+            fill: $red-1;
           }
         }
       }
       p.message {
-        background: $error-red;
+        background: $red-1;
         color: white;
         a {
           color: white;
@@ -112,7 +112,7 @@
       max-width: 100%;
       outline: 0;
       box-shadow: none;
-      color: $paragraph-color-1;
+      color: $grey-7;
       width: 100%;
       box-sizing: border-box;
       background: white;
@@ -167,9 +167,9 @@
       line-height: 150%;
       padding: 7px 15px;
       background: #eee;
-      color: $paragraph-color-1;
+      color: $grey-7;
       a {
-        color: $paragraph-color-1;
+        color: $grey-7;
         text-decoration: underline;
         &:hover {
           text-decoration: none;

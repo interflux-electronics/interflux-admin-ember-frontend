@@ -18,13 +18,13 @@ fieldset.many-to-many {
           border-radius: 3px;
           &:hover {
             [fill] {
-              fill: $error-red;
+              fill: $red-1;
             }
           }
           &:focus {
-            color: $error-red;
+            color: $red-1;
             text-decoration: none;
-            box-shadow: 0 0 0 2px $error-red;
+            box-shadow: 0 0 0 2px $red-1;
           }
           svg {
             width: 15px;
