@@ -1,7 +1,7 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import ENV from 'interflux/config/environment';
 
 export default class UseModel extends Model {
-  @attr('string') slug;
   @attr('string') icon;
   @attr('string') text;
   @attr('string') gist;
@@ -16,5 +16,9 @@ export default class UseModel extends Model {
 
   get families() {
     return this.products.mapBy('family').uniqBy('id');
+  }
+
+  get url() {
+    return `${ENV.wwwHost}/en/products/for-${this.id}`;
   }
 }

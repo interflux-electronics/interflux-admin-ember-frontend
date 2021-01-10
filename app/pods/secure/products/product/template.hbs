@@ -168,6 +168,69 @@
       </ul>
     </Fieldset>
 
+    <h2>Status</h2>
+
+    <Field::String::Radio
+      @record={{product}}
+      @attribute='status'
+      @options={{this.statusOptions}}
+    />
+
+    <h2>Website</h2>
+
+    {{#if product.isOnline}}
+      <Fieldset
+        @label='Live links on our website'
+        @legend='Copy paste the links below to share.'
+      >
+        <ul class="list">
+          <li>
+            <a
+              href={{product.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Product page - {{product.name}}
+            </a>
+          </li>
+          <li>
+            <a
+              href={{product.family.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Product list - {{product.family.namePlural}}
+            </a>
+          </li>
+          {{#each product.uses as |use|}}
+            <li>
+              <a
+                href={{use.url}}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Product list - {{use.text}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{else}}
+      <p>{{product.name}} is hidden from our website.</p>
+    {{/if}}
+
+    <h2>Substite</h2>
+
+    <Field::OneToMany
+      @label='Is there a better product?'
+      @legend='In case there is a product which does the same thing as {{product.name}}, but better, then please search and select that product here. On the product page of {{product.name}} we will show a message recommending them to have a look at the better product instead. This is highly recommended for products which are outdated or out-of-production.'
+      @baseRecord={{product}}
+      @baseLabel='superiorProduct'
+      @targetModel="product"
+      @targetFilter="name"
+      @minKeyStrokes='1'
+    />
+
     <h2>Documents</h2>
 
     <Field::ManyToMany
@@ -180,70 +243,6 @@
       @targetLabel="name"
       @targetRoute='secure.documents.document'
     />
-
-    <h2>Website</h2>
-
-    <Field::Boolean
-      @label='Show on our website'
-      @record={{product}}
-      @attribute='public'
-    />
-
-    {{#if product.public}}
-      <Fieldset
-        @label='Public pages'
-        @legend='Copy paste these links for sharing.'
-      >
-        <ul class="list">
-          <li>
-            <a
-              href={{product.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Product page
-            </a>
-          </li>
-
-          <li>
-            <a
-              href={{product.family.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Family page
-            </a>
-          </li>
-        </ul>
-      </Fieldset>
-
-      {{!-- <Field::Boolean
-      @label='Featured - '
-      @record={{product}}
-      @attribute='featured'
-      /> --}}
-
-      <Field::Boolean
-        @label='Mark as popular'
-        @record={{product}}
-        @attribute='popular'
-      />
-
-      <Field::Boolean
-        @label='Mark as new'
-        @record={{product}}
-        @attribute='new'
-      />
-
-      {{!-- <Field::Boolean
-        @label='Is still in production (can be ordered)'
-        @record={{product}}
-        @attribute='orderable'
-      /> --}}
-
-    {{else}}
-      <p>- {{product.name}} is hidden from our website -</p>
-    {{/if}}
 
     <h2>Database</h2>
 

@@ -7,12 +7,7 @@ export default class ProductModel extends Model {
   @attr('string') name;
   @attr('string') label;
   @attr('string') pitch;
-
-  @attr('boolean') public;
-  @attr('boolean') orderable;
-  @attr('boolean') featured;
-  @attr('boolean') popular;
-  @attr('boolean') new;
+  @attr('string') status;
 
   @belongsTo('product-family') productFamily;
   @alias('productFamily') family;
@@ -29,7 +24,26 @@ export default class ProductModel extends Model {
   @hasMany('product-quality') productQualities;
   @hasMany('product-use') productUses;
 
+  @belongsTo('product', { inverse: 'inferiorProducts' }) superiorProduct;
+  @hasMany('product', { inverse: 'superiorProduct' }) inferiorProducts;
+
   get url() {
     return `${ENV.wwwHost}/en/product/${this.slug}`;
+  }
+
+  get isOffline() {
+    return this.status === 'offline';
+  }
+
+  get isOnline() {
+    return !this.isOffline;
+  }
+
+  get isOutdated() {
+    return this.status === 'outdated';
+  }
+
+  get isOutOfProduction() {
+    return this.status === 'out-of-production';
   }
 }
