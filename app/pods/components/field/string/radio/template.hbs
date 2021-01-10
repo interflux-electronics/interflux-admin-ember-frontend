@@ -16,7 +16,7 @@
           <div
             role="radio"
             aria-checked={{option.ariaChecked}}
-            tabindex={{option.tabindex}}
+            tabindex={{if option.ariaChecked '0' '-1'}}
             {{on 'click' (fn this.onClick option.value)}}
             {{on 'keydown' (fn this.onKeyDown option.value)}}
           ></div>
