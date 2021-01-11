@@ -43,7 +43,7 @@ export default class ProductModel extends Model {
     return this.status === 'outdated';
   }
 
-  get isOutOfProduction() {
-    return this.status === 'out-of-production';
+  get isDiscontinued() {
+    return this.status === 'discontinued';
   }
 }

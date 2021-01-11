@@ -96,14 +96,14 @@ export default class ProductController extends Controller {
           '**Outdated** - This product has been outdated by a better product and we no longer want to promote it. The reason we still produce this product is because some customers still rely on it and are unable to switch to our better product. Outdated products are hidden from the product lists, however their product pages can still be found via Google, via our product search bar or by clicking a checkbox next to the product list.'
       },
       {
-        value: 'out-of-production',
+        value: 'discontinued',
         label:
-          '**Out of production** - This product can no longer be produced nor ordered. Just like outdated products, these are hidden from the product lists, unless a checkbox is ticked. Their product pages can still be found via Google and our product search bar.'
+          '**Discontinued** - This product can no longer be produced nor ordered. Just like outdated products, these are hidden from the product lists, unless a checkbox is ticked. Their product pages can still be found via Google and our product search bar.'
       },
       {
         value: 'offline',
         label:
-          '**Offline** - This product is entirely hidden from our website and will not show up in Google.'
+          '**Offline** - This product is entirely hidden from our website and will be removed from the Google search results.'
       }
     ];
   }
