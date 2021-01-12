@@ -86,9 +86,9 @@ export default class ProductController extends Controller {
           '**Popular** - This product is one of our best sellers. Popular products are sorted to the top every product list, right below new products. Highlighted as "Popular". In production. Can be ordered.'
       },
       {
-        value: 'common',
+        value: 'recommended',
         label:
-          '**Common** - Most of our products. Sorted below new and popular products. No highlights. In production. Can be ordered.'
+          '**Recommended** - Most of our products. Sorted below new and popular products. No highlights. In production. Can be ordered.'
       },
       {
         value: 'outdated',
