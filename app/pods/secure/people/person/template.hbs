@@ -36,20 +36,53 @@
       @targetRoute='secure.companies.company'
     />
 
-    <h2>Contact</h2>
+    {{#each person.companyMembers as |companyMember|}}
+      <h2>{{companyMember.company.businessName}}</h2>
 
-    <Field::String
-      @label='Personal phone'
-      @legend='Never made public. For internal communcation only.'
-      @record={{person}}
-      @attribute='phone'
-    />
+      <Field::String
+        @label="Role at {{companyMember.company.businessName}}"
+        @record={{companyMember}}
+        @attribute='title'
+      />
+
+      <Field::String
+        @label="Company email"
+        @record={{companyMember}}
+        @attribute='email'
+      />
+
+      <Field::String
+        @label="Company phone number"
+        @record={{companyMember}}
+        @attribute='phone'
+      />
+
+      <Field::Boolean
+        @record={{companyMember}}
+        @attribute='public'
+      >
+        <label>Show {{person.firstName}} on the <a
+            href="{{env 'appHosts'}}/en/contact"
+            target='_blank'
+            rel='noopener noreferrer'
+          >contact page</a> of our website.</label>
+      </Field::Boolean>
+    {{/each}}
+
+    <h2>Personal</h2>
 
     <Field::String
       @label='Personal email'
-      @legend='Never made public. For internal communcation only.'
+      @legend='Never made public. For internal communication only.'
       @record={{person}}
       @attribute='email'
+    />
+
+    <Field::String
+      @label='Personal phone number'
+      @legend='Never made public. For internal communication only.'
+      @record={{person}}
+      @attribute='phone'
     />
 
     <h2>Database</h2>

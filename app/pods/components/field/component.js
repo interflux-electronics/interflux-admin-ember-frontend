@@ -83,7 +83,7 @@ export default class FieldComponent extends Component {
 
   // SAVE
 
-  @tracked lastSavedValue;
+  @tracked lastSavedValue = null;
 
   @action
   async save() {
