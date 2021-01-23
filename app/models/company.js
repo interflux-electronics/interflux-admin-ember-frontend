@@ -6,7 +6,6 @@ export default class CompanyModel extends Model {
   @attr('string') address;
   @attr('string') phone;
   @attr('string') fax;
-  @attr('string') emails;
   @attr('string') emailGeneral;
   @attr('string') emailSupport;
   @attr('string') emailOrders;

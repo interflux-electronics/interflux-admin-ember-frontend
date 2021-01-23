@@ -68,17 +68,34 @@
     />
 
     <Field::String
-      @label='Emails'
-      @legend='For multiple emails, use commas for seperation.'
+      @label='Email for general enquiries'
       @record={{company}}
-      @attribute='emails'
+      @attribute='emailGeneral'
+    />
+
+    <Field::String
+      @label='Email for placing orders'
+      @record={{company}}
+      @attribute='emailOrders'
+    />
+
+    <Field::String
+      @label='Email for technical support'
+      @record={{company}}
+      @attribute='emailSupport'
+    />
+
+    <Field::String
+      @label='Email for accounting questions'
+      @record={{company}}
+      @attribute='emailAccounting'
     />
 
     <h2>Relations</h2>
 
     <Field::ManyToMany
       @label="Members"
-      @legend="Search by first name."
+      @legend="All people involved with this company."
       @baseRecord={{company}}
       @baseModel="company"
       @baseLabel="companyMembers"
