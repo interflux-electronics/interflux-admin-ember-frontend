@@ -52,7 +52,7 @@
       />
 
       <Field::String
-        @label="Company phone number"
+        @label="Company phone"
         @record={{companyMember}}
         @attribute='phone'
       />
@@ -65,8 +65,31 @@
             href="{{env 'appHosts'}}/en/contact"
             target='_blank'
             rel='noopener noreferrer'
-          >contact page</a> of our website.</label>
+          >contact page</a> of our website under {{companyMember.company.businessName}}.</label>
       </Field::Boolean>
+
+      {{#if companyMember.public}}
+        <Field::Boolean
+          @record={{companyMember}}
+          @attribute='publicTitle'
+        >
+          <label>Show role</label>
+        </Field::Boolean>
+
+        <Field::Boolean
+          @record={{companyMember}}
+          @attribute='publicEmail'
+        >
+          <label>Show email</label>
+        </Field::Boolean>
+
+        <Field::Boolean
+          @record={{companyMember}}
+          @attribute='publicPhone'
+        >
+          <label>Show phone</label>
+        </Field::Boolean>
+      {{/if}}
     {{/each}}
 
     <h2>Personal</h2>
