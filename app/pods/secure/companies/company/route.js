@@ -7,10 +7,10 @@ export default class CompanyRoute extends ModalRoute {
       company: this.store.findRecord('company', params.id, {
         include: [
           'country',
-          'people',
-          'markets',
           'company_members',
-          'company_markets'
+          'company_markets',
+          'company_members.person',
+          'company_markets.country'
         ].join(','),
         reload: true
       })
