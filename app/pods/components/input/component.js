@@ -86,4 +86,11 @@ export default class InputComponent extends Component {
       this.args.onKeyUp(event);
     }
   }
+
+  @action
+  onChange(event) {
+    if (this.args.onChange) {
+      this.args.onChange(event);
+    }
+  }
 }

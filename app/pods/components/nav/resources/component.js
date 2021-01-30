@@ -29,7 +29,7 @@ export default class NavResourcesComponent extends Component {
   get resources() {
     const arr = [
       {
-        label: 'Product',
+        label: 'Products',
         route: 'secure.products',
         icon: 'svg/prescription-bottle'
       },
@@ -72,7 +72,13 @@ export default class NavResourcesComponent extends Component {
         label: 'Videos',
         route: 'secure.videos',
         icon: 'svg/film'
+      },
+      {
+        label: 'Webinars',
+        route: 'secure.webinars',
+        icon: 'svg/podcast'
       }
+
       // {
       //   label: 'Orders',
       //   route: 'secure.orders',

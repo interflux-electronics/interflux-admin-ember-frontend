@@ -1,0 +1,33 @@
+<Fieldset
+  {{!-- props --}}
+  @id={{this.id}}
+  @label={{@label}}
+  @legend={{@legend}}
+  @component="string"
+  @theme={{@theme}}
+  {{!-- state --}}
+  @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
+>
+  <Input
+    {{!-- props --}}
+    @id={{this.id}}
+    @theme={{@theme}}
+    @type="datetime-local"
+    @placeholder={{@placeholder}}
+    @autofocus={{@autofocus}}
+    @disabled={{@disabled}}
+    {{!-- state --}}
+    @value={{this.dateString}}
+    @state={{this.state}}
+    {{!-- events --}}
+    @onFocus={{this.onFocus}}
+    @onBlur={{this.onBlur}}
+    @onKeyDown={{this.onKeyDown}}
+    @onKeyUp={{this.onKeyUp}}
+    @onMouseOver={{this.onMouseOver}}
+    @onMouseOut={{this.onMouseOut}}
+    @onChange={{this.onChange}}
+  >
+  </Input>
+</Fieldset>

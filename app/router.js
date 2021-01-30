@@ -55,6 +55,10 @@ Router.map(function () {
       this.route('video', { path: '/:id' });
     });
 
+    this.route('webinars', function () {
+      this.route('webinar', { path: '/:id' });
+    });
+
     this.route('user', function () {
       this.route('download');
       this.route('issue');
