@@ -2,35 +2,15 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import EmberObject from '@ember/object';
 
 module('Integration | Component | field/date', function (hooks) {
   setupRenderingTest(hooks);
 
-  // test('it renders', async function(assert) {
-  //   // Set any properties with this.set('myProperty', 'value');
-  //   // Handle any actions with this.set('myAction', function(val) { ... });
-  //
-  //   await render(hbs`<Field::Date />`);
-  //
-  //   assert.equal(this.element.textContent.trim(), '');
-  //
-  //   // Template block usage:
-  //   await render(hbs`
-  //     <Field::Date>
-  //       template block text
-  //     </Field::Date>
-  //   `);
-  //
-  //   assert.equal(this.element.textContent.trim(), 'template block text');
-  // });
-
   test('it renders', async function (assert) {
-    this.set('record', EmberObject.create({ foo: 'bar' }));
-    this.set('options', [
-      { value: 'a', label: 'A' },
-      { value: 'b', label: 'B' },
-      { value: 'c', label: 'C' }
-    ]);
+    assert.expect(4);
+
+    this.set('webinar', EmberObject.create({ startTime: 1611995580698 }));
 
     await render(hbs`
       <Field::Date
@@ -38,15 +18,16 @@ module('Integration | Component | field/date', function (hooks) {
         @legend='Enter UTC times.'
         @record={{webinar}}
         @attribute='startTime'
-      >
-      </Field::Date>
-      <Field::Date
-        @record={{this.record}}
-        @attribute="foo"
-        @options={{this.options}}
       />
     `);
 
-    assert.equal(this.element.querySelectorAll('[role="radio"]').length, 3);
+    const input = this.element.querySelector('input[type="datetime-local"]');
+    const label = this.element.querySelector('label');
+    const legend = this.element.querySelector('legend');
+
+    assert.ok(input);
+    assert.equal(input.value, '2021-01-30T08:33');
+    assert.equal(label.innerText, 'Start time');
+    assert.equal(legend.innerText, 'Enter UTC times.');
   });
 });

@@ -8,6 +8,8 @@ module('Integration | Component | field/string/radio', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
+    assert.expect(1);
+
     this.set('record', EmberObject.create({ foo: 'bar' }));
     this.set('options', [
       { value: 'a', label: 'A' },
