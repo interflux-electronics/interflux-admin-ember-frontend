@@ -31,10 +31,14 @@
     </div>
 
     <div class="right">
-      {{!-- <Button
-        @text="Create"
-        @action={{this.noop}}
-      /> --}}
+      {{#if @showCreateButton}}
+        <Button
+          @text="Create"
+          @route={{@linkRoute}}
+          @model="new"
+          @theme="big-green"
+        />
+      {{/if}}
     </div>
   </div>
 

@@ -6,6 +6,7 @@
     .left,
     .right {
       display: flex;
+      align-items: center;
     }
     .input {
       position: relative;
@@ -71,24 +72,12 @@
         }
       }
     }
-    // .icon {
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   height: 36px;
-    //   width: 36px;
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
-    //   background: white;
-    //   svg {
-    //     width: 50%;
-    //     height: 50%;
-    //     [fill] {
-    //       fill: $grey-3;
-    //     }
-    //   }
-    // }
+    .right {
+      button {
+        background: $green-1;
+        color: white;
+      }
+    }
   }
   .data {
     display: flex;

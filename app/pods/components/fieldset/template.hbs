@@ -4,11 +4,14 @@
 >
   <div class="liner">
     {{#if @label}}
-      <label for="input-{{@id}}">{{@label}}</label>
+      <div class="label-legend">
+        <label for="input-{{@id}}">{{@label}}</label>
+        {{#if @legend}}
+          <legend>{{@legend}}</legend>
+        {{/if}}
+      </div>
     {{/if}}
-    {{#if @legend}}
-      <legend>{{@legend}}</legend>
-    {{/if}}
+
     {{yield}}
   </div>
 </fieldset>

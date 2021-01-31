@@ -152,10 +152,4 @@ export default class SpreadsheetComponent extends Component {
     // Always reset the highlight or it may jump down the list
     this.highlighted = null;
   }
-
-  // TODO
-  @action
-  noop() {
-    alert(`This button doesn't work yet. Soon! :)`);
-  }
 }

@@ -1,50 +1,53 @@
 fieldset {
-  &.primary {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    transition: all 300ms $easeOutExpo;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  transition: all 300ms $easeOutExpo;
+  .label-legend {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
     label {
-      display: inline-block;
       font-family: $bold;
       font-size: 15px;
       line-height: 150%;
-      color: #444444;
-      margin-bottom: 10px;
+      color: $grey-7;
       cursor: pointer;
       user-select: none;
       letter-spacing: 0.2px;
+      margin-right: 10px;
     }
     legend {
       font-family: $regular;
       font-size: 15px;
       line-height: 150%;
-      color: $grey-6;
-      margin-bottom: 16px;
+      letter-spacing: 0.2px;
+      color: $grey-5;
     }
-    & + fieldset {
-      margin-top: 2px;
-    }
+  }
+
+  & + fieldset {
+    margin-top: 2px;
+  }
+  &.focus {
+    background-color: rgba($blue-0, 0.1);
+    position: relative;
+    z-index: 1;
+  }
+  &.error {
     &.focus {
-      background-color: rgba($blue-0, 0.1);
-      position: relative;
-      z-index: 1;
+      background-color: rgba($red-1, 0.1);
     }
-    &.error {
-      &.focus {
-        background-color: rgba($red-1, 0.1);
-      }
+  }
+  &.warning {
+    &.focus {
+      background-color: rgba($red-1, 0.1);
     }
-    &.warning {
-      &.focus {
-        background-color: rgba($red-1, 0.1);
-      }
-    }
-    &.dirty,
-    &.saving {
-      &.focus {
-        background-color: rgba($green-1, 0.1);
-      }
+  }
+  &.dirty,
+  &.saving {
+    &.focus {
+      background-color: rgba($green-1, 0.1);
     }
   }
   p + input {

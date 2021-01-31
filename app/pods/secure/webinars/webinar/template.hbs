@@ -1,6 +1,6 @@
 {{#with @model.webinar as |webinar|}}
   <Modal @id='webinar'>
-    <h1>{{webinar.title}}</h1>
+    <h1>{{if webinar.title webinar.title 'New webinar'}}</h1>
 
     <h2>Details</h2>
 
@@ -12,15 +12,15 @@
 
     <Field::String
       @label='Topic'
-      @legend='Wrap words with *stars* to mark them yellow.'
+      @legend='What is this webinar about?'
       @record={{webinar}}
       @attribute='topic'
       @multiline='true'
     />
 
     <Field::String
-      @label='Who should attend?'
-      @legend='Wrap words with *stars* to mark them yellow.'
+      @label='Audience'
+      @legend='Who should attend?'
       @record={{webinar}}
       @attribute='audience'
       @multiline='true'
@@ -28,7 +28,7 @@
 
     <Field::Date
       @label='Start time'
-      @legend='Enter UTC times.'
+      @legend='In UTC / GMT+0.'
       @record={{webinar}}
       @attribute='startTime'
     >
@@ -47,10 +47,12 @@
 
     <Field::String
       @label='Link'
-      @legend='The URL to the webinar'
+      @legend='The URL to the webinar.'
       @record={{webinar}}
       @attribute='url'
     />
+
+    <h2>Website</h2>
 
     <Field::Boolean
       @record={{webinar}}
@@ -92,6 +94,13 @@
       @record={{webinar}}
       @attribute='id'
       @disabled={{true}}
+    />
+
+    <Button
+      @text="Delete from database"
+      @onClick={{this.destroyRecord}}
+      @theme="danger-red"
+      @icon="warning"
     />
   </Modal>
 {{/with}}

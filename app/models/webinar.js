@@ -1,5 +1,4 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
-// import { alias } from '@ember/object/computed';
 
 export default class WebinarModel extends Model {
   @attr('string') title;
