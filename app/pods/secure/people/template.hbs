@@ -1,12 +1,16 @@
 <Page::Content @id="people">
   <h1>People</h1>
 
-  <Spreadsheet
-    @records={{@model.people}}
-    @linkRoute="secure.people.person"
-    @columns={{array
+  {{#if @model.people}}
+    <Spreadsheet
+      @records={{@model.people}}
+      @linkRoute="secure.people.person"
+      @columns={{array
       (hash key='fullName' label="Name")
       (hash key='memberOf' label='Member of')
     }}
-  />
+    />
+  {{else}}
+    <p>No people found.</p>
+  {{/if}}
 </Page::Content>
