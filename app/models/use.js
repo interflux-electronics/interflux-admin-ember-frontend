@@ -21,4 +21,8 @@ export default class UseModel extends Model {
   get url() {
     return `${ENV.wwwHost}/en/products/for-${this.id}`;
   }
+
+  get link() {
+    return this.url.replace('https://', '').replace('http://', '');
+  }
 }

@@ -180,7 +180,7 @@
 
     {{#if product.isOnline}}
       <Fieldset
-        @label='Live links on our website'
+        @label='Where is this product seen on our website?'
         @legend='Copy paste the links below to share.'
       >
         <ul class="list">
@@ -190,7 +190,7 @@
               target="_blank"
               rel="noreferrer noopener"
             >
-              Product page - {{product.name}}
+              {{product.link}}
             </a>
           </li>
           <li>
@@ -199,7 +199,7 @@
               target="_blank"
               rel="noreferrer noopener"
             >
-              Product list - {{product.family.namePlural}}
+              {{product.family.link}}
             </a>
           </li>
           {{#each product.uses as |use|}}
@@ -209,7 +209,7 @@
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                Product list - {{use.text}}
+                {{use.link}}
               </a>
             </li>
           {{/each}}

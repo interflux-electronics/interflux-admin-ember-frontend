@@ -15,4 +15,8 @@ export default class ProductFamilyModel extends Model {
   get url() {
     return `${ENV.wwwHost}/en/products/${this.slug}`;
   }
+
+  get link() {
+    return this.url.replace('https://', '').replace('http://', '');
+  }
 }

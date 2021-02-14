@@ -31,6 +31,10 @@ export default class ProductModel extends Model {
     return `${ENV.wwwHost}/en/product/${this.slug}`;
   }
 
+  get link() {
+    return this.url.replace('https://', '').replace('http://', '');
+  }
+
   get isOffline() {
     return this.status === 'offline';
   }
