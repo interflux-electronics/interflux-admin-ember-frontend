@@ -23,9 +23,37 @@ export default class ButtonComponent extends Component {
   }
 
   @action
-  onClick() {
+  onClick(event) {
     if (this.args.onClick && !this.args.isBusy) {
-      this.args.onClick();
+      this.args.onClick(event);
+    }
+  }
+
+  @action
+  onFocus(event) {
+    if (this.args.onFocus) {
+      this.args.onFocus(event);
+    }
+  }
+
+  @action
+  onBlur(event) {
+    if (this.args.onBlur) {
+      this.args.onBlur(event);
+    }
+  }
+
+  @action
+  onMouseDown(event) {
+    if (this.args.onMouseDown) {
+      this.args.onMouseDown(event);
+    }
+  }
+
+  @action
+  onMouseUp(event) {
+    if (this.args.onMouseUp) {
+      this.args.onMouseUp(event);
     }
   }
 }

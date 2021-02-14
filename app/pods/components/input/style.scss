@@ -95,7 +95,7 @@
 
     .wrapper {
       background: white;
-      box-shadow: #ddd 0 0 0 1px;
+      box-shadow: $grey-border 0 0 0 1px;
       border-radius: 3px;
       position: relative;
       transition: box-shadow 300ms $easeOutExpo;

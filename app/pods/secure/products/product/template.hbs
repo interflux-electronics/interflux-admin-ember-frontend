@@ -48,6 +48,7 @@
       @baseModel="product"
       @baseLabel="productUses"
       @joinModel="product-use"
+      @joinSortKey="rankAmongUses"
       @targetModel="use"
       @targetLabel="text"
       @targetRoute='secure.uses.use'
@@ -59,6 +60,7 @@
       @baseModel="product"
       @baseLabel="productQualities"
       @joinModel="product-quality"
+      @joinSortKey="rankAmongQualities"
       @targetModel="quality"
       @targetLabel="text"
       @targetRoute='secure.qualities.quality'

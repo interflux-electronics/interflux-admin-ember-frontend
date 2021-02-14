@@ -7,22 +7,25 @@ fieldset {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 12px;
+    margin-top: -7px;
     label {
       font-family: $bold;
-      font-size: 15px;
+      font-size: 16px;
       line-height: 150%;
       color: $grey-7;
       cursor: pointer;
       user-select: none;
       letter-spacing: 0.2px;
       margin-right: 10px;
+      margin-top: 6px;
     }
     legend {
       font-family: $regular;
-      font-size: 15px;
+      font-size: 16px;
       line-height: 150%;
       letter-spacing: 0.2px;
       color: $grey-5;
+      margin-top: 6px;
     }
   }
 

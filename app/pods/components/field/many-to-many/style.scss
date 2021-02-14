@@ -1,3 +1,14 @@
+@keyframes dropdown-intro {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 fieldset.many-to-many {
   // To avoid background colour on focus (lists are too long)
   &.primary {
@@ -6,36 +17,84 @@ fieldset.many-to-many {
     }
   }
 
-  .liner {
-    > ul {
-      > li {
-        button.trash {
-          width: 46px;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 3px;
-          &:hover {
-            [fill] {
-              fill: $red-1;
-            }
-          }
-          &:focus {
-            color: $red-1;
-            text-decoration: none;
-            box-shadow: 0 0 0 2px $red-1;
-          }
-          svg {
-            width: 15px;
-            height: auto;
-            [fill] {
-              fill: #ccc;
-            }
-          }
+  ul {
+    &.idle {
+      .dropzone {
+        display: none;
+      }
+    }
+    &.dragging {
+      cursor: grabbing;
+      .dropzone {
+        display: flex;
+      }
+    }
+    li {
+      position: relative;
+      cursor: grab;
+      &:active {
+        cursor: grabbing;
+        z-index: 1;
+        outline: 1px solid $blue-0;
+        outline-offset: -1px;
+      }
+      &.being-dragged {
+        background: $grey-0 !important;
+        a,
+        .menu {
+          display: none !important;
         }
       }
     }
+  }
+
+  .rank {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      background: #eee;
+      font-size: 14px;
+      height: 18px;
+      line-height: 20px;
+      text-align: center;
+      padding: 0 4px;
+    }
+  }
+
+  .dropzone {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    left: 0;
+    align-items: center;
+    // background: rgba(0, 0, 255, 0.1);
+    &.top {
+      top: -20px;
+    }
+    &.bottom {
+      bottom: -20px;
+    }
+    &.active {
+      .line {
+        opacity: 1;
+      }
+    }
+    .line {
+      height: 1px;
+      width: calc(100% - 2px);
+      transform: translateX(1px);
+      background: $blue-0;
+      outline: 2px solid $blue-0;
+      pointer-events: none; // prevents dragenter event from firing and stopping the drag
+      opacity: 0;
+      border-radius: 50%;
+    }
+  }
+
+  .liner {
     > button,
     > .search {
       margin-top: 12px;

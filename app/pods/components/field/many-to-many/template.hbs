@@ -7,16 +7,56 @@
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <ul class="list">
+  <ul class="list {{if this.isDragging 'dragging' 'idle'}}">
     {{#each this.rows as |row|}}
-      <li>
+      <li
+        draggable="true"
+        ondragstart={{fn this.handleDragStart row}}
+        ondragend={{fn this.handleDragEnd row}}
+      >
         <a href={{href-to @targetRoute row.targetRecord.id}}>
           {{row.text}}
         </a>
-        <Button
-          @icon="trash"
-          @onClick={{fn this.onDestroy row.joinRecord}}
-        />
+
+        <div class="right">
+          {{#if this.canSortList}}
+            <div class="rank">
+              <p>{{row.rank}}{{unless row.hasRankOnRecord '*'}}</p>
+            </div>
+          {{/if}}
+
+          <DotDotDotMenu>
+            <Button
+              @icon="trash"
+              @text="remove"
+              @onMouseDown={{fn this.onDestroy row.joinRecord}}
+            />
+          </DotDotDotMenu>
+        </div>
+
+        {{#if this.canSortList}}
+          <div
+            class="dropzone top"
+            ondragenter={{fn this.handleDragEnter row}}
+            ondragleave={{fn this.handleDragLeave row}}
+            ondragover={{fn this.handleDragOver row}}
+            ondrop={{fn this.handleDrop row}}
+          >
+            <div class="line"></div>
+          </div>
+
+          {{#if row.isLast}}
+            <div
+              class="dropzone bottom"
+              ondragenter={{fn this.handleDragEnter row}}
+              ondragleave={{fn this.handleDragLeave row}}
+              ondragover={{fn this.handleDragOver row}}
+              ondrop={{fn this.handleDrop row}}
+            >
+              <div class="line"></div>
+            </div>
+          {{/if}}
+        {{/if}}
       </li>
     {{else}}
       <li class="dashed">

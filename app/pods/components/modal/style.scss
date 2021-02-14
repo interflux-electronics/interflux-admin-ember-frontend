@@ -117,12 +117,15 @@
       }
       ul.list {
         li {
+          position: relative;
           background: white;
+          min-height: 46px;
           line-height: 46px;
-          border: 1px solid #dddddd;
+          border: 1px solid $grey-border;
           display: flex;
+          align-items: center;
           justify-content: space-between;
-          & + li {
+          &:not(:first-child) {
             margin-top: -1px;
           }
           &:first-child {
@@ -137,18 +140,19 @@
           &.dashed {
             border-style: dashed;
           }
-          span {
+          > span {
             line-height: 46px;
             padding: 0 15px;
           }
-          a {
+          > a {
             display: block;
             color: $blue-0;
             text-decoration: underline;
             outline: 0;
             border-radius: 3px;
-            line-height: 46px;
-            padding: 0 15px;
+            line-height: 26px;
+            padding: 5px 12px;
+            margin: 5px;
             &:hover {
               color: $orange-2;
               text-decoration: none;
@@ -158,6 +162,11 @@
               text-decoration: none;
               box-shadow: 0 0 0 2px $orange-2;
             }
+          }
+          .right {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
           }
         }
       }

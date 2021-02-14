@@ -125,13 +125,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   }
 
   @action
-  onDestroy(joinRecord) {
-    console.log('remove', joinRecord);
-
-    // joinRecord.destroyRecord();
-  }
-
-  @action
   onKeyUp() {
     this.error = null;
   }
@@ -231,27 +224,11 @@ export default class ManyToManyFieldComponent extends FieldComponent {
     });
   }
 
-  // DOT DOT DOT MENU
-
-  @tracked openMenuIndex;
+  // DESTROY
 
   @action
-  openMenu(row) {
-    this.openMenuIndex = row.rank;
-  }
-
-  // TODO: cannot click things inside of the menu (yet)
-  @action
-  closeMenu(row) {
-    console.log('close menu A');
-    this.openMenuIndex = null;
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-    //
-    // next(self, function () {
-    //   console.log('close menu B');
-    //   self.openMenuIndex = null;
-    //   // code to be executed in the next run loop,
-    //   // which will be scheduled after the current one
-    // });
+  onDestroy(joinRecord) {
+    console.debug('destroy join record', { joinRecord });
+    joinRecord.destroyRecord();
   }
 }

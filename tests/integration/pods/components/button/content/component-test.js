@@ -34,13 +34,13 @@ module('Integration | Component | <Button::Content>', function (hooks) {
         @text={{this.text}}
         @icon={{this.icon}}
       >
-        <div></div>
+        <div class="foo"></div>
       </Button::Content>
     `);
 
     assert.equal(this.element.querySelectorAll('span').length, 1);
     assert.equal(this.element.querySelectorAll('svg').length, 1);
-    assert.equal(this.element.querySelectorAll('div').length, 1);
+    assert.equal(this.element.querySelectorAll('.foo').length, 1);
     assert.equal(this.element.innerText.trim(), this.text);
   });
 });

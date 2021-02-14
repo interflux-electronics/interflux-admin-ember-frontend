@@ -74,9 +74,13 @@
    --}}
   <button
     onclick={{this.onClick}}
+    onfocus={{this.onFocus}}
+    onblur={{this.onBlur}}
+    onmousedown={{this.onMouseDown}}
     class={{this.classes}}
     type="button"
     disabled={{@isBusy}}
+    draggable={{@draggable}}
   >
     <Button::Content
       @text={{@text}}
