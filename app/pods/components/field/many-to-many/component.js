@@ -22,6 +22,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   // @arg baseModel;
   // @arg baseLabel;
   // @arg joinModel;
+  // @arg joinSortKey;
   // @arg targetModel;
   // @arg targetLabel;
   // @arg targetFilter;
@@ -31,21 +32,41 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   @service api;
   @service store;
 
-  get rows() {
-    const { baseRecord, baseLabel, targetLabel, targetModel } = this.args;
-    const joinRecords = baseRecord.get(baseLabel).rejectBy('isNew', true);
-    const arr = [];
+  get joinRecords() {
+    const {
+      baseRecord,
+      baseLabel,
+      joinSortKey,
+      targetModel,
+      targetLabel
+    } = this.args;
+    const joinRecords = baseRecord.get(baseLabel);
 
-    joinRecords.forEach((joinRecord) => {
+    // The join model does NOT have a rank property to sort by.
+    // Return all join records sorted alphabetically by the target label.
+    if (!joinSortKey) {
+      return joinRecords.sortBy(targetModel + '.' + targetLabel);
+    }
+
+    // Sort by join record rank. Move all those with undefined rank to the very bottom.
+    const ranked = joinRecords.filterBy(joinSortKey).sortBy(joinSortKey);
+    const rankless = joinRecords.rejectBy(joinSortKey);
+    return [...ranked, ...rankless];
+  }
+
+  get rows() {
+    const { targetLabel, targetModel, joinSortKey } = this.args;
+    return this.joinRecords.map((joinRecord, i, arr) => {
       const targetRecord = joinRecord.get(targetModel);
-      arr.push({
+      return {
         joinRecord,
         targetRecord,
-        text: targetRecord.get(targetLabel)
-      });
+        text: targetRecord.get(targetLabel),
+        rank: joinRecord[joinSortKey] || i + 1,
+        hasRankOnRecord: joinRecord[joinSortKey] ? true : false,
+        isLast: i === arr.length - 1
+      };
     });
-
-    return arr;
   }
 
   @tracked showSearch = false;
@@ -105,7 +126,9 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   @action
   onDestroy(joinRecord) {
-    joinRecord.destroyRecord();
+    console.log('remove', joinRecord);
+
+    // joinRecord.destroyRecord();
   }
 
   @action
@@ -115,5 +138,120 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   get searchFilter() {
     return this.args.targetFilter || this.args.targetLabel;
+  }
+
+  // DRAG & REORDER LOGIC
+
+  @tracked dragee = null;
+
+  get isDragging() {
+    return this.dragee !== null;
+  }
+
+  get canSortList() {
+    return this.args.joinSortKey && this.rows.length > 1;
+  }
+
+  @action
+  async handleDragStart(row, event) {
+    console.debug(`started dragging row ${row.rank}`);
+    const li = event.currentTarget;
+
+    // To prevent the blue lines from being rendered in the transparent screenshot being dragged.
+    // It also solves an odd bug wich triggers drag end.
+    await new Promise((resolve) => setTimeout(resolve, 1));
+
+    this.dragee = row;
+    li.classList.add('being-dragged');
+  }
+
+  @action
+  handleDragEnd(row, event) {
+    console.debug('stopped');
+    this.dragee = null;
+    event.currentTarget.classList.remove('being-dragged');
+  }
+
+  @action
+  handleDragEnter(row, event) {
+    event.preventDefault();
+    event.currentTarget.classList.add('active');
+  }
+
+  @action
+  handleDragLeave(row, event) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('active');
+  }
+
+  // Without this, ondrop would not trigger
+  @action
+  handleDragOver(row, event) {
+    event.preventDefault();
+  }
+
+  @action
+  handleDrop(row, event) {
+    console.debug(`dropped row ${this.dragee.rank} on row ${row.rank}`);
+
+    const isBottomMost = event.currentTarget.classList.contains('bottom');
+    const from = this.dragee.rank;
+    const to = isBottomMost ? row.rank + 1 : row.rank;
+
+    this.moveRow(from, to);
+
+    // Reset drag state.
+    this.dragee = null;
+    event.currentTarget.classList.remove('active');
+  }
+
+  async moveRow(from, to) {
+    console.debug('move row', { from, to });
+
+    // Move one row from origin to destination by creating a new array.
+    const { dragee } = this;
+    const nonDragees = this.rows.filter((row) => row.rank !== from);
+    const rowsBefore = nonDragees.filter((row) => row.rank < to);
+    const rowsAfter = nonDragees.filter((row) => row.rank >= to);
+    const newRows = [...rowsBefore, dragee, ...rowsAfter];
+
+    const { joinSortKey } = this.args;
+
+    // Iterate over the new array and use its positional index to update all ranks.
+    newRows.forEach((row, i) => {
+      const newRank = i + 1;
+
+      console.debug(`moving ${row.rank} to ${newRank}`);
+
+      row.joinRecord[joinSortKey] = newRank;
+
+      if (row.joinRecord.hasDirtyAttributes) {
+        row.joinRecord.save();
+      }
+    });
+  }
+
+  // DOT DOT DOT MENU
+
+  @tracked openMenuIndex;
+
+  @action
+  openMenu(row) {
+    this.openMenuIndex = row.rank;
+  }
+
+  // TODO: cannot click things inside of the menu (yet)
+  @action
+  closeMenu(row) {
+    console.log('close menu A');
+    this.openMenuIndex = null;
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    //
+    // next(self, function () {
+    //   console.log('close menu B');
+    //   self.openMenuIndex = null;
+    //   // code to be executed in the next run loop,
+    //   // which will be scheduled after the current one
+    // });
   }
 }

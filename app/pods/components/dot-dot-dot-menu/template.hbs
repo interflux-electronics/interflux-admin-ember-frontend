@@ -1,0 +1,16 @@
+<div class="dot-dot-dot-menu">
+  <Button
+    @icon="ellipsis-vertical"
+    @onClick={{fn this.open}}
+    @onBlur={{fn this.close}}
+  />
+  {{#if this.showDropdown}}
+    <div class="dropdown">
+      <div class="offset">
+        <div class="pane">
+          {{yield}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</div>
