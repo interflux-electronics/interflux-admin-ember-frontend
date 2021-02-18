@@ -14,4 +14,10 @@ export default class ProductController extends Controller {
   get maxAvatarCountReached() {
     return this.imageCount >= 4;
   }
+
+  get sortedImages() {
+    return this.model.family.productFamilyImages
+      .sortBy('rankAmongImages')
+      .mapBy('image');
+  }
 }

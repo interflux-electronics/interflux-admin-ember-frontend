@@ -38,6 +38,7 @@
       @label="Products"
       @legend="All products belonging to {{family.namePlural}}."
       @record={{family}}
+      @baseRankKey='rankedProducts'
       @relation='products'
       @relationModel='product'
       @relationLabel='name'
@@ -53,6 +54,7 @@
       @baseModel="productFamily"
       @baseLabel="productFamilyImages"
       @joinModel="product-family-image"
+      @joinSortKey="rankAmongImages"
       @targetModel="image"
       @targetLabel="alt"
       @targetRoute='secure.images.image'
@@ -61,10 +63,10 @@
 
     <Fieldset>
       <ul class="images">
-        {{#each family.productFamilyImages as |relation|}}
+        {{#each this.sortedImages as |image|}}
           <li>
-            <p>{{relation.image.alt}}</p>
-            <ResponsiveImage @image={{relation.image}} />
+            <p>{{image.alt}}</p>
+            <ResponsiveImage @image={{image}} />
           </li>
         {{/each}}
       </ul>

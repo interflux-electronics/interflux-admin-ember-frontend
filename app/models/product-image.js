@@ -5,5 +5,5 @@ export default class ImageModel extends Model {
   @belongsTo('image') image;
 
   @attr('boolean', { defaultValue: false }) public;
-  @attr('number', { defaultValue: 999 }) rank;
+  @attr('number', { defaultValue: 999 }) rank; // rankAmongImages
 }

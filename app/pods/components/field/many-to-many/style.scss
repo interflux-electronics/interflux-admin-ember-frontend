@@ -18,32 +18,35 @@ fieldset.many-to-many {
   }
 
   ul {
-    &.idle {
-      .dropzone {
-        display: none;
+    &.can-sort-list {
+      &.is-dragging {
+        cursor: grabbing;
+        .dropzone {
+          display: flex; // dropzones become hoverable
+        }
       }
-    }
-    &.dragging {
-      cursor: grabbing;
-      .dropzone {
-        display: flex;
+      li {
+        cursor: grab;
+        &:active {
+          cursor: grabbing;
+          z-index: 1;
+          outline: 1px solid $blue-0;
+          outline-offset: -1px;
+        }
+
+        &.dragee {
+          background: $grey-0 !important;
+          a,
+          .right {
+            display: none !important;
+          }
+        }
       }
     }
     li {
       position: relative;
-      cursor: grab;
-      &:active {
-        cursor: grabbing;
-        z-index: 1;
-        outline: 1px solid $blue-0;
-        outline-offset: -1px;
-      }
-      &.being-dragged {
-        background: $grey-0 !important;
-        a,
-        .menu {
-          display: none !important;
-        }
+      .dropzone {
+        display: none;
       }
     }
   }

@@ -9,6 +9,7 @@ import { inject as service } from '@ember/service';
 //   @baseModel="quality"
 //   @baseLabel="productQualities"
 //   @joinModel="product-quality"
+//   @joinSortKey="rankAmongQualities"
 //   @targetModel="product"
 //   @targetLabel="fullName"
 //   @targetFilter="firstName"
@@ -155,14 +156,14 @@ export default class ManyToManyFieldComponent extends FieldComponent {
     await new Promise((resolve) => setTimeout(resolve, 1));
 
     this.dragee = row;
-    li.classList.add('being-dragged');
+    li.classList.add('dragee');
   }
 
   @action
   handleDragEnd(row, event) {
     console.debug('stopped');
     this.dragee = null;
-    event.currentTarget.classList.remove('being-dragged');
+    event.currentTarget.classList.remove('dragee');
   }
 
   @action

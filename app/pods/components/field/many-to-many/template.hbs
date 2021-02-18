@@ -7,10 +7,10 @@
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <ul class="list {{if this.isDragging 'dragging' 'idle'}}">
+  <ul class="list {{if this.canSortList 'can-sort-list' 'no-sort'}} {{if this.isDragging 'is-dragging' 'no-drag'}}">
     {{#each this.rows as |row|}}
       <li
-        draggable="true"
+        draggable={{this.canSortList}}
         ondragstart={{fn this.handleDragStart row}}
         ondragend={{fn this.handleDragEnd row}}
       >

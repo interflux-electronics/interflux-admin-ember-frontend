@@ -24,7 +24,6 @@
       @minKeyStrokes='0'
     />
 
-
     {{!-- TODO: create sub families --}}
 
     <Field::String
@@ -241,6 +240,7 @@
       @baseModel="product"
       @baseLabel="productDocuments"
       @joinModel="product-document"
+      @joinSortKey="rankAmongDocuments"
       @targetModel="document"
       @targetLabel="name"
       @targetRoute='secure.documents.document'

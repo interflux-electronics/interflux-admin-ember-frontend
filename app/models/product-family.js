@@ -9,7 +9,11 @@ export default class ProductFamilyModel extends Model {
   @attr('string') gist;
   @attr('number') order;
 
+  // many to one, families to product
   @hasMany('product') products;
+  @attr('string') rankedProducts;
+
+  // many to many, families to images
   @hasMany('product-family-image') productFamilyImages;
 
   get url() {
