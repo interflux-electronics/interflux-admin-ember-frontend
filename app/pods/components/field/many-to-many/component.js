@@ -9,7 +9,7 @@ import { inject as service } from '@ember/service';
 //   @baseModel="quality"
 //   @baseLabel="productQualities"
 //   @joinModel="product-quality"
-//   @joinSortKey="rankAmongQualities"
+//   @joinRankKey="rankAmongQualities"
 //   @targetModel="product"
 //   @targetLabel="fullName"
 //   @targetFilter="firstName"
@@ -23,7 +23,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   // @arg baseModel;
   // @arg baseLabel;
   // @arg joinModel;
-  // @arg joinSortKey;
+  // @arg joinRankKey;
   // @arg targetModel;
   // @arg targetLabel;
   // @arg targetFilter;
@@ -37,7 +37,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
     const {
       baseRecord,
       baseLabel,
-      joinSortKey,
+      joinRankKey,
       targetModel,
       targetLabel
     } = this.args;
@@ -45,26 +45,26 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
     // The join model does NOT have a rank property to sort by.
     // Return all join records sorted alphabetically by the target label.
-    if (!joinSortKey) {
+    if (!joinRankKey) {
       return joinRecords.sortBy(targetModel + '.' + targetLabel);
     }
 
     // Sort by join record rank. Move all those with undefined rank to the very bottom.
-    const ranked = joinRecords.filterBy(joinSortKey).sortBy(joinSortKey);
-    const rankless = joinRecords.rejectBy(joinSortKey);
+    const ranked = joinRecords.filterBy(joinRankKey).sortBy(joinRankKey);
+    const rankless = joinRecords.rejectBy(joinRankKey);
     return [...ranked, ...rankless];
   }
 
   get rows() {
-    const { targetLabel, targetModel, joinSortKey } = this.args;
+    const { targetLabel, targetModel, joinRankKey } = this.args;
     return this.joinRecords.map((joinRecord, i, arr) => {
       const targetRecord = joinRecord.get(targetModel);
       return {
         joinRecord,
         targetRecord,
         text: targetRecord.get(targetLabel),
-        rank: joinRecord[joinSortKey] || i + 1,
-        hasRankOnRecord: joinRecord[joinSortKey] ? true : false,
+        rank: joinRecord[joinRankKey] || i + 1,
+        hasRankOnRecord: joinRecord[joinRankKey] ? true : false,
         isLast: i === arr.length - 1
       };
     });
@@ -143,7 +143,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   }
 
   get canSortList() {
-    return this.args.joinSortKey && this.rows.length > 1;
+    return this.args.joinRankKey && this.rows.length > 1;
   }
 
   @action
@@ -209,7 +209,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
     const rowsAfter = nonDragees.filter((row) => row.rank >= to);
     const newRows = [...rowsBefore, dragee, ...rowsAfter];
 
-    const { joinSortKey } = this.args;
+    const { joinRankKey } = this.args;
 
     // Iterate over the new array and use its positional index to update all ranks.
     newRows.forEach((row, i) => {
@@ -217,7 +217,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
       console.debug(`moving ${row.rank} to ${newRank}`);
 
-      row.joinRecord[joinSortKey] = newRank;
+      row.joinRecord[joinRankKey] = newRank;
 
       if (row.joinRecord.hasDirtyAttributes) {
         row.joinRecord.save();

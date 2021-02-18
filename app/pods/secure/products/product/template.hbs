@@ -47,7 +47,7 @@
       @baseModel="product"
       @baseLabel="productUses"
       @joinModel="product-use"
-      @joinSortKey="rankAmongUses"
+      @joinRankKey="rankAmongUses"
       @targetModel="use"
       @targetLabel="text"
       @targetRoute='secure.uses.use'
@@ -59,7 +59,7 @@
       @baseModel="product"
       @baseLabel="productQualities"
       @joinModel="product-quality"
-      @joinSortKey="rankAmongQualities"
+      @joinRankKey="rankAmongQualities"
       @targetModel="quality"
       @targetLabel="text"
       @targetRoute='secure.qualities.quality'
@@ -240,7 +240,7 @@
       @baseModel="product"
       @baseLabel="productDocuments"
       @joinModel="product-document"
-      @joinSortKey="rankAmongDocuments"
+      @joinRankKey="rankAmongDocuments"
       @targetModel="document"
       @targetLabel="name"
       @targetRoute='secure.documents.document'
