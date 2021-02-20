@@ -37,12 +37,13 @@
     <Field::ManyToOne
       @label="Products"
       @legend="All products belonging to {{family.namePlural}}."
-      @record={{family}}
-      @baseRankKey='rankedProducts'
-      @relation='products'
-      @relationModel='product'
-      @relationLabel='name'
-      @route='secure.products.product'
+      @baseRecord={{family}}
+      @baseLabel='products'
+      @targetModel='product'
+      @targetLabel='name'
+      @targetRank='rankAmongFamily'
+      @targetForeignId='productFamily'
+      @targetRoute='secure.products.product'
     />
 
     <h2>Images</h2>
@@ -63,10 +64,10 @@
 
     <Fieldset>
       <ul class="images">
-        {{#each this.sortedImages as |image|}}
+        {{#each this.sortedImages as |joinRecord|}}
           <li>
-            <p>{{image.alt}}</p>
-            <ResponsiveImage @image={{image}} />
+            <p>{{joinRecord.rankAmongImages}}</p>
+            <ResponsiveImage @image={{joinRecord.image}} />
           </li>
         {{/each}}
       </ul>

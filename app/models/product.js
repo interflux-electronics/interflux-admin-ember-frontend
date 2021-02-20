@@ -8,6 +8,7 @@ export default class ProductModel extends Model {
   @attr('string') label;
   @attr('string') pitch;
   @attr('string') status;
+  @attr('number') rankAmongFamily;
 
   @belongsTo('product-family') productFamily;
   @alias('productFamily') family;

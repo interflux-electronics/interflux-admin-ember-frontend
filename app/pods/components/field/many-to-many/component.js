@@ -34,6 +34,8 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   @service store;
 
   get joinRecords() {
+    console.log('MANY joinRecords()');
+
     const {
       baseRecord,
       baseLabel,
@@ -41,6 +43,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
       targetModel,
       targetLabel
     } = this.args;
+
     const joinRecords = baseRecord.get(baseLabel);
 
     // The join model does NOT have a rank property to sort by.
@@ -56,19 +59,29 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   }
 
   get rows() {
+    console.log('MANY rows()');
     const { targetLabel, targetModel, joinRankKey } = this.args;
     return this.joinRecords.map((joinRecord, i, arr) => {
       const targetRecord = joinRecord.get(targetModel);
       return {
         joinRecord,
         targetRecord,
-        text: targetRecord.get(targetLabel),
+        label: targetRecord.get(targetLabel),
         rank: joinRecord[joinRankKey] || i + 1,
-        hasRankOnRecord: joinRecord[joinRankKey] ? true : false,
+        isRanked: joinRecord[joinRankKey] ? true : false,
         isLast: i === arr.length - 1
       };
     });
   }
+
+  get listClasses() {
+    return [
+      this.canSortList ? 'can-sort-list' : 'no-sort',
+      this.isDragging ? 'is-dragging' : 'no-drag'
+    ].join(' ');
+  }
+
+  // SEARCH & ADD LOGIC
 
   @tracked showSearch = false;
 
@@ -89,10 +102,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   // The <Search> component will never have to show the selected value
   get value() {
     return null;
-  }
-
-  set value(value) {
-    // this.args.record.set(this.args.relation, value);
   }
 
   @action
@@ -143,7 +152,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   }
 
   get canSortList() {
-    return this.args.joinRankKey && this.rows.length > 1;
+    return this.args.joinRankKey;
   }
 
   @action

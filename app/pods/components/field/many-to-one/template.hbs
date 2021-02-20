@@ -7,17 +7,87 @@
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  {{#if (has-block)}}
-    {{yield this.relations}}
-  {{else}}
-    <ul class="list">
-      {{#each this.relations as |relation|}}
-        <li>
-          <a href={{href-to @route relation.record.id}}>{{relation.label}}</a>
-        </li>
-      {{else}}
-        <p>None</p>
-      {{/each}}
-    </ul>
-  {{/if}}
+  <ul class="list {{this.listClasses}}">
+    {{#each this.rows as |row|}}
+      <li
+        draggable={{this.canSortList}}
+        ondragstart={{fn this.handleDragStart row}}
+        ondragend={{fn this.handleDragEnd row}}
+      >
+        <a href={{href-to @targetRoute row.targetRecord.id}}>{{row.label}}</a>
+
+        <div class="right">
+          {{#if this.canSortList}}
+            <div class="rank">
+              <p>{{row.rank}}{{unless row.isRanked '*'}}</p>
+            </div>
+          {{/if}}
+
+          {{!--
+          <DotDotDotMenu>
+            <Button
+              @icon="trash"
+              @text="remove"
+              @onMouseDown={{fn this.onDestroy row.joinRecord}}
+            />
+          </DotDotDotMenu>
+          --}}
+        </div>
+
+        {{#if this.canSortList}}
+          <div
+            class="dropzone top"
+            ondragenter={{fn this.handleDragEnter row}}
+            ondragleave={{fn this.handleDragLeave row}}
+            ondragover={{fn this.handleDragOver row}}
+            ondrop={{fn this.handleDrop row}}
+          >
+            <div class="line"></div>
+          </div>
+
+          {{#if row.isLast}}
+            <div
+              class="dropzone bottom"
+              ondragenter={{fn this.handleDragEnter row}}
+              ondragleave={{fn this.handleDragLeave row}}
+              ondragover={{fn this.handleDragOver row}}
+              ondrop={{fn this.handleDrop row}}
+            >
+              <div class="line"></div>
+            </div>
+          {{/if}}
+        {{/if}}
+      </li>
+    {{else}}
+      <p>None</p>
+    {{/each}}
+  </ul>
+
+  {{!--
+  {{#unless @disabled}}
+    {{#if this.showSearch}}
+      <Search
+        @id={{this.id}}
+        @value={{this.value}}
+        @state={{this.state}}
+        @placeholder="Search product"
+        @autofocus="true"
+        @onFocus={{this.onFocus}}
+        @onBlur={{this.onSearchBlur}}
+        @onKeyUp={{this.onKeyUp}}
+        @onSelect={{this.onSelect}}
+        @searchModel={{@targetModel}}
+        @searchLabel={{@targetLabel}}
+        @searchFilter={{this.searchFilter}}
+        @error={{this.error}}
+      ></Search>
+    {{else}}
+      <Button
+        @text="Add"
+        @theme="save"
+        @onClick={{this.onClickAddButton}}
+      />
+    {{/if}}
+  {{/unless}}
+  --}}
 </Fieldset>

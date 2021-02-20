@@ -1,10 +1,20 @@
+@keyframes dropdown-intro {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .dot-dot-dot-menu {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 36px;
-  margin: 5px;
   > button {
     width: 36px;
     height: 100%;

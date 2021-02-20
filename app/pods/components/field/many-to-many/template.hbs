@@ -7,21 +7,19 @@
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <ul class="list {{if this.canSortList 'can-sort-list' 'no-sort'}} {{if this.isDragging 'is-dragging' 'no-drag'}}">
+  <ul class="list {{this.listClasses}}">
     {{#each this.rows as |row|}}
       <li
         draggable={{this.canSortList}}
         ondragstart={{fn this.handleDragStart row}}
         ondragend={{fn this.handleDragEnd row}}
       >
-        <a href={{href-to @targetRoute row.targetRecord.id}}>
-          {{row.text}}
-        </a>
+        <a href={{href-to @targetRoute row.targetRecord.id}}>{{row.label}}</a>
 
         <div class="right">
           {{#if this.canSortList}}
             <div class="rank">
-              <p>{{row.rank}}{{unless row.hasRankOnRecord '*'}}</p>
+              <p>{{row.rank}}{{unless row.isRanked '*'}}</p>
             </div>
           {{/if}}
 

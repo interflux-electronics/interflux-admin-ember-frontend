@@ -16,8 +16,6 @@ export default class ProductController extends Controller {
   }
 
   get sortedImages() {
-    return this.model.family.productFamilyImages
-      .sortBy('rankAmongImages')
-      .mapBy('image');
+    return this.model.family.productFamilyImages.sortBy('rankAmongImages');
   }
 }

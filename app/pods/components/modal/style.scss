@@ -116,6 +116,76 @@
         margin-top: 12px;
       }
       ul.list {
+        &.can-sort-list {
+          &.is-dragging {
+            cursor: grabbing;
+            .dropzone {
+              display: flex; // dropzones become hoverable
+            }
+          }
+          li {
+            position: relative;
+            cursor: grab;
+            &:active {
+              cursor: grabbing;
+              z-index: 1;
+              outline: 1px solid $blue-0;
+              outline-offset: -1px;
+            }
+
+            &.dragee {
+              background: $grey-0 !important;
+              a,
+              .right {
+                display: none !important;
+              }
+            }
+            .rank {
+              width: 36px;
+              height: 36px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              p {
+                background: #eee;
+                font-size: 14px;
+                height: 18px;
+                line-height: 20px;
+                text-align: center;
+                padding: 0 4px;
+              }
+            }
+            .dropzone {
+              display: none; // hide unless dragging
+              position: absolute;
+              width: 100%;
+              height: 40px;
+              left: 0;
+              align-items: center;
+              &.top {
+                top: -20px;
+              }
+              &.bottom {
+                bottom: -20px;
+              }
+              &.active {
+                .line {
+                  opacity: 1;
+                }
+              }
+              .line {
+                height: 1px;
+                width: calc(100% - 2px);
+                transform: translateX(1px);
+                background: $blue-0;
+                outline: 2px solid $blue-0;
+                pointer-events: none; // prevents dragenter event from firing and stopping the drag
+                opacity: 0;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
         li {
           position: relative;
           background: white;
@@ -167,7 +237,11 @@
             display: flex;
             align-items: center;
             flex-shrink: 0;
+            padding: 5px;
           }
+        }
+        & + button {
+          margin-top: 12px;
         }
       }
     }
