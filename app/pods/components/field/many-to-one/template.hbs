@@ -23,15 +23,13 @@
             </div>
           {{/if}}
 
-          {{!--
           <DotDotDotMenu>
             <Button
               @icon="trash"
               @text="remove"
-              @onMouseDown={{fn this.onDestroy row.joinRecord}}
+              @onMouseDown={{fn this.remove row}}
             />
           </DotDotDotMenu>
-          --}}
         </div>
 
         {{#if this.canSortList}}
@@ -63,7 +61,6 @@
     {{/each}}
   </ul>
 
-  {{!--
   {{#unless @disabled}}
     {{#if this.showSearch}}
       <Search
@@ -89,5 +86,4 @@
       />
     {{/if}}
   {{/unless}}
-  --}}
 </Fieldset>

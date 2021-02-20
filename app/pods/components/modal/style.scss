@@ -240,9 +240,10 @@
             padding: 5px;
           }
         }
-        & + button {
-          margin-top: 12px;
-        }
+      }
+      ul.list + button,
+      ul.list + .search {
+        margin-top: 12px;
       }
     }
   }

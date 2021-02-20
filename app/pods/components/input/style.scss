@@ -93,6 +93,12 @@
       }
     }
 
+    &.focus {
+      .wrapper {
+        z-index: 1;
+      }
+    }
+
     .wrapper {
       background: white;
       box-shadow: $grey-border 0 0 0 1px;

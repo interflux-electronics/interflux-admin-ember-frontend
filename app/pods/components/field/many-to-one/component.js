@@ -125,70 +125,90 @@ export default class ManyToOneFieldComponent extends FieldComponent {
       row.targetRecord[targetRank] = newRank;
 
       if (row.targetRecord.hasDirtyAttributes) {
-        row.targetRecord.save();
+        console.debug('saving...', i);
+        row.targetRecord.save().catch((response) => {
+          this.api.logError(response);
+        });
       }
     });
   }
 
   // SEARCH & ADD LOGIC
 
-  // @tracked showSearch = false;
-  //
-  // @action
-  // onClickAddButton() {
-  //   this.showSearch = true;
-  // }
-  //
-  // @action
-  // onSearchBlur() {
-  //   this.showSearch = false;
-  // }
-  //
-  // get isDirty() {
-  //   return false;
-  // }
-  //
-  // // The <Search> component will never have to show the selected value
-  // get value() {
-  //   return null;
-  // }
-  //
-  // @action
-  // onSelect(targetRecord) {
-  //   const { baseRecord, targetLabel, targetForeignKey } = this.args;
-  //
-  //   console.debug('selected', targetRecord[targetLabel]);
-  //
-  //   targetRecord[targetForeignKey] = baseRecord.id;
-  //
-  //   console.debug(
-  //     `updating ${targetRecord[targetForeignKey]} to ${baseRecord.id}`
-  //   );
-  //
-  //   targetRecord
-  //     .save()
-  //     .then(() => {
-  //       console.debug('success');
-  //     })
-  //     .catch((response) => {
-  //       this.api.logError(response);
-  //     });
-  // }
-  //
-  // @action
-  // onKeyUp() {
-  //   this.error = null;
-  // }
-  //
-  // get searchFilter() {
-  //   return this.args.targetFilter || this.args.targetLabel;
-  // }
+  @tracked showSearch = false;
 
-  // DESTROY
+  @action
+  onClickAddButton() {
+    this.showSearch = true;
+  }
 
-  // @action
-  // onDestroy(joinRecord) {
-  //   console.debug('destroy join record', { joinRecord });
-  //   joinRecord.destroyRecord();
-  // }
+  @action
+  onSearchBlur() {
+    this.showSearch = false;
+  }
+
+  get isDirty() {
+    return false;
+  }
+
+  // The <Search> component will never have to show the selected value
+  get value() {
+    return null;
+  }
+
+  @action
+  onSelect(targetRecord) {
+    const { baseRecord, targetLabel, targetForeignId } = this.args;
+
+    targetRecord[targetForeignId] = baseRecord;
+
+    console.debug(`updating ${targetRecord[targetLabel]} to ${baseRecord.id}`);
+
+    targetRecord
+      .save({
+        adapterOptions: {
+          whitelist: [targetForeignId]
+        }
+      })
+      .catch((response) => {
+        this.api.logError(response);
+      });
+  }
+
+  @action
+  onKeyUp() {
+    this.error = null;
+  }
+
+  get searchFilter() {
+    return this.args.targetFilter || this.args.targetLabel;
+  }
+
+  // REMOVE
+
+  @action
+  remove(row) {
+    const { targetRecord } = row;
+    const { targetForeignId } = this.args;
+
+    console.debug('remove', targetRecord.id);
+
+    targetRecord[targetForeignId] = null;
+    targetRecord
+      .save({
+        adapterOptions: {
+          whitelist: [targetForeignId]
+        }
+      })
+      .catch((response) => {
+        this.api.logError(response);
+      });
+  }
+
+  // FOCUS
+
+  @action
+  onFocus() {
+    // Do nothing to prevent background from going blue.
+  }
 }

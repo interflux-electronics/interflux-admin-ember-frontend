@@ -34,7 +34,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   @service store;
 
   get joinRecords() {
-    console.log('MANY joinRecords()');
+    console.debug('MANY joinRecords()');
 
     const {
       baseRecord,
@@ -59,7 +59,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   }
 
   get rows() {
-    console.log('MANY rows()');
+    console.debug('MANY rows()');
     const { targetLabel, targetModel, joinRankKey } = this.args;
     return this.joinRecords.map((joinRecord, i, arr) => {
       const targetRecord = joinRecord.get(targetModel);
@@ -124,14 +124,9 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
     const newRecord = this.store.createRecord(joinModel, props);
 
-    newRecord
-      .save()
-      .then(() => {
-        console.debug('success');
-      })
-      .catch((response) => {
-        this.api.logError(response);
-      });
+    newRecord.save().catch((response) => {
+      this.api.logError(response);
+    });
   }
 
   @action
@@ -229,7 +224,9 @@ export default class ManyToManyFieldComponent extends FieldComponent {
       row.joinRecord[joinRankKey] = newRank;
 
       if (row.joinRecord.hasDirtyAttributes) {
-        row.joinRecord.save();
+        row.joinRecord.save().catch((response) => {
+          this.api.logError(response);
+        });
       }
     });
   }
@@ -240,5 +237,12 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   onDestroy(joinRecord) {
     console.debug('destroy join record', { joinRecord });
     joinRecord.destroyRecord();
+  }
+
+  // FOCUS
+
+  @action
+  onFocus() {
+    // Do nothing to prevent background from going blue.
   }
 }

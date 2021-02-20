@@ -1,8 +1,3 @@
 fieldset.many-to-many {
-  // Prevent on focus blue background because lists are too long.
-  &.primary {
-    &.focus {
-      background-color: white;
-    }
-  }
+  // see #modal .list.can-sort-list styles
 }
