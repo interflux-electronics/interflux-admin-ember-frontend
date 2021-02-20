@@ -34,8 +34,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   @service store;
 
   get joinRecords() {
-    console.debug('MANY joinRecords()');
-
     const {
       baseRecord,
       baseLabel,
@@ -59,8 +57,8 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   }
 
   get rows() {
-    console.debug('MANY rows()');
     const { targetLabel, targetModel, joinRankKey } = this.args;
+
     return this.joinRecords.map((joinRecord, i, arr) => {
       const targetRecord = joinRecord.get(targetModel);
       return {

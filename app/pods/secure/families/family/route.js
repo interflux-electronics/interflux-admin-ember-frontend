@@ -5,7 +5,11 @@ export default class FamilyRoute extends ModalRoute {
   model(params) {
     return hash({
       family: this.store.findRecord('product-family', params.id, {
-        include: ['products', 'product_family_images'].join(','),
+        include: [
+          'products',
+          'product_family_images',
+          'product_family_images.image'
+        ].join(','),
         reload: true
       })
       // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
