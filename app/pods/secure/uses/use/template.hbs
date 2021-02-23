@@ -45,11 +45,13 @@
     >
       <ul class="list">
         {{#each use.families as |family|}}
-          <li>
-            <a href={{href-to 'secure.families.family' family.id}}>
-              {{family.namePlural}}
-            </a>
-          </li>
+          {{#if family.id}}
+            <li>
+              <a href={{href-to 'secure.families.family' family.id}}>
+                {{family.namePlural}}
+              </a>
+            </li>
+          {{/if}}
         {{else}}
           <li class="dashed">
             <span>- none -</span>
