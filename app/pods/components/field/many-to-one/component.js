@@ -126,9 +126,15 @@ export default class ManyToOneFieldComponent extends FieldComponent {
 
       if (row.targetRecord.hasDirtyAttributes) {
         console.debug('saving...', i);
-        row.targetRecord.save().catch((response) => {
-          this.api.logError(response);
-        });
+        row.targetRecord
+          .save({
+            adapterOptions: {
+              whitelist: [targetRank]
+            }
+          })
+          .catch((response) => {
+            this.api.logError(response);
+          });
       }
     });
   }
