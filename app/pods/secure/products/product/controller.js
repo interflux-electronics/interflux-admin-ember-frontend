@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
-import { tracked } from '@glimmer/tracking';
 
 export default class ProductController extends Controller {
   @alias('model.product') product;
