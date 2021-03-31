@@ -26,6 +26,15 @@ fieldset {
       letter-spacing: 0.2px;
       color: $grey-5;
       margin-top: 6px;
+
+      // TODO: hover legend and make visible on focus only
+      // position: absolute;
+      // width: 240px;
+      // left: 105%;
+      // background: #6ea4de;
+      // color: white;
+      // padding: 20px;
+      // box-shadow: 3px 0 10px RGBA(0,0,0,0.1);
     }
   }
 
