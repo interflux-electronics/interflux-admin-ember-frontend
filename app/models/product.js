@@ -6,9 +6,20 @@ export default class ProductModel extends Model {
   @alias('id') slug;
   @attr('string') name;
   @attr('string') label;
-  @attr('string') pitch;
   @attr('string') status;
+
+  @attr('string') pitch;
+  @attr('string') summary;
+  @attr('string') properties;
+  @attr('string') instructions;
+
   @attr('number') rankAmongFamily;
+
+  @attr('boolean') compliesWithROHS;
+  @attr('boolean') compliesWithIEC;
+  @attr('boolean') compliesWithIPC;
+  @attr('boolean') compliesWithISO;
+  @attr('string') testResults;
 
   @belongsTo('product-family') productFamily;
   @alias('productFamily') family;

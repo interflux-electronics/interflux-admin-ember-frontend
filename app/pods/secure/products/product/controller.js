@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import { tracked } from '@glimmer/tracking';
 
 export default class ProductController extends Controller {
   @alias('model.product') product;
@@ -106,5 +107,50 @@ export default class ProductController extends Controller {
           '**Offline** - This product is entirely hidden from our website and will be removed from the Google search results.'
       }
     ];
+  }
+
+  get testResults() {
+    const str = this.model.product.testResults;
+    if (!str) {
+      return [['', '', '']];
+    }
+    const arr = JSON.parse(str);
+    if (arr.length < 1) {
+      return [['', '', '']];
+    }
+    return JSON.parse(str);
+  }
+
+  @action
+  updateCell(i, ii, event) {
+    console.log(i, ii, event.target.value);
+    const arr = this.testResults;
+    arr[i][ii] = event.target.value;
+    this.saveTestResults(arr);
+  }
+
+  @action
+  addRow() {
+    const str = this.model.product.testResults;
+    const arr = JSON.parse(str);
+    arr.push(['-', '-', '-']);
+    this.saveTestResults(arr);
+  }
+
+  @action
+  removeRow() {
+    const str = this.model.product.testResults;
+    const arr = JSON.parse(str).slice(0, -1);
+    this.saveTestResults(arr);
+  }
+
+  saveTestResults(arr) {
+    const str = arr.length < 1 ? null : JSON.stringify(arr);
+    this.model.product.testResults = str;
+    this.product.save({
+      adapterOptions: {
+        whitelist: 'testResults'
+      }
+    });
   }
 }

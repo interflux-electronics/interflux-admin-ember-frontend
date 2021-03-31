@@ -33,14 +33,6 @@
       @attribute='label'
     />
 
-    <Field::String
-      @label='Elevator pitch'
-      @legend='Explain to someone who has never heard of Interflux in 7 to 20 seconds what this product is, which problem it solves, why it is so great and who will want to be using this {{product.name}}.'
-      @record={{product}}
-      @attribute='pitch'
-      @multiline='true'
-    />
-
     <Field::ManyToMany
       @label="Processes"
       @baseRecord={{product}}
@@ -63,6 +55,36 @@
       @targetModel="quality"
       @targetLabel="text"
       @targetRoute='secure.qualities.quality'
+    />
+
+    <Field::String
+      @label='The "elevator pitch"'
+      @legend='Explain to someone who has never heard of Interflux in 7 to 20 seconds what this product is, which problem it solves, why it is so great and who will want to be using this {{product.name}}.'
+      @record={{product}}
+      @attribute='pitch'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='Summary'
+      @legend="The summary is similar to the elevator pitch, but is not limited to 160 characters and text only. The summary is what one would read AFTER you've sparked their interest with the pitch. Here you get to elaborate more in depth. You can also use markdown, images and videos to make the content come alive."
+      @record={{product}}
+      @attribute='summary'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='Chemical & physical properties'
+      @record={{product}}
+      @attribute='properties'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='How to use {{product.name}}'
+      @record={{product}}
+      @attribute='instructions'
+      @multiline='true'
     />
 
     <h2>Images</h2>
@@ -231,6 +253,97 @@
       @targetFilter="name"
       @minKeyStrokes='1'
     />
+
+    <h2>Compliance</h2>
+
+    <Field::Boolean
+      @record={{product}}
+      @attribute='compliesWithIEC'
+    >
+      <label>Complies with IEC EN 61190-1-1(2002)</label>
+    </Field::Boolean>
+
+    <Field::Boolean
+      @record={{product}}
+      @attribute='compliesWithIPC'
+    >
+      <label>Complies with IPC J-STD-004A</label>
+    </Field::Boolean>
+
+    <Field::Boolean
+      @record={{product}}
+      @attribute='compliesWithIPC'
+    >
+      <label>Complies with IPC J-STD-004B</label>
+    </Field::Boolean>
+
+    <Field::Boolean
+      @record={{product}}
+      @attribute='compliesWithIPC'
+    >
+      <label>Complies with IPC J-STD-005</label>
+    </Field::Boolean>
+
+    <Field::Boolean
+      @record={{product}}
+      @attribute='compliesWithROHS'
+    >
+      <label>Complies with RoHS</label>
+    </Field::Boolean>
+
+    <Field::Boolean
+      @record={{product}}
+      @attribute='compliesWithISO'
+    >
+      <label>Complies with ISO 9001</label>
+    </Field::Boolean>
+
+    <Fieldset @label='Test results'>
+      <table class="results">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Result</th>
+            <th>Method</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each this.testResults as |row i|}}
+            <tr>
+              {{#each row as |cell ii|}}
+                <td>
+                  <input
+                    value={{cell}}
+                    {{on 'change' (fn this.updateCell i ii)}}
+                    autocapitalize='off'
+                    autocomplete='off'
+                    autocorrect='off'
+                    spellcheck='false'
+                  >
+                </td>
+              {{/each}}
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      {{#if this.testResults}}
+        <div class="buttons">
+          <Button
+            @text="Add row"
+            @theme="save"
+            @onClick={{this.addRow}}
+          />
+          <Button
+            @text="Remove row"
+            @theme="save"
+            @onClick={{this.removeRow}}
+          />
+        </div>
+      {{/if}}
+
+    </Fieldset>
 
     <h2>Documents</h2>
 
