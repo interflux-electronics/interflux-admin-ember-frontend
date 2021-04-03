@@ -1,4 +1,15 @@
 fieldset.radio {
+  label {
+    font-family: $bold;
+    font-size: 16px;
+    line-height: 150%;
+    color: $grey-7;
+    cursor: pointer;
+    user-select: none;
+    letter-spacing: 0.2px;
+    margin-right: 10px;
+    margin-top: 6px;
+  }
   ul {
     li {
       display: flex;
