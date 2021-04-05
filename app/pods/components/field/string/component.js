@@ -20,8 +20,6 @@ export default class StringFieldComponent extends FieldComponent {
     const { record, attribute } = this.args;
     const value = record.get(attribute);
 
-    console.log('last save value', value);
-
     this.lastSavedValue = value || null;
 
     if (!record.isNew && value === undefined) {
