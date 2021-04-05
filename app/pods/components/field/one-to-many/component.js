@@ -13,6 +13,13 @@ export default class OneToManyFieldComponent extends FieldComponent {
   // @arg targetLabel;
   // @arg targetRoute;
 
+  fieldset;
+
+  @action
+  onInsert(fieldset) {
+    this.fieldset = fieldset;
+  }
+
   get chosenRecord() {
     const { baseRecord, baseLabel } = this.args;
 
@@ -30,9 +37,28 @@ export default class OneToManyFieldComponent extends FieldComponent {
 
   @tracked showSearch = false;
 
+  delay(ms) {
+    return new Promise((approve) => {
+      window.setTimeout(approve, ms);
+    });
+  }
+
   @action
-  onClickEditButton() {
+  async onEdit() {
     this.showSearch = true;
+    await this.delay(1);
+    this.fieldset.querySelector('.search input').focus();
+  }
+
+  @action
+  onFocus() {
+    this.hasFocus = true;
+  }
+
+  @action
+  onBlur() {
+    this.hasFocus = false;
+    this.showSearch = false;
   }
 
   @action
@@ -66,5 +92,10 @@ export default class OneToManyFieldComponent extends FieldComponent {
   @action
   onKeyUp() {
     this.error = null;
+  }
+
+  // override
+  get isDirty() {
+    return false;
   }
 }

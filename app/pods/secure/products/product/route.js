@@ -17,7 +17,8 @@ export default class ProductRoute extends ModalRoute {
           'product_documents'
         ].join(','),
         reload: true
-      })
+      }),
+      families: this.modelFor('secure.products').families
     });
   }
 }

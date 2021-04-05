@@ -1,42 +1,7 @@
 fieldset.one-to-many {
-  // To avoid background colour on focus (lists are too long)
-  &.primary {
-    &.focus {
-      background-color: white;
-    }
-  }
-
-  ul.list {
-    > li {
-      button.trash {
-        width: 46px;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 3px;
-        &:hover {
-          [fill] {
-            fill: $red-1;
-          }
-        }
-        &:focus {
-          color: $red-1;
-          text-decoration: none;
-          box-shadow: 0 0 0 2px $red-1;
-        }
-        svg {
-          width: 18px;
-          height: auto;
-          [fill] {
-            fill: #ccc;
-          }
-        }
-      }
-    }
-    & + button,
-    & + .search {
-      margin-top: 12px;
+  .right {
+    button.select {
+      margin-right: 4px;
     }
   }
 

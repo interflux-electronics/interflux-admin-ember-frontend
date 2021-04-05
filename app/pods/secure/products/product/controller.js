@@ -73,6 +73,12 @@ export default class ProductController extends Controller {
     });
   }
 
+  get mainFamilyOptions() {
+    return this.model.families.sortBy('rank').map((family) => {
+      return { value: family, label: family.nameSingle };
+    });
+  }
+
   get statusOptions() {
     return [
       {

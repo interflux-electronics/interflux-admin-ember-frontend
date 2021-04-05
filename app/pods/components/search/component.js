@@ -302,7 +302,10 @@ export default class SearchComponent extends Component {
     // Here we sort results that start with the query to the top and the rest below.
     // Both groups are sorted alphabetically before being merged into one array.
     const condition = (record) => {
-      return record[searchFilter].toLowerCase().startsWith(query.toLowerCase());
+      return (
+        record[searchFilter] &&
+        record[searchFilter].toLowerCase().startsWith(query.toLowerCase())
+      );
     };
     const arr1 = response.filter(condition).sortBy(searchFilter);
     const arr2 = response.reject(condition).sortBy(searchFilter);

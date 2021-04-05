@@ -20,6 +20,7 @@ Router.map(function () {
     });
 
     this.route('families', function () {
+      this.route('create');
       this.route('family', { path: '/:id' });
     });
 

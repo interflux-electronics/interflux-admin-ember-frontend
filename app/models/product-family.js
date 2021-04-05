@@ -1,13 +1,19 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import { alias } from '@ember/object/computed';
 import ENV from 'interflux/config/environment';
 
 export default class ProductFamilyModel extends Model {
   @alias('id') slug;
+  @attr('string') slug;
   @attr('string') nameSingle;
   @attr('string') namePlural;
   @attr('string') gist;
-  @attr('number') order;
+  @attr('string') theFullMonty;
+  @attr('number') rank;
+  @attr('boolean') public;
+
+  @belongsTo('product-family', { inverse: 'children' }) productFamily;
+  @hasMany('product-family', { inverse: 'productFamily' }) children;
 
   @hasMany('product') products;
   @hasMany('product-family-image') productFamilyImages;
@@ -18,5 +24,19 @@ export default class ProductFamilyModel extends Model {
 
   get link() {
     return this.url.replace('https://', '').replace('http://', '');
+  }
+
+  get isSubFamily() {
+    return this.productFamily.get('id') ? true : false;
+  }
+
+  get isMainFamily() {
+    return !this.isSubFamily;
+  }
+
+  // Returns plural family name with first letter capitalised
+  get label() {
+    const str = this.namePlural || '';
+    return str[0].toUpperCase() + str.slice(1);
   }
 }

@@ -16,25 +16,24 @@
     />
 
     <Field::OneToMany
-      @label='Family'
+      @label='Product family'
       @baseRecord={{product}}
       @baseLabel='productFamily'
       @targetModel="product-family"
-      @targetFilter="namePlural"
+      @targetFilter="nameSingle"
+      @targetRoute="secure.families.family"
       @minKeyStrokes='0'
     />
 
-    {{!-- TODO: create sub families --}}
-
     <Field::String
-      @label='Sub family'
-      @legend='Leave blank, unless you have a more descriptive name for this product than the family name. For example "flux pen" instead of "auxiliary".'
+      @label='Better description than family'
+      @legend='In case the family name is not an accurate description, then override it here with a better name. For example "flux pen" instead of "auxiliary". Otherwise, leave blank.'
       @record={{product}}
       @attribute='label'
     />
 
     <Field::ManyToMany
-      @label="Processes"
+      @label="Suitable for"
       @baseRecord={{product}}
       @baseModel="product"
       @baseLabel="productUses"
@@ -46,7 +45,7 @@
     />
 
     <Field::ManyToMany
-      @label="Qualities"
+      @label="Key advantages"
       @baseRecord={{product}}
       @baseModel="product"
       @baseLabel="productQualities"
@@ -56,6 +55,8 @@
       @targetLabel="text"
       @targetRoute='secure.qualities.quality'
     />
+
+    <h2>Content</h2>
 
     <Field::String
       @label='The "elevator pitch"'

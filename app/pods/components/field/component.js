@@ -98,6 +98,10 @@ export default class FieldComponent extends Component {
     // Remember the value
     const value = this.value;
 
+    if (this.args.beforeSave) {
+      await this.args.beforeSave();
+    }
+
     this.args.record
       .save({
         adapterOptions: {
@@ -107,6 +111,9 @@ export default class FieldComponent extends Component {
       .then(() => {
         console.debug('save successful');
         this.lastSavedValue = value;
+        if (this.args.afterSave) {
+          this.args.afterSave(value);
+        }
       })
       .catch((response) => {
         console.error('save failed');

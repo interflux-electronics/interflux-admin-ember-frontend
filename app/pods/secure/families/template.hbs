@@ -4,9 +4,12 @@
   <Spreadsheet
     @records={{@model.families}}
     @linkRoute='secure.families.family'
+    @createRoute='secure.families.create'
+    @showCreateButton='true'
     @columns={{array
-      (hash key='order' label='Rank')
+      (hash key='rank' label='Rank')
       (hash key='namePlural' label='Name')
+      (hash key='productFamily.namePlural' label='Subset of')
     }}
   />
 </Page::Content>

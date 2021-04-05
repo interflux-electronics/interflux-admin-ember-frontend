@@ -6,6 +6,22 @@
     height: auto;
     min-height: calc(11px * 2 + 4 * 24px);
 
+    p[contenteditable] {
+      padding: 11px 15px 61px 15px;
+    }
+
+    .action {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: -60px;
+      button {
+        width: auto;
+      }
+    }
+
     textarea,
     [role='textbox'] {
       line-height: 150%;
