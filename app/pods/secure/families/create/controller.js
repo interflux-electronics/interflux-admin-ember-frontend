@@ -16,7 +16,6 @@ export default class ProductController extends Controller {
       })
       .catch((error) => {
         console.error(error);
-        debugger;
       });
   }
 
