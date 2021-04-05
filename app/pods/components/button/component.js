@@ -22,6 +22,10 @@ export default class ButtonComponent extends Component {
     return this.args.isBusy ? 'busy' : 'idle';
   }
 
+  get isDisabled() {
+    return this.args.disabled || this.args.isBusy;
+  }
+
   @action
   onClick(event) {
     if (this.args.onClick && !this.args.isBusy) {
