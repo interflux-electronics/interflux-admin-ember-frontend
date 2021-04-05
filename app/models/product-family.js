@@ -10,7 +10,6 @@ export default class ProductFamilyModel extends Model {
   @attr('string') gist;
   @attr('string') theFullMonty;
   @attr('number') rank;
-  @attr('boolean') public;
 
   @belongsTo('product-family', { inverse: 'children' }) productFamily;
   @hasMany('product-family', { inverse: 'productFamily' }) children;

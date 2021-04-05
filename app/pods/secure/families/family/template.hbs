@@ -62,41 +62,34 @@
       @targetRoute='secure.products.product'
     />
 
-    <h2>Images</h2>
+    {{#if family.isMainFamily}}
+      <h2>Images</h2>
 
-    <Field::ManyToMany
-      @label="The 4 avatars"
-      @legend="On the product overview page we show 4 images to represent this product family."
-      @baseRecord={{family}}
-      @baseModel="productFamily"
-      @baseLabel="productFamilyImages"
-      @joinModel="product-family-image"
-      @joinRankKey="rankAmongImages"
-      @targetModel="image"
-      @targetLabel="alt"
-      @targetRoute='secure.images.image'
-      @disabled={{this.maxAvatarCountReached}}
-    />
+      <Field::ManyToMany
+        @label="The 4 avatars"
+        @legend="On the product overview page we show 4 images to represent this product family."
+        @baseRecord={{family}}
+        @baseModel="productFamily"
+        @baseLabel="productFamilyImages"
+        @joinModel="product-family-image"
+        @joinRankKey="rankAmongImages"
+        @targetModel="image"
+        @targetLabel="alt"
+        @targetRoute='secure.images.image'
+        @disabled={{this.maxAvatarCountReached}}
+      />
 
-    <Fieldset>
-      <ul class="images">
-        {{#each this.sortedImages as |joinRecord|}}
-          <li>
-            <p>{{joinRecord.rankAmongImages}}</p>
-            <ResponsiveImage @image={{joinRecord.image}} />
-          </li>
-        {{/each}}
-      </ul>
-    </Fieldset>
-
-    <h2>Website</h2>
-
-    <Field::Boolean
-      @record={{family}}
-      @attribute='public'
-    >
-      <label>Show on website</label>
-    </Field::Boolean>
+      <Fieldset>
+        <ul class="images">
+          {{#each this.sortedImages as |joinRecord|}}
+            <li>
+              <p>{{joinRecord.rankAmongImages}}</p>
+              <ResponsiveImage @image={{joinRecord.image}} />
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
 
     <h2>Database</h2>
 

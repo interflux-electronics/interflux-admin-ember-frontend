@@ -2,6 +2,13 @@ import FieldComponent from '../component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
+// TODO: clear rank when added
+// TODO: sort by name button
+// TODO: sort by status button
+// TODO: add extra filters to the query
+// TODO: do not show already selected records
+// TODO: do not add already selected records a second time
+
 export default class OneToManyFieldComponent extends FieldComponent {
   // @arg label;
   // @arg legend;
