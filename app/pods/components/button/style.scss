@@ -160,8 +160,8 @@ button {
       }
       &.chevron-right {
         flex-direction: row-reverse;
-        .icon {
-          margin-left: 10px;
+        span {
+          padding-right: 10px;
         }
         svg {
           width: auto;
