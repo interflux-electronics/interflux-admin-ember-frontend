@@ -1,0 +1,13 @@
+{{#with @model.family as |family|}}
+  <Modal @id="family">
+    <h1>Create new product family</h1>
+
+    <Field::String
+      @label='Choose a name (plural)'
+      @record={{family}}
+      @attribute='namePlural'
+      @beforeSave={{this.beforeSave}}
+      @afterSave={{this.afterSave}}
+    />
+  </Modal>
+{{/with}}
