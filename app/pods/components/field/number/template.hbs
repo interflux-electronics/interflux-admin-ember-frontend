@@ -1,0 +1,36 @@
+<Fieldset
+  @id={{this.id}}
+  @label={{@label}}
+  @legend={{@legend}}
+  @component="string"
+  @theme={{@theme}}
+  @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
+>
+  <Input
+    @id={{this.id}}
+    @theme={{@theme}}
+    @type="number"
+    @placeholder={{@placeholder}}
+    @autofocus={{@autofocus}}
+    @disabled={{@disabled}}
+    @value={{this.value}}
+    @state={{this.state}}
+    @onFocus={{this.onFocus}}
+    @onBlur={{this.onBlur}}
+    @onKeyDown={{this.onKeyDown}}
+    @onKeyUp={{this.onKeyUp}}
+    @onMouseOver={{this.onMouseOver}}
+    @onMouseOut={{this.onMouseOut}}
+  >
+  <Field::String::Messages
+    @state={{this.state}}
+    @isSaving={{this.isSaving}}
+    @hasFocus={{this.hasFocus}}
+    @warning={{this.warning}}
+    @error={{this.error}}
+    @onSave={{this.save}}
+    @disabled={{@disabled}}
+  />
+  </Input>
+</Fieldset>
