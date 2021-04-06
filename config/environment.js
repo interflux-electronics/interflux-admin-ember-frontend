@@ -17,7 +17,7 @@ const apiHosts = {
 };
 
 // Where this Ember app is located
-const appHosts = {
+const publicHosts = {
   development: 'http://localhost:4400',
   production: 'https://admin.interflux.com'
 };
@@ -31,7 +31,7 @@ const cdnHosts = {
 // Where the CDN is located
 const wwwHosts = {
   development: 'http://localhost:9100',
-  production: 'https://app.interflux.com'
+  production: 'https://new.interflux.com'
 };
 
 // The mobile browser's theme colour
@@ -46,7 +46,7 @@ module.exports = function (env) {
 
   // Hosts
   const apiHost = apiHosts[env];
-  const appHost = appHosts[env];
+  const publicHost = publicHosts[env];
   const cdnHost = cdnHosts[env];
   const wwwHost = wwwHosts[env];
 
@@ -69,7 +69,7 @@ module.exports = function (env) {
     isTest,
     isProduction,
     apiHost,
-    appHost,
+    publicHost,
     cdnHost,
     wwwHost,
     apiNamespace,
