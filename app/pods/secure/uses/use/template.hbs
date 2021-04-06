@@ -100,10 +100,10 @@
 
     <Fieldset>
       <ul class="images">
-        {{#each use.useImages as |relation|}}
+        {{#each use.images as |useImage|}}
           <li>
-            <p>{{relation.image.alt}}</p>
-            <ResponsiveImage @image={{relation.image}} />
+            <p>{{useImage.image.alt}}</p>
+            <ResponsiveImage @image={{useImage.image}} />
           </li>
         {{/each}}
       </ul>

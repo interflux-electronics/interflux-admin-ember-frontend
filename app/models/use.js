@@ -25,4 +25,8 @@ export default class UseModel extends Model {
   get link() {
     return this.url.replace('https://', '').replace('http://', '');
   }
+
+  get images() {
+    return this.useImages.sortBy('rankAmongImages');
+  }
 }
