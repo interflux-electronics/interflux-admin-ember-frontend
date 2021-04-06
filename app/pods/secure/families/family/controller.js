@@ -23,17 +23,16 @@ export default class ProductController extends Controller {
     return this.model.family.productFamilyImages.sortBy('rankAmongImages');
   }
 
-  get mainFamilyOptions() {
-    const arr = this.model.families
+  get mainFamilies() {
+    return this.model.families
       .filterBy('isMainFamily')
       .sortBy('rank')
       .map((family) => {
-        return { value: family, label: family.namePlural };
+        const { namePlural, rank } = family;
+        const isCurrent = family.id === this.model.family.id;
+
+        return { namePlural, rank, isCurrent };
       });
-
-    arr.push({ value: null, label: 'none of the above' });
-
-    return arr;
   }
 
   @action
