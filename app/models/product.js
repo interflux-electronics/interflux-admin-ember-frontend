@@ -17,7 +17,9 @@ export default class ProductModel extends Model {
 
   @attr('boolean') compliesWithROHS;
   @attr('boolean') compliesWithIEC;
-  @attr('boolean') compliesWithIPC;
+  @attr('boolean') compliesWithIPCJSTD004A;
+  @attr('boolean') compliesWithIPCJSTD004B;
+  @attr('boolean') compliesWithIPCJSTD005;
   @attr('boolean') compliesWithISO;
   @attr('string') testResults;
 
