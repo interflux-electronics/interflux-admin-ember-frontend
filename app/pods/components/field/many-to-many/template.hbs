@@ -14,7 +14,11 @@
         ondragstart={{fn this.handleDragStart row}}
         ondragend={{fn this.handleDragEnd row}}
       >
-        <a href={{href-to @targetRoute row.targetRecord.id}}>{{row.label}}</a>
+        {{#if (and @targetRoute row.targetRecord.id)}}
+          <a href={{href-to @targetRoute row.targetRecord.id}}>{{row.label}}</a>
+        {{else}}
+          <span>{{row.label}}</span>
+        {{/if}}
 
         <div class="right">
           {{#if this.canSortList}}

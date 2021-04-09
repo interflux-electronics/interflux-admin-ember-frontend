@@ -64,7 +64,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
       return {
         joinRecord,
         targetRecord,
-        label: targetRecord.get(targetLabel),
+        label: targetRecord.get(targetLabel) || 'N/A',
         rank: joinRecord[joinRankKey] || i + 1,
         isRanked: joinRecord[joinRankKey] ? true : false,
         isLast: i === arr.length - 1

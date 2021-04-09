@@ -3,6 +3,8 @@
 
 .search {
   &.primary {
+    position: relative;
+    z-index: 2; // to make the results be on top of elements at z-index: 1
     .results {
       padding-top: 1px;
       background: $grey-2;
