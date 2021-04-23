@@ -20,7 +20,10 @@ import { inject as service } from '@ember/service';
 // }
 
 export default class ResponsiveImageComponent extends Component {
-  // @arg image;
+  // @arg path;
+  // @arg variations;
+  // @arg caption;
+  // @arg alt;
 
   @service browser;
 
@@ -125,9 +128,21 @@ export default class ResponsiveImageComponent extends Component {
     });
   }
 
-  // Here we create the HTML for the <img> and <source> elements which go into the <picture>.
+  // To create a responsive image we ideally we use the native HTML5 <picture> approach with
+  // <source> and <img> inside:
+  //
+  // <picture>
+  //   <source src="image.webp" type="image/webp" />
+  //   <img src="image.jpg" width="200" height="200" alt="foo" />
+  // </picture>
+  //
+  // However, browsers end up downloading both the JPG and WEBP!
+  // https://www.smashingmagazine.com/2013/05/how-to-avoid-duplicate-downloads-in-responsive-images/
+  // Thus we perform the logic ourselves and render a simple <img> in the end.
+  //
   get html() {
     const { path, variations, picture } = this;
+    const { cdnHost } = ENV;
 
     if (!path) {
       return console.warn('no path');
@@ -156,56 +171,38 @@ export default class ResponsiveImageComponent extends Component {
     img.onload = () => {
       this.status = 'done';
     };
+
     img.onerror = () => {
       this.status = 'error';
       console.warn('<ResponsiveImage> failed to load image', this.path);
     };
+
     if (this.alt) {
       img.alt = this.alt;
     }
 
-    // Ideally we use the native HTML5 <picture> approach with <source> and <img> inside.
-    //
-    // <picture>
-    //   <source src="image.webp" type="image/webp" />
-    //   <img src="image.jpg" width="200" height="200" alt="foo" />
-    // </picture>
-    //
-    // However, browsers end up downloading both the JPG and WEBP!
-    // https://www.smashingmagazine.com/2013/05/how-to-avoid-duplicate-downloads-in-responsive-images/
-    // Thus we revert to simply one <img> rendering.
-    //
-    // For reference:
-    // if (this.hasJPG) {
-    //   img.src = `${ENV.cdnHost}/${this.path}@${this.closestJPGsize}.jpg`;
-    //   img.width = this.closestJPGsize.split('x')[0];
-    //   img.height = this.closestJPGsize.split('x')[1];
-    //   fragment.append(img);
-    //
-    //   if (this.hasWEBP) {
-    //     const source = document.createElement('source');
-    //     source.type = 'image/webp';
-    //     source.srcset = `${ENV.cdnHost}/${this.path}@${this.closestWEBPsize}.webp`;
-    //     fragment.prepend(source);
-    //   }
-    //
-    //   return fragment;
-    // }
-    //
+    // If SVG, render immediately for the are sizeless.
     if (this.hasSVG) {
-      img.src = `${ENV.cdnHost}/${path}.svg`;
+      img.src = `${cdnHost}/${path}.svg`;
       fragment.append(img);
       return fragment;
     }
 
+    // If WEBP files exist and the browser supports them, then render WEBP instead of JPG.
     if (this.hasWEBP && this.browser.supportsWEBP) {
-      img.src = `${ENV.cdnHost}/${path}@${this.closestWEBPsize}.webp`;
-      img.width = this.closestWEBPsize.split('x')[0];
-      img.height = this.closestWEBPsize.split('x')[1];
+      const size = this.closestWEBPsize;
+      if (size) {
+        img.src = `${cdnHost}/${path}@${size}.webp`;
+        img.width = size.split('x')[0];
+        img.height = size.split('x')[1];
+      } else {
+        img.src = `${cdnHost}/${path}.jpg`;
+      }
       fragment.append(img);
       return fragment;
     }
 
+    // If no WEBP exist or the browser does not support WEBP, then render the trusty old JPG.
     if (this.hasJPG) {
       const size = this.closestJPGsize;
       if (size) {
@@ -213,12 +210,13 @@ export default class ResponsiveImageComponent extends Component {
         img.width = size.split('x')[0];
         img.height = size.split('x')[1];
       } else {
-        img.src = `${ENV.cdnHost}/${this.path}.jpg`;
+        img.src = `${ENV.cdnHost}/${path}.jpg`;
       }
       fragment.append(img);
       return fragment;
     }
 
+    // Image is neither SVG, WEBP or JPG?
     return null;
   }
 
