@@ -14,7 +14,7 @@
     {{#if image.hasJPG}}
       <Fieldset
         @label='JPGs'
-        @legend="Compressed, small file size, low visual quality, can be used in all apps."
+        @legend="Compressed, small file size, poor visual quality, can be used in all apps."
       >
         <ul class="list">
           {{#each image.JPGs as |file|}}
@@ -24,7 +24,7 @@
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                {{file.size}}
+                {{if file.size file.size file.path}}
               </a>
             </li>
           {{/each}}
@@ -35,7 +35,7 @@
     {{#if image.hasWEBP}}
       <Fieldset
         @label='WEBPs'
-        @legend="Super compressed, 50% smaller than JPG, same poor visual quality as JPG, can only be used in websites."
+        @legend="Super compressed, smallest file size, 50% smaller than JPG, same poor visual quality as JPG, can only be used in websites."
       >
         <ul class="list">
           {{#each image.WEBPs as |file|}}
@@ -99,20 +99,6 @@
       </Fieldset>
     {{/if}}
 
-    <p><strong>Why so many sizes?</strong></p>
-    <p>To make our website faster. Fast website means happy visitors and higher ranking in Google. To make sure the images on our website download as fast as humanly possible we...</p>
-    <p>1. We store images on a CDN. Such a network copies the images to all continents so that no matter where you are in the world, the latency between you and the server will be low.</p>
-    <p>2. We keep 14 sizes of every images on our CDN. Our website are smart enough to download only the smallest possible size which still looks sharp.</p>
-    <p>3. We replace JPG with WEBP wherever possible, which is about 50% smaller in file size than JPG.</p>
-    <p>4. We use SVG instead of PNG.</p>
-
-    <p><strong>What is a CDN?</strong></p>
-    <p>A Content Delivery Network (CDN) is designed to speed up websites. It's where we store all the images, videos and PDFs. Location: <a
-        href="https://cdn.interflux.com/index.html"
-        target="_blank"
-        rel="noreferrer noopener"
-      >cdn.interflux.com</a></p>
-
     <h2>Properties</h2>
 
     <Field::String
@@ -160,7 +146,30 @@
       />
     {{/if}}
 
+    <h2>FYI</h2>
+
+    <p><strong>What is a CDN?</strong></p>
+    <p>A Content Delivery Network (CDN) is designed to speed up websites. It's where we store all the images, videos and PDFs. Location: <a
+        href="https://cdn.interflux.com/index.html"
+        target="_blank"
+        rel="noreferrer noopener"
+      >cdn.interflux.com</a></p>
+
+    <p><strong>Why so many image sizes?</strong></p>
+    <p>To make our website faster. Fast website means happy visitors and higher ranking in Google. To make sure the images on our website download as fast as humanly possible we do the following:</p>
+    <p>1. We store images on a CDN. Such a network copies the images to all continents so that no matter where you are in the world, the latency between you and the server will be low.</p>
+    <p>2. We keep 14 sizes of every images on our CDN. Our website are smart enough to download only the smallest possible size which still looks sharp.</p>
+    <p>3. We replace JPG with WEBP wherever possible, which is about 50% smaller in file size than JPG.</p>
+    <p>4. We use SVG instead of PNG.</p>
+
     <h2>Database</h2>
+
+    <Field::String
+      @label='Variations'
+      @record={{image}}
+      @attribute='variations'
+      @disabled='true'
+    />
 
     <Field::String
       @label='Database ID'

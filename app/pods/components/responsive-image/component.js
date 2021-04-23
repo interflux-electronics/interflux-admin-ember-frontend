@@ -61,19 +61,19 @@ export default class ResponsiveImageComponent extends Component {
   }
 
   get JPGs() {
-    return this.variations.split(',').filter(x => x.split('.')[1] === 'jpg');
+    return this.variations.split(',').filter((x) => x.split('.')[1] === 'jpg');
   }
 
   get WEBPs() {
-    return this.variations.split(',').filter(x => x.split('.')[1] === 'webp');
+    return this.variations.split(',').filter((x) => x.split('.')[1] === 'webp');
   }
 
   get JPGsizes() {
-    return this.JPGs.map(x => x.split('.')[0].replace('@', ''));
+    return this.JPGs.map((x) => x.split('.')[0].replace('@', ''));
   }
 
   get WEBPsizes() {
-    return this.JPGs.map(x => x.split('.')[0].replace('@', ''));
+    return this.JPGs.map((x) => x.split('.')[0].replace('@', ''));
   }
 
   // PICTURE
@@ -107,19 +107,19 @@ export default class ResponsiveImageComponent extends Component {
   // Accepts and array of sizes "200x200".
   // Returns the one which is above and closest to the optimal width.
   closestSize(sizes) {
-    const distances = sizes.map(size => {
+    const distances = sizes.map((size) => {
       const width = size.split('x')[0];
       return width - this.optimalWidth;
     });
 
-    const larger = distances.filter(d => d >= 0);
-    const smaller = distances.filter(d => d < 0);
+    const larger = distances.filter((d) => d >= 0);
+    const smaller = distances.filter((d) => d < 0);
 
     const closestDistance = larger.length
       ? Math.min(...larger)
       : Math.max(...smaller);
 
-    return sizes.find(size => {
+    return sizes.find((size) => {
       const width = size.split('x')[0];
       return width - this.optimalWidth === closestDistance;
     });
@@ -127,13 +127,15 @@ export default class ResponsiveImageComponent extends Component {
 
   // Here we create the HTML for the <img> and <source> elements which go into the <picture>.
   get html() {
-    if (!this.path) {
+    const { path, variations, picture } = this;
+
+    if (!path) {
       return console.warn('no path');
     }
-    if (!this.variations) {
+    if (!variations) {
       return console.warn('no variations', this.path);
     }
-    if (!this.picture) {
+    if (!picture) {
       return null;
     }
 
@@ -191,13 +193,13 @@ export default class ResponsiveImageComponent extends Component {
     // }
     //
     if (this.hasSVG) {
-      img.src = `${ENV.cdnHost}/${this.path}.svg`;
+      img.src = `${ENV.cdnHost}/${path}.svg`;
       fragment.append(img);
       return fragment;
     }
 
     if (this.hasWEBP && this.browser.supportsWEBP) {
-      img.src = `${ENV.cdnHost}/${this.path}@${this.closestWEBPsize}.webp`;
+      img.src = `${ENV.cdnHost}/${path}@${this.closestWEBPsize}.webp`;
       img.width = this.closestWEBPsize.split('x')[0];
       img.height = this.closestWEBPsize.split('x')[1];
       fragment.append(img);
@@ -205,9 +207,14 @@ export default class ResponsiveImageComponent extends Component {
     }
 
     if (this.hasJPG) {
-      img.src = `${ENV.cdnHost}/${this.path}@${this.closestJPGsize}.jpg`;
-      img.width = this.closestJPGsize.split('x')[0];
-      img.height = this.closestJPGsize.split('x')[1];
+      const size = this.closestJPGsize;
+      if (size) {
+        img.src = `${ENV.cdnHost}/${path}@${size}.jpg`;
+        img.width = size.split('x')[0];
+        img.height = size.split('x')[1];
+      } else {
+        img.src = `${ENV.cdnHost}/${this.path}.jpg`;
+      }
       fragment.append(img);
       return fragment;
     }

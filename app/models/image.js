@@ -67,8 +67,8 @@ export default class ImageModel extends Model {
       ? 'webp'
       : 'jpg';
 
-    if (ext === 'svg') {
-      return `${ENV.cdnHost}/${path}.svg`;
+    if (!variations.includes('@')) {
+      return `${ENV.cdnHost}/${path}.${ext}`;
     }
 
     const optimalWidth = 180;
