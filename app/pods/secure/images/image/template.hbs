@@ -9,6 +9,20 @@
 
     <h1>{{image.alt}}</h1>
 
+    {{#if this.showProducts}}
+      <h2>Product</h2>
+      <Field::ManyToMany
+        @label="Which product is this?"
+        @baseRecord={{image}}
+        @baseModel="image"
+        @baseLabel="productImages"
+        @joinModel="product-image"
+        @targetModel="product"
+        @targetLabel="name"
+        @targetRoute='secure.products.product'
+      />
+    {{/if}}
+
     <h2>CDN files</h2>
 
     {{#if image.hasJPG}}
@@ -128,21 +142,6 @@
         @targetModel="company"
         @targetFilter="businessName"
         @minKeyStrokes='2'
-      />
-    {{/if}}
-
-    {{#if this.showProducts}}
-      <h2>Relations</h2>
-      <Field::ManyToMany
-        @label="Products"
-        @legend="Please identify the products seen in this image."
-        @baseRecord={{image}}
-        @baseModel="imagge"
-        @baseLabel="productImages"
-        @joinModel="product-image"
-        @targetModel="product"
-        @targetLabel="name"
-        @targetRoute='secure.products.product'
       />
     {{/if}}
 

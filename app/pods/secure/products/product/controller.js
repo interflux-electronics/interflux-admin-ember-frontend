@@ -79,66 +79,33 @@ export default class ProductController extends Controller {
     });
   }
 
-  // get statusOptions() {
-  //   return [
-  //     {
-  //       value: 'new',
-  //       label:
-  //         '**New** - This product is new and we want it to receive maximum attention. New products are sorted to the top of every product list. Highlighted as "New". In production. Can be ordered.'
-  //     },
-  //     {
-  //       value: 'popular',
-  //       label:
-  //         '**Popular** - This product is one of our best sellers. Popular products are sorted to the top every product list, right below new products. Highlighted as "Popular". In production. Can be ordered.'
-  //     },
-  //     {
-  //       value: 'recommended',
-  //       label:
-  //         '**Recommended** - Most of our products. Sorted below new and popular products. No highlights. In production. Can be ordered.'
-  //     },
-  //     {
-  //       value: 'outdated',
-  //       label:
-  //         '**Outdated** - This product has been outdated by a better product and we no longer want to promote it. The reason we still produce this product is because some customers still rely on it and are unable to switch to our better product. Outdated products are hidden from the product lists, however their product pages can still be found via Google, via our product search bar or by clicking a checkbox next to the product list.'
-  //     },
-  //     {
-  //       value: 'discontinued',
-  //       label:
-  //         '**Discontinued** - This product can no longer be produced nor ordered. Just like outdated products, these are hidden from the product lists, unless a checkbox is ticked. Their product pages can still be found via Google and our product search bar.'
-  //     },
-  //     {
-  //       value: 'offline',
-  //       label:
-  //         '**Offline** - This product is entirely hidden from our website and will be removed from the Google search results.'
-  //     }
-  //   ];
-  // }
-
   get statusOptions() {
     return [
       {
         value: 'new',
-        label: 'New'
+        label: '**New** - Highly promoted on our website.'
       },
       {
         value: 'popular',
-        label: 'Popular'
+        label:
+          '**Popular** - These products have been best-sellers for years. Highly promoted on our website.'
       },
       {
         value: 'recommended',
-        label: 'Recommended'
+        label:
+          '**Recommended** - Most of our products. Can be ordered. Visible on website and in Google.'
       },
       {
         value: 'outdated',
-        label: 'Outdated'
+        label: `**Replaced** - Has been replaced by a better product. Can still be ordered. Can still be found on our website and via Google, though we do not actively promote it anymore. We suggest visitors to use a better product instead (if selected).`
       },
       {
         value: 'discontinued',
-        label: 'Discontinued'
+        label: `**Out of production** - Cannot be ordered. It can however still be found on our website and via Google, though we don't promote it any way. We suggest visitors to use a better product instead (if selected).`
       },
       {
         value: 'offline',
-        label: 'Offline'
+        label: '**Offline** - Hidden from website and Google.'
       }
     ];
   }

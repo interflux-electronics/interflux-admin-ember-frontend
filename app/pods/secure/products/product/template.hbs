@@ -389,7 +389,7 @@
               target="_blank"
               rel="noreferrer noopener"
             >
-              {{product.link}}
+              {{product.name}} product page
             </a>
           </li>
           <li>
@@ -398,7 +398,7 @@
               target="_blank"
               rel="noreferrer noopener"
             >
-              {{product.family.link}}
+              {{product.family.label}} page
             </a>
           </li>
           {{#each product.uses as |use|}}
@@ -408,7 +408,7 @@
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                {{use.link}}
+                {{use.label}} page
               </a>
             </li>
           {{/each}}
