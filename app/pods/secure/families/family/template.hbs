@@ -89,7 +89,14 @@
           {{#each this.sortedImages as |joinRecord|}}
             <li>
               <p>{{joinRecord.rankAmongImages}}</p>
-              <ResponsiveImage @image={{joinRecord.image}} />
+              {{#with joinRecord.image as |image|}}
+                <ResponsiveImage
+                  @path={{image.path}}
+                  @variations={{image.variations}}
+                  @caption={{image.caption}}
+                  @alt={{image.alt}}
+                />
+              {{/with}}
             </li>
           {{/each}}
         </ul>

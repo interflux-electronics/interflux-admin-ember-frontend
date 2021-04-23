@@ -1,11 +1,16 @@
 <Page::Content @id="qualities">
-  <h1>Qualities</h1>
+  <h1>Product qualities</h1>
 
   <Spreadsheet
     @records={{@model.qualities}}
     @linkRoute="secure.qualities.quality"
+    @layout="image-rows"
+    @sortBy="productCount"
+    @sortUp={{false}}
     @columns={{array
-      (hash key='text' label='Name')
+      (hash key='iconURL' label='Icon' isImage='true')
+      (hash key='text' label='Quality')
+      (hash key='productCount' label='Product count')
     }}
   />
 </Page::Content>

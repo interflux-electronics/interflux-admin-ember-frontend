@@ -73,12 +73,24 @@
 
     <div class="icon">
       {{#if use.image}}
-        <a href={{href-to 'secure.images.image' use.image.id}}>
-          <ResponsiveImage @image={{use.image}} />
-        </a>
-        <a href={{href-to 'secure.images.image' use.image.id}}>
-          <ResponsiveImage @image={{use.image}} />
-        </a>
+        {{#with use.image as |image|}}
+          <a href={{href-to 'secure.images.image' use.image.id}}>
+            <ResponsiveImage
+              @path={{image.path}}
+              @variations={{image.variations}}
+              @caption={{image.caption}}
+              @alt={{image.alt}}
+            />
+          </a>
+          <a href={{href-to 'secure.images.image' use.image.id}}>
+            <ResponsiveImage
+              @path={{image.path}}
+              @variations={{image.variations}}
+              @caption={{image.caption}}
+              @alt={{image.alt}}
+            />
+          </a>
+        {{/with}}
       {{else}}
         <p>- no icon -</p>
       {{/if}}
@@ -103,7 +115,14 @@
         {{#each use.images as |useImage|}}
           <li>
             <p>{{useImage.image.alt}}</p>
-            <ResponsiveImage @image={{useImage.image}} />
+            {{#with useImage.image as |image|}}
+              <ResponsiveImage
+                @path={{image.path}}
+                @variations={{image.variations}}
+                @caption={{image.caption}}
+                @alt={{image.alt}}
+              />
+            {{/with}}
           </li>
         {{/each}}
       </ul>

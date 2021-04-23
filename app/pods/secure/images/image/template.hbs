@@ -1,84 +1,19 @@
 {{#with @model.image as |image|}}
   <Modal @id="image">
-    <ResponsiveImage @image={{image}} />
+    <ResponsiveImage
+      @path={{image.path}}
+      @variations={{image.variations}}
+      @caption={{image.caption}}
+      @alt={{image.alt}}
+    />
 
     <h1>{{image.alt}}</h1>
 
-    <h2>Properties</h2>
-
-    <Field::String
-      @label='Hidden metadata'
-      @legend="On our website we hide metadata behind every image, which can only be read by Google and social media. These are essential for our images to rank in Google Image search. Please never leave these blank and where possible include key words like the product name (IF 2005M), family (soldering flux) and something unique (25L front view)."
-      @record={{image}}
-      @attribute='alt'
-      @multiline='true'
-    />
-
-    {{#if this.showLabel}}
-      <Field::String
-        @label='Visible label'
-        @legend="The label is visible to visitors, unlike the metadata. This label can be useful for helping visitors distinguish between for SnAgCu and SnPB alloys or 25L and 10L drums. This is optional."
-        @record={{image}}
-        @attribute='caption'
-        @multiline='true'
-      />
-    {{/if}}
-
-    {{#if this.showCopyright}}
-      <Field::OneToMany
-        @label='Copyright'
-        @legend='When we receive images from other companies, we should attribute them and link to their website. The copyright link will show right below the label. Leave blank if the image belongs to Interflux.'
-        @baseRecord={{image}}
-        @baseLabel='company'
-        @targetModel="company"
-        @targetFilter="businessName"
-        @minKeyStrokes='2'
-      />
-    {{/if}}
-
-    {{#if this.showProducts}}
-      <h2>Relations</h2>
-      <Field::ManyToMany
-        @label="Products"
-        @legend="Please identify the products seen in this image."
-        @baseRecord={{image}}
-        @baseModel="imagge"
-        @baseLabel="productImages"
-        @joinModel="product-image"
-        @targetModel="product"
-        @targetLabel="name"
-        @targetRoute='secure.products.product'
-      />
-    {{/if}}
-
-    {{!-- TOOD
-    {{#if this.showProcesses}}
-      <h2>Relations</h2>
-      <Field::ManyToMany
-        @label="Process"
-        @legend="Please identify the process seen in this image."
-        @baseRecord={{image}}
-        @baseModel="imagge"
-        @baseLabel="productImages"
-        @joinModel="use-image"
-        @targetModel="use"
-        @targetLabel="name"
-        @targetRoute='secure.uses.use'
-      />
-    {{/if}}
-    --}}
-
-    <h2>CDN</h2>
-
-    <p>Images have a big impact on the download speed and snappy user experience of any website. To guarantee our images load as fast as humanly possible we do three things:</p>
-    <p>1. We store images on a CDN. Such a network copies the images to all continents so that no matter where you are in the world, the latency between you and the server will be low.</p>
-    <p>2. We keep 14 sizes of every images on our CDN. Our website are smart enough to download only the smallest possible size which still looks sharp.</p>
-    <p>3. We replace JPG with WEBP wherever possible, which is about 50% smaller in file size than JPG.</p>
-    <p>4. We use SVG instead of PNG.</p>
+    <h2>CDN files</h2>
 
     {{#if image.hasJPG}}
       <Fieldset
-        @label='JPG'
+        @label='JPGs'
         @legend="Compressed, small file size, low visual quality, can be used in all apps."
       >
         <ul class="list">
@@ -99,7 +34,7 @@
 
     {{#if image.hasWEBP}}
       <Fieldset
-        @label='WEBP'
+        @label='WEBPs'
         @legend="Super compressed, 50% smaller than JPG, same poor visual quality as JPG, can only be used in websites."
       >
         <ul class="list">
@@ -162,6 +97,67 @@
           {{/each}}
         </ul>
       </Fieldset>
+    {{/if}}
+
+    <p><strong>Why so many sizes?</strong></p>
+    <p>To make our website faster. Fast website means happy visitors and higher ranking in Google. To make sure the images on our website download as fast as humanly possible we...</p>
+    <p>1. We store images on a CDN. Such a network copies the images to all continents so that no matter where you are in the world, the latency between you and the server will be low.</p>
+    <p>2. We keep 14 sizes of every images on our CDN. Our website are smart enough to download only the smallest possible size which still looks sharp.</p>
+    <p>3. We replace JPG with WEBP wherever possible, which is about 50% smaller in file size than JPG.</p>
+    <p>4. We use SVG instead of PNG.</p>
+
+    <p><strong>What is a CDN?</strong></p>
+    <p>A Content Delivery Network (CDN) is designed to speed up websites. It's where we store all the images, videos and PDFs. Location: <a
+        href="https://cdn.interflux.com/index.html"
+        target="_blank"
+        rel="noreferrer noopener"
+      >cdn.interflux.com</a></p>
+
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Metadata (for robots)'
+      @legend="On our website we hide metadata behind every image, which can only be read by Google and social media. These are essential for our images to rank in Google Image search. Please never leave these blank and where possible include key words like the product name (IF 2005M), family (soldering flux) and something unique (25L front view)."
+      @record={{image}}
+      @attribute='alt'
+      @multiline='true'
+    />
+
+    {{#if this.showLabel}}
+      <Field::String
+        @label='Label (for humans)'
+        @legend="The label is visible to visitors, unlike the metadata. This label can be useful for helping visitors distinguish between for SnAgCu and SnPB alloys or 25L and 10L drums. This is optional."
+        @record={{image}}
+        @attribute='caption'
+        @multiline='true'
+      />
+    {{/if}}
+
+    {{#if this.showCopyright}}
+      <Field::OneToMany
+        @label='Copyright'
+        @legend='When we receive images from other companies, we should attribute them and link to their website. The copyright link will show right below the label. Leave blank if the image belongs to Interflux.'
+        @baseRecord={{image}}
+        @baseLabel='company'
+        @targetModel="company"
+        @targetFilter="businessName"
+        @minKeyStrokes='2'
+      />
+    {{/if}}
+
+    {{#if this.showProducts}}
+      <h2>Relations</h2>
+      <Field::ManyToMany
+        @label="Products"
+        @legend="Please identify the products seen in this image."
+        @baseRecord={{image}}
+        @baseModel="imagge"
+        @baseLabel="productImages"
+        @joinModel="product-image"
+        @targetModel="product"
+        @targetLabel="name"
+        @targetRoute='secure.products.product'
+      />
     {{/if}}
 
     <h2>Database</h2>

@@ -29,4 +29,15 @@ export default class UseModel extends Model {
   get images() {
     return this.useImages.sortBy('rankAmongImages');
   }
+
+  get label() {
+    const str = this.text || '';
+    return str[0].toUpperCase() + str.slice(1);
+  }
+
+  get iconURL() {
+    return this.icon
+      ? `${ENV.cdnHost}/${this.icon}`
+      : `${ENV.cdnHost}/images/icons/check.svg`;
+  }
 }

@@ -7,7 +7,9 @@ export default class QualitiesRoute extends Route {
 
   model() {
     return hash({
-      qualities: this.store.findAll('quality')
+      qualities: this.store.findAll('quality'),
+      products: this.store.findAll('product'),
+      productQualities: this.store.findAll('product-quality')
     });
   }
 }

@@ -4,9 +4,12 @@
   <Spreadsheet
     @records={{@model.uses}}
     @linkRoute="secure.uses.use"
+    @layout="image-rows"
     @columns={{array
-      (hash key='rank' label='Rank')
-      (hash key='text' label='Name')
+      (hash key='iconURL' label='icon' isImage='true')
+      (hash key='text' label='name')
+      (hash key='rank' label='rank')
     }}
+    @sortBy='rank'
   />
 </Page::Content>

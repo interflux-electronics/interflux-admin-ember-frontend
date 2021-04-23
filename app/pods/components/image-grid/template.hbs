@@ -3,7 +3,12 @@
     {{#each this.sortedImages as |image|}}
       <li>
         <a href="{{href-to 'secure.images.image' image.id}}">
-          <ResponsiveImage @image={{image}} />
+          <ResponsiveImage
+            @path={{image.path}}
+            @variations={{image.variations}}
+            @caption={{image.caption}}
+            @alt={{image.alt}}
+          />
         </a>
       </li>
     {{/each}}

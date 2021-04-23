@@ -5,9 +5,9 @@ import { hash } from 'rsvp';
 export default class ImagesRoute extends Route {
   @service store;
 
-  model(){
+  model() {
     return hash({
       images: this.store.findAll('image')
-    })
+    });
   }
 }

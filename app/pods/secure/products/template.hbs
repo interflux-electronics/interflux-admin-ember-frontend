@@ -4,10 +4,13 @@
   <Spreadsheet
     @records={{@model.products}}
     @linkRoute="secure.products.product"
+    @layout="image-rows"
     @columns={{array
-      (hash key='name' label='Name')
-      (hash key='family.nameSingle' label="Family")
-      (hash key='status' label="Status")
+      (hash key='avatarURL' label='image' isImage='true')
+      (hash key='name' label='name')
+      (hash key='family.nameSingle' label="product family")
+      (hash key='status' label="status")
     }}
+    @sortBy='name'
   />
 </Page::Content>

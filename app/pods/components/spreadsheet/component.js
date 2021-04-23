@@ -13,6 +13,7 @@ export default class SpreadsheetComponent extends Component {
   @tracked highlighted;
   @tracked sortBy;
   @tracked sortUp = true;
+  @tracked lauyout = 'normal'; // image-rows, image-tiles
 
   @service router;
 
@@ -23,6 +24,7 @@ export default class SpreadsheetComponent extends Component {
     this.total = n;
     this.matches = this.args.records.mapBy('id');
     this.sortBy = this.args.sortBy || this.args.columns[0].key;
+    this.sortUp = this.args.sortUp === false ? false : true;
   }
 
   get sortedRecords() {

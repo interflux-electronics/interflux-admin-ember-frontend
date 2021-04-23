@@ -1,7 +1,14 @@
 {{#with @model.product as |product|}}
   <Modal @id="product">
     {{#if product.image}}
-      <ResponsiveImage @image={{product.image}} />
+      {{#with product.image as |image|}}
+        <ResponsiveImage
+          @path={{image.path}}
+          @variations={{image.variations}}
+          @caption={{image.caption}}
+          @alt={{image.alt}}
+        />
+      {{/with}}
     {{/if}}
 
     <h1>{{product.name}}</h1>
@@ -16,7 +23,7 @@
     />
 
     <Field::OneToMany
-      @label='Product family'
+      @label='Family'
       @baseRecord={{product}}
       @baseLabel='productFamily'
       @targetModel="product-family"
@@ -26,26 +33,65 @@
     />
 
     <Field::String
-      @label='Better description than family'
-      @legend='In case the family name is not an accurate description, then override it here with a better name. For example "flux pen" instead of "auxiliary". Otherwise, leave blank.'
+      @label='Family override'
+      @legend='Leave blank if the family name above is a good description for this product. If not, override it here.'
       @record={{product}}
       @attribute='label'
     />
 
+    <h2>Status</h2>
+
+    <Field::String::Radio
+      @record={{product}}
+      @attribute='status'
+      @options={{this.statusOptions}}
+    />
+
+    {{#if (or product.isOutdated product.isDiscontinued)}}
+      <h2>Substitute</h2>
+
+      <Field::OneToMany
+        @label='Is there a better product?'
+        @legend='In case there is a product which does the same thing as {{product.name}}, but better, then please find and select that product below. If {{product.name}} has the status "outdated" or "discontinued" and you have selected a better product below, then we will show a message on the product page of {{product.name}} to encourage visitors to look at the better product instead.'
+        @baseRecord={{product}}
+        @baseLabel='superiorProduct'
+        @targetModel="product"
+        @targetFilter="name"
+        @minKeyStrokes='1'
+      />
+    {{/if}}
+
+    <h2>Features</h2>
+
     <Field::ManyToMany
-      @label="Suitable for"
+      @label="Processess"
       @baseRecord={{product}}
       @baseModel="product"
       @baseLabel="productUses"
       @joinModel="product-use"
       @joinRankKey="rankAmongUses"
+      @joinFlags={{array
+        (hash key='showOnListView' label='show preview')
+        (hash key='isBest' label='mark as recommended')
+      }}
       @targetModel="use"
       @targetLabel="text"
       @targetRoute='secure.uses.use'
     />
 
+    <div class="preview">
+      <ul>
+        {{#each product.uses as |use|}}
+          <li>
+            <Image @src={{use.iconURL}} />
+            <p>{{use.label}}</p>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
     <Field::ManyToMany
-      @label="Key advantages"
+      @label="Qualities"
       @baseRecord={{product}}
       @baseModel="product"
       @baseLabel="productQualities"
@@ -56,11 +102,22 @@
       @targetRoute='secure.qualities.quality'
     />
 
+    <div class="preview">
+      <ul>
+        {{#each product.qualities as |quality|}}
+          <li>
+            <Image @src={{quality.iconURL}} />
+            <p>{{quality.label}}</p>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
     <h2>Content</h2>
 
     <Field::String
       @label='The "elevator pitch"'
-      @legend='Explain to someone who has never heard of Interflux in 7 to 20 seconds what this product is, which problem it solves, why it is so great and who will want to be using this {{product.name}}.'
+      @legend='Explain to someone who has never heard of Interflux in 7 to 20 seconds what this product is, which problem it solves, why it is great and who will want to be using it.'
       @record={{product}}
       @attribute='pitch'
       @multiline='true'
@@ -96,7 +153,14 @@
     >
       <ul class="images">
         <li class="avatar">
-          <ResponsiveImage @image={{product.image}} />
+          {{#with product.image as |image|}}
+            <ResponsiveImage
+              @path={{image.path}}
+              @variations={{image.variations}}
+              @caption={{image.caption}}
+              @alt={{image.alt}}
+            />
+          {{/with}}
 
           <div class="buttons">
             <Button
@@ -119,7 +183,14 @@
           <li>
             <p>{{relation.rank}}{{if (eq relation.image.id product.image.id) ' - avatar'}}</p>
 
-            <ResponsiveImage @image={{relation.image}} />
+            {{#with relation.image as |image|}}
+              <ResponsiveImage
+                @path={{image.path}}
+                @variations={{image.variations}}
+                @caption={{image.caption}}
+                @alt={{image.alt}}
+              />
+            {{/with}}
 
             <div class="buttons">
               {{#if (not (eq relation.image.id product.image.id))}}
@@ -169,7 +240,14 @@
       <ul class="images">
         {{#each this.hiddenImages as |relation|}}
           <li>
-            <ResponsiveImage @image={{relation.image}} />
+            {{#with relation.image as |image|}}
+              <ResponsiveImage
+                @path={{image.path}}
+                @variations={{image.variations}}
+                @caption={{image.caption}}
+                @alt={{image.alt}}
+              />
+            {{/with}}
 
             <div class="buttons">
               <Button
@@ -191,69 +269,6 @@
         {{/each}}
       </ul>
     </Fieldset>
-
-    <h2>Status</h2>
-
-    <Field::String::Radio
-      @record={{product}}
-      @attribute='status'
-      @options={{this.statusOptions}}
-    />
-
-    <h2>Website</h2>
-
-    {{#if product.isOnline}}
-      <Fieldset
-        @label='Where is this product seen on our website?'
-        @legend='Copy paste the links below to share.'
-      >
-        <ul class="list">
-          <li>
-            <a
-              href={{product.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {{product.link}}
-            </a>
-          </li>
-          <li>
-            <a
-              href={{product.family.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {{product.family.link}}
-            </a>
-          </li>
-          {{#each product.uses as |use|}}
-            <li>
-              <a
-                href={{use.url}}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {{use.link}}
-              </a>
-            </li>
-          {{/each}}
-        </ul>
-      </Fieldset>
-    {{else}}
-      <p>{{product.name}} is hidden from our website.</p>
-    {{/if}}
-
-    <h2>Substitute</h2>
-
-    <Field::OneToMany
-      @label='Is there a better product?'
-      @legend='In case there is a product which does the same thing as {{product.name}}, but better, then please find and select that product below. If {{product.name}} has the status "outdated" or "discontinued" and you have selected a better product below, then we will show a message on the product page of {{product.name}} to encourage visitors to look at the better product instead.'
-      @baseRecord={{product}}
-      @baseLabel='superiorProduct'
-      @targetModel="product"
-      @targetFilter="name"
-      @minKeyStrokes='1'
-    />
 
     <h2>Compliance</h2>
 
@@ -359,6 +374,49 @@
       @targetLabel="name"
       @targetRoute='secure.documents.document'
     />
+
+    <h2>Website</h2>
+
+    {{#if product.isOnline}}
+      <Fieldset
+        @label='Where is this product seen on our website?'
+        @legend='Copy paste the links below to share.'
+      >
+        <ul class="list">
+          <li>
+            <a
+              href={{product.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {{product.link}}
+            </a>
+          </li>
+          <li>
+            <a
+              href={{product.family.url}}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {{product.family.link}}
+            </a>
+          </li>
+          {{#each product.uses as |use|}}
+            <li>
+              <a
+                href={{use.url}}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {{use.link}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{else}}
+      <p>{{product.name}} is hidden from our website.</p>
+    {{/if}}
 
     <h2>Database</h2>
 

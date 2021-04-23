@@ -28,12 +28,24 @@
 
     <div class="icon">
       {{#if quality.image}}
-        <a href={{href-to 'secure.images.image' quality.image.id}}>
-          <ResponsiveImage @image={{quality.image}} />
-        </a>
-        <a href={{href-to 'secure.images.image' quality.image.id}}>
-          <ResponsiveImage @image={{quality.image}} />
-        </a>
+        {{#with quality.image as |image|}}
+          <a href={{href-to 'secure.images.image' quality.image.id}}>
+            <ResponsiveImage
+              @path={{image.path}}
+              @variations={{image.variations}}
+              @caption={{image.caption}}
+              @alt={{image.alt}}
+            />
+          </a>
+          <a href={{href-to 'secure.images.image' quality.image.id}}>
+            <ResponsiveImage
+              @path={{image.path}}
+              @variations={{image.variations}}
+              @caption={{image.caption}}
+              @alt={{image.alt}}
+            />
+          </a>
+        {{/with}}
       {{/if}}
     </div>
 

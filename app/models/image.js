@@ -1,4 +1,5 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import ENV from 'interflux/config/environment';
 
 export default class ImageModel extends Model {
   @attr('string') path;
@@ -47,5 +48,50 @@ export default class ImageModel extends Model {
 
   get hasSVG() {
     return this.SVGs.length > 0;
+  }
+
+  get label() {
+    return `${this.alt || ''} ${this.caption || ''}`;
+  }
+
+  get thumbURL() {
+    const { path, variations } = this;
+
+    if (!path || !variations) {
+      return null;
+    }
+
+    const ext = variations.includes('.svg')
+      ? 'svg'
+      : variations.includes('.webp')
+      ? 'webp'
+      : 'jpg';
+
+    if (ext === 'svg') {
+      return `${ENV.cdnHost}/${path}.svg`;
+    }
+
+    const optimalWidth = 180;
+    const subset = variations.split(',').filter((x) => x.split('.')[1] === ext);
+    const sizes = subset.map((x) => x.split('.')[0].replace('@', ''));
+
+    const distances = sizes.map((size) => {
+      const width = size.split('x')[0];
+      return width - optimalWidth;
+    });
+
+    const larger = distances.filter((d) => d >= 0);
+    const smaller = distances.filter((d) => d < 0);
+
+    const closestDistance = larger.length
+      ? Math.min(...larger)
+      : Math.max(...smaller);
+
+    const closestSize = sizes.find((size) => {
+      const width = size.split('x')[0];
+      return width - optimalWidth === closestDistance;
+    });
+
+    return `${ENV.cdnHost}/${path}@${closestSize}.${ext}`;
   }
 }

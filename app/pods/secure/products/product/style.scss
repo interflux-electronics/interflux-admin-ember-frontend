@@ -57,6 +57,26 @@
     }
   }
 
+  .preview {
+    ul {
+      li {
+        display: flex;
+        align-items: center;
+        & + li {
+          margin-top: 10px;
+        }
+        picture {
+          width: 45px;
+          margin-right: 15px;
+          flex-shrink: 0;
+        }
+        p {
+          line-height: 150%;
+        }
+      }
+    }
+  }
+
   table.results {
     tr {
       display: flex;
