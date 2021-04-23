@@ -4,40 +4,40 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-function arg(object, property) {
-  return {
-    get() {
-      const value = this.args[property];
-      if (!value) {
-        console.warn(`missing argument: ${property}`);
-      }
-      return value;
-    },
-    set() {
-      console.warn(`argument ${property} is read-only`);
-    }
-  };
-}
+// function arg(object, property) {
+//   return {
+//     get() {
+//       const value = this.args[property];
+//       if (!value) {
+//         console.warn(`missing argument: ${property}`);
+//       }
+//       return value;
+//     },
+//     set() {
+//       console.warn(`argument ${property} is read-only`);
+//     }
+//   };
+// }
 
 export default class ResponsiveImageComponent extends Component {
+  // @arg image;
+
   @service browser;
 
-  @arg image;
-
-  get variations() {
-    return this.image ? this.image.get('variations') : null;
+  get path() {
+    return this.args.path;
   }
 
-  get path() {
-    return this.image ? this.image.get('path') : null;
+  get variations() {
+    return this.args.variations;
   }
 
   get caption() {
-    return this.image ? this.image.get('caption') : null;
+    return this.args.caption;
   }
 
   get alt() {
-    return this.image ? this.image.get('alt') : null;
+    return this.args.alt;
   }
 
   get hasJPG() {
@@ -61,19 +61,19 @@ export default class ResponsiveImageComponent extends Component {
   }
 
   get JPGs() {
-    return this.variations.split(',').filter((x) => x.split('.')[1] === 'jpg');
+    return this.variations.split(',').filter(x => x.split('.')[1] === 'jpg');
   }
 
   get WEBPs() {
-    return this.variations.split(',').filter((x) => x.split('.')[1] === 'webp');
+    return this.variations.split(',').filter(x => x.split('.')[1] === 'webp');
   }
 
   get JPGsizes() {
-    return this.JPGs.map((x) => x.split('.')[0].replace('@', ''));
+    return this.JPGs.map(x => x.split('.')[0].replace('@', ''));
   }
 
   get WEBPsizes() {
-    return this.JPGs.map((x) => x.split('.')[0].replace('@', ''));
+    return this.JPGs.map(x => x.split('.')[0].replace('@', ''));
   }
 
   // PICTURE
@@ -107,19 +107,19 @@ export default class ResponsiveImageComponent extends Component {
   // Accepts and array of sizes "200x200".
   // Returns the one which is above and closest to the optimal width.
   closestSize(sizes) {
-    const distances = sizes.map((size) => {
+    const distances = sizes.map(size => {
       const width = size.split('x')[0];
       return width - this.optimalWidth;
     });
 
-    const larger = distances.filter((d) => d >= 0);
-    const smaller = distances.filter((d) => d < 0);
+    const larger = distances.filter(d => d >= 0);
+    const smaller = distances.filter(d => d < 0);
 
     const closestDistance = larger.length
       ? Math.min(...larger)
       : Math.max(...smaller);
 
-    return sizes.find((size) => {
+    return sizes.find(size => {
       const width = size.split('x')[0];
       return width - this.optimalWidth === closestDistance;
     });
@@ -215,8 +215,15 @@ export default class ResponsiveImageComponent extends Component {
     return null;
   }
 
-  // The state of this component (loading | error | done)
-  @tracked status = 'loading';
+  @tracked _status = 'loading'; // loading, error, invalid, done
+
+  get status() {
+    return this.path && this.variations ? this._status : 'invalid';
+  }
+
+  set status(value) {
+    this._status = value;
+  }
 
   get showLoading() {
     return this.status === 'loading';
@@ -228,13 +235,13 @@ export default class ResponsiveImageComponent extends Component {
 
   get orientation() {
     if (!this.picture) {
-      return 'loading';
+      return 'square'; // invalid icon is square
     }
     if (!this.variations) {
-      return 'invalid';
+      return 'square'; // invalid icon is square
     }
     if (!this.closestJPGsize) {
-      return 'invalid';
+      return 'no-jpg';
     }
     const size = this.closestJPGsize.split('x');
     const w = parseInt(size[0]);

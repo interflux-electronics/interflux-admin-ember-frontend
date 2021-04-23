@@ -1,21 +1,28 @@
-<figure class="responsive-image {{this.orientation}}">
-  <picture {{did-insert this.register}}>
-    {{this.html}}
-  </picture>
-
-  {{#if @caption}}
-    <figcaption>{{@caption}}</figcaption>
+<picture
+  id={{@id}}
+  class="stateful{{if @class (concat ' ' @class)}}"
+>
+  {{#if this.error}}
+    <div class="error">
+      <img
+        src="{{env 'cdnHost'}}/images/icons/unknown.svg"
+        alt="icon unknown"
+      >
+    </div>
   {{/if}}
 
-  {{!-- {{#if this.showLoading}}
+  {{#if this.loading}}
     <div class="loading">
       <LoadSpinner @icon="cup" />
     </div>
-  {{/if}} --}}
+  {{/if}}
 
-  {{!-- {{#if this.showError}}
-    <div class="error">
-      <Svg::Error />
-    </div>
-  {{/if}} --}}
-</figure>
+  <img
+    src={{@src}}
+    alt={{@alt}}
+    width={{@width}}
+    height={{@height}}
+    onload={{this.onLoad}}
+    onerror={{this.onError}}
+  >
+</picture>

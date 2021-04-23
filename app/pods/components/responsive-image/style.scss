@@ -1,3 +1,12 @@
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
 figure.responsive-image {
   display: flex;
   justify-content: center;
@@ -5,7 +14,7 @@ figure.responsive-image {
   margin: 0;
   max-width: 100%;
   max-height: 100%;
-  background: #eee;
+  background: $grey-0;
   overflow: hidden; // To hide alt text from breaking out of the <figure> frame
   position: relative; // So the error and loading states don't got beyond <figure>
   &.portrait {
@@ -20,7 +29,53 @@ figure.responsive-image {
       }
     }
   }
+  .overlay {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &.loading {
+    .overlay {
+      animation: shimmer 3s infinite;
+      background: linear-gradient(
+        to right,
+        $grey-0 4%,
+        darken($grey-0, 2%) 25%,
+        $grey-0 36%
+      );
+      background-size: 1000px 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &.error {
+    .overlay {
+      background: $grey-0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 100%;
+        height: auto;
+        filter: grayscale(1) opacity(0.15);
+      }
+    }
+  }
+  &.invalid {
+    .no-image {
+      svg {
+        width: 100%;
+        height: auto;
+        filter: grayscale(1) opacity(0.4);
+      }
+    }
+  }
   picture {
+    position: relative;
     display: block;
     width: 100%;
     img {
@@ -28,34 +83,6 @@ figure.responsive-image {
       width: 100%;
       height: auto;
       font-size: 1px; // To prevent the alt text from showing if load failed
-    }
-  }
-  .loading,
-  .error {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: #eee;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    svg {
-      height: 50%;
-      width: auto;
-    }
-  }
-  .error {
-    img {
-      display: block;
-      max-width: 100%;
-      max-height: 100%;
-      width: 100%;
-      height: auto;
-      opacity: 0.06;
-      filter: grayscale(1);
     }
   }
 }
