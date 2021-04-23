@@ -1,8 +1,10 @@
-<div class="dot-dot-dot-menu">
+<div
+  class="dot-dot-dot-menu"
+  {{did-insert this.onInsert}}
+>
   <Button
     @icon="ellipsis-vertical"
-    @onClick={{fn this.open}}
-    @onBlur={{fn this.close}}
+    @onClick={{fn this.onClick}}
   />
   {{#if this.showDropdown}}
     <div class="dropdown">

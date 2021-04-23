@@ -6,12 +6,18 @@ export default class DotDotDotMenuComponent extends Component {
   @tracked showDropdown = false;
 
   @action
-  open() {
+  onClick() {
     this.showDropdown = true;
   }
 
   @action
-  close() {
-    this.showDropdown = false;
+  onInsert(wrapper) {
+    const handleEvent = (event) => {
+      if (!wrapper.contains(event.target)) {
+        this.showDropdown = false;
+      }
+    };
+
+    document.addEventListener('click', handleEvent);
   }
 }
