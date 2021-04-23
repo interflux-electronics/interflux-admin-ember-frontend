@@ -240,7 +240,16 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   // FOCUS
 
   @action
-  onFocus() {
+  onSearchFocus() {
     // Do nothing to prevent background from going blue.
+  }
+
+  // DOT DOT DOT MENU FLAGS
+
+  @action
+  async toggleFlag(joinRecord, key) {
+    const bool = joinRecord.get(key);
+    joinRecord.set(key, !bool);
+    await joinRecord.save();
   }
 }

@@ -24,8 +24,11 @@ export default class BooleanFieldComponent extends FieldComponent {
   }
 
   @action
-  onClick() {
+  onClick(event) {
     this.value = !this.value;
     this.save();
+    if (this.args.onClick) {
+      this.args.onClick(event);
+    }
   }
 }

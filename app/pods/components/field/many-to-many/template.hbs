@@ -28,10 +28,18 @@
           {{/if}}
 
           <DotDotDotMenu>
+            {{#each @joinFlags as |flag|}}
+              <Button
+                @text={{flag.label}}
+                @icon={{if (get row.joinRecord flag.key) 'check' 'times'}}
+                @onClick={{fn this.toggleFlag row.joinRecord flag.key}}
+              />
+            {{/each}}
+
             <Button
               @icon="trash"
               @text="remove"
-              @onMouseDown={{fn this.onDestroy row.joinRecord}}
+              @onClick={{fn this.onDestroy row.joinRecord}}
             />
           </DotDotDotMenu>
         </div>
@@ -75,7 +83,7 @@
         @state={{this.state}}
         @placeholder="Search product"
         @autofocus="true"
-        @onFocus={{this.onFocus}}
+        @onFocus={{this.onSearchFocus}}
         @onBlur={{this.onSearchBlur}}
         @onKeyUp={{this.onKeyUp}}
         @onSelect={{this.onSelect}}
