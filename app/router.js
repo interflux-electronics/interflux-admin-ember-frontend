@@ -25,10 +25,12 @@ Router.map(function () {
     });
 
     this.route('qualities', function () {
+      this.route('create');
       this.route('quality', { path: '/:id' });
     });
 
     this.route('uses', function () {
+      this.route('create');
       this.route('use', { path: '/:id' });
     });
 

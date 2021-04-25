@@ -38,4 +38,8 @@ export default class ProductFamilyModel extends Model {
     const str = this.namePlural || '';
     return str[0].toUpperCase() + str.slice(1);
   }
+
+  get subsetOf() {
+    return this.productFamily.get('namePlural') || '-';
+  }
 }
