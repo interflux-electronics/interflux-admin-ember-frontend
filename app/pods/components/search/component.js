@@ -267,7 +267,7 @@ export default class SearchComponent extends Component {
 
     console.debug('searching', query);
 
-    const { searchModel, searchFilter } = this.args;
+    const { searchModel, searchFilter, searchPermanentFilters } = this.args;
 
     // First we store the query for later use
     this.mostRecentQuery = query;
@@ -282,10 +282,30 @@ export default class SearchComponent extends Component {
     // Prepare filters
     // If no characters were typed, then fetch all records.
     // If minimum 1 character was typed, do a filtered search.
+    //
+    // Our Rails backend with Postgres database uses POSIX regexes:
+    // https://www.postgresql.org/docs/9.6/functions-matching.html#FUNCTIONS-POSIX-TABLE
+    //
+    // Prefix the query with:
+    //
+    //       no prefix for exact match
+    // ~     match regex, case sensitive
+    // ~*    match regex, case insensitive
+    // !~    does not match regex, case sensitive
+    // !~*   does not match regex, case insensitive
+    //
     const filter = {};
     if (query) {
-      filter[searchFilter] = `${query}*`;
+      filter[searchFilter] = `~*${query}`;
+
+      if (searchPermanentFilters) {
+        searchPermanentFilters.forEach((f) => {
+          filter[f.key] = f.value;
+        });
+      }
     }
+
+    console.debug({ filter });
 
     // Then we send the API request and wait
     const response = await this.store

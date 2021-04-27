@@ -23,6 +23,9 @@
       @baseLabel='image'
       @targetModel="image"
       @targetFilter="alt"
+      @targetPermanentFilters={{array
+        (hash key='path' value='~^images/icons')
+      }}
       @minKeyStrokes='2'
     />
 
