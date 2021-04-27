@@ -250,6 +250,7 @@
         padding: 10px;
         border: 1px dashed $grey-border;
         margin: 16px 40px 30px;
+        min-height: 8px;
         &:after {
           content: 'preview';
           position: absolute;
