@@ -314,6 +314,13 @@
       <label>Complies with ISO 9001</label>
     </Field::Boolean>
 
+    <Field::String
+      @label='Test results'
+      @record={{product}}
+      @attribute='testResults'
+      @multiline='true'
+    />
+
     <Fieldset @label='Test results'>
       <table class="results">
         <thead>
