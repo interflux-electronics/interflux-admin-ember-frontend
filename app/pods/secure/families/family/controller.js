@@ -3,7 +3,7 @@ import { alias } from '@ember/object/computed';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-export default class ProductController extends Controller {
+export default class FamilyController extends Controller {
   @service router;
 
   @alias('model.family') family;
