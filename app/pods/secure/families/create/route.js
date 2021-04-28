@@ -1,11 +1,19 @@
 import ModalRoute from 'interflux/pods/components/modal/route';
 import { hash } from 'rsvp';
+import { action } from '@ember/object';
 
-export default class FamilyRoute extends ModalRoute {
+export default class FamilyCreateRoute extends ModalRoute {
   model() {
     return hash({
-      families: this.modelFor('secure.families').families,
       family: this.store.createRecord('product-family')
     });
+  }
+
+  @action
+  willTransition() {
+    this.store
+      .peekAll('product-family')
+      .filterBy('isNew')
+      .forEach((rec) => rec.deleteRecord());
   }
 }
