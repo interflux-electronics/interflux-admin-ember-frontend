@@ -26,7 +26,7 @@ export default class QualityModel extends Model {
   }
 
   get families() {
-    return this.products.mapBy('family').uniqBy('id');
+    return this.products.mapBy('family').uniqBy('id').filterBy('id');
   }
 
   get label() {
