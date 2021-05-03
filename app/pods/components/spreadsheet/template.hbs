@@ -3,6 +3,7 @@
     <div class="left">
       <div class="input">
         <p
+          role="textbox"
           contenteditable="true"
           autocomplete="off"
           autocorrect="off"
@@ -11,7 +12,7 @@
           {{on 'keyup' this.onKeyUp}}
           {{on 'keydown' this.onKeyDown}}
           {{on 'click' this.selectText}}
-          role="button"
+          {{did-insert this.onInsertSearch}}
         ></p>
         {{#if (eq this.query '')}}
           <p class="placeholder">Search</p>
@@ -45,7 +46,7 @@
   {{#if (eq @layout 'image-tiles')}}
     <ul
       class="tiles"
-      {{did-insert this.register}}
+      {{did-insert this.onInsertData}}
     >
       {{#each this.sortedRecords as |record|}}
         <li
@@ -72,7 +73,7 @@
   {{else}}
     <div
       class="columns {{@layout}}"
-      {{did-insert this.register}}
+      {{did-insert this.onInsertData}}
     >
       {{#each @columns as |column|}}
         <div class="column {{if (eq this.sortBy column.key) 'sort'}}">

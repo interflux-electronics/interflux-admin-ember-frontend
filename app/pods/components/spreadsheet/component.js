@@ -4,16 +4,23 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class SpreadsheetComponent extends Component {
+  // @arg records
+  // @arg linkRoute
+  // @arg layout
+  // @arg sortBy
+  // @arg onLoadQuery
+  // @arg columns
+
   @tracked count;
   @tracked total;
   @tracked matches;
   @tracked hasMatches;
-  @tracked query = '';
+  @tracked query;
   @tracked data;
   @tracked highlighted;
   @tracked sortBy;
   @tracked sortUp = true;
-  @tracked lauyout = 'normal'; // image-rows, image-tiles
+  @tracked layout = 'normal'; // image-rows, image-tiles
 
   @service router;
 
@@ -25,6 +32,12 @@ export default class SpreadsheetComponent extends Component {
     this.matches = this.args.records.mapBy('id');
     this.sortBy = this.args.sortBy || this.args.columns[0].key;
     this.sortUp = this.args.sortUp === false ? false : true;
+    this.query = this.args.onLoadQuery || '';
+  }
+
+  @action
+  onInsertSearch(element) {
+    element.innerHTML = this.query;
   }
 
   get sortedRecords() {
@@ -49,8 +62,9 @@ export default class SpreadsheetComponent extends Component {
   }
 
   @action
-  register(element) {
+  onInsertData(element) {
     this.data = element;
+    this.filter(this.query);
   }
 
   @action
@@ -84,6 +98,7 @@ export default class SpreadsheetComponent extends Component {
     if (queryHasChanged) {
       this.query = query;
       this.filter(query);
+      this.router.transitionTo({ queryParams: { search: query } });
     }
   }
 

@@ -6,6 +6,7 @@
     @linkRoute="secure.images.image"
     @layout="image-tiles"
     @sortBy='category'
+    @onLoadQuery={{this.query}}
     @columns={{array
       (hash key='thumbURL' isImage='true')
       (hash key='label')
