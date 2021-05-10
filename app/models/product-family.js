@@ -18,7 +18,7 @@ export default class ProductFamilyModel extends Model {
   @hasMany('product-family-image') productFamilyImages;
 
   get url() {
-    return `${ENV.wwwHost}/en/products/${this.slug}`;
+    return `${ENV.publicHosts}/en/products/${this.slug}`;
   }
 
   get link() {

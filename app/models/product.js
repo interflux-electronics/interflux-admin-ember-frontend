@@ -65,7 +65,7 @@ export default class ProductModel extends Model {
   @hasMany('product', { inverse: 'superiorProduct' }) inferiorProducts;
 
   get url() {
-    return `${ENV.wwwHost}/en/product/${this.slug}`;
+    return `${ENV.publicHosts}/en/product/${this.slug}`;
   }
 
   get link() {
