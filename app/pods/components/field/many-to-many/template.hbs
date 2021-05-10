@@ -28,6 +28,7 @@
           {{/if}}
 
           <DotDotDotMenu>
+            {{!--
             {{#each @joinFlags as |flag|}}
               <Button
                 @text={{flag.label}}
@@ -35,6 +36,7 @@
                 @onClick={{fn this.toggleFlag row.joinRecord flag.key}}
               />
             {{/each}}
+            --}}
 
             <Button
               @icon="trash"

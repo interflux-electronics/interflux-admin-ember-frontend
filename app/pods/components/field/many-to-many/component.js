@@ -10,6 +10,10 @@ import { inject as service } from '@ember/service';
 //   @baseLabel="productQualities"
 //   @joinModel="product-quality"
 //   @joinRankKey="rankAmongQualities"
+//   @joinFlags={{array
+//     (hash key='showOnProductList' label='show preview')
+//     (hash key='markAsRecommended' label='mark as recommended')
+//   }}
 //   @targetModel="product"
 //   @targetLabel="fullName"
 //   @targetFilter="firstName"

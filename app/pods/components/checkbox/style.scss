@@ -8,7 +8,6 @@
   border-radius: 2px;
   cursor: pointer;
   user-select: none;
-
   &.checked {
     background: $orange-0;
   }
@@ -19,14 +18,13 @@
   &:hover {
     box-shadow: 0 0 0 2px white, 0 0 0 4px $blue-0;
   }
-
   svg {
     [fill] {
       fill: #fff;
     }
   }
-
   svg.times {
     width: 60%;
+    height: auto;
   }
 }

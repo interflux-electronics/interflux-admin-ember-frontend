@@ -61,7 +61,7 @@
       />
     {{/if}}
 
-    <h2>Features</h2>
+    <h2>Processes</h2>
 
     <Field::ManyToMany
       @label="Processess"
@@ -70,10 +70,6 @@
       @baseLabel="productUses"
       @joinModel="product-use"
       @joinRankKey="rankAmongUses"
-      @joinFlags={{array
-        (hash key='showOnListView' label='show preview')
-        (hash key='isBest' label='mark as recommended')
-      }}
       @targetModel="use"
       @targetLabel="text"
       @targetRoute='secure.uses.use'
@@ -89,6 +85,21 @@
         {{/each}}
       </ul>
     </div>
+
+    <Fieldset @label="Show icon on product list">
+      <div>
+        {{#each this.product.productUsesSorted as |productUse|}}
+          <Field::Boolean
+            @record={{productUse}}
+            @attribute='showOnProductList'
+          >
+            <label>{{productUse.use.label}}</label>
+          </Field::Boolean>
+        {{/each}}
+      </div>
+    </Fieldset>
+
+    <h2>Qualities</h2>
 
     <Field::ManyToMany
       @label="Qualities"
@@ -112,6 +123,19 @@
         {{/each}}
       </ul>
     </div>
+
+    <Fieldset @label="Show icon on product list">
+      <div>
+        {{#each this.product.productQualitiesSorted as |productQuality|}}
+          <Field::Boolean
+            @record={{productQuality}}
+            @attribute='showOnProductList'
+          >
+            <label>{{productQuality.quality.label}}</label>
+          </Field::Boolean>
+        {{/each}}
+      </div>
+    </Fieldset>
 
     <h2>Content</h2>
 

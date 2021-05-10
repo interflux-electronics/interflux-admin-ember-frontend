@@ -83,7 +83,8 @@ export default class ProductController extends Controller {
     return [
       {
         value: 'new',
-        label: '**New** - Highly promoted on our website.'
+        label:
+          '**New** - Promising and in need of early adopters. Highly promoted on our website.'
       },
       {
         value: 'popular',
@@ -93,7 +94,7 @@ export default class ProductController extends Controller {
       {
         value: 'recommended',
         label:
-          '**Recommended** - Most of our products. Can be ordered. Visible on website and in Google.'
+          '**Mainstream** - Most of our products. Can be ordered. Visible on website and in Google.'
       },
       {
         value: 'outdated',
