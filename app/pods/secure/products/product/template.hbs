@@ -1,5 +1,5 @@
 {{#with @model.product as |product|}}
-  <Modal @id="product">
+  <Modal @id='product'>
     {{#if product.image}}
       {{#with product.image as |image|}}
         <ResponsiveImage
@@ -26,9 +26,9 @@
       @label='Family'
       @baseRecord={{product}}
       @baseLabel='productFamily'
-      @targetModel="product-family"
-      @targetFilter="nameSingle"
-      @targetRoute="secure.families.family"
+      @targetModel='product-family'
+      @targetFilter='nameSingle'
+      @targetRoute='secure.families.family'
       @minKeyStrokes='0'
     />
 
@@ -55,8 +55,8 @@
         @legend='In case there is a product which does the same thing as {{product.name}}, but better, then please find and select that product below. If {{product.name}} has the status "outdated" or "discontinued" and you have selected a better product below, then we will show a message on the product page of {{product.name}} to encourage visitors to look at the better product instead.'
         @baseRecord={{product}}
         @baseLabel='superiorProduct'
-        @targetModel="product"
-        @targetFilter="name"
+        @targetModel='product'
+        @targetFilter='name'
         @minKeyStrokes='1'
       />
     {{/if}}
@@ -64,18 +64,18 @@
     <h2>Processes</h2>
 
     <Field::ManyToMany
-      @label="Processess"
+      @label='Processess'
       @baseRecord={{product}}
-      @baseModel="product"
-      @baseLabel="productUses"
-      @joinModel="product-use"
-      @joinRankKey="rankAmongUses"
-      @targetModel="use"
-      @targetLabel="text"
+      @baseModel='product'
+      @baseLabel='productUses'
+      @joinModel='product-use'
+      @joinRankKey='rankAmongUses'
+      @targetModel='use'
+      @targetLabel='text'
       @targetRoute='secure.uses.use'
     />
 
-    <div class="preview">
+    <div class='preview'>
       <ul>
         {{#each product.uses as |use|}}
           <li>
@@ -86,13 +86,10 @@
       </ul>
     </div>
 
-    <Fieldset @label="Show icon on product list">
+    <Fieldset @label='Show icon on product list'>
       <div>
         {{#each this.product.productUsesSorted as |productUse|}}
-          <Field::Boolean
-            @record={{productUse}}
-            @attribute='showOnProductList'
-          >
+          <Field::Boolean @record={{productUse}} @attribute='showOnProductList'>
             <label>{{productUse.use.label}}</label>
           </Field::Boolean>
         {{/each}}
@@ -102,18 +99,18 @@
     <h2>Qualities</h2>
 
     <Field::ManyToMany
-      @label="Qualities"
+      @label='Qualities'
       @baseRecord={{product}}
-      @baseModel="product"
-      @baseLabel="productQualities"
-      @joinModel="product-quality"
-      @joinRankKey="rankAmongQualities"
-      @targetModel="quality"
-      @targetLabel="text"
+      @baseModel='product'
+      @baseLabel='productQualities'
+      @joinModel='product-quality'
+      @joinRankKey='rankAmongQualities'
+      @targetModel='quality'
+      @targetLabel='text'
       @targetRoute='secure.qualities.quality'
     />
 
-    <div class="preview">
+    <div class='preview'>
       <ul>
         {{#each product.qualities as |quality|}}
           <li>
@@ -124,7 +121,7 @@
       </ul>
     </div>
 
-    <Fieldset @label="Show icon on product list">
+    <Fieldset @label='Show icon on product list'>
       <div>
         {{#each this.product.productQualitiesSorted as |productQuality|}}
           <Field::Boolean
@@ -175,8 +172,8 @@
       @label='The avatar'
       @legend='If you had to present this product with only one image, which one would you choose? The avatar is the single most representative image of this product and will be shown everywhere on our website, on Google and in social media links.'
     >
-      <ul class="images">
-        <li class="avatar">
+      <ul class='images'>
+        <li class='avatar'>
           {{#with product.image as |image|}}
             <ResponsiveImage
               @path={{image.path}}
@@ -186,10 +183,10 @@
             />
           {{/with}}
 
-          <div class="buttons">
+          <div class='buttons'>
             <Button
-              @text="View details"
-              @theme="secondary"
+              @text='View details'
+              @theme='secondary'
               @route='secure.images.image'
               @model={{product.image.id}}
             />
@@ -202,10 +199,13 @@
       @label='Shown on website'
       @legend='These images will be shown on the product page of {{product.name}}. Make sure all available sizes, containers, alloys and shapes of {{product.name}} are shown on our website.'
     >
-      <ul class="images">
+      <ul class='images'>
         {{#each this.publicImages as |relation|}}
           <li>
-            <p>{{relation.rank}}{{if (eq relation.image.id product.image.id) ' - avatar'}}</p>
+            <p>{{relation.rank}}{{if
+                (eq relation.image.id product.image.id)
+                ' - avatar'
+              }}</p>
 
             {{#with relation.image as |image|}}
               <ResponsiveImage
@@ -216,36 +216,36 @@
               />
             {{/with}}
 
-            <div class="buttons">
+            <div class='buttons'>
               {{#if (not (eq relation.image.id product.image.id))}}
                 <Button
-                  @text="Make avatar"
-                  @theme="secondary"
+                  @text='Make avatar'
+                  @theme='secondary'
                   @onClick={{fn this.setAvatar relation}}
                 />
               {{/if}}
               {{#if (not (eq relation.rank 1))}}
                 <Button
-                  @text="Move up"
-                  @theme="secondary"
+                  @text='Move up'
+                  @theme='secondary'
                   @onClick={{fn this.moveImageUp relation}}
                 />
               {{/if}}
               {{#if (not (eq relation.rank this.publicImageCount))}}
                 <Button
-                  @text="Move down"
-                  @theme="secondary"
+                  @text='Move down'
+                  @theme='secondary'
                   @onClick={{fn this.moveImageDown relation}}
                 />
               {{/if}}
               <Button
-                @text="Hide from website"
-                @theme="secondary"
+                @text='Hide from website'
+                @theme='secondary'
                 @onClick={{fn this.hideImage relation}}
               />
               <Button
-                @text="View details"
-                @theme="secondary"
+                @text='View details'
+                @theme='secondary'
                 @route='secure.images.image'
                 @model={{relation.image.id}}
               />
@@ -261,7 +261,7 @@
       @label='Hidden images'
       @legend='These images are for internal use only and will not be shown on our website.'
     >
-      <ul class="images">
+      <ul class='images'>
         {{#each this.hiddenImages as |relation|}}
           <li>
             {{#with relation.image as |image|}}
@@ -273,16 +273,16 @@
               />
             {{/with}}
 
-            <div class="buttons">
+            <div class='buttons'>
               <Button
-                @text="Show on website"
-                @theme="secondary"
+                @text='Show on website'
+                @theme='secondary'
                 @onClick={{fn this.showImage relation}}
               />
 
               <Button
-                @text="View details"
-                @theme="secondary"
+                @text='View details'
+                @theme='secondary'
                 @route='secure.images.image'
                 @model={{relation.image.id}}
               />
@@ -296,45 +296,27 @@
 
     <h2>Compliance</h2>
 
-    <Field::Boolean
-      @record={{product}}
-      @attribute='compliesWithIEC'
-    >
+    <Field::Boolean @record={{product}} @attribute='compliesWithIEC'>
       <label>Complies with IEC EN 61190-1-1(2002)</label>
     </Field::Boolean>
 
-    <Field::Boolean
-      @record={{product}}
-      @attribute='compliesWithIPCJSTD004A'
-    >
+    <Field::Boolean @record={{product}} @attribute='compliesWithIPCJSTD004A'>
       <label>Complies with IPC J-STD-004A</label>
     </Field::Boolean>
 
-    <Field::Boolean
-      @record={{product}}
-      @attribute='compliesWithIPCJSTD004B'
-    >
+    <Field::Boolean @record={{product}} @attribute='compliesWithIPCJSTD004B'>
       <label>Complies with IPC J-STD-004B</label>
     </Field::Boolean>
 
-    <Field::Boolean
-      @record={{product}}
-      @attribute='compliesWithIPCJSTD005'
-    >
+    <Field::Boolean @record={{product}} @attribute='compliesWithIPCJSTD005'>
       <label>Complies with IPC J-STD-005</label>
     </Field::Boolean>
 
-    <Field::Boolean
-      @record={{product}}
-      @attribute='compliesWithROHS'
-    >
+    <Field::Boolean @record={{product}} @attribute='compliesWithROHS'>
       <label>Complies with RoHS</label>
     </Field::Boolean>
 
-    <Field::Boolean
-      @record={{product}}
-      @attribute='compliesWithISO'
-    >
+    <Field::Boolean @record={{product}} @attribute='compliesWithISO'>
       <label>Complies with ISO 9001</label>
     </Field::Boolean>
 
@@ -346,7 +328,7 @@
     />
 
     <Fieldset @label='Test results'>
-      <table class="results">
+      <table class='results'>
         <thead>
           <tr>
             <th>Property</th>
@@ -362,12 +344,12 @@
                 <td>
                   <input
                     value={{cell}}
-                    {{on 'change' (fn this.updateCell i ii)}}
                     autocapitalize='off'
                     autocomplete='off'
                     autocorrect='off'
                     spellcheck='false'
-                  >
+                    {{on 'change' (fn this.updateCell i ii)}}
+                  />
                 </td>
               {{/each}}
             </tr>
@@ -376,15 +358,11 @@
       </table>
 
       {{#if this.testResults}}
-        <div class="buttons">
+        <div class='buttons'>
+          <Button @text='Add row' @theme='save' @onClick={{this.addRow}} />
           <Button
-            @text="Add row"
-            @theme="save"
-            @onClick={{this.addRow}}
-          />
-          <Button
-            @text="Remove row"
-            @theme="save"
+            @text='Remove row'
+            @theme='save'
             @onClick={{this.removeRow}}
           />
         </div>
@@ -395,14 +373,14 @@
     <h2>Documents</h2>
 
     <Field::ManyToMany
-      @label="Documents"
+      @label='Documents'
       @baseRecord={{product}}
-      @baseModel="product"
-      @baseLabel="productDocuments"
-      @joinModel="product-document"
-      @joinRankKey="rankAmongDocuments"
-      @targetModel="document"
-      @targetLabel="name"
+      @baseModel='product'
+      @baseLabel='productDocuments'
+      @joinModel='product-document'
+      @joinRankKey='rankAmongDocuments'
+      @targetModel='document'
+      @targetLabel='name'
       @targetRoute='secure.documents.document'
     />
 
@@ -413,33 +391,28 @@
         @label='Where is this product seen on our website?'
         @legend='Copy paste the links below to share.'
       >
-        <ul class="list">
+        <ul class='list'>
           <li>
-            <a
-              href={{product.url}}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {{product.name}} product page
+            <a href={{product.url}} target='_blank' rel='noreferrer noopener'>
+              {{product.name}}
+              product page
             </a>
           </li>
           <li>
             <a
               href={{product.family.url}}
-              target="_blank"
-              rel="noreferrer noopener"
+              target='_blank'
+              rel='noreferrer noopener'
             >
-              {{product.family.label}} page
+              {{product.family.label}}
+              page
             </a>
           </li>
           {{#each product.uses as |use|}}
             <li>
-              <a
-                href={{use.url}}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {{use.label}} page
+              <a href={{use.url}} target='_blank' rel='noreferrer noopener'>
+                {{use.label}}
+                page
               </a>
             </li>
           {{/each}}
