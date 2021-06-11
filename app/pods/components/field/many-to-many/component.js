@@ -38,13 +38,8 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   @service store;
 
   get joinRecords() {
-    const {
-      baseRecord,
-      baseLabel,
-      joinRankKey,
-      targetModel,
-      targetLabel
-    } = this.args;
+    const { baseRecord, baseLabel, joinRankKey, targetModel, targetLabel } =
+      this.args;
 
     const joinRecords = baseRecord.get(baseLabel);
 
@@ -108,13 +103,8 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   @action
   onSelect(targetRecord) {
-    const {
-      baseRecord,
-      baseModel,
-      joinModel,
-      targetModel,
-      targetLabel
-    } = this.args;
+    const { baseRecord, baseModel, joinModel, targetModel, targetLabel } =
+      this.args;
 
     console.debug('selected', targetRecord[targetLabel]);
 

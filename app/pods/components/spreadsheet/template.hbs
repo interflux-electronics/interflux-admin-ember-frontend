@@ -1,23 +1,23 @@
-<div class="spreadsheet">
-  <div class="tools">
-    <div class="left">
-      <div class="input">
+<div class='spreadsheet'>
+  <div class='tools'>
+    <div class='left'>
+      <div class='input'>
         <p
-          role="textbox"
-          contenteditable="true"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="false"
+          role='textbox'
+          contenteditable='true'
+          autocomplete='off'
+          autocorrect='off'
+          autocapitalize='off'
+          spellcheck='false'
           {{on 'keyup' this.onKeyUp}}
           {{on 'keydown' this.onKeyDown}}
           {{on 'click' this.selectText}}
           {{did-insert this.onInsertSearch}}
         ></p>
         {{#if (eq this.query '')}}
-          <p class="placeholder">Search</p>
+          <p class='placeholder'>Search</p>
         {{/if}}
-        <div class="icon">
+        <div class='icon'>
           {{#if this.showSearchIcon}}
             <Svg::Search />
           {{else if this.showCrossIcon}}
@@ -26,32 +26,25 @@
         </div>
       </div>
       {{#if this.query}}
-        <div class="counter">
+        <div class='counter'>
           <p>{{this.count}}</p>
         </div>
       {{/if}}
     </div>
 
-    <div class="right">
+    <div class='right'>
       {{#if @showCreateButton}}
-        <Button
-          @text="Create"
-          @route={{@createRoute}}
-          @theme="big-green"
-        />
+        <Button @text='Create' @route={{@createRoute}} @theme='big-green' />
       {{/if}}
     </div>
   </div>
 
   {{#if (eq @layout 'image-tiles')}}
-    <ul
-      class="tiles"
-      {{did-insert this.onInsertData}}
-    >
+    <ul class='tiles' {{did-insert this.onInsertData}}>
       {{#each this.sortedRecords as |record|}}
         <li
-          class="tile"
-          role="button"
+          class='tile'
+          role='button'
           data-record={{record.id}}
           {{on 'mouseover' (fn this.highlight record.id)}}
           {{on 'click' (fn this.select record.id)}}
@@ -64,26 +57,20 @@
                 {{/if}}
               {{/with}}
             {{else}}
-              <p data-search="me">{{get record column.key}}</p>
+              <p data-search='me'>{{get record column.key}}</p>
             {{/if}}
           {{/each}}
         </li>
       {{/each}}
     </ul>
   {{else}}
-    <div
-      class="columns {{@layout}}"
-      {{did-insert this.onInsertData}}
-    >
+    <div class='columns {{@layout}}' {{did-insert this.onInsertData}}>
       {{#each @columns as |column|}}
-        <div class="column {{if (eq this.sortBy column.key) 'sort'}}">
-          <header
-            {{on 'click' (fn this.setSortBy column.key)}}
-            role="button"
-          >
+        <div class='column {{if (eq this.sortBy column.key) 'sort'}}'>
+          <header role='button' {{on 'click' (fn this.setSortBy column.key)}}>
             <h2>{{column.label}}</h2>
             {{#if (eq this.sortBy column.key)}}
-              <div class="sort">
+              <div class='sort'>
                 {{#if this.sortUp}}
                   <Svg::SortUp />
                 {{else}}
@@ -96,11 +83,11 @@
           <ul>
             {{#each this.sortedRecords as |record|}}
               <li
-                class="row"
+                class='row'
                 data-record={{record.id}}
+                role='button'
                 {{on 'mouseover' (fn this.highlight record.id)}}
                 {{on 'click' (fn this.select record.id)}}
-                role="button"
               >
                 {{#if column.isImage}}
                   {{#with (get record column.key) as |url|}}
@@ -116,7 +103,7 @@
                     />
                   {{/with}}
                 {{else}}
-                  <p data-search="me">{{get record column.key}}</p>
+                  <p data-search='me'>{{get record column.key}}</p>
                 {{/if}}
               </li>
             {{/each}}

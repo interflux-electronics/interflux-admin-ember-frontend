@@ -1,27 +1,21 @@
 <Fieldset
-  {{!-- props --}}
   @id={{this.id}}
   @label={{@label}}
   @legend={{@legend}}
-  @component="string"
+  @component='string'
   @theme={{@theme}}
-  {{!-- state --}}
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
   {{#if @multiline}}
-
-    <Textarea
-      {{!-- props --}}
+    <Form::Textarea
       @id={{this.id}}
       @theme={{@theme}}
       @placeholder={{@placeholder}}
       @autofocus={{@autofocus}}
       @disabled={{@disabled}}
-      {{!-- state --}}
       @value={{this.value}}
       @state={{this.state}}
-      {{!-- events --}}
       @onFocus={{this.onFocus}}
       @onBlur={{this.onBlur}}
       @onKeyDown={{this.onKeyDown}}
@@ -29,31 +23,26 @@
       @onMouseOver={{this.onMouseOver}}
       @onMouseOut={{this.onMouseOut}}
     >
-    <Field::String::Messages
-      @state={{this.state}}
-      @isSaving={{this.isSaving}}
-      @hasFocus={{this.hasFocus}}
-      @warning={{this.warning}}
-      @error={{this.error}}
-      @onSave={{this.save}}
-      @disabled={{@disabled}}
-    />
-    </Textarea>
-
+      <Field::String::Messages
+        @state={{this.state}}
+        @isSaving={{this.isSaving}}
+        @hasFocus={{this.hasFocus}}
+        @warning={{this.warning}}
+        @error={{this.error}}
+        @onSave={{this.save}}
+        @disabled={{@disabled}}
+      />
+    </Form::Textarea>
   {{else}}
-
-    <Input
-      {{!-- props --}}
+    <Form::Input
       @id={{this.id}}
       @theme={{@theme}}
       @type={{@type}}
       @placeholder={{@placeholder}}
       @autofocus={{@autofocus}}
       @disabled={{@disabled}}
-      {{!-- state --}}
       @value={{this.value}}
       @state={{this.state}}
-      {{!-- events --}}
       @onFocus={{this.onFocus}}
       @onBlur={{this.onBlur}}
       @onKeyDown={{this.onKeyDown}}
@@ -61,16 +50,15 @@
       @onMouseOver={{this.onMouseOver}}
       @onMouseOut={{this.onMouseOut}}
     >
-    <Field::String::Messages
-      @state={{this.state}}
-      @isSaving={{this.isSaving}}
-      @hasFocus={{this.hasFocus}}
-      @warning={{this.warning}}
-      @error={{this.error}}
-      @onSave={{this.save}}
-      @disabled={{@disabled}}
-    />
-    </Input>
-
+      <Field::String::Messages
+        @state={{this.state}}
+        @isSaving={{this.isSaving}}
+        @hasFocus={{this.hasFocus}}
+        @warning={{this.warning}}
+        @error={{this.error}}
+        @onSave={{this.save}}
+        @disabled={{@disabled}}
+      />
+    </Form::Input>
   {{/if}}
 </Fieldset>

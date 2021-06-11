@@ -1,9 +1,10 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { alias } from '@ember/object/computed';
 
 export default class ProductController extends Controller {
-  @alias('model.product') product;
+  get product() {
+    return this.model.product;
+  }
 
   get publicImages() {
     return this.product.productImages.filterBy('public', true).sortBy('rank');

@@ -1,9 +1,7 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
-import { alias } from '@ember/object/computed';
 import ENV from 'interflux/config/environment';
 
 export default class ProductFamilyModel extends Model {
-  @alias('id') slug;
   @attr('string') slug;
   @attr('string') nameSingle;
   @attr('string') namePlural;

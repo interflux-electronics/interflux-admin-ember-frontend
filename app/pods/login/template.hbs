@@ -1,33 +1,33 @@
-<Page @id="login">
+<Page @id='login'>
   <Section>
     <form>
-      <div class="row one">
-        <Input
-          @id="email"
+      <div class='row one'>
+        <Form::Input
+          @id='email'
           @value={{this.email}}
-          @placeholder="Email"
-          @type="email"
-          @theme="tertiary"
+          @placeholder='Email'
+          @type='email'
+          @theme='tertiary'
           @disabled={{this.auth.getToken.isRunning}}
           @onKeyDown={{this.onKeyDown}}
           @onKeyUp={{this.onKeyUp}}
         />
       </div>
 
-      <div class="row two">
-        <Input
-          @id="password"
+      <div class='row two'>
+        <Form::Input
+          @id='password'
           @value={{this.password}}
-          @placeholder="Password"
-          @type="password"
-          @theme="tertiary"
+          @placeholder='Password'
+          @type='password'
+          @theme='tertiary'
           @disabled={{this.auth.getToken.isRunning}}
           @onKeyDown={{this.onKeyDown}}
           @onKeyUp={{this.onKeyUp}}
         />
 
         <Button
-          @theme="tertiary"
+          @theme='tertiary'
           @icon={{if this.loading 'ellipsis' 'chevron-right'}}
           @onClick={{this.submit}}
           @isBusy={{this.loading}}
@@ -35,18 +35,14 @@
       </div>
 
       {{#if this.error}}
-        <div class="row three">
+        <div class='row three'>
           <p>Error: {{this.error}}</p>
         </div>
       {{/if}}
     </form>
 
-    <div class="back">
-      <Button
-        @route="index"
-        @theme="tertiary"
-        @icon="chevron-left"
-      />
+    <div class='back'>
+      <Button @route='index' @theme='tertiary' @icon='chevron-left' />
     </div>
   </Section>
 </Page>

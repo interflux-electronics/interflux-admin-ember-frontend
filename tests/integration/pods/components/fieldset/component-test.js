@@ -21,7 +21,7 @@ module('Integration | Component | <Fieldset>', function (hooks) {
         @id={{this.id}}
         @label={{this.label}}
       >
-        <Input @id={{this.id}} />
+        <Form::Input @id={{this.id}} />
       </Fieldset>
     `);
 

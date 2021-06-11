@@ -1,26 +1,21 @@
 <Fieldset
-  {{!-- props --}}
   @id={{this.id}}
   @label={{@label}}
   @legend={{@legend}}
-  @component="string"
+  @component='string'
   @theme={{@theme}}
-  {{!-- state --}}
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <Input
-    {{!-- props --}}
+  <Form::Input
     @id={{this.id}}
     @theme={{@theme}}
-    @type="datetime-local"
+    @type='datetime-local'
     @placeholder={{@placeholder}}
     @autofocus={{@autofocus}}
     @disabled={{@disabled}}
-    {{!-- state --}}
     @value={{this.dateString}}
     @state={{this.state}}
-    {{!-- events --}}
     @onFocus={{this.onFocus}}
     @onBlur={{this.onBlur}}
     @onKeyDown={{this.onKeyDown}}
@@ -28,6 +23,5 @@
     @onMouseOver={{this.onMouseOver}}
     @onMouseOut={{this.onMouseOut}}
     @onChange={{this.onChange}}
-  >
-  </Input>
+  />
 </Fieldset>

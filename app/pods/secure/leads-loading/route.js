@@ -1,4 +1,3 @@
-import Route from '@ember/routing/route';
+import BaseRoute from 'interflux/pods/base/route';
 
-export default class SecureLeadsLoadingRoute extends Route {
-}
+export default class SecureLeadsLoadingRoute extends BaseRoute {}

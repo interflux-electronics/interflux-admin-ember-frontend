@@ -1,7 +1,7 @@
-import Route from '@ember/routing/route';
+import BaseRoute from 'interflux/pods/base/route';
 import { inject as service } from '@ember/service';
 
-export default class ModalRoute extends Route {
+export default class ModalRoute extends BaseRoute {
   @service modal;
 
   renderTemplate() {

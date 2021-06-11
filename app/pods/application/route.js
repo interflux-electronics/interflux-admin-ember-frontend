@@ -4,7 +4,9 @@ import { inject as service } from '@ember/service';
 export default class ApplicationRoute extends BaseRoute {
   @service auth;
 
-  init() {
+  constructor() {
+    super(...arguments);
+
     this.auth.revive();
   }
 }

@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
-import { alias } from '@ember/object/computed';
 
 export default class UseController extends Controller {
-  @alias('model.use') use;
+  get use() {
+    return this.model.use;
+  }
 
   get imageCount() {
     if (!this.use.useImages) {

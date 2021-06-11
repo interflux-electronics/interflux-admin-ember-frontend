@@ -1,25 +1,19 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
-import { alias } from '@ember/object/computed';
 import ENV from 'interflux/config/environment';
 
 export default class ProductModel extends Model {
-  @alias('id') slug;
   @attr('string') name;
   @attr('string') label;
   @attr('string') status;
-
   @attr('string') pitch;
   @attr('string') summary;
   @attr('string') properties;
   @attr('string') instructions;
-
   @attr('string') avatarPath;
   @attr('string') avatarAlt;
   @attr('string') avatarCaption;
   @attr('string') avatarVariations;
-
   @attr('number') rankAmongFamily;
-
   @attr('boolean') compliesWithROHS;
   @attr('boolean') compliesWithIEC;
   @attr('boolean') compliesWithIPCJSTD004A;
@@ -29,12 +23,18 @@ export default class ProductModel extends Model {
   @attr('string') testResults;
 
   @belongsTo('product-family') productFamily;
-  @alias('productFamily') family;
-
   @belongsTo('image', { inverse: 'product' }) image;
 
   @hasMany('image', { inverse: 'products' }) images;
   @hasMany('document') documents;
+
+  get slug() {
+    return this.id;
+  }
+
+  get family() {
+    return this.productFamily;
+  }
 
   get productUsesSorted() {
     const rank = 'rankAmongUses';

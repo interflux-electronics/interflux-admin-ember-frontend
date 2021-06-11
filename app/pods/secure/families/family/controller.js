@@ -1,12 +1,13 @@
 import Controller from '@ember/controller';
-import { alias } from '@ember/object/computed';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class FamilyController extends Controller {
   @service router;
 
-  @alias('model.family') family;
+  get family() {
+    return this.model.family;
+  }
 
   get imageCount() {
     if (!this.family.productFamilyImages) {

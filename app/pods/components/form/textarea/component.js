@@ -2,7 +2,7 @@ import InputComponent from '../input/component';
 import { action } from '@ember/object';
 
 export default class TextareaComponent extends InputComponent {
-  // See <Input> component
+  // See <Form::Input> component
 
   // The contenteditable <p>
   textarea;
@@ -23,7 +23,7 @@ export default class TextareaComponent extends InputComponent {
     document.execCommand('insertHTML', false, text);
   }
 
-  // Unlike <Input> we don't select the text on focus.
+  // Unlike <Form::Input> we don't select the text on focus.
   @action
   selectText() {
     // Do nothing.

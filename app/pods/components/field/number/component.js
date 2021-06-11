@@ -44,7 +44,7 @@ export default class NumberFieldComponent extends FieldComponent {
     // Reset errors
     this.error = null;
 
-    // On enter, save the attribute, unless it's a <Textarea>
+    // On enter, save the attribute, unless it's a <Form::Textarea>
     if (event.key === 'Enter' && !multiline) {
       this.save();
     }
