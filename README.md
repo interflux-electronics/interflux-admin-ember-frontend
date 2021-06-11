@@ -4,28 +4,29 @@ This Ember front-end is the UI where Interflux team members log in to make chang
 
 ## Prerequisites
 
-* [Git](https://git-scm.com/)
-* [NVM](https://github.com/nvm-sh/nvm)
-* [Yarn](https://yarnpkg.com/)
+- [Git](https://git-scm.com/)
+- [NVM](https://github.com/nvm-sh/nvm)
+- [Yarn](https://yarnpkg.com/)
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd admin.interflux.com`
-* `nvm install`
-* `yarn install`
+- `git clone <repository-url>` this repository
+- `cd admin.interflux.com`
+- `nvm install`
+- `yarn install`
 
 ## Serving
 
-* `yarn serve`
+- `yarn lint`
+- `yarn lint:fix`
 
 ## Building
 
-* `yarn build`
+- `yarn build`
 
 ## Deploying
 
-* `yarn deploy`
+- `yarn deploy`
 
 ## Branches
 
