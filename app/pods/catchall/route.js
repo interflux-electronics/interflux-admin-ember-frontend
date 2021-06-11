@@ -1,6 +1,6 @@
-import Route from '@ember/routing/route';
+import BaseRoute from 'interflux/pods/base/route';
 
-export default class CatchallRoute extends Route {
+export default class CatchallRoute extends BaseRoute {
   beforeModel(transition) {
     console.warn('Unknown route, redirecting to index');
     console.warn(location.href);
