@@ -12,16 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: 'node -v'
-      - run: 'yarn -v'
-      - run: 'curl https://get.volta.sh | bash'
-      - run: 'node -v'
-      - run: 'yarn -v'
-      - run: 'volta list'
-      - run: 'volta install'
-      - run: 'node -v'
-      - run: 'yarn -v'
-      - run: 'volta list'
       - run: 'yarn install'
       - run: 'yarn test'
 
