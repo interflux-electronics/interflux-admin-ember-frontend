@@ -39,28 +39,6 @@
       @attribute='label'
     />
 
-    <h2>Status</h2>
-
-    <Field::String::Radio
-      @record={{product}}
-      @attribute='status'
-      @options={{this.statusOptions}}
-    />
-
-    {{#if (or product.isOutdated product.isDiscontinued)}}
-      <h2>Substitute</h2>
-
-      <Field::OneToMany
-        @label='Is there a better product?'
-        @legend='In case there is a product which does the same thing as {{product.name}}, but better, then please find and select that product below. If {{product.name}} has the status "outdated" or "discontinued" and you have selected a better product below, then we will show a message on the product page of {{product.name}} to encourage visitors to look at the better product instead.'
-        @baseRecord={{product}}
-        @baseLabel='superiorProduct'
-        @targetModel='product'
-        @targetFilter='name'
-        @minKeyStrokes='1'
-      />
-    {{/if}}
-
     <h2>Processes</h2>
 
     <Field::ManyToMany
@@ -384,40 +362,86 @@
       @targetRoute='secure.documents.document'
     />
 
+    <h2>Status</h2>
+
+    <Field::String::Radio
+      @record={{product}}
+      @attribute='status'
+      @options={{this.statusOptions}}
+    />
+
+    {{#if (or product.isOutdated product.isDiscontinued)}}
+      <h2>Substitute</h2>
+
+      <Field::OneToMany
+        @label='Is there a better product?'
+        @legend='In case there is a product which does the same thing as {{product.name}}, but better, then please find and select that product below. If {{product.name}} has the status "outdated" or "discontinued" and you have selected a better product below, then we will show a message on the product page of {{product.name}} to encourage visitors to look at the better product instead.'
+        @baseRecord={{product}}
+        @baseLabel='superiorProduct'
+        @targetModel='product'
+        @targetFilter='name'
+        @minKeyStrokes='1'
+      />
+    {{/if}}
+
     <h2>Website</h2>
 
     {{#if product.isOnline}}
-      <Fieldset
-        @label='Where is this product seen on our website?'
-        @legend='Copy paste the links below to share.'
-      >
-        <ul class='list'>
-          <li>
-            <a href={{product.url}} target='_blank' rel='noreferrer noopener'>
-              {{product.name}}
-              product page
-            </a>
-          </li>
-          <li>
-            <a
-              href={{product.family.url}}
-              target='_blank'
-              rel='noreferrer noopener'
-            >
-              {{product.family.label}}
-              page
-            </a>
-          </li>
-          {{#each product.uses as |use|}}
+      {{#if (or product.isPopular product.isNew)}}
+        <Field::Boolean
+          @record={{product}}
+          @attribute='onFrontPage'
+          @label='Show {{product.name}} on our front-page?'
+        >
+          <label>{{if product.onFrontPage 'Yes' 'No'}}</label>
+        </Field::Boolean>
+
+        {{#if product.onFrontPage}}
+          <Field::String
+            @label='Rank on front-page (amongst {{product.status}} products)'
+            @legend='1 to top, 9 to the bottom'
+            @record={{product}}
+            @attribute='frontPageRank'
+          />
+
+          <h3>Link to our live front-page</h3>
+          <ul class='list'>
             <li>
-              <a href={{use.url}} target='_blank' rel='noreferrer noopener'>
-                {{use.label}}
-                page
-              </a>
+              <Link
+                @url='{{env 'publicHost'}}/en/'
+                @label='{{env 'publicHost'}}/en/'
+              />
             </li>
-          {{/each}}
-        </ul>
-      </Fieldset>
+          </ul>
+        {{/if}}
+      {{/if}}
+
+      <h3>Link to {{product.name}}'s live product page</h3>
+      <ul class='list'>
+        <li>
+          <Link @url={{product.url}} @label={{product.link}} />
+        </li>
+      </ul>
+
+      <h3>Links to live product lists on which {{product.name}} is seen</h3>
+      <ul class='list'>
+        <li>
+          <a
+            href={{product.family.url}}
+            target='_blank'
+            rel='noreferrer noopener'
+          >
+            {{product.family.link}}
+          </a>
+        </li>
+        {{#each product.uses as |use|}}
+          <li>
+            <a href={{use.url}} target='_blank' rel='noreferrer noopener'>
+              {{use.link}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
     {{else}}
       <p>{{product.name}} is hidden from our website.</p>
     {{/if}}

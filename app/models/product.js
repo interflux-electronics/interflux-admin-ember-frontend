@@ -21,6 +21,8 @@ export default class ProductModel extends Model {
   @attr('boolean') compliesWithIPCJSTD005;
   @attr('boolean') compliesWithISO;
   @attr('string') testResults;
+  @attr('boolean') onFrontPage;
+  @attr('number') frontPageRank;
 
   @belongsTo('product-family') productFamily;
   @belongsTo('image', { inverse: 'product' }) image;
@@ -71,7 +73,7 @@ export default class ProductModel extends Model {
   @hasMany('product', { inverse: 'superiorProduct' }) inferiorProducts;
 
   get url() {
-    return `${ENV.publicHosts}/en/product/${this.slug}`;
+    return `${ENV.publicHost}/en/product/${this.slug}`;
   }
 
   get link() {
@@ -92,6 +94,14 @@ export default class ProductModel extends Model {
 
   get isDiscontinued() {
     return this.status === 'discontinued';
+  }
+
+  get isPopular() {
+    return this.status === 'popular';
+  }
+
+  get isNew() {
+    return this.status === 'new';
   }
 
   get avatarURL() {

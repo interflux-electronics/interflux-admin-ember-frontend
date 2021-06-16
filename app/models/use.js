@@ -36,7 +36,7 @@ export default class UseModel extends Model {
   }
 
   get url() {
-    return `${ENV.wwwHost}/en/products/for-${this.id}`;
+    return `${ENV.publicHost}/en/products/for-${this.id}`;
   }
 
   get link() {

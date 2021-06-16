@@ -83,14 +83,14 @@ export default class ProductController extends Controller {
   get statusOptions() {
     return [
       {
-        value: 'new',
-        label:
-          '**New** - Promising and in need of early adopters. Highly promoted on our website.'
-      },
-      {
         value: 'popular',
         label:
           '**Popular** - These products have been best-sellers for years. Highly promoted on our website.'
+      },
+      {
+        value: 'new',
+        label:
+          '**New** - Promising and in need of early adopters. Highly promoted on our website.'
       },
       {
         value: 'recommended',
