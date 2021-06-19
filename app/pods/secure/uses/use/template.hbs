@@ -1,17 +1,13 @@
 {{#with @model.use as |use|}}
-  <Modal @id="use">
+  <Modal @id='use'>
     <h1>{{use.text}}</h1>
     <h2>Properties</h2>
 
-    <Field::String
-      @label='Process name'
-      @record={{use}}
-      @attribute='text'
-    />
+    <Field::String @label='Process name' @record={{use}} @attribute='text' />
 
     <Field::String
       @label='Explanation'
-      @legend="Explain in depth what {{use.text}} means, who it is used by and why it matters. Aim for the first paragraphs to make sense to a layman (no jargon). In the paragraphs after, feel free to get technical."
+      @legend='Explain in depth what {{use.text}} means, who it is used by and why it matters. Aim for the first paragraphs to make sense to a layman (no jargon). In the paragraphs after, feel free to get technical.'
       @record={{use}}
       @attribute='gist'
       @multiline='true'
@@ -27,23 +23,20 @@
     <h2>Relations</h2>
 
     <Field::ManyToMany
-      @label="Products"
-      @legend="All products which can are suitable for this process."
+      @label='Products'
+      @legend='All products which can are suitable for this process.'
       @baseRecord={{use}}
-      @baseModel="use"
-      @baseLabel="productUses"
-      @joinModel="product-use"
-      @joinRankKey="rankAmongProducts"
-      @targetModel="product"
-      @targetLabel="name"
+      @baseModel='use'
+      @baseLabel='productUses'
+      @joinModel='product-use'
+      @joinRankKey='rankAmongProducts'
+      @targetModel='product'
+      @targetLabel='name'
       @targetRoute='secure.products.product'
     />
 
-    <Fieldset
-      @label="Families"
-      @legend="All families from the products above."
-    >
-      <ul class="list">
+    <Fieldset @label='Families' @legend='All families from the products above.'>
+      <ul class='list'>
         {{#each use.families as |family|}}
           {{#if family.id}}
             <li>
@@ -53,7 +46,7 @@
             </li>
           {{/if}}
         {{else}}
-          <li class="dashed">
+          <li class='dashed'>
             <span>- none -</span>
           </li>
         {{/each}}
@@ -66,15 +59,13 @@
       @label='Icon'
       @baseRecord={{use}}
       @baseLabel='image'
-      @targetModel="image"
-      @targetFilter="alt"
-      @targetPermanentFilters={{array
-        (hash key='path' value='~^images/icons')
-      }}
+      @targetModel='image'
+      @targetFilter='alt'
+      @targetPermanentFilters={{array (hash key='path' value='~^images/icons')}}
       @minKeyStrokes='2'
     />
 
-    <div class="icon">
+    <div class='icon'>
       {{#if use.image}}
         {{#with use.image as |image|}}
           <a href={{href-to 'secure.images.image' use.image.id}}>
@@ -100,21 +91,21 @@
     </div>
 
     <Field::ManyToMany
-      @label="The 4 avatars"
-      @legend="On the product overview page we show 4 images to represent this process."
+      @label='The 4 avatars'
+      @legend='On the product overview page we show 4 images to represent this process.'
       @baseRecord={{use}}
-      @baseModel="use"
-      @baseLabel="useImages"
-      @joinModel="use-image"
-      @joinRankKey="rankAmongImages"
-      @targetModel="image"
-      @targetLabel="alt"
+      @baseModel='use'
+      @baseLabel='useImages'
+      @joinModel='use-image'
+      @joinRankKey='rankAmongImages'
+      @targetModel='image'
+      @targetLabel='alt'
       @targetRoute='secure.images.image'
       @disabled={{this.maxAvatarCountReached}}
     />
 
     <Fieldset>
-      <ul class="images">
+      <ul class='images'>
         {{#each use.images as |useImage|}}
           <li>
             <p>{{useImage.image.alt}}</p>
@@ -139,5 +130,22 @@
       @attribute='id'
       @disabled='true'
     />
+
+    <Button
+      @text='Delete from database'
+      @onClick={{this.destroyRecord}}
+      @theme='danger-red'
+      @icon='warning'
+    />
+
+    {{#if this.showDeleteInstructions}}
+      <p>To delete this process, please first remove all relations:</p>
+      {{#if use.productCount}}
+        <p>Products: {{use.productCount}}</p>
+      {{/if}}
+      {{#if use.imageCount}}
+        <p>Images: {{use.imageCount}}</p>
+      {{/if}}
+    {{/if}}
   </Modal>
 {{/with}}

@@ -40,4 +40,16 @@ export default class ProductFamilyModel extends Model {
   get subsetOf() {
     return this.productFamily.get('namePlural') || '-';
   }
+
+  get canBeDeleted() {
+    return this.productCount === 0 && this.imagesCount === 0;
+  }
+
+  get productCount() {
+    return this.products.length;
+  }
+
+  get imagesCount() {
+    return this.productFamilyImages.length;
+  }
 }

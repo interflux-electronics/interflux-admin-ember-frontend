@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class FamilyController extends Controller {
   @service router;
@@ -39,5 +40,22 @@ export default class FamilyController extends Controller {
   @action
   redirect(id) {
     this.router.transitionTo('secure.families.family', id);
+  }
+
+  @action
+  async destroyRecord() {
+    this.userClickedDelete = true;
+    if (this.family.canBeDeleted) {
+      console.warn(`destroying record ${this.family.id}`);
+      await this.family.destroyRecord();
+      console.warn('destroyed');
+      this.router.transitionTo('secure.families');
+    }
+  }
+
+  @tracked userClickedDelete = false;
+
+  get showDeleteInstructions() {
+    return !this.family.canBeDeleted && this.userClickedDelete;
   }
 }

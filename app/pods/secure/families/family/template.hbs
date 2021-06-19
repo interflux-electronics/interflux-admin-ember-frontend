@@ -1,5 +1,5 @@
 {{#with @model.family as |family|}}
-  <Modal @id="family">
+  <Modal @id='family'>
     <h1>{{family.namePlural}}</h1>
     <h2>Properties</h2>
 
@@ -10,25 +10,25 @@
     />
 
     <Field::String
-      @label="Name (single)"
+      @label='Name (single)'
       @record={{family}}
       @attribute='nameSingle'
     />
 
     <Field::OneToMany
-      @label="This product family is a subset of ..."
-      @legend="Leave blank if top level family."
+      @label='This product family is a subset of ...'
+      @legend='Leave blank if top level family.'
       @baseRecord={{family}}
       @baseLabel='productFamily'
-      @targetModel="product-family"
-      @targetFilter="namePlural"
-      @targetRoute="secure.families.family"
+      @targetModel='product-family'
+      @targetFilter='namePlural'
+      @targetRoute='secure.families.family'
       @minKeyStrokes='0'
     />
 
     {{#if family.isMainFamily}}
       <Field::ManyToOne
-        @label="Sub families"
+        @label='Sub families'
         @baseRecord={{family}}
         @baseLabel='children'
         @targetModel='product-family'
@@ -40,8 +40,8 @@
     {{/if}}
 
     <Field::ManyToOne
-      @label="Products belonging to this family"
-      @legend="Drag to sort."
+      @label='Products belonging to this family'
+      @legend='Drag to sort.'
       @baseRecord={{family}}
       @baseLabel='products'
       @targetModel='product'
@@ -71,21 +71,21 @@
       <h2>Images</h2>
 
       <Field::ManyToMany
-        @label="The 4 avatars"
-        @legend="On the product overview page we show 4 images to represent this product family."
+        @label='The 4 avatars'
+        @legend='On the product overview page we show 4 images to represent this product family.'
         @baseRecord={{family}}
-        @baseModel="productFamily"
-        @baseLabel="productFamilyImages"
-        @joinModel="product-family-image"
-        @joinRankKey="rankAmongImages"
-        @targetModel="image"
-        @targetLabel="alt"
+        @baseModel='productFamily'
+        @baseLabel='productFamilyImages'
+        @joinModel='product-family-image'
+        @joinRankKey='rankAmongImages'
+        @targetModel='image'
+        @targetLabel='alt'
         @targetRoute='secure.images.image'
         @disabled={{this.maxAvatarCountReached}}
       />
 
       <Fieldset>
-        <ul class="images">
+        <ul class='images'>
           {{#each this.sortedImages as |joinRecord|}}
             <li>
               <p>{{joinRecord.rankAmongImages}}</p>
@@ -130,5 +130,22 @@
       @afterSave={{this.redirect}}
       @disabled='true'
     />
+
+    <Button
+      @text='Delete from database'
+      @onClick={{this.destroyRecord}}
+      @theme='danger-red'
+      @icon='warning'
+    />
+
+    {{#if this.showDeleteInstructions}}
+      <p>To delete this family, please first remove all relations:</p>
+      {{#if family.productCount}}
+        <p>Products: {{family.productCount}}</p>
+      {{/if}}
+      {{#if family.imageCount}}
+        <p>Images: {{family.imageCount}}</p>
+      {{/if}}
+    {{/if}}
   </Modal>
 {{/with}}

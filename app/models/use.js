@@ -20,10 +20,6 @@ export default class UseModel extends Model {
     return sorted.map((record) => record.product);
   }
 
-  get productCount() {
-    return this.products.length;
-  }
-
   @belongsTo('image') image;
   @hasMany('use-image') useImages;
 
@@ -52,5 +48,17 @@ export default class UseModel extends Model {
     return this.icon
       ? `${ENV.cdnHost}/${this.icon}`
       : `${ENV.cdnHost}/images/icons/check.svg`;
+  }
+
+  get canBeDeleted() {
+    return this.productCount === 0 && this.imageCount === 0;
+  }
+
+  get productCount() {
+    return this.products.length;
+  }
+
+  get imageCount() {
+    return this.useImages.length;
   }
 }
