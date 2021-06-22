@@ -17,14 +17,24 @@
       @attribute='legalName'
     />
 
+    <h2>Notes</h2>
+
+    <Field::String
+      @label='Internal notes'
+      @legend='Only seen by Interflux.'
+      @record={{company}}
+      @attribute='notes'
+      @multiline='true'
+    />
+
     <h2>Address</h2>
 
     <Field::OneToMany
       @label='Country'
       @baseRecord={{company}}
       @baseLabel='country'
-      @targetModel="country"
-      @targetFilter="nameEnglish"
+      @targetModel='country'
+      @targetFilter='nameEnglish'
       @minKeyStrokes='2'
     />
 
@@ -49,23 +59,11 @@
 
     <h2>Contact</h2>
 
-    <Field::String
-      @label='Phone'
-      @record={{company}}
-      @attribute='phone'
-    />
+    <Field::String @label='Phone' @record={{company}} @attribute='phone' />
 
-    <Field::String
-      @label='Fax'
-      @record={{company}}
-      @attribute='fax'
-    />
+    <Field::String @label='Fax' @record={{company}} @attribute='fax' />
 
-    <Field::String
-      @label='Website'
-      @record={{company}}
-      @attribute='website'
-    />
+    <Field::String @label='Website' @record={{company}} @attribute='website' />
 
     <Field::String
       @label='Email for general enquiries'
@@ -94,42 +92,41 @@
     <h2>Relations</h2>
 
     <Field::ManyToMany
-      @label="Members"
-      @legend="All people involved with this company."
+      @label='Members'
+      @legend='All people involved with this company.'
       @baseRecord={{company}}
-      @baseModel="company"
-      @baseLabel="companyMembers"
-      @joinModel="company-member"
-      @targetModel="person"
-      @targetLabel="fullName"
-      @targetFilter="fullName"
+      @baseModel='company'
+      @baseLabel='companyMembers'
+      @joinModel='company-member'
+      @targetModel='person'
+      @targetLabel='fullName'
+      @targetFilter='fullName'
       @targetRoute='secure.people.person'
     />
 
     <Field::ManyToMany
-      @label="Markets"
-      @legend="The countries in which this company operates and sells."
+      @label='Markets'
+      @legend='The countries in which this company operates and sells.'
       @baseRecord={{company}}
-      @baseModel="company"
-      @baseLabel="companyMarkets"
-      @joinModel="company-market"
-      @targetModel="country"
-      @targetLabel="nameEnglish"
+      @baseModel='company'
+      @baseLabel='companyMarkets'
+      @joinModel='company-market'
+      @targetModel='country'
+      @targetLabel='nameEnglish'
       @targetRoute='secure.people.person'
     />
 
-    <h2>Visibility</h2>
+    <h2>Website</h2>
 
-    <p>To make companies visible on the <a
+    <p>To make companies visible on the
+      <a
         href='https://app.interflux.com/en/contact'
         target='_blank'
         rel='noopener noreferrer'
-      >contact page</a> of our website, use the checkbox below.</p>
+      >contact page</a>
+      of our website, use the checkbox below.</p>
 
-    <Field::Boolean
-      @record={{company}}
-      @attribute='public'
-    >
+    <Field::Boolean @record={{company}} @attribute='public'>
       <label>Show on website</label>
     </Field::Boolean>
 
@@ -139,6 +136,13 @@
         @legend='Companies are sorted alphabetically on our website, except for those with a rank. Those with a rank move to the top of the list. Enter a number to sort the ranked companies. Leave blank for alphabetical sort.'
         @record={{company}}
         @attribute='order'
+      />
+
+      <Field::String
+        @label='Description'
+        @legend='Optional extra bit of text shown on the contact page of our website.'
+        @record={{company}}
+        @attribute='description'
       />
     {{/if}}
 
