@@ -19,6 +19,7 @@ export default class OneToManyFieldComponent extends FieldComponent {
   // @arg targetFilter;
   // @arg targetLabel;
   // @arg targetRoute;
+  // @arg autoSave;
 
   fieldset;
 
@@ -73,6 +74,9 @@ export default class OneToManyFieldComponent extends FieldComponent {
     const { baseRecord, baseLabel } = this.args;
     this.showSearch = false;
     baseRecord[baseLabel] = chosenRecord;
+    if (this.args.localSave) {
+      return;
+    }
     console.debug('saving');
     baseRecord
       .save({

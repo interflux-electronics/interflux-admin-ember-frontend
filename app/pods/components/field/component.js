@@ -50,7 +50,7 @@ export default class FieldComponent extends Component {
   @tracked error;
 
   get isDirty() {
-    return this.value !== this.lastSavedValue;
+    return this.args.localSave ? false : this.value !== this.lastSavedValue;
   }
 
   get warnings() {
@@ -87,6 +87,10 @@ export default class FieldComponent extends Component {
 
   @action
   async save() {
+    if (this.args.localSave) {
+      return false;
+    }
+
     console.debug('saving');
 
     // Reset errors, allow second save attempt

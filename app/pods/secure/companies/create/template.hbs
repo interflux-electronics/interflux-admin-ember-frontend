@@ -1,0 +1,32 @@
+{{#with @model.company as |company|}}
+  <Modal @id='company-create'>
+    <h1>
+      {{if company.businessName company.businessName 'Create new company'}}
+    </h1>
+
+    <Field::String
+      @label='Business name'
+      @record={{company}}
+      @attribute='businessName'
+      @localSave={{true}}
+    />
+
+    <Field::OneToMany
+      @label='Country'
+      @baseRecord={{company}}
+      @baseLabel='country'
+      @targetModel='country'
+      @targetFilter='nameEnglish'
+      @minKeyStrokes='2'
+      @localSave={{true}}
+    />
+
+    <Button
+      @text='Save'
+      @theme='big-green'
+      @disabled={{this.preventSave}}
+      @isBusy={{this.isSaving}}
+      @onClick={{this.onSave}}
+    />
+  </Modal>
+{{/with}}

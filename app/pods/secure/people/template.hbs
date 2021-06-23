@@ -1,14 +1,16 @@
-<Page::Content @id="people">
+<Page::Content @id='people'>
   <h1>People</h1>
 
   {{#if @model.people}}
     <Spreadsheet
       @records={{@model.people}}
-      @linkRoute="secure.people.person"
+      @linkRoute='secure.people.person'
+      @createRoute='secure.people.create'
+      @showCreateButton='true'
       @columns={{array
-      (hash key='fullName' label="Name")
-      (hash key='memberOf' label='Member of')
-    }}
+        (hash key='fullName' label='Name')
+        (hash key='memberOf' label='Member of')
+      }}
     />
   {{else}}
     <p>No people found.</p>

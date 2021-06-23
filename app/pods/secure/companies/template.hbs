@@ -1,9 +1,11 @@
-<Page::Content @id="companies">
+<Page::Content @id='companies'>
   <h1>Companies</h1>
 
   <Spreadsheet
     @records={{@model.companies}}
     @linkRoute='secure.companies.company'
+    @createRoute='secure.companies.create'
+    @showCreateButton='true'
     @columns={{array
       (hash key='country.nameEnglish' label='Country')
       (hash key='businessName' label='Name')
