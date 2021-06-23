@@ -5,8 +5,8 @@
   @theme={{@theme}}
   @state={{this.state}}
 >
-  {{yield}}
   <Checkbox @id={{this.id}} @checked={{this.value}} @onClick={{this.onClick}} />
+  {{yield}}
 
   {{#if (eq this.state 'saving')}}
     <div class='icon saving'></div>

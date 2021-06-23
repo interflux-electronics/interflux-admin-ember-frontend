@@ -7,8 +7,9 @@ export default class PeopleRoute extends BaseRoute {
 
   model() {
     return hash({
+      companies: this.store.findAll('company'),
       people: this.store.findAll('person', {
-        include: ['companies'].join(','),
+        include: ['company_members'].join(','),
         reload: true
       })
     });

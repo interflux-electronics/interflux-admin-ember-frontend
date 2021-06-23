@@ -2,6 +2,8 @@ fieldset.boolean {
   background: white !important;
   .liner {
     position: relative;
+    display: flex;
+    align-items: center;
   }
   .liner > label {
     font-family: $regular;
@@ -11,12 +13,10 @@ fieldset.boolean {
     cursor: text;
     margin: 0;
     padding: 0;
-    padding-left: calc(24px + 20px);
+    padding-left: 20px;
   }
   .checkbox {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    flex-shrink: 0;
   }
   .icon.saving {
     background: $green-1;

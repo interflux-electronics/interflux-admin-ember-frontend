@@ -118,9 +118,14 @@
     />
 
     {{#if this.showDeleteInstructions}}
-      <p>To delete this person, please first remove all relations:</p>
-      {{#if person.companyCount}}
-        <p>Companies: {{person.companyCount}}</p>
+      {{#if person.hasUser}}
+        <p>This person is protected.<br />
+          Please ask Jan if this person needs to be removed.</p>
+      {{else}}
+        <p>To delete this person, please first remove all relations:</p>
+        {{#if person.companyCount}}
+          <p>Companies: {{person.companyCount}}</p>
+        {{/if}}
       {{/if}}
     {{/if}}
   </Modal>

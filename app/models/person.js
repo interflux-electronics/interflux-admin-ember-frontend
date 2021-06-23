@@ -8,6 +8,7 @@ export default class PersonModel extends Model {
   @attr('string') phone;
   @attr('string') email;
   @attr('boolean') public;
+  @attr('boolean') hasUser;
 
   @hasMany('company-member') companyMembers;
 
@@ -24,6 +25,6 @@ export default class PersonModel extends Model {
   }
 
   get canBeDeleted() {
-    return this.companyCount === 0;
+    return this.companyCount === 0 && !this.hasUser;
   }
 }
