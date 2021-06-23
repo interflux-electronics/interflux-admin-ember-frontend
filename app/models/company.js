@@ -21,9 +21,22 @@ export default class CompanyModel extends Model {
 
   @belongsTo('country') country;
 
-  @hasMany('person') people;
-  @hasMany('country') markets;
-
   @hasMany('company-member') companyMembers;
   @hasMany('company-market') companyMarkets;
+
+  get people() {
+    return this.companyMembers.mapBy('person');
+  }
+
+  get markets() {
+    return this.companyMarkets.mapBy('country');
+  }
+
+  get canBeDeleted() {
+    return this.peopleCount === 0;
+  }
+
+  get peopleCount() {
+    return this.people.length;
+  }
 }

@@ -34,12 +34,12 @@ export default class NavResourcesComponent extends Component {
         icon: 'svg/prescription-bottle'
       },
       {
-        label: 'Product families',
+        label: 'Families',
         route: 'secure.families',
         icon: 'svg/flask'
       },
       {
-        label: 'Product qualities',
+        label: 'Qualities',
         route: 'secure.qualities',
         icon: 'svg/medal'
       },

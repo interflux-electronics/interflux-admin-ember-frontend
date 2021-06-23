@@ -149,11 +149,25 @@
     <h2>Database</h2>
 
     <Field::String
-      @label='Database ID'
+      @label='UUID'
       @record={{company}}
       @attribute='id'
       @disabled={{true}}
     />
+
+    <Button
+      @text='Delete from database'
+      @onClick={{this.destroyRecord}}
+      @theme='danger-red'
+      @icon='warning'
+    />
+
+    {{#if this.showDeleteInstructions}}
+      <p>To delete this company, please first remove all relations:</p>
+      {{#if company.peopleCount}}
+        <p>People: {{company.peopleCount}}</p>
+      {{/if}}
+    {{/if}}
   </Modal>
 
 {{/with}}

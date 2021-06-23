@@ -1,5 +1,5 @@
 {{#with @model.person as |person|}}
-  <Modal @id="person">
+  <Modal @id='person'>
 
     <h1>{{person.fullName}}</h1>
 
@@ -26,13 +26,13 @@
     <h2>Companies</h2>
 
     <Field::ManyToMany
-      @label="Member of"
+      @label='Member of'
       @baseRecord={{person}}
-      @baseModel="person"
-      @baseLabel="companyMembers"
-      @joinModel="company-member"
-      @targetModel="company"
-      @targetLabel="businessName"
+      @baseModel='person'
+      @baseLabel='companyMembers'
+      @joinModel='company-member'
+      @targetModel='company'
+      @targetLabel='businessName'
       @targetRoute='secure.companies.company'
     />
 
@@ -40,53 +40,46 @@
       <h2>{{companyMember.company.businessName}}</h2>
 
       <Field::String
-        @label="Role at {{companyMember.company.businessName}}"
+        @label='Role at {{companyMember.company.businessName}}'
         @record={{companyMember}}
         @attribute='title'
       />
 
       <Field::String
-        @label="Company email"
+        @label='Company email'
         @record={{companyMember}}
         @attribute='email'
       />
 
       <Field::String
-        @label="Company phone"
+        @label='Company phone'
         @record={{companyMember}}
         @attribute='phone'
       />
 
-      <Field::Boolean
-        @record={{companyMember}}
-        @attribute='public'
-      >
-        <label>Show {{person.firstName}} on the <a
-            href="{{env 'publicHosts'}}/en/contact"
+      <Field::Boolean @record={{companyMember}} @attribute='public'>
+        <label>Show
+          {{person.firstName}}
+          on the
+          <a
+            href='{{env 'publicHosts'}}/en/contact'
             target='_blank'
             rel='noopener noreferrer'
-          >contact page</a> of our website under {{companyMember.company.businessName}}.</label>
+          >contact page</a>
+          of our website under
+          {{companyMember.company.businessName}}.</label>
       </Field::Boolean>
 
       {{#if companyMember.public}}
-        <Field::Boolean
-          @record={{companyMember}}
-          @attribute='publicTitle'
-        >
+        <Field::Boolean @record={{companyMember}} @attribute='publicTitle'>
           <label>Show role</label>
         </Field::Boolean>
 
-        <Field::Boolean
-          @record={{companyMember}}
-          @attribute='publicEmail'
-        >
+        <Field::Boolean @record={{companyMember}} @attribute='publicEmail'>
           <label>Show email</label>
         </Field::Boolean>
 
-        <Field::Boolean
-          @record={{companyMember}}
-          @attribute='publicPhone'
-        >
+        <Field::Boolean @record={{companyMember}} @attribute='publicPhone'>
           <label>Show phone</label>
         </Field::Boolean>
       {{/if}}
@@ -116,5 +109,19 @@
       @attribute='id'
       @disabled='true'
     />
+
+    <Button
+      @text='Delete from database'
+      @onClick={{this.destroyRecord}}
+      @theme='danger-red'
+      @icon='warning'
+    />
+
+    {{#if this.showDeleteInstructions}}
+      <p>To delete this person, please first remove all relations:</p>
+      {{#if person.companyCount}}
+        <p>Companies: {{person.companyCount}}</p>
+      {{/if}}
+    {{/if}}
   </Modal>
 {{/with}}
