@@ -1,6 +1,6 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
-export default class CompanyPersonModel extends Model {
+export default class CompanyMemberModel extends Model {
   @attr('string') title;
   @attr('string') email;
   @attr('string') phone;
@@ -8,6 +8,8 @@ export default class CompanyPersonModel extends Model {
   @attr('boolean') publicTitle;
   @attr('boolean') publicEmail;
   @attr('boolean') publicPhone;
+  @attr('number') rankAmongCompanies;
+  @attr('number') rankAmongMembers;
 
   @belongsTo('company') company;
   @belongsTo('person') person;
