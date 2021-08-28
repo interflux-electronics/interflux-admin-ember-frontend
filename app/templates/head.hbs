@@ -1,0 +1,62 @@
+{{! https://ogp.me/ }}
+{{! https://developers.facebook.com/docs/sharing/webmasters/ }}
+{{! https://developers.facebook.com/docs/sharing/best-practices#images }}
+
+{{! template-lint-disable no-forbidden-elements  }}
+
+{{! SEO basics  }}
+
+<title>{{this.model.title}}</title>
+<meta name='description' content='{{this.model.description}}' />
+<meta name='robots' content='noindex, nofollow' />
+
+{{#if this.model.canonicalURL}}
+  <link rel='canonical' href='{{this.model.canonicalURL}}' />
+{{/if}}
+
+<link
+  rel='icon'
+  type='image/png'
+  href='{{env 'cdnHost'}}/images/favicons/interflux-blue-favicon@228x228.png'
+  sizes='228x228'
+/>
+
+{{! Open graph, for social media  }}
+
+<meta property='og:type' content={{this.model.ogType}} />
+<meta property='og:title' content='{{this.model.title}}' />
+<meta property='og:description' content='{{this.model.description}}' />
+
+{{#if this.model.canonicalURL}}
+  <meta property='og:url' content='{{this.model.canonicalURL}}' />
+{{/if}}
+
+{{#if this.model.showImage}}
+  <meta property='og:image' content={{this.model.imageURL}} />
+  <meta property='og:image:url' content={{this.model.imageURL}} />
+  <meta property='og:image:secure_url' content={{this.model.imageURL}} />
+  <meta property='og:image:width' content={{this.model.imageWidth}} />
+  <meta property='og:image:height' content={{this.model.imageHeight}} />
+  <meta property='og:image:alt' content={{this.model.imageAlt}} />
+{{/if}}
+
+{{! For developers  }}
+
+<meta name='environment' content={{this.model.environment}} />
+<meta name='build-timestamp' content={{this.model.buildTimestamp}} />
+<meta name='git-branch' content={{this.model.gitBranch}} />
+<meta name='git-revision' content={{this.model.gitRevision}} />
+<meta
+  name='git-repo'
+  content='https://github.com/interflux-electronics/interflux-admin-ember-frontend'
+/>
+<meta name='built-by' content='Jan Werkhoven, j.werkhoven@interflux.com' />
+<meta name='built-with' content='Ember Octane, https://emberjs.com/' />
+
+{{! For browsers  }}
+
+<meta name='theme-color' content='#23578c' />
+
+{{! Legal  }}
+
+<meta name='copyright' content='© since 1980 by Interflux Electronics NV ®' />

@@ -39,9 +39,9 @@ const wwwHosts = {
   production: 'https://new.interflux.com'
 };
 
-// The mobile browser's theme colour
-// https://developers.google.com/web/fundamentals/design-and-ux/browser-customization/
-const themeColour = '#23578c';
+// The UTC date and time of when this build was compiled
+const date = new Date();
+const buildTimestamp = date.toUTCString();
 
 module.exports = function (env) {
   // Environment flags
@@ -82,7 +82,7 @@ module.exports = function (env) {
     apiNamespace,
     gitBranch,
     gitRevision,
-    themeColour
+    buildTimestamp
   };
 
   if (isTest) {
