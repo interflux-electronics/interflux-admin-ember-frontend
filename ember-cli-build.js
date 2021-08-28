@@ -30,13 +30,9 @@ module.exports = function (defaults) {
       remove: false
     },
 
-    // Because the 2 JS and 2 CSS bundles are being HTTP2 pushed alongside the
-    // index.html by Nginx, we need the name to be predictable and thus have
-    // no fingerprints. Cache busting is not needed because the JS and CSS
-    // bundles we'll never cache (they update too often). Images, videos and
-    // fonts we'll highly cache though.
+    // Fingerprint files with the git revision rather than the MD5 to deduct from which deploy.
     fingerprint: {
-      enabled: false
+      customHash: ENV.gitRevision
     }
   });
 
