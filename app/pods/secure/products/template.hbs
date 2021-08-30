@@ -1,15 +1,17 @@
-<Page::Content @id="products">
+<Page::Content @id='products'>
   <h1>Products</h1>
 
   <Spreadsheet
     @records={{@model.products}}
-    @linkRoute="secure.products.product"
-    @layout="image-rows"
+    @linkRoute='secure.products.product'
+    @layout='image-rows'
+    @createRoute='secure.products.create'
+    @showCreateButton='true'
     @columns={{array
       (hash key='avatarURL' label='image' isImage='true')
       (hash key='name' label='name')
-      (hash key='family.nameSingle' label="product family")
-      (hash key='status' label="status")
+      (hash key='family.nameSingle' label='product family')
+      (hash key='status' label='status')
     }}
     @sortBy='name'
   />

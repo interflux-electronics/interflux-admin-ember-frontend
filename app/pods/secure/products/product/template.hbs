@@ -53,26 +53,31 @@
       @targetRoute='secure.uses.use'
     />
 
-    <div class='preview'>
-      <ul>
-        {{#each product.uses as |use|}}
-          <li>
-            <Image @src={{use.iconURL}} />
-            <p>{{use.label}}</p>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-
-    <Fieldset @label='Show icon on product list'>
-      <div>
-        {{#each this.product.productUsesSorted as |productUse|}}
-          <Field::Boolean @record={{productUse}} @attribute='showOnProductList'>
-            <label>{{productUse.use.label}}</label>
-          </Field::Boolean>
-        {{/each}}
+    {{#if product.productUses}}
+      <div class='preview'>
+        <ul>
+          {{#each product.uses as |use|}}
+            <li>
+              <Image @src={{use.iconURL}} />
+              <p>{{use.label}}</p>
+            </li>
+          {{/each}}
+        </ul>
       </div>
-    </Fieldset>
+
+      <Fieldset @label='Show icon on product list'>
+        <div>
+          {{#each this.product.productUsesSorted as |productUse|}}
+            <Field::Boolean
+              @record={{productUse}}
+              @attribute='showOnProductList'
+            >
+              <label>{{productUse.use.label}}</label>
+            </Field::Boolean>
+          {{/each}}
+        </div>
+      </Fieldset>
+    {{/if}}
 
     <h2>Qualities</h2>
 
@@ -88,29 +93,31 @@
       @targetRoute='secure.qualities.quality'
     />
 
-    <div class='preview'>
-      <ul>
-        {{#each product.qualities as |quality|}}
-          <li>
-            <Image @src={{quality.iconURL}} />
-            <p>{{quality.label}}</p>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-
-    <Fieldset @label='Show icon on product list'>
-      <div>
-        {{#each this.product.productQualitiesSorted as |productQuality|}}
-          <Field::Boolean
-            @record={{productQuality}}
-            @attribute='showOnProductList'
-          >
-            <label>{{productQuality.quality.label}}</label>
-          </Field::Boolean>
-        {{/each}}
+    {{#if product.productUses}}
+      <div class='preview'>
+        <ul>
+          {{#each product.qualities as |quality|}}
+            <li>
+              <Image @src={{quality.iconURL}} />
+              <p>{{quality.label}}</p>
+            </li>
+          {{/each}}
+        </ul>
       </div>
-    </Fieldset>
+
+      <Fieldset @label='Show icon on product list'>
+        <div>
+          {{#each this.product.productQualitiesSorted as |productQuality|}}
+            <Field::Boolean
+              @record={{productQuality}}
+              @attribute='showOnProductList'
+            >
+              <label>{{productQuality.quality.label}}</label>
+            </Field::Boolean>
+          {{/each}}
+        </div>
+      </Fieldset>
+    {{/if}}
 
     <h2>Content</h2>
 

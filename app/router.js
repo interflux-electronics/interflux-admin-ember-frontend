@@ -12,6 +12,7 @@ Router.map(function () {
 
   this.route('secure', function () {
     this.route('products', function () {
+      this.route('create');
       this.route('product', { path: '/:id' });
     });
 

@@ -2,6 +2,7 @@ import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import ENV from 'interflux/config/environment';
 
 export default class ProductModel extends Model {
+  @attr('string') slug;
   @attr('string') name;
   @attr('string') label;
   @attr('string') status;
@@ -29,10 +30,6 @@ export default class ProductModel extends Model {
 
   @hasMany('image', { inverse: 'products' }) images;
   @hasMany('document') documents;
-
-  get slug() {
-    return this.id;
-  }
 
   get family() {
     return this.productFamily;
