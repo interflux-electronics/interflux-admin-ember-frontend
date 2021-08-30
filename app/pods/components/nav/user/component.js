@@ -7,4 +7,8 @@ export default class NavUserComponent extends Component {
   get userFirstName() {
     return this.auth.user.person.get('firstName');
   }
+
+  openLiveChat() {
+    window.LiveChatWidget.call('maximize');
+  }
 }
