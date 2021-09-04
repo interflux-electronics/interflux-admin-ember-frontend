@@ -1,7 +1,10 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class ProductController extends Controller {
+  @service router;
+
   get product() {
     return this.model.product;
   }
@@ -155,5 +158,18 @@ export default class ProductController extends Controller {
         whitelist: 'testResults'
       }
     });
+  }
+
+  // After the name is changed, the slug will automatically be updated as well.
+  // Therefor we need to redirect the admin user to the new URL, otherwise refresh will fail.
+  @action
+  afterSaveName() {
+    const newSlug = this.model.product.name
+      .replace(/\s/g, '-')
+      .replace(/[^a-zA-Z0-9-]/g, '');
+
+    this.router.transitionTo('secure.products.product', newSlug);
+
+    // TODO: refresh the parent route
   }
 }

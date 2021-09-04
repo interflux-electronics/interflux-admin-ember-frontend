@@ -8,7 +8,7 @@ export default class ProductCreateController extends Controller {
   @action
   async beforeSave() {
     const record = this.model.product;
-    record.slug = record.name.toLowerCase().replace(/\s/g, '-');
+    record.slug = record.name.replace(/\s/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
     await record
       .save({
         adapterOptions: {

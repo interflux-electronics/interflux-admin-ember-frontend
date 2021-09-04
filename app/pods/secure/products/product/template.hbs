@@ -19,7 +19,8 @@
       @label='Name'
       @record={{product}}
       @attribute='name'
-      @disabled='true'
+      @disabled={{true}}
+      @afterSave={{this.afterSaveName}}
     />
 
     <Field::OneToMany
