@@ -67,6 +67,7 @@ export default class AuthService extends Service {
     this.user = null;
     this.expiry = null;
     localStorage.clear();
+    this.sync();
     this.store.unloadAll();
     this.router.transitionTo('login');
   }
