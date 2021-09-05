@@ -19,7 +19,7 @@ const apiHosts = {
 // Where this Ember app is located
 const publicHosts = {
   development: 'http://localhost:4200',
-  production: 'https://new.interflux.com'
+  production: 'https://interflux.com'
 };
 
 const adminHosts = {
@@ -34,9 +34,9 @@ const cdnHosts = {
 };
 
 // Where the CDN is located
-const wwwHosts = {
+const oldHosts = {
   development: 'http://localhost:9100',
-  production: 'https://new.interflux.com'
+  production: 'https://old.interflux.com'
 };
 
 // The UTC date and time of when this build was compiled
@@ -54,7 +54,7 @@ module.exports = function (env) {
   const publicHost = publicHosts[env];
   const admdinHost = adminHosts[env];
   const cdnHost = cdnHosts[env];
-  const wwwHost = wwwHosts[env];
+  const oldHost = oldHosts[env];
 
   const ENV = {
     appName: PKG.name,
@@ -78,7 +78,7 @@ module.exports = function (env) {
     publicHost,
     admdinHost,
     cdnHost,
-    wwwHost,
+    oldHost,
     apiNamespace,
     gitBranch,
     gitRevision,
