@@ -5,4 +5,8 @@ export default class UserModel extends Model {
   @attr('string') password;
 
   @belongsTo('person') person;
+
+  get name() {
+    return this.person.get('fullName');
+  }
 }

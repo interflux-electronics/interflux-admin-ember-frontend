@@ -92,3 +92,8 @@ h6 {
 p {
   margin: 0;
 }
+
+// sync iframes are to pass localStorage to subdomain
+body > iframe.sync {
+  display: none;
+}

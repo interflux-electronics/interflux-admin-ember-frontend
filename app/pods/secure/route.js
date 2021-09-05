@@ -31,8 +31,9 @@ export default class SecureRoute extends BaseRoute {
 
   afterModel(model) {
     this.auth.user = model.user;
+    this.auth.sync();
 
-    const name = model.user.get('person.fullName');
+    const name = model.user.name;
     const email = model.user.email;
 
     window.LiveChatWidget.call('set_customer_name', name);

@@ -18,7 +18,7 @@ const apiHosts = {
 
 // Where this Ember app is located
 const publicHosts = {
-  development: 'http://localhost:4400',
+  development: 'http://localhost:4200',
   production: 'https://new.interflux.com'
 };
 
