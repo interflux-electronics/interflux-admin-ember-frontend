@@ -57,6 +57,7 @@ export default class ApplicationSerializer extends JSONAPISerializer {
   // Returns boolean, whether the given key should be included in the payload or not
   includeKeyInPayload(snapshot, key) {
     const options = snapshot.adapterOptions;
+
     return (
       !options ||
       (options && options.whitelist && options.whitelist.includes(key))

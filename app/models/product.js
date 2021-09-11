@@ -2,10 +2,9 @@ import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import ENV from 'interflux/config/environment';
 
 export default class ProductModel extends Model {
-  @attr('string') slug;
   @attr('string') name;
   @attr('string') label;
-  @attr('string') status;
+  @attr('string') lifeCyle;
   @attr('string') pitch;
   @attr('string') summary;
   @attr('string') properties;
@@ -70,7 +69,7 @@ export default class ProductModel extends Model {
   @hasMany('product', { inverse: 'superiorProduct' }) inferiorProducts;
 
   get url() {
-    return `${ENV.publicHost}/en/product/${this.slug}`;
+    return `${ENV.publicHost}/en/product/${this.id}`;
   }
 
   get link() {
@@ -82,23 +81,23 @@ export default class ProductModel extends Model {
   }
 
   get isOffline() {
-    return this.status === 'offline';
+    return this.lifeCycle === 'offline';
   }
 
   get isOutdated() {
-    return this.status === 'outdated';
+    return this.lifeCycle === 'outdated';
   }
 
   get isDiscontinued() {
-    return this.status === 'discontinued';
+    return this.lifeCycle === 'discontinued';
   }
 
   get isPopular() {
-    return this.status === 'popular';
+    return this.lifeCycle === 'popular';
   }
 
   get isNew() {
-    return this.status === 'new';
+    return this.lifeCycle === 'new';
   }
 
   get avatarURL() {
