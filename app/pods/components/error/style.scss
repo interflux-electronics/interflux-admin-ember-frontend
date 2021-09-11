@@ -1,0 +1,23 @@
+.error[role='alert'] {
+  background: $red-1;
+  border-radius: 2px;
+  padding: 13px 16px;
+  p {
+    color: white;
+    line-height: 150%;
+  }
+  button {
+    border: 1px solid white;
+    color: $red-1;
+    background: white;
+    border-radius: 3px;
+    padding: 2px 14px;
+    &:focus,
+    &:hover {
+      box-shadow: 0 0 0 2px $red-1, 0 0 0 4px white;
+    }
+  }
+  p + button {
+    margin-top: 10px;
+  }
+}
