@@ -144,7 +144,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   @action
   async handleDragStart(row, event) {
-    console.debug(`started dragging row ${row.rank}`);
     const li = event.currentTarget;
 
     // To prevent the blue lines from being rendered in the transparent screenshot being dragged.
@@ -157,7 +156,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   @action
   handleDragEnd(row, event) {
-    console.debug('stopped');
     this.dragee = null;
     event.currentTarget.classList.remove('dragee');
   }
@@ -182,8 +180,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   @action
   handleDrop(row, event) {
-    console.debug(`dropped row ${this.dragee.rank} on row ${row.rank}`);
-
     const isBottomMost = event.currentTarget.classList.contains('bottom');
     const from = this.dragee.rank;
     const to = isBottomMost ? row.rank + 1 : row.rank;
@@ -196,8 +192,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   }
 
   async moveRow(from, to) {
-    console.debug('move row', { from, to });
-
     // Move one row from origin to destination by creating a new array.
     const { dragee } = this;
     const nonDragees = this.rows.filter((row) => row.rank !== from);
@@ -210,9 +204,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
     // Iterate over the new array and use its positional index to update all ranks.
     newRows.forEach((row, i) => {
       const newRank = i + 1;
-
-      console.debug(`moving ${row.rank} to ${newRank}`);
-
       row.joinRecord[joinRankKey] = newRank;
 
       if (row.joinRecord.hasDirtyAttributes) {
@@ -227,7 +218,6 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   @action
   onDestroy(joinRecord) {
-    console.debug('destroy join record', { joinRecord });
     joinRecord.destroyRecord();
   }
 
