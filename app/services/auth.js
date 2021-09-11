@@ -28,11 +28,7 @@ export default class AuthService extends Service {
   // interflux.com, our public facing website. This sync makes that possible.
   sync() {
     const onMessage = (event) => {
-      console.log('ADMIN: onMessage', event.origin);
-
       if (event.origin === ENV.publicHost && event.data === 'sync-complete') {
-        console.log('ADMIN: sync complete!');
-        console.log('ADMIN: removing <iframe>');
         const iframe = document.querySelector(
           `iframe[src^="${ENV.publicHost}"]`
         );
@@ -46,17 +42,14 @@ export default class AuthService extends Service {
     iframe.src = `${ENV.publicHost}/assets/sync.html`;
     iframe.className = 'sync';
     iframe.onload = (event) => {
-      console.log('ADMIN: iframe onload');
       const iframe = event.target;
       const { token, uuid, expiry } = this;
       const name = this.user.get('person.fullName');
       const email = this.user.email;
       const data = { token, uuid, expiry, name, email };
       const target = ENV.publicHost;
-      console.log('ADMIN: posting to iframe', data, target);
       iframe.contentWindow.postMessage(data, target);
     };
-    console.log('ADMIN: appending iframe');
     fragment.appendChild(iframe);
     document.body.appendChild(fragment);
   }
