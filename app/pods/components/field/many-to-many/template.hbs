@@ -2,12 +2,12 @@
   @id={{this.id}}
   @label={{@label}}
   @legend={{@legend}}
-  @component="many-to-many"
+  @component='many-to-many'
   @theme={{@theme}}
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
-  <ul class="list {{this.listClasses}}">
+  <ul class='list {{this.listClasses}}'>
     {{#each this.rows as |row|}}
       <li
         draggable={{this.canSortList}}
@@ -20,9 +20,9 @@
           <span>{{row.label}}</span>
         {{/if}}
 
-        <div class="right">
+        <div class='right'>
           {{#if this.canSortList}}
-            <div class="rank">
+            <div class='rank'>
               <p>{{row.rank}}{{unless row.isRanked '*'}}</p>
             </div>
           {{/if}}
@@ -39,8 +39,8 @@
             --}}
 
             <Button
-              @icon="trash"
-              @text="remove"
+              @icon='trash'
+              @text='remove'
               @onClick={{fn this.onDestroy row.joinRecord}}
             />
           </DotDotDotMenu>
@@ -48,43 +48,47 @@
 
         {{#if this.canSortList}}
           <div
-            class="dropzone top"
+            class='dropzone top'
             ondragenter={{fn this.handleDragEnter row}}
             ondragleave={{fn this.handleDragLeave row}}
             ondragover={{fn this.handleDragOver row}}
             ondrop={{fn this.handleDrop row}}
           >
-            <div class="line"></div>
+            <div class='line'></div>
           </div>
 
           {{#if row.isLast}}
             <div
-              class="dropzone bottom"
+              class='dropzone bottom'
               ondragenter={{fn this.handleDragEnter row}}
               ondragleave={{fn this.handleDragLeave row}}
               ondragover={{fn this.handleDragOver row}}
               ondrop={{fn this.handleDrop row}}
             >
-              <div class="line"></div>
+              <div class='line'></div>
             </div>
           {{/if}}
         {{/if}}
       </li>
     {{else}}
-      <li class="dashed">
+      <li class='dashed'>
         <span>- none -</span>
       </li>
     {{/each}}
   </ul>
 
   {{#unless @disabled}}
-    {{#if this.showSearch}}
+    {{#if this.error}}
+      <Error::Generic />
+    {{else if this.isSaving}}
+      <Button @text='Saving ...' @theme='save' @isBusy='true' />
+    {{else if this.showSearch}}
       <Search
         @id={{this.id}}
         @value={{this.value}}
         @state={{this.state}}
-        @placeholder="Search product"
-        @autofocus="true"
+        @placeholder='Search product'
+        @autofocus='true'
         @onFocus={{this.onSearchFocus}}
         @onBlur={{this.onSearchBlur}}
         @onKeyUp={{this.onKeyUp}}
@@ -93,13 +97,9 @@
         @searchLabel={{@targetLabel}}
         @searchFilter={{this.searchFilter}}
         @error={{this.error}}
-      ></Search>
-    {{else}}
-      <Button
-        @text="Add"
-        @theme="save"
-        @onClick={{this.onClickAddButton}}
       />
+    {{else}}
+      <Button @text='Add' @theme='save' @onClick={{this.onClickAddButton}} />
     {{/if}}
   {{/unless}}
 </Fieldset>

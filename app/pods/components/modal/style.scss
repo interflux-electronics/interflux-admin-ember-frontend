@@ -262,7 +262,8 @@
         }
       }
       ul.list + button,
-      ul.list + .search {
+      ul.list + .search,
+      ul.list + .error {
         margin-top: 12px;
       }
       .preview {

@@ -58,7 +58,7 @@ export default class ManyToManyFieldComponent extends FieldComponent {
   get rows() {
     const { targetLabel, targetModel, joinRankKey } = this.args;
 
-    return this.joinRecords.map((joinRecord, i, arr) => {
+    return this.joinRecords.rejectBy('isNew').map((joinRecord, i, arr) => {
       const targetRecord = joinRecord.get(targetModel);
       return {
         joinRecord,
@@ -103,22 +103,14 @@ export default class ManyToManyFieldComponent extends FieldComponent {
 
   @action
   onSelect(targetRecord) {
-    const { baseRecord, baseModel, joinModel, targetModel, targetLabel } =
-      this.args;
-
-    console.debug('selected', targetRecord[targetLabel]);
-
+    const { baseRecord, baseModel, joinModel, targetModel } = this.args;
     const props = {};
     props[baseModel] = baseRecord;
     props[targetModel] = targetRecord;
-
-    console.debug('creating', props);
-
     const newRecord = this.store.createRecord(joinModel, props);
+    const options = {};
 
-    newRecord.save().catch((response) => {
-      this.api.logError(response);
-    });
+    this.save(newRecord, options);
   }
 
   @action

@@ -86,7 +86,7 @@ export default class FieldComponent extends Component {
   @tracked lastSavedValue = null;
 
   @action
-  async save() {
+  async save(record, saveOptions) {
     if (this.args.localSave) {
       return false;
     }
@@ -104,32 +104,37 @@ export default class FieldComponent extends Component {
       await this.args.beforeSave();
     }
 
-    this.args.record
-      .save({
-        adapterOptions: {
-          whitelist: [this.args.attribute || this.args.relation]
-        }
-      })
-      .then(() => {
-        this.lastSavedValue = value;
-        if (this.args.afterSave) {
-          this.args.afterSave(value);
-        }
-      })
-      .catch((response) => {
-        // Show error in console
-        this.api.logError(response);
+    const success = () => {
+      this.lastSavedValue = value;
+      if (this.args.afterSave) {
+        this.args.afterSave(value);
+      }
+    };
 
-        // Show error to user
-        if (response.errors && response.errors[0] && response.errors[0].code) {
-          const code = response.errors[0].code;
-          this.error = code;
-        } else {
-          this.error = 'unknown';
-        }
-      })
-      .finally(() => {
-        this.isSaving = false;
-      });
+    const fail = (response) => {
+      // Show error in console
+      this.api.logError(response);
+
+      // Show error to user
+      if (response.errors && response.errors[0] && response.errors[0].code) {
+        const code = response.errors[0].code;
+        this.error = code;
+      } else {
+        this.error = 'unknown';
+      }
+    };
+
+    const done = () => {
+      this.isSaving = false;
+    };
+
+    const recordToSave = record || this.args.record;
+    const options = saveOptions || {
+      adapterOptions: {
+        whitelist: [this.args.attribute || this.args.relation]
+      }
+    };
+
+    recordToSave.save(options).then(success).catch(fail).finally(done);
   }
 }
