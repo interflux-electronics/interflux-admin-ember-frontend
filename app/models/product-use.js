@@ -6,6 +6,5 @@ export default class ProductUseModel extends Model {
 
   @attr('number') rankAmongProducts;
   @attr('number') rankAmongUses;
-
   @attr('boolean') showOnProductList;
 }

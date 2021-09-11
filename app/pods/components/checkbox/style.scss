@@ -1,4 +1,4 @@
-.checkbox {
+[role='checkbox'] {
   height: 24px;
   width: 24px;
   outline: 0;
@@ -8,10 +8,13 @@
   border-radius: 2px;
   cursor: pointer;
   user-select: none;
-  &.checked {
+  &[aria-checked='true'] {
     background: $orange-0;
   }
-  &.not-checked {
+  &[aria-checked='false'] {
+    background: $grey-2;
+  }
+  &[disabled] {
     background: $grey-2;
   }
   &:focus,
@@ -25,6 +28,10 @@
   }
   svg.times {
     width: 60%;
+    height: auto;
+  }
+  svg.lock {
+    width: 55%;
     height: auto;
   }
 }

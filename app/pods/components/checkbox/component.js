@@ -2,25 +2,21 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 export default class CheckboxComponent extends Component {
-  get classes() {
-    return [this.args.checked ? 'checked' : 'not-checked'].join(' ');
-  }
-
-  input; // the <input> element
-
-  @action
-  onInsert(element) {
-    this.input = element;
-  }
-
   @action
   onClick() {
+    if (this.args.disabled) {
+      return true;
+    }
+
     this.args.onClick();
-    this.input.blur();
   }
 
   @action
   onKeyDown(event) {
+    if (this.args.disabled) {
+      return true;
+    }
+
     const pressedEnter = event.code === 'Enter';
     const pressedSpace = event.code === 'Space';
 

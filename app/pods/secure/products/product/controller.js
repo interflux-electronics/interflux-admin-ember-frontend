@@ -83,7 +83,7 @@ export default class ProductController extends Controller {
     });
   }
 
-  get statusOptions() {
+  get lifeCyleOptions() {
     return [
       {
         value: 'popular',
@@ -102,11 +102,13 @@ export default class ProductController extends Controller {
       },
       {
         value: 'outdated',
-        label: `**Replaced** - Has been replaced by a better product. Can still be ordered. Can still be found on our website and via Google, though we do not actively promote it anymore. We suggest visitors to use a better product instead (if selected).`
+        label:
+          '**Replaced** - Has been replaced by a better product. Can still be ordered. Can still be found on our website and via Google, though we do not actively promote it anymore. We suggest visitors to use a better product instead (if selected).'
       },
       {
         value: 'discontinued',
-        label: `**Out of production** - Cannot be ordered. It can however still be found on our website and via Google, though we don't promote it any way. We suggest visitors to use a better product instead (if selected).`
+        label:
+          "`**Out of production** - Cannot be ordered. It can however still be found on our website and via Google, though we don't promote it any way. We suggest visitors to use a better product instead (if selected)."
       },
       {
         value: 'offline',

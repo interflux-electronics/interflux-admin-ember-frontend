@@ -1,14 +1,15 @@
 <div
-  class="checkbox {{this.classes}}"
-  role="checkbox"
-  aria-checked="{{@checked}}"
-  aria-labelledby="input-{{@id}}"
-  tabindex="0"
+  role='checkbox'
+  aria-checked='{{@checked}}'
+  aria-labelledby='input-{{@id}}'
+  tabindex='0'
+  disabled={{@disabled}}
   {{on 'click' this.onClick}}
   {{on 'keydown' this.onKeyDown}}
-  {{did-insert this.onInsert}}
 >
-  {{#if @checked}}
+  {{#if @disabled}}
+    <Svg::Lock />
+  {{else if @checked}}
     <Svg::Check />
   {{else}}
     <Svg::Times />

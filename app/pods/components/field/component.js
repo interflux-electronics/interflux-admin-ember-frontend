@@ -91,8 +91,6 @@ export default class FieldComponent extends Component {
       return false;
     }
 
-    console.debug('saving');
-
     // Reset errors, allow second save attempt
     this.error = null;
 
@@ -113,15 +111,12 @@ export default class FieldComponent extends Component {
         }
       })
       .then(() => {
-        console.debug('save successful');
         this.lastSavedValue = value;
         if (this.args.afterSave) {
           this.args.afterSave(value);
         }
       })
       .catch((response) => {
-        console.error('save failed');
-
         // Show error in console
         this.api.logError(response);
 
