@@ -117,9 +117,11 @@ export default class ProductController extends Controller {
     ];
   }
 
+  // TEST RESULTS
+
   get testResults() {
     try {
-      const arr = JSON.parse(this.model.product.testResults);
+      const arr = JSON.parse(this.product.testResults);
 
       if (arr.length < 1) {
         return [['', '', '']];
@@ -142,7 +144,7 @@ export default class ProductController extends Controller {
 
   @action
   addRow() {
-    const str = this.model.product.testResults;
+    const str = this.product.testResults;
     const arr = JSON.parse(str);
     arr.push(['-', '-', '-']);
     this.saveTestResults(arr);
@@ -150,14 +152,14 @@ export default class ProductController extends Controller {
 
   @action
   removeRow() {
-    const str = this.model.product.testResults;
+    const str = this.product.testResults;
     const arr = JSON.parse(str).slice(0, -1);
     this.saveTestResults(arr);
   }
 
   saveTestResults(arr) {
     const str = arr.length < 1 ? null : JSON.stringify(arr);
-    this.model.product.testResults = str;
+    this.product.testResults = str;
     this.product.save({
       adapterOptions: {
         whitelist: 'testResults'
@@ -169,7 +171,7 @@ export default class ProductController extends Controller {
   // Therefor we need to redirect the admin user to the new URL, otherwise refresh will fail.
   @action
   afterSaveName() {
-    const newSlug = this.model.product.name
+    const newSlug = this.product.name
       .replace(/\s/g, '-')
       .replace(/[^a-zA-Z0-9-]/g, '');
 
