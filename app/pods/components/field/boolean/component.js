@@ -31,11 +31,16 @@ export default class BooleanFieldComponent extends FieldComponent {
   @action
   onClick(event) {
     this.value = !this.value;
-    this.save({
+    const record = this.args.record;
+    const options = {
       adapterOptions: {
         whitelist: [this.args.attribute]
       }
-    });
+    };
+
+    // Persist to database.
+    this.save(record, options);
+
     if (this.args.onClick) {
       this.args.onClick(event);
     }

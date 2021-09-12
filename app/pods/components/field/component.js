@@ -86,7 +86,19 @@ export default class FieldComponent extends Component {
   @tracked lastSavedValue = null;
 
   @action
-  async save(record, saveOptions) {
+  onSave(event) {
+    this.save();
+  }
+
+  async save(record, options) {
+    const _record = record || this.args.record;
+    const _options = options || {
+      adapterOptions: {
+        whitelist: [this.args.attribute || this.args.relation]
+      }
+    };
+
+    // Do not persist to database if localSave
     if (this.args.localSave) {
       return false;
     }
@@ -128,13 +140,6 @@ export default class FieldComponent extends Component {
       this.isSaving = false;
     };
 
-    const recordToSave = record || this.args.record;
-    const options = saveOptions || {
-      adapterOptions: {
-        whitelist: [this.args.attribute || this.args.relation]
-      }
-    };
-
-    recordToSave.save(options).then(success).catch(fail).finally(done);
+    _record.save(_options).then(success).catch(fail).finally(done);
   }
 }
