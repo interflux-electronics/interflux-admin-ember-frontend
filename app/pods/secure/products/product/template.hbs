@@ -387,8 +387,8 @@
 
     <Field::String::Radio
       @record={{product}}
-      @attribute='lifeCyle'
-      @options={{this.lifeCyleOptions}}
+      @attribute='lifeCycle'
+      @options={{this.lifeCycleOptions}}
     />
 
     {{#if (or product.isOutdated product.isDiscontinued)}}
@@ -408,29 +408,26 @@
     <h2>Website</h2>
 
     {{#if product.isOnline}}
-      <Field::Boolean
-        @record={{product}}
-        @attribute='onFrontPage'
-        @label='Show on front-page?'
-        @legend='Products which are "new" or "popular" can be shown on the front-page of our website by checking this box.'
-        @disabled={{not (or product.isPopular product.isNew)}}
-      >
-        <label>
-          {{if
-            (or product.isPopular product.isNew)
-            (if product.onFrontPage 'Yes, show' 'No, hide')
-            'Locked'
-          }}
-        </label>
-      </Field::Boolean>
-
-      {{#if product.onFrontPage}}
-        <Field::String
-          @label='Front-page rank'
-          @legend='Enter a number to rank {{product.name}} before or after other products on the front-page. 1 for the top, 9 to the bottom'
+      {{#if (or product.isNew product.isPopular)}}
+        <Field::Boolean
           @record={{product}}
-          @attribute='frontPageRank'
-        />
+          @attribute='onFrontPage'
+          @label='Show on front-page?'
+          @legend='Products which are "new" or "popular" can be shown on the front-page of our public website.'
+        >
+          <label>
+            {{if product.onFrontPage 'Yes, shown' 'Not shown'}}
+          </label>
+        </Field::Boolean>
+
+        {{#if product.onFrontPage}}
+          <Field::String
+            @label='Front-page rank'
+            @legend='Enter a number to rank {{product.name}} before or after other products on the front-page. 1 for the top, 9 to the bottom'
+            @record={{product}}
+            @attribute='frontPageRank'
+          />
+        {{/if}}
       {{/if}}
 
       <Fieldset

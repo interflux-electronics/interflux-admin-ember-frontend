@@ -83,7 +83,7 @@ export default class ProductController extends Controller {
     });
   }
 
-  get lifeCyleOptions() {
+  get lifeCycleOptions() {
     return [
       {
         value: 'popular',
