@@ -36,17 +36,12 @@ export default class FieldStringRadioComponent extends Component {
 
   @action
   onClick(value) {
-    console.debug('onClick');
-    console.debug(value);
     this.value = value;
     this.save();
   }
 
   @action
   onKeyDown(value, event) {
-    console.debug('onKeyDown');
-    console.debug(value);
-
     // On arrow down, highlight the next record
     if ('ArrowDown' === event.key) {
       // TODO

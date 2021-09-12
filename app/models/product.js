@@ -4,7 +4,7 @@ import ENV from 'interflux/config/environment';
 export default class ProductModel extends Model {
   @attr('string') name;
   @attr('string') label;
-  @attr('string') lifeCyle;
+  @attr('string') lifeCycle;
   @attr('string') pitch;
   @attr('string') summary;
   @attr('string') properties;
