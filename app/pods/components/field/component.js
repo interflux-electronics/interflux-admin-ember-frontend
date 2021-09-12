@@ -86,7 +86,7 @@ export default class FieldComponent extends Component {
   @tracked lastSavedValue = null;
 
   @action
-  onSave(event) {
+  onSave() {
     this.save();
   }
 
