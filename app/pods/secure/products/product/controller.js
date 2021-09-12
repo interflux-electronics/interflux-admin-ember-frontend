@@ -118,15 +118,18 @@ export default class ProductController extends Controller {
   }
 
   get testResults() {
-    const str = this.model.product.testResults;
-    if (!str) {
+    try {
+      const arr = JSON.parse(this.model.product.testResults);
+
+      if (arr.length < 1) {
+        return [['', '', '']];
+      }
+
+      return arr;
+    } catch (e) {
+      console.warn('invalid testResults format');
       return [['', '', '']];
     }
-    const arr = JSON.parse(str);
-    if (arr.length < 1) {
-      return [['', '', '']];
-    }
-    return JSON.parse(str);
   }
 
   @action
