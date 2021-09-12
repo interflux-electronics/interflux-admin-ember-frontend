@@ -96,7 +96,8 @@ export default class ProductModel extends Model {
     return this.lifeCycle === 'popular';
   }
 
-  get isNew() {
+  // Avoid name clash with Ember's Model.isNew
+  get _isNew() {
     return this.lifeCycle === 'new';
   }
 

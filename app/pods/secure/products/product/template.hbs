@@ -408,7 +408,7 @@
     <h2>Website</h2>
 
     {{#if product.isOnline}}
-      {{#if (or product.isNew product.isPopular)}}
+      {{#if (or product._isNew product.isPopular)}}
         <Field::Boolean
           @record={{product}}
           @attribute='onFrontPage'
