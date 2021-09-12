@@ -56,31 +56,4 @@ export default class StringFieldComponent extends FieldComponent {
       this.save();
     }
   }
-
-  // get warning() {
-  //   const rules = this.args.record.validations[this.args.attribute];
-  //
-  //   // Consider value as valid if no rules are found
-  //   if (!rules) {
-  //     return null;
-  //   }
-  //
-  //   const fails = rules.find((rule) => {
-  //     return this.valuePassesRule(this.value, rule);
-  //   });
-  //
-  //   console.log('fails', fails);
-  //
-  //   return fails[0];
-  // }
-
-  // valuePassesRule(value, rule) {
-  //   if (rule === 'not-blank') {
-  //     return value ? true : false;
-  //   }
-  //
-  //   if (rule === 'is-url') {
-  //     return value && value.startsWith('https://');
-  //   }
-  // }
 }
