@@ -439,11 +439,11 @@
       <ul class='list'>
         {{#if product.onFrontPage}}
           <li>
-            <Link @url='{{env 'pub'}}' @label='front-page' />
+            <Link @url='{{env 'publicHost'}}/en/' @label='front-page' />
           </li>
         {{/if}}
         <li>
-          <Link @url='{{env 'publicHost'}}/en/' @label='product page' />
+          <Link @url='{{product.url}}' @label='product page' />
         </li>
         <li>
           <a
