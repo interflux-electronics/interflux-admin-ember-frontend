@@ -109,11 +109,14 @@ export default class ResponsiveImageComponent extends Component {
 
   // Accepts and array of sizes "200x200".
   // Returns the one which is above and closest to the optimal width.
+  // We filter out the size "original".
   closestSize(sizes) {
-    const distances = sizes.map((size) => {
-      const width = size.split('x')[0];
-      return width - this.optimalWidth;
-    });
+    const distances = sizes
+      .filter((size) => /^\d{2,4}x\d{2,4}$/.test(size))
+      .map((size) => {
+        const width = size.split('x')[0];
+        return width - this.optimalWidth;
+      });
 
     const larger = distances.filter((d) => d >= 0);
     const smaller = distances.filter((d) => d < 0);
