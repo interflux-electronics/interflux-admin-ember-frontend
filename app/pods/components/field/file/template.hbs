@@ -1,0 +1,36 @@
+<Fieldset
+  @id={{this.id}}
+  @label={{@label}}
+  @legend={{@legend}}
+  @component='file'
+  @theme={{@theme}}
+  @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
+>
+
+  <form onSubmit={{this.onSubmit}}>
+    <label htmlFor='file'>
+      <span>Upload file</span>
+      <input type='file' name='file' accept='application/pdf' />
+    </label>
+
+    <input type='submit' value='Submit' />
+  </form>
+
+  {{!-- <Form::Input
+    @id={{this.id}}
+    @theme={{@theme}}
+    @type='file'
+    @placeholder={{@placeholder}}
+    @autofocus={{@autofocus}}
+    @disabled={{@disabled}}
+    @value={{this.value}}
+    @state={{this.state}}
+    @onFocus={{this.onFocus}}
+    @onBlur={{this.onBlur}}
+    @onKeyDown={{this.onKeyDown}}
+    @onKeyUp={{this.onKeyUp}}
+    @onMouseOver={{this.onMouseOver}}
+    @onMouseOut={{this.onMouseOut}}
+  /> --}}
+</Fieldset>
