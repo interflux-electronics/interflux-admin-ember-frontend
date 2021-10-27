@@ -4,14 +4,17 @@
 
     <h2>Details</h2>
 
-    <Field::String
-      @label='Title'
+    <Field::File
+      @label='Slide deck PDF'
       @record={{webinar}}
       @attribute='title'
+      @allowed-file-types={{array 'pdf'}}
     />
 
+    <Field::String @label='Title' @record={{webinar}} @attribute='title' />
+
     <Field::String
-      @label='Topic'
+      @label='Agenda'
       @legend='What is this webinar about?'
       @record={{webinar}}
       @attribute='topic'
@@ -31,12 +34,14 @@
       @legend='In UTC / GMT+0.'
       @record={{webinar}}
       @attribute='startTime'
-    >
-    </Field::Date>
+    />
 
-    <p>Belgium: {{webinar.startTimeBelgium}}<br />
-      Singapore: {{webinar.startTimeSingapore}}<br />
-      Melbourne: {{webinar.startTimeMelbourne}}</p>
+    <p>Belgium:
+      {{webinar.startTimeBelgium}}<br />
+      Singapore:
+      {{webinar.startTimeSingapore}}<br />
+      Melbourne:
+      {{webinar.startTimeMelbourne}}</p>
 
     <Field::String
       @label='Duration'
@@ -54,36 +59,34 @@
 
     <h2>Website</h2>
 
-    <Field::Boolean
-      @record={{webinar}}
-      @attribute='public'
-    >
+    <Field::Boolean @record={{webinar}} @attribute='public'>
       <label>Show on website</label>
     </Field::Boolean>
 
     <h2>People</h2>
 
-    <p>Note: No need to fill out the people below, but we could use this in the future to automate the email invitations to our webinars.</p>
+    <p>Note: No need to fill out the people below, but we could use this in the
+      future to automate the email invitations to our webinars.</p>
 
     <Field::OneToMany
       @label='Host'
       @legend='The person who will be presenting.'
       @baseRecord={{webinar}}
       @baseLabel='person'
-      @targetModel="person"
-      @targetFilter="fullName"
+      @targetModel='person'
+      @targetFilter='fullName'
       @minKeyStrokes='1'
     />
 
     <Field::ManyToMany
-      @label="Invitees"
-      @legend="The people invited to the event."
+      @label='Invitees'
+      @legend='The people invited to the event.'
       @baseRecord={{webinar}}
-      @baseModel="webinar"
-      @baseLabel="webinarInvitees"
-      @joinModel="webinar-invitee"
-      @targetModel="person"
-      @targetLabel="fullName"
+      @baseModel='webinar'
+      @baseLabel='webinarInvitees'
+      @joinModel='webinar-invitee'
+      @targetModel='person'
+      @targetLabel='fullName'
       @targetRoute='secure.people.person'
     />
 
@@ -97,10 +100,10 @@
     />
 
     <Button
-      @text="Delete from database"
+      @text='Delete from database'
       @onClick={{this.destroyRecord}}
-      @theme="danger-red"
-      @icon="warning"
+      @theme='danger-red'
+      @icon='warning'
     />
   </Modal>
 {{/with}}

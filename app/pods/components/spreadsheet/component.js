@@ -41,7 +41,7 @@ export default class SpreadsheetComponent extends Component {
   }
 
   get sortedRecords() {
-    const arr = this.args.records.sortBy(this.sortBy);
+    const arr = this.args.records.rejectBy('isNew').sortBy(this.sortBy);
     const isBlank = (x) => {
       return x[this.sortBy] === null || x[this.sortBy] === undefined;
     };

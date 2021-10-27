@@ -54,6 +54,7 @@ Router.map(function () {
     });
 
     this.route('webinars', function () {
+      this.route('create');
       this.route('webinar', { path: '/:id' });
     });
 

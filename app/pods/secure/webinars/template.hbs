@@ -1,17 +1,18 @@
-<Page::Content @id="webinars">
+<Page::Content @id='webinars'>
   <h1>Webinars</h1>
 
   {{#if @model.webinars}}
     <Spreadsheet
       @records={{@model.webinars}}
       @linkRoute='secure.webinars.webinar'
+      @createRoute='secure.webinars.create'
       @showCreateButton='true'
       @columns={{array
-          (hash key='title' label='Title')
-          (hash key='startTimeBelgium' label='Belgium time')
-          (hash key='startTimeSingapore' label='Singapore time')
-          (hash key='public' label='Shown on website')
-        }}
+        (hash key='title' label='Title')
+        (hash key='startTimeBelgium' label='Belgium time')
+        (hash key='startTimeSingapore' label='Singapore time')
+        (hash key='public' label='Shown on website')
+      }}
     />
   {{else}}
     <p>No webinars found.</p>
