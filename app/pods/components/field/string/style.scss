@@ -1,0 +1,59 @@
+fieldset.string {
+  &.has-tools {
+    .tools {
+      display: flex;
+      justify-content: space-between;
+      background: #eee;
+      border: 1px solid #ddd;
+      border-radius: 3px 3px 0 0;
+      border-bottom: 0;
+      .left {
+        display: flex;
+        padding: 2px 3px 0 3px;
+        [role='tab'] {
+          font-size: 15px;
+          line-height: 38px;
+          background: none;
+          border: 0;
+          transform: translateY(1px);
+          cursor: pointer;
+          padding: 0 15px;
+          border-radius: 3px 3px 0 0;
+          border: 1px solid transparent;
+
+          &[aria-selected] {
+            background: white;
+            border-color: #ddd;
+            border-bottom-color: white;
+          }
+          & + [role='tab'] {
+            margin-left: 3px;
+          }
+        }
+      }
+
+      .right {
+        display: flex;
+        button {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+
+    [role='tabpanel'] {
+      border: 1px solid #ddd;
+      border-radius: 0 0 3px 3px;
+      &.edit {
+        padding: 5px;
+      }
+      &.preview {
+        padding: 20px;
+        min-height: 200px;
+      }
+    }
+  }
+}
