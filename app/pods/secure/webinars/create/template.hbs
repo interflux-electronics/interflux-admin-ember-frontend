@@ -1,0 +1,20 @@
+{{#with @model.webinar as |webinar|}}
+  <Modal @id='webinar-create'>
+    <h1>Create new webinar</h1>
+
+    <Field::String
+      @label='Title'
+      @record={{webinar}}
+      @attribute='title'
+      @localSave={{true}}
+    />
+
+    <Button
+      @text='Save'
+      @theme='big-green'
+      @disabled={{this.preventSave}}
+      @isBusy={{this.isSaving}}
+      @onClick={{this.onSave}}
+    />
+  </Modal>
+{{/with}}
