@@ -1,28 +1,29 @@
-<div class="textarea {{this.classes}}">
-  <div class="wrapper">
-    {{!-- We don't use the <textarea> element because it does not expand as you type. --}}
-    {{!-- Instead we use a contenteditable <p> --}}
+<div class='textarea {{this.classes}}'>
+  <div class='wrapper'>
+    {{! We don't use the <textarea> element because it does not expand as you type. }}
+    {{! Instead we use a contenteditable <p> }}
     <p
-      id={{@id}}
-      role="textbox"
+      id='textarea-{{@id}}'
+      role='textbox'
       contenteditable
       aria-multiline
       placeholder={{@placeholder}}
       autofocus={{@autofocus}}
       disabled={{@disabled}}
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
+      rows={{this.rows}}
       {{on 'focus' this.onFocus}}
       {{on 'blur' this.onBlur}}
       {{on 'keydown' this.onKeyDown}}
       {{on 'keyup' this.onKeyUp}}
       {{on 'mouseover' this.onMouseOver}}
       {{on 'mouseout' this.onMouseOut}}
-      autocapitalize='off'
-      autocomplete='off'
-      autocorrect='off'
-      spellcheck='false'
-      rows={{this.rows}}
       {{did-insert this.onInsert}}
       {{on 'paste' this.onPaste}}
+      {{on 'change' this.onChange}}
     ></p>
 
     {{yield}}

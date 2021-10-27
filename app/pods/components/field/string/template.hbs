@@ -3,36 +3,91 @@
   @label={{@label}}
   @legend={{@legend}}
   @component='string'
-  @theme={{@theme}}
+  @theme={{this.theme}}
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
 >
   {{#if @multiline}}
-    <Form::Textarea
-      @id={{this.id}}
-      @theme={{@theme}}
-      @placeholder={{@placeholder}}
-      @autofocus={{@autofocus}}
-      @disabled={{@disabled}}
-      @value={{this.value}}
-      @state={{this.state}}
-      @onFocus={{this.onFocus}}
-      @onBlur={{this.onBlur}}
-      @onKeyDown={{this.onKeyDown}}
-      @onKeyUp={{this.onKeyUp}}
-      @onMouseOver={{this.onMouseOver}}
-      @onMouseOut={{this.onMouseOut}}
-    >
-      <Field::String::Messages
-        @state={{this.state}}
-        @isSaving={{this.isSaving}}
-        @hasFocus={{this.hasFocus}}
-        @warning={{this.warning}}
-        @error={{this.error}}
-        @onSave={{this.onSave}}
-        @disabled={{@disabled}}
-      />
-    </Form::Textarea>
+    {{#if @tools}}
+      <div class='tools'>
+        <div class='left' role='tablist'>
+          <button
+            type='button'
+            role='tab'
+            id='tab-edit-{{this.id}}'
+            aria-controls='panel-edit-{{this.id}}'
+            aria-selected={{this.showEditPanel}}
+            {{on 'click' this.onEditTabClick}}
+          >Edit</button>
+
+          <button
+            type='button'
+            role='tab'
+            id='tab-preview-{{this.id}}'
+            aria-controls='panel-preview-{{this.id}}'
+            aria-selected={{this.showPreviewPanel}}
+            {{on 'click' this.onPreviewTabClick}}
+          >Preview</button>
+        </div>
+
+        <div class='right'>
+          {{#if this.showEditPanel}}
+            {{#each @tools as |tool|}}
+              <Button @icon={{tool}} @onClick={{fn this.onToolClick tool}} />
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if this.showEditPanel}}
+      <div
+        role='tabpanel'
+        id='panel-edit-{{this.id}}'
+        aria-labelledby='tab-edit-{{this.id}}'
+        tabindex='0'
+        class='edit'
+      >
+        <Form::Textarea
+          @id={{this.id}}
+          @theme={{@theme}}
+          @placeholder={{@placeholder}}
+          @autofocus={{@autofocus}}
+          @disabled={{@disabled}}
+          @value={{this.value}}
+          @state={{this.state}}
+          @onFocus={{this.onFocus}}
+          @onBlur={{this.onBlur}}
+          @onKeyDown={{this.onKeyDown}}
+          @onKeyUp={{this.onKeyUp}}
+          @onMouseOver={{this.onMouseOver}}
+          @onMouseOut={{this.onMouseOut}}
+        >
+          <Field::String::Messages
+            @state={{this.state}}
+            @isSaving={{this.isSaving}}
+            @hasFocus={{this.hasFocus}}
+            @warning={{this.warning}}
+            @error={{this.error}}
+            @onSave={{this.onSave}}
+            @disabled={{@disabled}}
+          />
+        </Form::Textarea>
+      </div>
+    {{/if}}
+
+    {{#if this.showPreviewPanel}}
+      <div
+        role='tabpanel'
+        id='panel-preview-{{this.id}}'
+        aria-labelledby='tab-preview-{{this.id}}'
+        tabindex='0'
+        class='preview'
+      >
+        {{markdown this.value}}
+      </div>
+    {{/if}}
+
   {{else}}
     <Form::Input
       @id={{this.id}}
