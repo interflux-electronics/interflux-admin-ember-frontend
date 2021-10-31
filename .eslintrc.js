@@ -22,7 +22,7 @@ module.exports = {
   rules: {
     // keepers
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         singleQuote: true,
         trailingComma: 'none'
