@@ -36,10 +36,12 @@ export default class SecureRoute extends BaseRoute {
     const name = model.user.name;
     const email = model.user.email;
 
-    window.LiveChatWidget.call('set_customer_name', name);
-    window.LiveChatWidget.call('set_customer_email', email);
-    window.LiveChatWidget.call('update_session_variables', {
-      isAdminUser: true
-    });
+    if (name && email && window.LiveChatWidget) {
+      window.LiveChatWidget.call('set_customer_name', name);
+      window.LiveChatWidget.call('set_customer_email', email);
+      window.LiveChatWidget.call('update_session_variables', {
+        isAdminUser: true
+      });
+    }
   }
 }

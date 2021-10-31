@@ -60,3 +60,9 @@
 {{! Legal  }}
 
 <meta name='copyright' content='© since 1980 by Interflux Electronics NV ®' />
+
+{{! LiveChat }}
+
+{{#if (env 'isProduction')}}
+  <script src='{{env 'rootURL'}}assets/livechat.js'></script>
+{{/if}}
