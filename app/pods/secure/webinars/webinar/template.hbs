@@ -4,30 +4,7 @@
 
     <h2>Details</h2>
 
-    <Field::File
-      @label='Slide deck PDF'
-      @record={{webinar}}
-      @attribute='title'
-      @allowed-file-types={{array 'pdf'}}
-    />
-
     <Field::String @label='Title' @record={{webinar}} @attribute='title' />
-
-    <Field::String
-      @label='Agenda'
-      @legend='What is this webinar about?'
-      @record={{webinar}}
-      @attribute='topic'
-      @multiline='true'
-    />
-
-    <Field::String
-      @label='Who should attend?'
-      @record={{webinar}}
-      @attribute='audience'
-      @multiline='true'
-      @tools={{array 'bullets'}}
-    />
 
     <Field::Date
       @label='Start time'
@@ -51,6 +28,53 @@
     />
 
     <Field::String
+      @label='Agenda'
+      @legend='What is this webinar about?'
+      @record={{webinar}}
+      @attribute='topic'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='Who should attend?'
+      @record={{webinar}}
+      @attribute='audience'
+      @multiline='true'
+      @tools={{array 'bullets'}}
+    />
+
+    <Field::OneToMany
+      @label='Image'
+      @baseRecord={{webinar}}
+      @baseLabel='image'
+      @targetModel='image'
+      @targetFilter='alt'
+      @targetPermanentFilters={{array
+        (hash key='path' value='~^images/processes')
+      }}
+      @minKeyStrokes='2'
+    />
+
+    {{#if webinar.image}}
+      {{#with webinar.image as |image|}}
+        <ResponsiveImage
+          @path={{image.path}}
+          @variations={{image.variations}}
+          @caption={{image.caption}}
+          @alt={{image.alt}}
+        />
+      {{/with}}
+      <ResponsiveImage
+        @path={{webinar.imagePath}}
+        @variations={{webinar.imageVariations}}
+        @caption={{webinar.imageCaption}}
+        @alt={{webinar.imageAlt}}
+      />
+    {{/if}}
+
+    <h2>Gotowebinar</h2>
+
+    <Field::String
       @label='Link'
       @legend='The URL to the webinar.'
       @record={{webinar}}
@@ -65,14 +89,11 @@
 
     <h2>People</h2>
 
-    <p>Note: No need to fill out the people below, but we could use this in the
-      future to automate the email invitations to our webinars.</p>
-
     <Field::OneToMany
       @label='Host'
       @legend='The person who will be presenting.'
       @baseRecord={{webinar}}
-      @baseLabel='person'
+      @baseLabel='host'
       @targetModel='person'
       @targetFilter='fullName'
       @minKeyStrokes='1'
@@ -80,7 +101,7 @@
 
     <Field::ManyToMany
       @label='Invitees'
-      @legend='The people invited to the event.'
+      @legend='Add people to this list to automatically send them an email invitation.'
       @baseRecord={{webinar}}
       @baseModel='webinar'
       @baseLabel='webinarInvitees'
@@ -88,6 +109,27 @@
       @targetModel='person'
       @targetLabel='fullName'
       @targetRoute='secure.people.person'
+    />
+
+    <Field::ManyToMany
+      @label='Attendees'
+      @legend='People who reserved a seat.'
+      @baseRecord={{webinar}}
+      @baseModel='webinar'
+      @baseLabel='webinarAttendees'
+      @joinModel='webinar-attendee'
+      @targetModel='person'
+      @targetLabel='fullName'
+      @targetRoute='secure.people.person'
+    />
+
+    <h2>After the event</h2>
+
+    <Field::File
+      @label='Slide deck PDF'
+      @record={{webinar}}
+      @attribute='title'
+      @allowed-file-types={{array 'pdf'}}
     />
 
     <h2>Database</h2>
