@@ -4,13 +4,11 @@
   <Spreadsheet
     @records={{@model.videos}}
     @linkRoute='secure.videos.video'
-    @layout='image-tiles'
     @sortBy='titleAdmin'
     @onLoadQuery={{this.query}}
     @columns={{array
-      (hash key='posterUrl' isImage='true')
-      (hash key='titleAdmin')
-      (hash key='category')
+      (hash key='category' label='Category')
+      (hash key='titleAdmin' label='Title')
     }}
   />
 </Page::Content>
