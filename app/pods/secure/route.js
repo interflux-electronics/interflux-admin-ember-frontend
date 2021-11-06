@@ -31,7 +31,8 @@ export default class SecureRoute extends BaseRoute {
 
   afterModel(model) {
     this.auth.user = model.user;
-    this.auth.sync();
+    // TODO: iframes and localstorage are not the way, use cross subdomain cookies instead
+    // this.auth.sync();
 
     const name = model.user.name;
     const email = model.user.email;
