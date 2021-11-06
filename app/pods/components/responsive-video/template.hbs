@@ -1,0 +1,26 @@
+{{#if this.hasValidData}}
+  <div class='responsive-video'>
+    <svg
+      viewBox='0 0 {{this.ratioWidth}} {{this.ratioHeight}}'
+      {{did-insert this.onInsert}}
+    >
+      <rect width={{this.ratioWidth}} height={{this.ratioHeight}}></rect>
+    </svg>
+
+    {{#if this.showVideo}}
+      <video
+        controls
+        width={{@video.optimalWidth}}
+        height={{@video.optimalHeight}}
+      >
+        {{#if this.closestWEBMsize}}
+          <source src={{this.WEBMsrc}} type='video/webm' />
+        {{/if}}
+
+        {{#if this.closestMP4size}}
+          <source src={{this.MP4src}} type='video/mp4' />
+        {{/if}}
+      </video>
+    {{/if}}
+  </div>
+{{/if}}
