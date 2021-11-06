@@ -1,1 +1,84 @@
-{{outlet}}
+{{#with @model.video as |video|}}
+  <Modal @id='video'>
+
+    <ResponsiveVideo @video={{video}} />
+
+    <h1>{{video.titleAdmin}}</h1>
+
+    <h2>Files</h2>
+
+    {{#if video.hasMP4}}
+      <Fieldset
+        @label='MP4s'
+        @legend='Compatible with all apps. Large file size. Good video and audio quality.'
+      >
+        <ul class='list'>
+          {{#each video.MP4s as |file|}}
+            <li>
+              <a
+                href={{file.url}}
+                target='_blank'
+                rel='noreferrer noopener'
+              >{{file.label}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
+
+    {{#if video.hasWEBM}}
+      <Fieldset
+        @label='WEBMs'
+        @legend='30% smaller than MP4. Same quality as MP4. Designed for streaming on websites. Not compatible with all apps.'
+      >
+        <ul class='list'>
+          {{#each video.WEBMs as |file|}}
+            <li>
+              <a
+                href={{file.url}}
+                target='_blank'
+                rel='noreferrer noopener'
+              >{{file.label}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
+
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Title as seen on interflux.com'
+      @record={{video}}
+      @attribute='titlePublic'
+      @multiline='true'
+    />
+
+    <Field::String
+      @label='Title as seen in Admin'
+      @record={{video}}
+      @attribute='titleAdmin'
+      @multiline='true'
+    />
+
+    {{#if video.isWebinar}}
+      <h2>The webinar seen in the video</h2>
+
+      <Fieldset @label='Webinar'>
+        <ul class='list'>
+          {{#if video.webinar.id}}
+            <li>
+              <a href={{href-to 'secure.webinars.webinar' video.webinar.id}}>
+                {{video.webinar.title}}
+              </a>
+            </li>
+          {{else}}
+            <li class='dashed'>
+              <span>- none -</span>
+            </li>
+          {{/if}}
+        </ul>
+      </Fieldset>
+    {{/if}}
+  </Modal>
+{{/with}}

@@ -23,7 +23,7 @@ export default class WebinarModel extends Model {
 
   // Video
 
-  // @belongsTo('video') video;
+  @belongsTo('video') video;
   // @attr('string') imagePath;
   // @attr('string') imageVariations;
   // @attr('string') imageAlt;
@@ -31,6 +31,7 @@ export default class WebinarModel extends Model {
 
   // Slide deck
   // @belongsTo('file') slides;
+  @belongsTo('document') document;
 
   // Date and time
 

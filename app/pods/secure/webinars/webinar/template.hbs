@@ -125,11 +125,33 @@
 
     <h2>After the event</h2>
 
+    {{!--
     <Field::File
       @label='Slide deck PDF'
       @record={{webinar}}
       @attribute='title'
       @allowed-file-types={{array 'pdf'}}
+    />
+    --}}
+
+    <Field::OneToMany
+      @label='Slide deck'
+      @baseRecord={{webinar}}
+      @baseLabel='document'
+      @targetModel='document'
+      @targetFilter='name'
+      @targetRoute='secure.documents.document'
+      @minKeyStrokes='1'
+    />
+
+    <Field::OneToMany
+      @label='Video'
+      @baseRecord={{webinar}}
+      @baseLabel='video'
+      @targetModel='video'
+      @targetFilter='titleAdmin'
+      @targetRoute='secure.videos.video'
+      @minKeyStrokes='1'
     />
 
     <h2>Database</h2>
