@@ -4,7 +4,35 @@
 
     <h2>Details</h2>
 
+    <Field::Boolean @record={{webinar}} @attribute='public'>
+      <label>Show on interflux.com</label>
+    </Field::Boolean>
+
     <Field::String @label='Title' @record={{webinar}} @attribute='title' />
+
+    <Field::String
+      @label='Agenda'
+      @legend='What is this webinar about?'
+      @record={{webinar}}
+      @attribute='topic'
+      @multiline='true'
+      @tools={{array 'bullets'}}
+    />
+
+    <Field::String
+      @label='Who should attend?'
+      @record={{webinar}}
+      @attribute='audience'
+      @multiline='true'
+      @tools={{array 'bullets'}}
+    />
+
+    <Field::String
+      @label='Duration'
+      @legend='In minutes, including the Q&A.'
+      @record={{webinar}}
+      @attribute='duration'
+    />
 
     <Field::Date
       @label='Start time'
@@ -20,29 +48,6 @@
       Melbourne:
       {{webinar.startTimeMelbourne}}</p>
 
-    <Field::String
-      @label='Duration'
-      @legend='In minutes, including the Q&A.'
-      @record={{webinar}}
-      @attribute='duration'
-    />
-
-    <Field::String
-      @label='Agenda'
-      @legend='What is this webinar about?'
-      @record={{webinar}}
-      @attribute='topic'
-      @multiline='true'
-    />
-
-    <Field::String
-      @label='Who should attend?'
-      @record={{webinar}}
-      @attribute='audience'
-      @multiline='true'
-      @tools={{array 'bullets'}}
-    />
-
     <Field::OneToMany
       @label='Image'
       @baseRecord={{webinar}}
@@ -57,35 +62,22 @@
 
     {{#if webinar.image}}
       {{#with webinar.image as |image|}}
-        <ResponsiveImage
-          @path={{image.path}}
-          @variations={{image.variations}}
-          @caption={{image.caption}}
-          @alt={{image.alt}}
-        />
+        <div class='preview'>
+          <ResponsiveImage
+            @path={{image.path}}
+            @variations={{image.variations}}
+            @caption={{image.caption}}
+            @alt={{image.alt}}
+          />
+        </div>
       {{/with}}
-      <ResponsiveImage
-        @path={{webinar.imagePath}}
-        @variations={{webinar.imageVariations}}
-        @caption={{webinar.imageCaption}}
-        @alt={{webinar.imageAlt}}
-      />
     {{/if}}
 
-    <h2>Gotowebinar</h2>
-
     <Field::String
-      @label='Link'
-      @legend='The URL to the webinar.'
+      @label='Link to gotowebinar.com'
       @record={{webinar}}
       @attribute='url'
     />
-
-    <h2>Website</h2>
-
-    <Field::Boolean @record={{webinar}} @attribute='public'>
-      <label>Show on website</label>
-    </Field::Boolean>
 
     <h2>People</h2>
 
@@ -125,17 +117,8 @@
 
     <h2>After the event</h2>
 
-    {{!--
-    <Field::File
-      @label='Slide deck PDF'
-      @record={{webinar}}
-      @attribute='title'
-      @allowed-file-types={{array 'pdf'}}
-    />
-    --}}
-
     <Field::OneToMany
-      @label='Slide deck'
+      @label='Slides'
       @baseRecord={{webinar}}
       @baseLabel='document'
       @targetModel='document'
