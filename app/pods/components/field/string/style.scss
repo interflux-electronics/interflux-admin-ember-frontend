@@ -51,8 +51,11 @@ fieldset.string {
         padding: 5px;
       }
       &.preview {
-        padding: 28px 30px;
+        padding: 18px 20px;
         min-height: 200px;
+        p {
+          line-height: 150%;
+        }
         ul {
           list-style: disc;
           padding-left: 40px;
