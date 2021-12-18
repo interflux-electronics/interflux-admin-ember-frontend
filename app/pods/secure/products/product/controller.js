@@ -179,4 +179,29 @@ export default class ProductController extends Controller {
 
     // TODO: refresh the parent route
   }
+
+  @action
+  saveAlternativeAvatar(productUse, image) {
+    productUse.image = image;
+    productUse
+      .save({
+        adapterOptions: {
+          whitelist: 'image'
+        }
+      })
+      .then(() => {
+        console.debug('success');
+      })
+      .catch((response) => {
+        // Log error in console
+        this.api.logError(response);
+
+        // Show error to user
+        try {
+          this.error = response.errors[0].code || 'unknown';
+        } catch (e) {
+          this.error = 'unknown';
+        }
+      });
+  }
 }

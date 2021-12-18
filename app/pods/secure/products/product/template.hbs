@@ -150,40 +150,14 @@
       @record={{product}}
       @attribute='instructions'
       @multiline='true'
+      @tools={{array 'bullets'}}
     />
 
     <h2>Images</h2>
 
     <Fieldset
-      @label='The avatar'
-      @legend='If you had to present this product with only one image, which one would you choose? The avatar is the single most representative image of this product and will be shown everywhere on our website, on Google and in social media links.'
-    >
-      <ul class='images'>
-        <li class='avatar'>
-          {{#with product.image as |image|}}
-            <ResponsiveImage
-              @path={{image.path}}
-              @variations={{image.variations}}
-              @caption={{image.caption}}
-              @alt={{image.alt}}
-            />
-          {{/with}}
-
-          <div class='buttons'>
-            <Button
-              @text='View details'
-              @theme='secondary'
-              @route='secure.images.image'
-              @model={{product.image.id}}
-            />
-          </div>
-        </li>
-      </ul>
-    </Fieldset>
-
-    <Fieldset
-      @label='Shown on website'
-      @legend='These images will be shown on the product page of {{product.name}}. Make sure all available sizes, containers, alloys and shapes of {{product.name}} are shown on our website.'
+      @label='Public images'
+      @legend='These images are made visible to all our website visitors and search engines bots from Google and social media.'
     >
       <ul class='images'>
         {{#each this.publicImages as |relation|}}
@@ -230,7 +204,7 @@
                 @onClick={{fn this.hideImage relation}}
               />
               <Button
-                @text='View details'
+                @text='Go to image'
                 @theme='secondary'
                 @route='secure.images.image'
                 @model={{relation.image.id}}
@@ -245,7 +219,7 @@
 
     <Fieldset
       @label='Hidden images'
-      @legend='These images are for internal use only and will not be shown on our website.'
+      @legend='These images are hidden from our website visitors and Google. They are meant for internal Interflux use only.'
     >
       <ul class='images'>
         {{#each this.hiddenImages as |relation|}}
@@ -267,7 +241,7 @@
               />
 
               <Button
-                @text='View details'
+                @text='Go to image'
                 @theme='secondary'
                 @route='secure.images.image'
                 @model={{relation.image.id}}
@@ -278,6 +252,99 @@
           <p>- none -</p>
         {{/each}}
       </ul>
+    </Fieldset>
+
+    <Fieldset
+      @label='Avatar'
+      @legend='The avatar is the one image which will represent {{product.name}} on all our websites, Google and social media links.'
+    >
+      <ul class='images'>
+        <li class='avatar'>
+          {{#with product.image as |image|}}
+            <ResponsiveImage
+              @path={{image.path}}
+              @variations={{image.variations}}
+              @caption={{image.caption}}
+              @alt={{image.alt}}
+            />
+          {{/with}}
+
+          <div class='buttons'>
+            <Button
+              @text='Go to image'
+              @theme='secondary'
+              @route='secure.images.image'
+              @model={{product.image.id}}
+            />
+          </div>
+        </li>
+      </ul>
+    </Fieldset>
+
+    <Fieldset
+      @label='Alternative avatars'
+      @legend='Where helpful, we can show a different avatar per process. This is optional and will most commonly be used to differentiate lead-free from lead-based products.'
+    >
+      <div>
+        {{#each this.product.productUsesSorted as |productUse|}}
+          <Field::Boolean
+            @record={{productUse}}
+            @attribute='showAlternativeAvatar'
+          >
+            <label>{{productUse.use.label}}</label>
+          </Field::Boolean>
+
+          {{#if productUse.showAlternativeAvatar}}
+            <ul class='images'>
+              {{#if productUse.image}}
+                <li>
+                  <ResponsiveImage
+                    @path={{productUse.image.path}}
+                    @variations={{productUse.image.variations}}
+                    @caption={{productUse.image.caption}}
+                    @alt={{productUse.image.alt}}
+                  />
+
+                  <div class='buttons'>
+                    <Button
+                      @text='Remove'
+                      @theme='secondary'
+                      @onClick={{fn this.saveAlternativeAvatar productUse null}}
+                    />
+                  </div>
+                </li>
+              {{else}}
+                {{#each this.publicImages as |productImage|}}
+                  {{#with productImage.image as |image|}}
+                    <li>
+                      <ResponsiveImage
+                        @path={{image.path}}
+                        @variations={{image.variations}}
+                        @caption={{image.caption}}
+                        @alt={{image.alt}}
+                      />
+
+                      <div class='buttons'>
+                        <Button
+                          @text='Select'
+                          @theme='secondary'
+                          @onClick={{fn
+                            this.saveAlternativeAvatar
+                            productUse
+                            image
+                          }}
+                        />
+                      </div>
+                    </li>
+                  {{/with}}
+                {{else}}
+                  <p>- none -</p>
+                {{/each}}
+              {{/if}}
+            </ul>
+          {{/if}}
+        {{/each}}
+      </div>
     </Fieldset>
 
     <h2>Compliance</h2>
