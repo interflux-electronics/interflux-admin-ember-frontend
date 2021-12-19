@@ -12,10 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: nvm install
-      - run: yarn install
-      - run: node -v
-      - run: yarn test
+      - name: Set the correct Node version using nvm
+        shell: bash -l {0}
+        run: nvm install
+      - name: Install all Node dependencies
+        shell: bash -l {0}
+        run: yarn install
+      - name: Run linters and tests
+        shell: bash -l {0}
+        run: yarn test
 
   deploy:
     name: Deploy
