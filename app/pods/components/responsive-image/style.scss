@@ -88,4 +88,32 @@ figure.responsive-image {
       font-size: 1px; // To prevent the alt text from showing if load failed
     }
   }
+  figcaption {
+    .caption,
+    .copyright {
+      position: absolute;
+      font-size: 85%;
+      opacity: 0.8;
+      @include widescreen {
+        padding: 6px 12px;
+      }
+      @include desktop {
+        padding: vw(6px) vw(12px);
+      }
+      @include tablet {
+        padding: 1.3vw 2.3vw;
+      }
+      @include mobile {
+        display: none;
+      }
+    }
+    .caption {
+      top: 0;
+      left: 0;
+    }
+    .copyright {
+      bottom: 0;
+      right: 0;
+    }
+  }
 }

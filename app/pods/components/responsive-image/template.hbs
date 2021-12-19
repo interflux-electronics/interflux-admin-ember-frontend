@@ -1,26 +1,29 @@
-<figure class="responsive-image {{this.orientation}} {{this.status}}">
+<figure class='responsive-image {{this.orientation}} {{this.status}}'>
   <picture {{did-insert this.register}}>
     {{#if this.html}}
       {{this.html}}
     {{else}}
-      <div class="no-image">
+      <div class='no-image'>
         <Svg::Unknown />
       </div>
     {{/if}}
 
     {{#if this.showLoading}}
-      <div class="overlay">
-        <LoadSpinner @icon="cup" />
+      <div class='overlay'>
+        <LoadSpinner @icon='cup' />
       </div>
     {{/if}}
 
     {{#if this.showError}}
-      <div class="overlay">
+      <div class='overlay'>
         <Svg::Unknown />
       </div>
     {{/if}}
   </picture>
   {{#if @caption}}
-    <figcaption>{{@caption}}</figcaption>
+    <figcaption>
+      <p class='caption'>{{@caption}}</p>
+      <p class='copyright'>&copy; Interflux Electronics</p>
+    </figcaption>
   {{/if}}
 </figure>
