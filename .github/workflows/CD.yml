@@ -12,10 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set the correct Node version using nvm
-        shell: bash -l {0}
-        run: nvm install
+      - run: nvm install
       - run: yarn install
+      - run: node -v
       - run: yarn test
 
   deploy:
@@ -26,9 +25,6 @@ jobs:
       PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
     steps:
       - uses: actions/checkout@v2
-      - name: Set the correct Node version using nvm
-        shell: bash -l {0}
-        run: nvm install
       - run: mkdir ~/.ssh
       - run: 'echo "$PRIVATE_KEY" > ~/.ssh/bot@server.interflux.com'
       - run: ssh-keyscan -H server.interflux.com > ~/.ssh/known_hosts
