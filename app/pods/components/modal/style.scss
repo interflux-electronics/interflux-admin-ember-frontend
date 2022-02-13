@@ -232,27 +232,38 @@
           &.dashed {
             border-style: dashed;
           }
-          > span {
-            line-height: 46px;
-            padding: 0 15px;
-          }
-          > a {
-            display: block;
-            color: $blue-0;
-            text-decoration: underline;
-            outline: 0;
-            border-radius: 3px;
-            line-height: 26px;
-            padding: 5px 12px;
-            margin: 5px;
-            &:hover {
-              color: $orange-2;
-              text-decoration: none;
+          .left {
+            display: flex;
+            align-items: center;
+            span.no-link {
+              line-height: 46px;
+              padding: 0 15px;
             }
-            &:focus {
-              color: $orange-2;
-              text-decoration: none;
-              box-shadow: 0 0 0 2px $orange-2;
+            span.flag {
+              line-height: 20px;
+              padding: 0 4px;
+              font-size: 15px;
+              background: $orange-2;
+              color: white;
+            }
+            a {
+              display: block;
+              color: $blue-0;
+              text-decoration: underline;
+              outline: 0;
+              border-radius: 3px;
+              line-height: 26px;
+              padding: 5px 12px;
+              margin: 5px;
+              &:hover {
+                color: $orange-2;
+                text-decoration: none;
+              }
+              &:focus {
+                color: $orange-2;
+                text-decoration: none;
+                box-shadow: 0 0 0 2px $orange-2;
+              }
             }
           }
           .right {

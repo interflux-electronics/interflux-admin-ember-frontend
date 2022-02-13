@@ -14,11 +14,21 @@
         ondragstart={{fn this.handleDragStart row}}
         ondragend={{fn this.handleDragEnd row}}
       >
-        {{#if (and @targetRoute row.targetRecord.id)}}
-          <a href={{href-to @targetRoute row.targetRecord.id}}>{{row.label}}</a>
-        {{else}}
-          <span>{{row.label}}</span>
-        {{/if}}
+        <div class='left'>
+          {{#if (and @targetRoute row.targetRecord.id)}}
+            <a
+              href={{href-to @targetRoute row.targetRecord.id}}
+            >{{row.label}}</a>
+          {{else}}
+            <span class='no-link'>{{row.label}}</span>
+          {{/if}}
+
+          {{#each @joinFlags as |flag|}}
+            {{#if (get row.joinRecord flag.key)}}
+              <span class='flag'>{{flag.label}}</span>
+            {{/if}}
+          {{/each}}
+        </div>
 
         <div class='right'>
           {{#if this.canSortList}}
@@ -27,23 +37,23 @@
             </div>
           {{/if}}
 
-          <DotDotDotMenu>
-            {{!--
-            {{#each @joinFlags as |flag|}}
-              <Button
-                @text={{flag.label}}
-                @icon={{if (get row.joinRecord flag.key) 'check' 'times'}}
-                @onClick={{fn this.toggleFlag row.joinRecord flag.key}}
-              />
-            {{/each}}
-            --}}
+          {{#unless @disabled}}
+            <DotDotDotMenu>
+              {{#each @joinFlags as |flag|}}
+                <Button
+                  @text={{flag.label}}
+                  @icon={{if (get row.joinRecord flag.key) 'check' 'times'}}
+                  @onClick={{fn this.toggleFlag row.joinRecord flag.key}}
+                />
+              {{/each}}
 
-            <Button
-              @icon='trash'
-              @text='remove'
-              @onClick={{fn this.onDestroy row.joinRecord}}
-            />
-          </DotDotDotMenu>
+              <Button
+                @icon='trash'
+                @text='remove'
+                @onClick={{fn this.onDestroy row.joinRecord}}
+              />
+            </DotDotDotMenu>
+          {{/unless}}
         </div>
 
         {{#if this.canSortList}}
