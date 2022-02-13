@@ -77,6 +77,11 @@ export default class NavResourcesComponent extends Component {
         label: 'Webinars',
         route: 'secure.webinars',
         icon: 'svg/podcast'
+      },
+      {
+        label: 'Countries',
+        route: 'secure.countries',
+        icon: 'svg/flag'
       }
 
       // {

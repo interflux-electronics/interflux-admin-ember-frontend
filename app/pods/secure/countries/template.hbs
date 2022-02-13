@@ -1,0 +1,13 @@
+<Page::Content @id='Countries'>
+  <h1>Countries</h1>
+
+  <Spreadsheet
+    @records={{@model.countries}}
+    @linkRoute='secure.countries.country'
+    @showCreateButton='true'
+    @columns={{array
+      (hash key='nameEnglish' label='Country')
+      (hash key='companyNames' label='Covered by')
+    }}
+  />
+</Page::Content>

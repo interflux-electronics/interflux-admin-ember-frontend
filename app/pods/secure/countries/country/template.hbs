@@ -1,0 +1,48 @@
+{{#with @model.country as |country|}}
+  <Modal @id='country'>
+    <h1>{{country.nameEnglish}}</h1>
+
+    <h2>Properties</h2>
+
+    <Field::String
+      @label='Name (native)'
+      @record={{country}}
+      @attribute='nameNative'
+      @disabled='true'
+    />
+
+    <Field::String
+      @label='Name (English)'
+      @record={{country}}
+      @attribute='nameEnglish'
+      @disabled='true'
+    />
+
+    <Field::ManyToMany
+      @label='Local languages'
+      @baseRecord={{country}}
+      @baseModel='country'
+      @baseLabel='countryLanguages'
+      @joinModel='country-languages'
+      @targetModel='language'
+      @targetLabel='nameEnglish'
+      @targetFilter='nameEnglish'
+      @disabled='true'
+    />
+
+    <h2>Relations</h2>
+
+    <Field::ManyToMany
+      @label='Recommended distributors'
+      @baseRecord={{country}}
+      @baseModel='country'
+      @baseLabel='companyMarkets'
+      @joinModel='company-market'
+      @joinRankKey='rankAmongCompanies'
+      @joinFlags={{array (hash key='companyIsRecommended' label='recommend')}}
+      @targetModel='company'
+      @targetLabel='businessName'
+      @targetRoute='secure.companies.company'
+    />
+  </Modal>
+{{/with}}

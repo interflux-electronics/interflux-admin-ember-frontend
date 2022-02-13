@@ -58,6 +58,10 @@ Router.map(function () {
       this.route('webinar', { path: '/:id' });
     });
 
+    this.route('countries', function () {
+      this.route('country', { path: '/:id' });
+    });
+
     // this.route('leads', function () {
     //   this.route('lead', { path: '/:id' });
     // });
@@ -65,6 +69,7 @@ Router.map(function () {
     // this.route('orders', function () {
     //   this.route('order', { path: '/:id' });
     // });
+    //
 
     this.route('user', function () {
       this.route('download');
