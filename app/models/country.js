@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class CountryModel extends Model {
   @attr('string') nameEnglish;
@@ -16,4 +16,19 @@ export default class CountryModel extends Model {
   @attr('array') timezones;
   @attr('array') topLevelDomains;
   @attr('array') callingCodes;
+
+  @hasMany('company-market') companyMarkets;
+
+  get companyNames() {
+    return this.companyMarkets
+      .sortBy('rankAmongCompanies')
+      .mapBy('company.businessName')
+      .join(', ');
+  }
+
+  @hasMany('country-language') countryLanguages;
+
+  get languages() {
+    return this.countryLanguages.mapBy('language');
+  }
 }

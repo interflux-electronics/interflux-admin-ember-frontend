@@ -8,7 +8,8 @@ export default class CompaniesRoute extends BaseRoute {
   model() {
     return hash({
       companies: this.store.findAll('company'),
-      countries: this.store.findAll('country')
+      countries: this.store.findAll('country'),
+      markets: this.store.findAll('company-market')
     });
   }
 }
