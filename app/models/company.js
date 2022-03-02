@@ -18,6 +18,7 @@ export default class CompanyModel extends Model {
 
   @attr('number') order;
   @attr('boolean') public;
+  @attr('boolean') isHeadquarter;
 
   @belongsTo('country') country;
 

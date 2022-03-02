@@ -132,6 +132,14 @@
     </Field::Boolean>
 
     {{#if company.public}}
+      <Field::Boolean
+        @record={{company}}
+        @attribute='isHeadquarter'
+        @legend='Headquarters are shown on the map with a different marker.'
+      >
+        <label>Is headquarter</label>
+      </Field::Boolean>
+
       <Field::String
         @label='Rank'
         @legend='Companies are sorted alphabetically on our website, except for those with a rank. Those with a rank move to the top of the list. Enter a number to sort the ranked companies. Leave blank for alphabetical sort.'
