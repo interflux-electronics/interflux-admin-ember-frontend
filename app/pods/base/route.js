@@ -7,13 +7,6 @@ export default class BaseRoute extends Route {
   @service api;
   @service store;
 
-  // Alias to avoid confusion with the header service.
-  // The seo (headData) service is all about the <head>.
-  // The header services is all about the <header>.
-  get seo() {
-    return this.headData;
-  }
-
   get isNode() {
     return this.fastboot.isFastBoot;
   }
