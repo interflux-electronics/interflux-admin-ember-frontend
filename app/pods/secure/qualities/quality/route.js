@@ -5,7 +5,6 @@ export default class QualityRoute extends ModalRoute {
   model(params) {
     return hash({
       quality: this.store.findRecord('quality', params.id, {
-        reload: true,
         include: [
           'image',
           'products',

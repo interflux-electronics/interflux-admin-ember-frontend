@@ -10,8 +10,7 @@ export default class FamilyRoute extends ModalRoute {
           'products',
           'product_family_images',
           'product_family_images.image'
-        ].join(','),
-        reload: true
+        ].join(',')
       })
       // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });

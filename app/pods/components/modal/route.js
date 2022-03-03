@@ -22,11 +22,11 @@ export default class ModalRoute extends BaseRoute {
 
   // Allow <main> page to scroll again
   deactivate() {
+    const scroll = this.modal.scroll;
     this.modal.setProperties({
       active: false,
       scroll: 0
     });
-    const scroll = this.modal.scroll;
     window.scrollTo(0, scroll);
   }
 }

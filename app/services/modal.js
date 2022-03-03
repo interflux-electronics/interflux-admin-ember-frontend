@@ -1,6 +1,7 @@
 import Service from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class ModalService extends Service {
-  active = false;
-  scroll = 0;
+  @tracked active = false;
+  @tracked scroll = 0;
 }

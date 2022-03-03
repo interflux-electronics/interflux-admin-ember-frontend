@@ -7,8 +7,7 @@ export default class ImageRoute extends ModalRoute {
       image: this.store.findRecord('image', params.id, {
         include: ['products', 'product_images', 'company', 'cdn_files'].join(
           ','
-        ),
-        reload: true
+        )
       })
     });
   }

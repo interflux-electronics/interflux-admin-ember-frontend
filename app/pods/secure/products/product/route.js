@@ -15,8 +15,7 @@ export default class ProductRoute extends ModalRoute {
           'product_qualities',
           'product_uses',
           'product_documents'
-        ].join(','),
-        reload: true
+        ].join(',')
       }),
       families: this.modelFor('secure.products').families
     });

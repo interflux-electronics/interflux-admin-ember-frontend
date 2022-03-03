@@ -5,7 +5,6 @@ export default class UseRoute extends ModalRoute {
   model(params) {
     return hash({
       use: this.store.findRecord('use', params.id, {
-        reload: true,
         include: [
           'image',
           'use_images',

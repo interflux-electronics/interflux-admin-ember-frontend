@@ -4,7 +4,7 @@ import { hash } from 'rsvp';
 export default class LeadRoute extends ModalRoute {
   model(params) {
     return hash({
-      lead: this.store.findRecord('lead', params.id, { reload: true })
+      lead: this.store.findRecord('lead', params.id)
       // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }

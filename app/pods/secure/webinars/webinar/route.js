@@ -13,8 +13,7 @@ export default class WebinarRoute extends ModalRoute {
           'webinar_invitees.person',
           'webinar_attendees',
           'webinar_attendees.person'
-        ].join(','),
-        reload: true
+        ].join(',')
       })
     });
   }

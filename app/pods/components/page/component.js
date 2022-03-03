@@ -9,6 +9,7 @@ export default class PageComponent extends Component {
     if (!this.modal.active) {
       return null;
     }
+
     return htmlSafe(`top: -${this.modal.scroll}px`);
   }
 }
