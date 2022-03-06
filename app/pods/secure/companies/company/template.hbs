@@ -17,16 +17,6 @@
       @attribute='legalName'
     />
 
-    <h2>Notes</h2>
-
-    <Field::String
-      @label='Internal notes'
-      @legend='Only seen by Interflux.'
-      @record={{company}}
-      @attribute='notes'
-      @multiline='true'
-    />
-
     <h2>Address</h2>
 
     <Field::OneToMany
@@ -155,6 +145,16 @@
         @multiline='true'
       />
     {{/if}}
+
+    <h2>Notes</h2>
+
+    <Field::String
+      @label='Internal notes'
+      @legend='Only seen by Interflux.'
+      @record={{company}}
+      @attribute='notes'
+      @multiline='true'
+    />
 
     <h2>Database</h2>
 

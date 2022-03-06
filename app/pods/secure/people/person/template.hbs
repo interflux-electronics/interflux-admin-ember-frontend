@@ -53,9 +53,15 @@
       />
 
       <Field::String
-        @label='Company phone'
+        @label='Company mobile phone'
         @record={{companyMember}}
         @attribute='phone'
+      />
+
+      <Field::String
+        @label='Company landline phone'
+        @record={{companyMember}}
+        @attribute='landline'
       />
 
       <Field::Boolean @record={{companyMember}} @attribute='public'>
@@ -81,7 +87,11 @@
         </Field::Boolean>
 
         <Field::Boolean @record={{companyMember}} @attribute='publicPhone'>
-          <label>Show phone</label>
+          <label>Show mobile phone</label>
+        </Field::Boolean>
+
+        <Field::Boolean @record={{companyMember}} @attribute='publicLandline'>
+          <label>Show landline phone</label>
         </Field::Boolean>
       {{/if}}
     {{/each}}
