@@ -1,13 +1,13 @@
-<Page::Content @id="qualities">
+<Page::Content @id='qualities'>
   <h1>Product qualities</h1>
 
   <Spreadsheet
     @records={{@model.qualities}}
-    @linkRoute="secure.qualities.quality"
+    @linkRoute='secure.qualities.quality'
     @createRoute='secure.qualities.create'
     @showCreateButton='true'
-    @layout="image-rows"
-    @sortBy="productCount"
+    @layout='image-rows'
+    @sortBy='productCount'
     @sortUp={{false}}
     @columns={{array
       (hash key='iconURL' label='icon' isImage='true')

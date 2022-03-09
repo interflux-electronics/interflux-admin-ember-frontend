@@ -1,20 +1,14 @@
-<nav
-  id="resources"
-  class={{this.isExpanded}}
->
-  <button
-    onclick={{this.toggleExpansion}}
-    type="button"
-  >
-    <div class="clip">
-      <div class="fade"></div>
-      <div class="icon">
+<nav id='resources' class={{this.isExpanded}}>
+  <button onclick={{this.toggleExpansion}} type='button'>
+    <div class='clip'>
+      <div class='fade'></div>
+      <div class='icon'>
         <Svg::Hamburger />
       </div>
       <h1>Interflux</h1>
     </div>
 
-    <div class="float">
+    <div class='float'>
       <p>Interflux</p>
     </div>
   </button>
@@ -25,15 +19,15 @@
       class={{resource.isActive}}
       onclick={{this.collapse}}
     >
-      <div class="clip">
-        <div class="fade"></div>
-        <div class="icon">
+      <div class='clip'>
+        <div class='fade'></div>
+        <div class='icon'>
           {{component resource.icon}}
         </div>
         <p>{{resource.label}}</p>
       </div>
 
-      <div class="float">
+      <div class='float'>
         <p>{{resource.label}}</p>
       </div>
     </a>

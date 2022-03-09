@@ -1,12 +1,12 @@
-<Page::Content @id="uses">
+<Page::Content @id='uses'>
   <h1>Processes</h1>
 
   <Spreadsheet
     @records={{@model.uses}}
-    @linkRoute="secure.uses.use"
+    @linkRoute='secure.uses.use'
     @createRoute='secure.uses.create'
     @showCreateButton='true'
-    @layout="image-rows"
+    @layout='image-rows'
     @sortBy='rank'
     @columns={{array
       (hash key='iconURL' label='icon' isImage='true')

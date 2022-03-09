@@ -1,20 +1,20 @@
 <fieldset
-  id="field-{{this.id}}"
-  role="radiogroup"
-  aria-labelledby="label-{{this.id}}"
-  aria-describedby={{if @legend (concat "legend-" this.id)}}
-  class="radio primary"
+  id='field-{{this.id}}'
+  role='radiogroup'
+  aria-labelledby='label-{{this.id}}'
+  aria-describedby={{if @legend (concat 'legend-' this.id)}}
+  class='radio primary'
 >
-  <div class="liner">
-    <label id="label-{{this.id}}">{{@label}}</label>
+  <div class='liner'>
+    <label id='label-{{this.id}}'>{{@label}}</label>
     {{#if @legend}}
-      <legend id="legend-{{this.id}}">{{@legend}}</legend>
+      <legend id='legend-{{this.id}}'>{{@legend}}</legend>
     {{/if}}
     <ul>
       {{#each this.options as |option|}}
         <li>
           <div
-            role="radio"
+            role='radio'
             aria-checked={{option.ariaChecked}}
             tabindex={{if option.ariaChecked '0' '-1'}}
             {{on 'click' (fn this.onClick option.value)}}

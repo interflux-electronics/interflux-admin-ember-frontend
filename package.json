@@ -28,7 +28,8 @@
     "build-android": "ANDROID_BUILD=true corber build --platform=android --environment=production",
     "start-ios": "IOS_BUILD=true corber start --platform=ios",
     "android": "ANDROID_BUILD=true ember s --port=4200 --live-reload-port=0 --output-path=dist-android/",
-    "start-android": "ANDROID_BUILD=true corber start --platform=android"
+    "start-android": "ANDROID_BUILD=true corber start --platform=android",
+    "format": "prettier --write"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",

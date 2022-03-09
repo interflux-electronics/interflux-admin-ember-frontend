@@ -1,13 +1,13 @@
-<Modal @id="lead">
+<Modal @id='lead'>
   <h1>{{@model.lead.company}}</h1>
   <h2>Lead</h2>
 
-  <hr>
+  <hr />
 
   <p>Purpose: {{@model.lead.purpose}}</p>
   <p>Message: {{@model.lead.message}}</p>
 
-  <hr>
+  <hr />
 
   <p>Name: {{@model.lead.name}}</p>
   <p>Company: {{@model.lead.company}}</p>
@@ -15,14 +15,16 @@
   <p>Email: {{@model.lead.email}}</p>
   <p>Mobile: {{@model.lead.mobile}}</p>
 
-  <hr>
+  <hr />
 
   <p>URL: {{@model.lead.source}}</p>
   <p>IP: {{@model.lead.ip}}</p>
-  <p>Region: {{@model.lead.ipCity}}, {{@model.lead.ipRegion}},
+  <p>Region:
+    {{@model.lead.ipCity}},
+    {{@model.lead.ipRegion}},
     {{@model.lead.ipCountry.nameEnglish}}</p>
 
-  <hr>
+  <hr />
 
   <p>Database UUID: {{@model.lead.id}}</p>
 </Modal>

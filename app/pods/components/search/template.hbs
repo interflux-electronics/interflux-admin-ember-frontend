@@ -1,26 +1,26 @@
-<div class="search {{this.classes}}">
-  <div class="wrapper">
+<div class='search {{this.classes}}'>
+  <div class='wrapper'>
     <input
-      id="input-{{@id}}"
+      id='input-{{@id}}'
       value={{this.value}}
-      type="search"
+      type='search'
       placeholder={{@placeholder}}
       disabled={{@disabled}}
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
       {{on 'focus' this.onFocus}}
       {{on 'blur' this.onBlur}}
       {{on 'keydown' this.onKeyDown}}
       {{on 'keyup' this.onKeyUp}}
       {{on 'mouseover' this.onMouseOver}}
       {{on 'mouseout' this.onMouseOut}}
-      autocapitalize='off'
-      autocomplete='off'
-      autocorrect='off'
-      spellcheck='false'
       {{did-insert this.onInsert}}
-    >
+    />
 
     {{#if (eq @state 'idle')}}
-      <div class="icon">
+      <div class='icon'>
         <Svg::Search />
       </div>
     {{/if}}
@@ -28,15 +28,15 @@
     {{#unless @error}}
       {{#if this.focus}}
         {{#if this.isSearching}}
-          <p class="message searching">Searching ...</p>
+          <p class='message searching'>Searching ...</p>
         {{else}}
           {{#if this.showResults}}
-            <div class="results">
+            <div class='results'>
 
               {{#each this.buttons as |btn i|}}
                 {{#if btn.shown}}
                   <button
-                    type="button"
+                    type='button'
                     class={{btn.classes}}
                     {{on 'mouseover' (fn this.onMouseOverButton i)}}
                     {{on 'mousedown' (fn this.onMouseDown btn.record)}}
@@ -47,13 +47,13 @@
               {{/each}}
 
               {{#if this.error}}
-                <p class="message error">Search broke</p>
+                <p class='message error'>Search broke</p>
               {{else}}
-                <p class="message">{{this.recordCount}} results</p>
+                <p class='message'>{{this.recordCount}} results</p>
               {{/if}}
             </div>
           {{else}}
-            <p class="message">{{this.keepTypingMessage}}</p>
+            <p class='message'>{{this.keepTypingMessage}}</p>
           {{/if}}
         {{/if}}
       {{/if}}

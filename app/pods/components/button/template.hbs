@@ -11,30 +11,18 @@
     />
    --}}
   {{#if @model}}
-    <a
-      href={{href-to @route @model}}
-      class={{this.classes}}
-    >
-      <Button::Content
-        @text={{@text}}
-        @icon={{@icon}}
-      />
+    <a href={{href-to @route @model}} class={{this.classes}}>
+      <Button::Content @text={{@text}} @icon={{@icon}} />
     </a>
   {{else}}
-    <a
-      href={{href-to @route}}
-      class={{this.classes}}
-    >
-      <Button::Content
-        @text={{@text}}
-        @icon={{@icon}}
-      >
+    <a href={{href-to @route}} class={{this.classes}}>
+      <Button::Content @text={{@text}} @icon={{@icon}}>
         {{yield}}
       </Button::Content>
     </a>
   {{/if}}
 {{else if @url}}
-  {{!--
+  {{!
     For buttons which open URLs outside of the Ember app, pass down a @url, no @route.
     Note the `target` attribute. We open all external links in a new tab.
     The `rel` attribute we add for security.
@@ -44,17 +32,14 @@
       @text="external.com"
       @url="https://external.com"
     />
-   --}}
+   }}
   <a
     href={{@url}}
-    target="_blank"
-    rel="noopener noreferrer"
+    target='_blank'
+    rel='noopener noreferrer'
     class={{this.classes}}
   >
-    <Button::Content
-      @text={{@text}}
-      @icon={{@icon}}
-    >
+    <Button::Content @text={{@text}} @icon={{@icon}}>
       {{yield}}
     </Button::Content>
   </a>
@@ -78,14 +63,11 @@
     onblur={{this.onBlur}}
     onmousedown={{this.onMouseDown}}
     class={{this.classes}}
-    type="button"
+    type='button'
     disabled={{this.isDisabled}}
     draggable={{@draggable}}
   >
-    <Button::Content
-      @text={{@text}}
-      @icon={{@icon}}
-    >
+    <Button::Content @text={{@text}} @icon={{@icon}}>
       {{yield}}
     </Button::Content>
   </button>

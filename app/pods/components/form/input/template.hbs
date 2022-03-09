@@ -1,11 +1,15 @@
-<div class="input {{this.classes}}">
-  <div class="wrapper">
+<div class='input {{this.classes}}'>
+  <div class='wrapper'>
     <input
-      id="input-{{@id}}"
+      id='input-{{@id}}'
       value={{@value}}
       type={{this.type}}
       placeholder={{@placeholder}}
       readonly={{@disabled}}
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
       {{on 'focus' this.onFocus}}
       {{on 'blur' this.onBlur}}
       {{on 'keydown' this.onKeyDown}}
@@ -13,12 +17,8 @@
       {{on 'mouseover' this.onMouseOver}}
       {{on 'mouseout' this.onMouseOut}}
       {{on 'change' this.onChange}}
-      autocapitalize='off'
-      autocomplete='off'
-      autocorrect='off'
-      spellcheck='false'
       {{did-insert this.onInsert}}
-    >
+    />
     {{yield}}
   </div>
 </div>

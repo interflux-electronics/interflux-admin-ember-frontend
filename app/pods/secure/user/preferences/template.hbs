@@ -1,4 +1,4 @@
-<Modal @id="preferences">
+<Modal @id='preferences'>
   <h1>Preferences</h1>
 
   <h2>Account</h2>
@@ -7,12 +7,12 @@
     @label='User'
     @baseRecord={{this.auth.user}}
     @baseLabel='person'
-    @targetModel="person"
-    @targetFilter="fullName"
-    @targetLabel="fullName"
+    @targetModel='person'
+    @targetFilter='fullName'
+    @targetLabel='fullName'
     @targetRoute='secure.people.person'
     @minKeyStrokes='1'
-    @disabled="true"
+    @disabled='true'
   />
 
   <Field::String

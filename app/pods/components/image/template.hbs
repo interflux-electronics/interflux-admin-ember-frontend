@@ -1,19 +1,16 @@
-<picture
-  id={{@id}}
-  class="stateful{{if @class (concat ' ' @class)}}"
->
+<picture id={{@id}} class='stateful{{if @class (concat ' ' @class)}}'>
   {{#if this.error}}
-    <div class="error">
+    <div class='error'>
       <img
-        src="{{env 'cdnHost'}}/images/icons/unknown.svg"
-        alt="icon unknown"
-      >
+        src='{{env 'cdnHost'}}/images/icons/unknown.svg'
+        alt='icon unknown'
+      />
     </div>
   {{/if}}
 
   {{#if this.loading}}
-    <div class="loading">
-      <LoadSpinner @icon="cup" />
+    <div class='loading'>
+      <LoadSpinner @icon='cup' />
     </div>
   {{/if}}
 
@@ -24,5 +21,5 @@
     height={{@height}}
     onload={{this.onLoad}}
     onerror={{this.onError}}
-  >
+  />
 </picture>
