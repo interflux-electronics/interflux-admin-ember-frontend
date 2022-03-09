@@ -1,5 +1,5 @@
 {{#with @model.quality as |quality|}}
-  <Modal @id="quality">
+  <Modal @id='quality'>
     <h1>{{quality.text}}</h1>
     <h2>Properties</h2>
 
@@ -11,7 +11,7 @@
 
     <Field::String
       @label='Explanation'
-      @legend="Explain in depth what this quality means and why it matters. Aim for the first paragraphs to make sense to a layman (no jargon). In the paragraphs after, feel free to get technical."
+      @legend='Explain in depth what this quality means and why it matters. Aim for the first paragraphs to make sense to a layman (no jargon). In the paragraphs after, feel free to get technical.'
       @record={{quality}}
       @attribute='gist'
       @multiline='true'
@@ -21,15 +21,13 @@
       @label='Icon'
       @baseRecord={{quality}}
       @baseLabel='image'
-      @targetModel="image"
-      @targetFilter="alt"
-      @targetPermanentFilters={{array
-        (hash key='path' value='~^images/icons')
-      }}
+      @targetModel='image'
+      @targetFilter='alt'
+      @targetPermanentFilters={{array (hash key='path' value='~^images/icons')}}
       @minKeyStrokes='2'
     />
 
-    <div class="icon">
+    <div class='icon'>
       {{#if quality.image}}
         {{#with quality.image as |image|}}
           <a href={{href-to 'secure.images.image' quality.image.id}}>
@@ -55,32 +53,33 @@
     <h2>Relations</h2>
 
     <Field::ManyToMany
-      @label="Products"
-      @legend="All products that have this quality."
+      @label='Products'
+      @legend='All products that have this quality.'
       @baseRecord={{quality}}
-      @baseModel="quality"
-      @baseLabel="productQualities"
-      @joinModel="product-quality"
-      @joinRankKey="rankAmongQualities"
-      @targetModel="product"
-      @targetLabel="name"
+      @baseModel='quality'
+      @baseLabel='productQualities'
+      @joinModel='product-quality'
+      @joinRankKey='rankAmongQualities'
+      @targetModel='product'
+      @targetLabel='name'
       @targetRoute='secure.products.product'
     />
 
-    <Fieldset
-      @label="Families"
-      @legend="The families of the products above."
-    >
-      <ul class="list">
+    <Fieldset @label='Families' @legend='The families of the products above.'>
+      <ul class='list'>
         {{#each quality.families as |family|}}
           <li>
-            <a href={{href-to 'secure.families.family' family.id}}>
-              {{family.namePlural}}
-            </a>
+            <div class='left'>
+              <a href={{href-to 'secure.families.family' family.id}}>
+                {{family.namePlural}}
+              </a>
+            </div>
           </li>
         {{else}}
-          <li class="dashed">
-            <span>- none -</span>
+          <li class='dashed'>
+            <div class='left'>
+              <span class='no-link'>- none -</span>
+            </div>
           </li>
         {{/each}}
       </ul>

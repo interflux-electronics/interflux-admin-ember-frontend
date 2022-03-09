@@ -1,5 +1,5 @@
 {{#with @model.image as |image|}}
-  <Modal @id="image">
+  <Modal @id='image'>
     <ResponsiveImage
       @path={{image.path}}
       @variations={{image.variations}}
@@ -12,13 +12,13 @@
     {{#if this.showProducts}}
       <h2>Product</h2>
       <Field::ManyToMany
-        @label="Which product is this?"
+        @label='Which product is this?'
         @baseRecord={{image}}
-        @baseModel="image"
-        @baseLabel="productImages"
-        @joinModel="product-image"
-        @targetModel="product"
-        @targetLabel="name"
+        @baseModel='image'
+        @baseLabel='productImages'
+        @joinModel='product-image'
+        @targetModel='product'
+        @targetLabel='name'
         @targetRoute='secure.products.product'
       />
     {{/if}}
@@ -28,18 +28,16 @@
     {{#if image.hasJPG}}
       <Fieldset
         @label='JPGs'
-        @legend="Compressed, small file size, poor visual quality, can be used in all apps."
+        @legend='Compressed, small file size, poor visual quality, can be used in all apps.'
       >
-        <ul class="list">
+        <ul class='list'>
           {{#each image.JPGs as |file|}}
             <li>
-              <a
-                href={{file.url}}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {{if file.size file.size file.path}}
-              </a>
+              <div class='left'>
+                <a href={{file.url}} target='_blank' rel='noreferrer noopener'>
+                  {{if file.size file.size file.path}}
+                </a>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -49,18 +47,16 @@
     {{#if image.hasWEBP}}
       <Fieldset
         @label='WEBPs'
-        @legend="Super compressed, smallest file size, 50% smaller than JPG, same poor visual quality as JPG, can only be used in websites."
+        @legend='Super compressed, smallest file size, 50% smaller than JPG, same poor visual quality as JPG, can only be used in websites.'
       >
-        <ul class="list">
+        <ul class='list'>
           {{#each image.WEBPs as |file|}}
             <li>
-              <a
-                href={{file.url}}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {{file.size}}
-              </a>
+              <div class='left'>
+                <a href={{file.url}} target='_blank' rel='noreferrer noopener'>
+                  {{file.size}}
+                </a>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -70,22 +66,20 @@
     {{#if image.hasPNG}}
       <Fieldset
         @label='PNG'
-        @legend="For designers, lossless, no compression, great quality, huge file size, can be used in all apps."
+        @legend='For designers, lossless, no compression, great quality, huge file size, can be used in all apps.'
       >
-        <ul class="list">
+        <ul class='list'>
           {{#each image.PNGs as |file|}}
             <li>
-              <a
-                href={{file.url}}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {{#if file.size}}
-                  {{file.size}}
-                {{else}}
-                  {{file.label}}
-                {{/if}}
-              </a>
+              <div class='left'>
+                <a href={{file.url}} target='_blank' rel='noreferrer noopener'>
+                  {{#if file.size}}
+                    {{file.size}}
+                  {{else}}
+                    {{file.label}}
+                  {{/if}}
+                </a>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -95,18 +89,16 @@
     {{#if image.hasSVG}}
       <Fieldset
         @label='SVG'
-        @legend="Best quality because is vectorised, does not use pixels, small file size, can only be used in design tools and websites."
+        @legend='Best quality because is vectorised, does not use pixels, small file size, can only be used in design tools and websites.'
       >
-        <ul class="list">
+        <ul class='list'>
           {{#each image.SVGs as |file|}}
             <li>
-              <a
-                href={{file.url}}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {{file.label}}
-              </a>
+              <div class='left'>
+                <a href={{file.url}} target='_blank' rel='noreferrer noopener'>
+                  {{file.label}}
+                </a>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -117,7 +109,7 @@
 
     <Field::String
       @label='Metadata (for robots)'
-      @legend="On our website we hide metadata behind every image, which can only be read by Google and social media. These are essential for our images to rank in Google Image search. Please never leave these blank and where possible include key words like the product name (IF 2005M), family (soldering flux) and something unique (25L front view)."
+      @legend='On our website we hide metadata behind every image, which can only be read by Google and social media. These are essential for our images to rank in Google Image search. Please never leave these blank and where possible include key words like the product name (IF 2005M), family (soldering flux) and something unique (25L front view).'
       @record={{image}}
       @attribute='alt'
       @multiline='true'
@@ -126,7 +118,7 @@
     {{#if this.showLabel}}
       <Field::String
         @label='Label (for humans)'
-        @legend="The label is visible to visitors, unlike the metadata. This label can be useful for helping visitors distinguish between for SnAgCu and SnPB alloys or 25L and 10L drums. This is optional."
+        @legend='The label is visible to visitors, unlike the metadata. This label can be useful for helping visitors distinguish between for SnAgCu and SnPB alloys or 25L and 10L drums. This is optional.'
         @record={{image}}
         @attribute='caption'
         @multiline='true'
@@ -139,8 +131,8 @@
         @legend='When we receive images from other companies, we should attribute them and link to their website. The copyright link will show right below the label. Leave blank if the image belongs to Interflux.'
         @baseRecord={{image}}
         @baseLabel='company'
-        @targetModel="company"
-        @targetFilter="businessName"
+        @targetModel='company'
+        @targetFilter='businessName'
         @minKeyStrokes='2'
       />
     {{/if}}
@@ -148,17 +140,26 @@
     <h2>FYI</h2>
 
     <p><strong>What is a CDN?</strong></p>
-    <p>A Content Delivery Network (CDN) is designed to speed up websites. It's where we store all the images, videos and PDFs. Location: <a
-        href="https://cdn.interflux.com/index.html"
-        target="_blank"
-        rel="noreferrer noopener"
+    <p>A Content Delivery Network (CDN) is designed to speed up websites. It's
+      where we store all the images, videos and PDFs. Location:
+      <a
+        href='https://cdn.interflux.com/index.html'
+        target='_blank'
+        rel='noreferrer noopener'
       >cdn.interflux.com</a></p>
 
     <p><strong>Why so many image sizes?</strong></p>
-    <p>To make our website faster. Fast website means happy visitors and higher ranking in Google. To make sure the images on our website download as fast as humanly possible we do the following:</p>
-    <p>1. We store images on a CDN. Such a network copies the images to all continents so that no matter where you are in the world, the latency between you and the server will be low.</p>
-    <p>2. We keep 14 sizes of every images on our CDN. Our website are smart enough to download only the smallest possible size which still looks sharp.</p>
-    <p>3. We replace JPG with WEBP wherever possible, which is about 50% smaller in file size than JPG.</p>
+    <p>To make our website faster. Fast website means happy visitors and higher
+      ranking in Google. To make sure the images on our website download as fast
+      as humanly possible we do the following:</p>
+    <p>1. We store images on a CDN. Such a network copies the images to all
+      continents so that no matter where you are in the world, the latency
+      between you and the server will be low.</p>
+    <p>2. We keep 14 sizes of every images on our CDN. Our website are smart
+      enough to download only the smallest possible size which still looks
+      sharp.</p>
+    <p>3. We replace JPG with WEBP wherever possible, which is about 50% smaller
+      in file size than JPG.</p>
     <p>4. We use SVG instead of PNG.</p>
 
     <h2>Database</h2>

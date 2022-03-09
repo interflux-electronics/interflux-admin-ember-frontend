@@ -29,9 +29,11 @@
       <ul class='list'>
         {{#each document.files as |file|}}
           <li>
-            <a href={{file.url}} target='_blank' rel='noreferrer noopener'>
-              {{file.label}}
-            </a>
+            <div class='left'>
+              <a href={{file.url}} target='_blank' rel='noreferrer noopener'>
+                {{file.label}}
+              </a>
+            </div>
           </li>
         {{/each}}
       </ul>

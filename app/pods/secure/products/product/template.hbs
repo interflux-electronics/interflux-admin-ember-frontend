@@ -497,28 +497,36 @@
       <ul class='list'>
         {{#if product.onFrontPage}}
           <li>
-            <Link @url='{{env 'publicHost'}}/en/' @label='front-page' />
+            <div class='left'>
+              <Link @url='{{env 'publicHost'}}/en/' @label='front-page' />
+            </div>
           </li>
         {{/if}}
         <li>
-          <Link @url='{{product.url}}' @label='product page' />
+          <div class='left'>
+            <Link @url='{{product.url}}' @label='product page' />
+          </div>
         </li>
         <li>
-          <a
-            href={{product.family.url}}
-            target='_blank'
-            rel='noreferrer noopener'
-          >
-            {{product.family.namePlural}}
-            page
-          </a>
+          <div class='left'>
+            <a
+              href={{product.family.url}}
+              target='_blank'
+              rel='noreferrer noopener'
+            >
+              {{product.family.namePlural}}
+              page
+            </a>
+          </div>
         </li>
         {{#each product.uses as |use|}}
           <li>
-            <a href={{use.url}} target='_blank' rel='noreferrer noopener'>
-              {{use.text}}
-              page
-            </a>
+            <div class='left'>
+              <a href={{use.url}} target='_blank' rel='noreferrer noopener'>
+                {{use.text}}
+                page
+              </a>
+            </div>
           </li>
         {{/each}}
       </ul>

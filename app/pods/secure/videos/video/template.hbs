@@ -15,11 +15,13 @@
         <ul class='list'>
           {{#each video.MP4s as |file|}}
             <li>
-              <a
-                href={{file.url}}
-                target='_blank'
-                rel='noreferrer noopener'
-              >{{file.label}}</a>
+              <div class='left'>
+                <a
+                  href={{file.url}}
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{file.label}}</a>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -34,11 +36,13 @@
         <ul class='list'>
           {{#each video.WEBMs as |file|}}
             <li>
-              <a
-                href={{file.url}}
-                target='_blank'
-                rel='noreferrer noopener'
-              >{{file.label}}</a>
+              <div class='left'>
+                <a
+                  href={{file.url}}
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{file.label}}</a>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -68,13 +72,17 @@
         <ul class='list'>
           {{#if video.webinar.id}}
             <li>
-              <a href={{href-to 'secure.webinars.webinar' video.webinar.id}}>
-                {{video.webinar.title}}
-              </a>
+              <div class='left'>
+                <a href={{href-to 'secure.webinars.webinar' video.webinar.id}}>
+                  {{video.webinar.title}}
+                </a>
+              </div>
             </li>
           {{else}}
             <li class='dashed'>
-              <span>- none -</span>
+              <div class='left'>
+                <span class='no-link'>- none -</span>
+              </div>
             </li>
           {{/if}}
         </ul>

@@ -40,9 +40,11 @@
         {{#each use.families as |family|}}
           {{#if family.id}}
             <li>
-              <a href={{href-to 'secure.families.family' family.id}}>
-                {{family.namePlural}}
-              </a>
+              <div class='left'>
+                <a href={{href-to 'secure.families.family' family.id}}>
+                  {{family.namePlural}}
+                </a>
+              </div>
             </li>
           {{/if}}
         {{else}}

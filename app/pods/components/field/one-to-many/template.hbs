@@ -2,7 +2,7 @@
   @id={{this.id}}
   @label={{@label}}
   @legend={{@legend}}
-  @component="one-to-many"
+  @component='one-to-many'
   @theme={{@theme}}
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
@@ -12,7 +12,7 @@
     <Search
       @id={{this.id}}
       @theme={{@theme}}
-      @placeholder="Search"
+      @placeholder='Search'
       @disabled={{@disabled}}
       @value={{this.value}}
       @state={{this.state}}
@@ -29,42 +29,44 @@
     />
   {{else}}
     {{#if this.chosenRecord}}
-      <ul class="list">
+      <ul class='list'>
         <li class={{if this.chosenRecord 'solid' 'dashed'}}>
-          {{#if this.chosenRecord}}
-            {{#if @targetRoute}}
-              <a href={{href-to @targetRoute this.chosenRecord.id}}>
-                {{this.chosenLabel}}
-              </a>
+          <div class='left'>
+            {{#if this.chosenRecord}}
+              {{#if @targetRoute}}
+                <a href={{href-to @targetRoute this.chosenRecord.id}}>
+                  {{this.chosenLabel}}
+                </a>
+              {{else}}
+                <span class='no-link'>{{this.chosenLabel}}</span>
+              {{/if}}
             {{else}}
-              <span>{{this.chosenLabel}}</span>
+              <span>- none -</span>
             {{/if}}
-          {{else}}
-            <span>- none -</span>
-          {{/if}}
+          </div>
 
-          <div class="right">
+          <div class='right'>
             {{#if this.error}}
-              <div class="icon error">
+              <div class='icon error'>
                 <Svg::Error />
               </div>
             {{/if}}
 
             {{#if @disabled}}
-              <div class="icon lock">
+              <div class='icon lock'>
                 <Svg::Lock />
               </div>
             {{else}}
               <DotDotDotMenu>
                 <Button
-                  @icon="edit"
-                  @text="edit"
+                  @icon='edit'
+                  @text='edit'
                   @onMouseDown={{this.onEdit}}
                 />
                 {{#if this.chosenRecord}}
                   <Button
-                    @icon="trash"
-                    @text="remove"
+                    @icon='trash'
+                    @text='remove'
                     @onMouseDown={{fn this.onSelect null}}
                   />
                 {{/if}}
@@ -74,13 +76,15 @@
         </li>
       </ul>
     {{else}}
-      <ul class="list">
-        <li class="dashed">
-          <span>- none -</span>
-          <div class="right">
+      <ul class='list'>
+        <li class='dashed'>
+          <div class='left'>
+            <span class='no-link'>- none -</span>
+          </div>
+          <div class='right'>
             <Button
-              @theme="save select"
-              @text="select"
+              @theme='save select'
+              @text='select'
               @onClick={{this.onEdit}}
             />
           </div>
@@ -90,11 +94,15 @@
   {{/if}}
 
   {{#if this.error}}
-    <p class="message error">Sorry, something didn't quite go as planned. Nobody should ever see this message, so please <a
-        href="mailto:j.werkhoven@interflux.com"
-        target="_blank"
-        rel="noreferrer noopener"
-      >tell Jan</a> that you encounter <strong>error {{this.error}}</strong>.
+    <p class='message error'>Sorry, something didn't quite go as planned. Nobody
+      should ever see this message, so please
+      <a
+        href='mailto:j.werkhoven@interflux.com'
+        target='_blank'
+        rel='noreferrer noopener'
+      >tell Jan</a>
+      that you encounter
+      <strong>error {{this.error}}</strong>.
     </p>
   {{/if}}
 </Fieldset>
