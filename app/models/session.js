@@ -55,10 +55,20 @@ export default class SessionModel extends Model {
   }
 
   get ipCountryFlag() {
+    if (!this.ipCountryId) {
+      return null;
+    }
     return `${ENV.cdnHost}/images/flags/${this.ipCountryId}.svg`;
   }
 
   get ipCountryName() {
-    return this.store.peekRecord('country', this.ipCountryId).nameEnglish;
+    if (!this.ipCountryId) {
+      return '-';
+    }
+    const country = this.store.peekRecord('country', this.ipCountryId);
+    if (!country?.id) {
+      return '-';
+    }
+    return country.nameEnglish;
   }
 }
