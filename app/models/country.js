@@ -1,4 +1,5 @@
 import Model, { attr, hasMany } from '@ember-data/model';
+import ENV from 'interflux/config/environment';
 
 export default class CountryModel extends Model {
   @attr('string') nameEnglish;
@@ -30,5 +31,9 @@ export default class CountryModel extends Model {
 
   get languages() {
     return this.countryLanguages.mapBy('language');
+  }
+
+  get flag() {
+    return `${ENV.cdnHost}/images/flags/${this.id}.svg`;
   }
 }

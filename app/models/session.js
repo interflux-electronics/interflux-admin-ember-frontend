@@ -46,20 +46,8 @@ export default class SessionModel extends Model {
     const sec = ms / 1000;
     const min = sec / 60;
     const hours = min / 60;
-    // const days = hours / 24;
 
     return Math.floor(hours);
-
-    // return days;
-    // if (days === 0) {
-    //   return 'today';
-    // }
-    //
-    // if (days === 1) {
-    //   return 'yesterday';
-    // }
-    //
-    // return `${days} days ago`;
   }
 
   get isp() {
@@ -67,7 +55,7 @@ export default class SessionModel extends Model {
   }
 
   get ipCountryFlag() {
-    return `${ENV.cdnHost}/images/public/flags/${this.ipCountryId}.svg`;
+    return `${ENV.cdnHost}/images/flags/${this.ipCountryId}.svg`;
   }
 
   get ipCountryName() {

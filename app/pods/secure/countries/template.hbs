@@ -5,7 +5,9 @@
     @records={{@model.countries}}
     @linkRoute='secure.countries.country'
     @showCreateButton='true'
+    @sortBy='nameEnglish'
     @columns={{array
+      (hash key='flag' label='Flag' isImage='true')
       (hash key='nameEnglish' label='Country')
       (hash key='companyNames' label='Covered by')
     }}
