@@ -82,6 +82,11 @@ export default class NavResourcesComponent extends Component {
         label: 'Countries',
         route: 'secure.countries',
         icon: 'svg/flag'
+      },
+      {
+        label: 'Sessions',
+        route: 'secure.sessions',
+        icon: 'svg/eye'
       }
 
       // {

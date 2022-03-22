@@ -1,0 +1,17 @@
+<Page::Content @id='sessions'>
+  <h1>Sessions</h1>
+
+  <Spreadsheet
+    @records={{@model.sessions}}
+    @linkRoute='secure.sessions.session'
+    @columns={{array
+      (hash key='timeFromNow' label='Hours ago')
+      (hash key='ipCountryFlag' label='Flag' isImage='true')
+      (hash key='ipCountryName' label='Country')
+      (hash key='href' label='Landing page')
+      (hash key='ip' label='IP')
+      (hash key='ipIsp' label='ISP')
+      (hash key='browserApp' label='browser')
+    }}
+  />
+</Page::Content>

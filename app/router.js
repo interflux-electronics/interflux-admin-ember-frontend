@@ -62,6 +62,10 @@ Router.map(function () {
       this.route('country', { path: '/:id' });
     });
 
+    this.route('sessions', function () {
+      this.route('session', { path: '/:id' });
+    });
+
     // this.route('leads', function () {
     //   this.route('lead', { path: '/:id' });
     // });
