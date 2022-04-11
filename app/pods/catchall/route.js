@@ -5,6 +5,6 @@ export default class CatchallRoute extends BaseRoute {
     console.warn('Unknown route, redirecting to index');
     console.warn(location.href);
     console.warn({ transition, location });
-    this.transitionTo('index');
+    this.router.transitionTo('index');
   }
 }

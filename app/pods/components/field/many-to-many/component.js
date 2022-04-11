@@ -1,7 +1,7 @@
 import FieldComponent from '../component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 // <Field::ManyToMany
 //   @label="Products"

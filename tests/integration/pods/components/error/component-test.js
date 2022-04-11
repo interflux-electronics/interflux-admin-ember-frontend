@@ -15,6 +15,6 @@ module('Integration | Component | error', function (hooks) {
 
     assert.ok(this.element.querySelector('[role="alert"]'));
     assert.ok(this.element.querySelector('p'));
-    assert.equal(this.element.querySelector('p').textContent, 'Foo');
+    assert.strictEqual(this.element.querySelector('p').textContent, 'Foo');
   });
 });

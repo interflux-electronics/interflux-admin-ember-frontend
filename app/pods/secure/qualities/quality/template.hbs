@@ -1,4 +1,4 @@
-{{#with @model.quality as |quality|}}
+{{#let @model.quality as |quality|}}
   <Modal @id='quality'>
     <h1>{{quality.text}}</h1>
     <h2>Properties</h2>
@@ -29,7 +29,7 @@
 
     <div class='icon'>
       {{#if quality.image}}
-        {{#with quality.image as |image|}}
+        {{#let quality.image as |image|}}
           <a href={{href-to 'secure.images.image' quality.image.id}}>
             <ResponsiveImage
               @path={{image.path}}
@@ -46,7 +46,7 @@
               @alt={{image.alt}}
             />
           </a>
-        {{/with}}
+        {{/let}}
       {{/if}}
     </div>
 
@@ -94,4 +94,4 @@
       @disabled='true'
     />
   </Modal>
-{{/with}}
+{{/let}}

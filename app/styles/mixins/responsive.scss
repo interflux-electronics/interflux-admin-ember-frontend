@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Mixins for breaking the CSS into 4 breakpoints:
 //
 // @include widescreen { }
@@ -21,12 +23,27 @@
   }
 }
 @mixin tablet {
-  @media (max-width: 900px) and (min-width: 601px) {
+  @media (max-width: 900px) and (min-width: 501px) {
     @content;
   }
 }
 @mixin mobile {
-  @media (max-width: 600px) {
+  @media (max-width: 500px) {
+    @content;
+  }
+}
+@mixin desktop-and-up {
+  @media (min-width: 901px) {
+    @content;
+  }
+}
+@mixin tablet-and-below {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     @content;
   }
 }
@@ -45,10 +62,32 @@
 // Documentation on SASS functions:
 // https://sass-lang.com/documentation/at-rules/function
 //
-@function vw($desired_px, $screen_width: 1200) {
-  @return #{($desired_px / $screen_width * 100) + 'vw'};
+@function px($desired_vw, $screen_width: 1200) {
+  $number: strip-unit($desired_vw);
+  @return #{(math.div($number, 100) * $screen_width) + 'px'};
 }
 
-@function px($desired_vw, $screen_width) {
-  @return #{(($desired_vw / 100) * $screen_width) + 'px'};
+@function vw($desired_px, $screen_width: 1200) {
+  $number: strip-unit($desired_px);
+  @return #{(math.div($number, $screen_width) * 100) + 'vw'};
+}
+
+@function vw-tablet($px) {
+  @return vw($px, 800);
+}
+
+@function vw-mobile($px) {
+  @return vw($px, 400);
+}
+
+// Remove the unit of a length
+// @param {Number} $number - Number to remove unit from
+// @return {Number} - Unitless number
+// https://css-tricks.com/snippets/sass/strip-unit-function/
+//
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+  @return $number;
 }

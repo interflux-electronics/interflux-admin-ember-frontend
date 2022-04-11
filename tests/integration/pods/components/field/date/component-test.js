@@ -16,7 +16,7 @@ module('Integration | Component | field/date', function (hooks) {
       <Field::Date
         @label='Start time'
         @legend='Enter UTC times.'
-        @record={{webinar}}
+        @record={{this.webinar}}
         @attribute='startTime'
       />
     `);
@@ -26,8 +26,8 @@ module('Integration | Component | field/date', function (hooks) {
     const legend = this.element.querySelector('legend');
 
     assert.ok(input);
-    assert.equal(input.value, '2021-01-30T08:33');
-    assert.equal(label.innerText, 'Start time');
-    assert.equal(legend.innerText, 'Enter UTC times.');
+    assert.strictEqual(input.value, '2021-01-30T08:33');
+    assert.strictEqual(label.innerText, 'Start time');
+    assert.strictEqual(legend.innerText, 'Enter UTC times.');
   });
 });

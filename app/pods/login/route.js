@@ -1,5 +1,5 @@
 import BaseRoute from 'interflux/pods/base/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class LoginRoute extends BaseRoute {
   @service auth;
@@ -7,7 +7,7 @@ export default class LoginRoute extends BaseRoute {
   beforeModel() {
     if (this.auth.token) {
       console.warn('Found auth token, redirecting to secure.index');
-      this.transitionTo('secure.index');
+      this.router.transitionTo('secure.index');
     }
   }
 }

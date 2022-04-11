@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  extends: 'octane',
+  extends: 'recommended',
 
   rules: {
     'no-down-event-binding': 'off',
@@ -10,6 +10,8 @@ module.exports = {
     'no-redundant-landmark-role': 'off',
     'require-input-label': 'off',
     'no-potential-path-strings': 'warn',
-    'no-heading-inside-button': 'warn'
+    'no-heading-inside-button': 'warn',
+    'require-presentational-children': 'warn',
+    'no-autofocus-attribute': 'warn'
   }
 };

@@ -1,4 +1,4 @@
-{{#with @model.quality as |quality|}}
+{{#let @model.quality as |quality|}}
   <Modal @id='quality-create'>
     <h1>Create new product quality</h1>
 
@@ -10,4 +10,4 @@
       @afterSave={{this.afterSave}}
     />
   </Modal>
-{{/with}}
+{{/let}}

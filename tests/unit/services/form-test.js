@@ -13,8 +13,8 @@ module('Unit | Service | form', function (hooks) {
     const b = service.getUniqueId();
     const c = service.getUniqueId();
 
-    assert.equal(a, 1);
-    assert.equal(b, 2);
-    assert.equal(c, 3);
+    assert.strictEqual(a, 1);
+    assert.strictEqual(b, 2);
+    assert.strictEqual(c, 3);
   });
 });

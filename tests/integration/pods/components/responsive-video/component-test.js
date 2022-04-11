@@ -18,7 +18,7 @@ module('Integration | Component | responsive-video', function (hooks) {
 
     const svg = this.element.querySelector('svg');
 
-    assert.equal(svg.getAttribute('viewBox'), '0 0 16 9');
+    assert.strictEqual(svg.getAttribute('viewBox'), '0 0 16 9');
     assert.ok(this.element.querySelector('source[type="video/webm"]'));
     assert.ok(this.element.querySelector('source[type="video/mp4"]'));
   });

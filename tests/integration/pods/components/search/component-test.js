@@ -37,6 +37,6 @@ module('Integration | Component | <Search>', function (hooks) {
     const input = this.element.querySelector('input');
 
     assert.ok(search.classList.contains(theme));
-    assert.equal(input.id, `input-${id}`);
+    assert.strictEqual(input.id, `input-${id}`);
   });
 });

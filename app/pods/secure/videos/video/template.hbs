@@ -1,4 +1,4 @@
-{{#with @model.video as |video|}}
+{{#let @model.video as |video|}}
   <Modal @id='video'>
 
     <ResponsiveVideo @video={{video}} />
@@ -89,4 +89,4 @@
       </Fieldset>
     {{/if}}
   </Modal>
-{{/with}}
+{{/let}}

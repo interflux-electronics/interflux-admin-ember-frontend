@@ -29,9 +29,9 @@ module('Integration | Component | <Fieldset>', function (hooks) {
     const label = this.element.querySelector('label');
     const input = this.element.querySelector('input');
 
-    assert.equal(field.id, `field-${id}`);
-    assert.equal(input.id, `input-${id}`);
-    assert.equal(label.getAttribute('for'), `input-${id}`);
-    assert.equal(label.innerText, str);
+    assert.strictEqual(field.id, `field-${id}`);
+    assert.strictEqual(input.id, `input-${id}`);
+    assert.strictEqual(label.getAttribute('for'), `input-${id}`);
+    assert.strictEqual(label.innerText, str);
   });
 });

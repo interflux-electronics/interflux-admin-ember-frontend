@@ -1,4 +1,4 @@
-{{#with @model.family as |family|}}
+{{#let @model.family as |family|}}
   <Modal @id='family-create'>
     <h1>Create new product family</h1>
 
@@ -10,4 +10,4 @@
       @afterSave={{this.afterSave}}
     />
   </Modal>
-{{/with}}
+{{/let}}

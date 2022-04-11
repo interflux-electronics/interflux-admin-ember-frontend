@@ -1,4 +1,4 @@
-{{#with @model.use as |use|}}
+{{#let @model.use as |use|}}
   <Modal @id='use-create'>
     <h1>Create new process</h1>
 
@@ -10,4 +10,4 @@
       @afterSave={{this.afterSave}}
     />
   </Modal>
-{{/with}}
+{{/let}}

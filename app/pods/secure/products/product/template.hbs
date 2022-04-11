@@ -1,12 +1,12 @@
-{{#with @model.product as |product|}}
+{{#let @model.product as |product|}}
   <Modal @id='product'>
     {{#if product.image}}
-      {{#with product.image as |image|}}
+      {{#let product.image as |image|}}
         <ResponsiveImage
           @path={{image.path}}
           @variations={{image.variations}}
         />
-      {{/with}}
+      {{/let}}
     {{/if}}
 
     <h1>{{product.name}}</h1>
@@ -168,12 +168,12 @@
                 ' - avatar'
               }}</p>
 
-            {{#with relation.image as |image|}}
+            {{#let relation.image as |image|}}
               <ResponsiveImage
                 @path={{image.path}}
                 @variations={{image.variations}}
               />
-            {{/with}}
+            {{/let}}
 
             <div class='buttons'>
               {{#if (not (eq relation.image.id product.image.id))}}
@@ -223,12 +223,12 @@
       <ul class='images'>
         {{#each this.hiddenImages as |relation|}}
           <li>
-            {{#with relation.image as |image|}}
+            {{#let relation.image as |image|}}
               <ResponsiveImage
                 @path={{image.path}}
                 @variations={{image.variations}}
               />
-            {{/with}}
+            {{/let}}
 
             <div class='buttons'>
               <Button
@@ -257,12 +257,12 @@
     >
       <ul class='images'>
         <li class='avatar'>
-          {{#with product.image as |image|}}
+          {{#let product.image as |image|}}
             <ResponsiveImage
               @path={{image.path}}
               @variations={{image.variations}}
             />
-          {{/with}}
+          {{/let}}
 
           <div class='buttons'>
             <Button
@@ -308,7 +308,7 @@
                 </li>
               {{else}}
                 {{#each this.publicImages as |productImage|}}
-                  {{#with productImage.image as |image|}}
+                  {{#let productImage.image as |image|}}
                     <li>
                       <ResponsiveImage
                         @path={{image.path}}
@@ -327,7 +327,7 @@
                         />
                       </div>
                     </li>
-                  {{/with}}
+                  {{/let}}
                 {{else}}
                   <p>- none -</p>
                 {{/each}}
@@ -543,4 +543,4 @@
       @disabled='true'
     />
   </Modal>
-{{/with}}
+{{/let}}

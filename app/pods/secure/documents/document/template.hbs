@@ -1,4 +1,4 @@
-{{#with @model.document as |document|}}
+{{#let @model.document as |document|}}
   <Modal @id='document'>
     <h1>{{document.name}}</h1>
     <h2>Properties</h2>
@@ -78,4 +78,4 @@
       @disabled='true'
     />
   </Modal>
-{{/with}}
+{{/let}}

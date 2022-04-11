@@ -22,8 +22,8 @@ module('Integration | Component | <Button>', function (hooks) {
     const a = this.element.querySelector('a');
 
     assert.notEqual(a, undefined);
-    assert.equal(a.textContent.trim(), this.text);
-    assert.equal(a.target, '');
+    assert.strictEqual(a.textContent.trim(), this.text);
+    assert.strictEqual(a.target, '');
   });
 
   test('it renders <a> to an external URL', async function (assert) {
@@ -42,9 +42,9 @@ module('Integration | Component | <Button>', function (hooks) {
     const a = this.element.querySelector('a');
 
     assert.notEqual(a, undefined);
-    assert.equal(a.textContent.trim(), this.text);
-    assert.equal(a.href, this.url);
-    assert.equal(a.target, '_blank');
+    assert.strictEqual(a.textContent.trim(), this.text);
+    assert.strictEqual(a.href, this.url);
+    assert.strictEqual(a.target, '_blank');
   });
 
   test('it renders <button> which fires @onClick', async function (assert) {
@@ -68,12 +68,12 @@ module('Integration | Component | <Button>', function (hooks) {
     const button = this.element.querySelector('button');
 
     assert.notEqual(button, undefined);
-    assert.equal(button.textContent.trim(), this.text);
-    assert.equal(buttonWasClicked, false);
+    assert.strictEqual(button.textContent.trim(), this.text);
+    assert.false(buttonWasClicked);
 
     await click('button');
 
-    assert.equal(buttonWasClicked, true);
+    assert.true(buttonWasClicked);
   });
 
   test('it renders @theme', async function (assert) {

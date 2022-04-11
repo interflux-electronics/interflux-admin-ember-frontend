@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import ENV from 'interflux/config/environment';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import {
   AbortError,
   ConflictError,

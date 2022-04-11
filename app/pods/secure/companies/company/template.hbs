@@ -1,4 +1,4 @@
-{{#with @model.company as |company|}}
+{{#let @model.company as |company|}}
   <Modal @id='company'>
 
     <h1>{{company.businessName}}</h1>
@@ -180,4 +180,4 @@
     {{/if}}
   </Modal>
 
-{{/with}}
+{{/let}}

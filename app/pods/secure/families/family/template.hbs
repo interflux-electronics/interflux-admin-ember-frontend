@@ -1,4 +1,4 @@
-{{#with @model.family as |family|}}
+{{#let @model.family as |family|}}
   <Modal @id='family'>
     <h1>{{family.namePlural}}</h1>
     <h2>Properties</h2>
@@ -89,14 +89,14 @@
           {{#each this.sortedImages as |joinRecord|}}
             <li>
               <p>{{joinRecord.rankAmongImages}}</p>
-              {{#with joinRecord.image as |image|}}
+              {{#let joinRecord.image as |image|}}
                 <ResponsiveImage
                   @path={{image.path}}
                   @variations={{image.variations}}
                   @caption={{image.caption}}
                   @alt={{image.alt}}
                 />
-              {{/with}}
+              {{/let}}
             </li>
           {{/each}}
         </ul>
@@ -148,4 +148,4 @@
       {{/if}}
     {{/if}}
   </Modal>
-{{/with}}
+{{/let}}

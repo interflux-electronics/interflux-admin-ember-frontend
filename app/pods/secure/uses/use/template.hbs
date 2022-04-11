@@ -1,4 +1,4 @@
-{{#with @model.use as |use|}}
+{{#let @model.use as |use|}}
   <Modal @id='use'>
     <h1>{{use.text}}</h1>
     <h2>Properties</h2>
@@ -69,7 +69,7 @@
 
     <div class='icon'>
       {{#if use.image}}
-        {{#with use.image as |image|}}
+        {{#let use.image as |image|}}
           <a href={{href-to 'secure.images.image' use.image.id}}>
             <ResponsiveImage
               @path={{image.path}}
@@ -86,7 +86,7 @@
               @alt={{image.alt}}
             />
           </a>
-        {{/with}}
+        {{/let}}
       {{else}}
         <p>- no icon -</p>
       {{/if}}
@@ -111,14 +111,14 @@
         {{#each use.images as |useImage|}}
           <li>
             <p>{{useImage.image.alt}}</p>
-            {{#with useImage.image as |image|}}
+            {{#let useImage.image as |image|}}
               <ResponsiveImage
                 @path={{image.path}}
                 @variations={{image.variations}}
                 @caption={{image.caption}}
                 @alt={{image.alt}}
               />
-            {{/with}}
+            {{/let}}
           </li>
         {{/each}}
       </ul>
@@ -150,4 +150,4 @@
       {{/if}}
     {{/if}}
   </Modal>
-{{/with}}
+{{/let}}

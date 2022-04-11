@@ -25,6 +25,9 @@ module('Integration | Component | field/string/radio', function (hooks) {
       />
     `);
 
-    assert.equal(this.element.querySelectorAll('[role="radio"]').length, 3);
+    assert.strictEqual(
+      this.element.querySelectorAll('[role="radio"]').length,
+      3
+    );
   });
 });

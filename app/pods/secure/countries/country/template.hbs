@@ -1,4 +1,4 @@
-{{#with @model.country as |country|}}
+{{#let @model.country as |country|}}
   <Modal @id='country'>
     <h1>{{country.nameEnglish}}</h1>
 
@@ -45,4 +45,4 @@
       @targetRoute='secure.companies.company'
     />
   </Modal>
-{{/with}}
+{{/let}}

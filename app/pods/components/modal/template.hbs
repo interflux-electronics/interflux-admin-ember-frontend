@@ -1,19 +1,31 @@
-<div id='modal'>
-  <div class='overlay'>
-    <a href={{href-to this.parentRoute}}></a>
+{{#in-element this.modalParent}}
+  <div id='modal' class={{this.theme}}>
+    <div class='overlay'>
+      <a href={{href-to this.parentRoute}} aria-label="Close"></a>
+    </div>
+
+    <div class='content' id={{@id}}>
+      {{#if @loading}}
+        <p>Loading ...</p>
+      {{else if @error}}
+        <div class='box error'>
+          <Svg::Error />
+          <RouteErrorMessage />
+        </div>
+      {{else}}
+        <div class='box'>
+          {{yield}}
+        </div>
+      {{/if}}
+    </div>
+
+    {{!--
+    <Button
+      @text='Close'
+      @icon='close'
+      @theme='tertiary medium white-text icon-right'
+      @route={{this.parentRoute}}
+    />
+    --}}
   </div>
-  <div class='content' id={{@id}}>
-    {{#if @loading}}
-      <p>Loading ...</p>
-    {{else if @error}}
-      <div class='box error'>
-        <Svg::Error />
-        <RouteErrorMessage />
-      </div>
-    {{else}}
-      <div class='box'>
-        {{yield}}
-      </div>
-    {{/if}}
-  </div>
-</div>
+{{/in-element}}

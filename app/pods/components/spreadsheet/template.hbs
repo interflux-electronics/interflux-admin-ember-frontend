@@ -51,11 +51,11 @@
         >
           {{#each @columns as |column|}}
             {{#if column.isImage}}
-              {{#with (get record column.key) as |url|}}
+              {{#let (get record column.key) as |url|}}
                 {{#if url}}
                   <Image @src={{url}} />
                 {{/if}}
-              {{/with}}
+              {{/let}}
             {{else}}
               <p data-search='me'>{{get record column.key}}</p>
             {{/if}}
@@ -90,18 +90,18 @@
                 {{on 'click' (fn this.select record.id)}}
               >
                 {{#if column.isImage}}
-                  {{#with (get record column.key) as |url|}}
+                  {{#let (get record column.key) as |url|}}
                     {{#if url}}
                       <Image @src={{url}} />
                     {{/if}}
-                  {{/with}}
+                  {{/let}}
                 {{else if column.isResponsiveImage}}
-                  {{#with (get record column.key) as |image|}}
+                  {{#let (get record column.key) as |image|}}
                     <ResponsiveImage
                       @path={{image.path}}
                       @variations={{image.variations}}
                     />
-                  {{/with}}
+                  {{/let}}
                 {{else}}
                   <p data-search='me'>{{get record column.key}}</p>
                 {{/if}}

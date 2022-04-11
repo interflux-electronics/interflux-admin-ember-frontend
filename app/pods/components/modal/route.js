@@ -1,15 +1,8 @@
 import BaseRoute from 'interflux/pods/base/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class ModalRoute extends BaseRoute {
   @service modal;
-
-  renderTemplate() {
-    this.render({
-      into: 'application',
-      outlet: 'modal'
-    });
-  }
 
   // Prevent <main> page from scrolling
   activate() {

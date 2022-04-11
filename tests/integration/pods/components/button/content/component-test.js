@@ -17,10 +17,10 @@ module('Integration | Component | <Button::Content>', function (hooks) {
       />
     `);
 
-    assert.equal(this.element.querySelectorAll('span').length, 1);
-    assert.equal(this.element.querySelectorAll('svg').length, 0);
-    assert.equal(this.element.querySelectorAll('div').length, 0);
-    assert.equal(this.element.innerText.trim(), this.text);
+    assert.strictEqual(this.element.querySelectorAll('span').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('svg').length, 0);
+    assert.strictEqual(this.element.querySelectorAll('div').length, 0);
+    assert.strictEqual(this.element.innerText.trim(), this.text);
   });
 
   test('it renders @text, @icon and block content', async function (assert) {
@@ -38,9 +38,9 @@ module('Integration | Component | <Button::Content>', function (hooks) {
       </Button::Content>
     `);
 
-    assert.equal(this.element.querySelectorAll('span').length, 1);
-    assert.equal(this.element.querySelectorAll('svg').length, 1);
-    assert.equal(this.element.querySelectorAll('.foo').length, 1);
-    assert.equal(this.element.innerText.trim(), this.text);
+    assert.strictEqual(this.element.querySelectorAll('span').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('svg').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('.foo').length, 1);
+    assert.strictEqual(this.element.innerText.trim(), this.text);
   });
 });

@@ -1,4 +1,4 @@
-{{#with @model.company as |company|}}
+{{#let @model.company as |company|}}
   <Modal @id='company-create'>
     <h1>
       {{if company.businessName company.businessName 'Create new company'}}
@@ -29,4 +29,4 @@
       @onClick={{this.onSave}}
     />
   </Modal>
-{{/with}}
+{{/let}}

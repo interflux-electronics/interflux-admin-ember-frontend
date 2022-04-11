@@ -9,7 +9,7 @@
 //
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import { pluralize } from 'ember-inflector';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class ApplicationAdapter extends JSONAPIAdapter {
   @service api;

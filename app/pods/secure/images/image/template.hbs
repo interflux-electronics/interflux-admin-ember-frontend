@@ -1,4 +1,4 @@
-{{#with @model.image as |image|}}
+{{#let @model.image as |image|}}
   <Modal @id='image'>
     <ResponsiveImage
       @path={{image.path}}
@@ -178,4 +178,4 @@
       @disabled='true'
     />
   </Modal>
-{{/with}}
+{{/let}}

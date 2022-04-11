@@ -1,4 +1,4 @@
-{{#with @model.person as |person|}}
+{{#let @model.person as |person|}}
   <Modal @id='person'>
 
     <h1>{{person.fullName}}</h1>
@@ -140,4 +140,4 @@
       {{/if}}
     {{/if}}
   </Modal>
-{{/with}}
+{{/let}}
