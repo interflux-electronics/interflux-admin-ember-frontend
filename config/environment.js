@@ -52,7 +52,7 @@ module.exports = function (env) {
   // Hosts
   const apiHost = apiHosts[env];
   const publicHost = publicHosts[env];
-  const admdinHost = adminHosts[env];
+  const adminHost = adminHosts[env];
   const cdnHost = cdnHosts[env];
   const oldHost = oldHosts[env];
 
@@ -76,7 +76,7 @@ module.exports = function (env) {
     isProduction,
     apiHost,
     publicHost,
-    admdinHost,
+    adminHost,
     cdnHost,
     oldHost,
     apiNamespace,
