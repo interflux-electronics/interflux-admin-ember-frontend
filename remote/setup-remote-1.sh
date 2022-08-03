@@ -96,11 +96,11 @@ nvm install
 
 echo "----------"
 echo "Installing Node packages..."
-( set -x; yarn install )
+( set -x; pnpm install )
 
 echo "----------"
 echo "Building dist..."
-( set -x; yarn build )
+( set -x; pnpm build )
 
 if [ -f "fastboot.js" ]; then
   echo "----------"

@@ -28,9 +28,9 @@ export NVM_DIR="$HOME/.nvm"
 echo "nvm install"
 nvm install
 echo "----------"
-( set -x; yarn install )
+( set -x; pnpm install )
 echo "----------"
-( set -x; yarn build )
+( set -x; pnpm build )
 echo "----------"
 echo "Deploy successful!"
 echo "----------"
