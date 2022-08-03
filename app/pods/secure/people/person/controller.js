@@ -24,4 +24,14 @@ export default class PersonController extends Controller {
   get showDeleteInstructions() {
     return !this.person.canBeDeleted && this.userClickedDelete;
   }
+
+  @action
+  setAvatar(rel) {
+    this.person.image = rel.image;
+    this.person.save({
+      adapterOptions: {
+        whitelist: 'image'
+      }
+    });
+  }
 }

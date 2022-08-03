@@ -5,7 +5,13 @@ export default class PersonRoute extends ModalRoute {
   model(params) {
     return hash({
       person: this.store.findRecord('person', params.id, {
-        include: ['companies', 'company_members'].join(',')
+        include: [
+          'companies',
+          'company_members',
+          'image',
+          'person_images',
+          'person_images.image'
+        ].join(',')
       })
     });
   }

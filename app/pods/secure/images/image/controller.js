@@ -9,8 +9,8 @@ export default class ImageController extends Controller {
     return this.image.category === 'products';
   }
 
-  get showProcesses() {
-    return this.image.category === 'processes';
+  get showPeople() {
+    return this.image.category === 'people';
   }
 
   get showLabel() {

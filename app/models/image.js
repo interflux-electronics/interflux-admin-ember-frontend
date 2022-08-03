@@ -8,8 +8,12 @@ export default class ImageModel extends Model {
   @attr('string') variations;
 
   @belongsTo('product', { inverse: 'image' }) product;
+  @belongsTo('person', { inverse: 'image' }) person;
+
   @hasMany('product', { inverse: 'images' }) products;
   @hasMany('product-image') productImages;
+  @hasMany('person', { inverse: 'images' }) people;
+  @hasMany('person-image') personImages;
   @hasMany('cdn-files') files;
 
   @belongsTo('company') company;

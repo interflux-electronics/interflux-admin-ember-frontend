@@ -23,6 +23,20 @@
       />
     {{/if}}
 
+    {{#if this.showPeople}}
+      <h2>Person</h2>
+      <Field::ManyToMany
+        @label='Who is in this photo?'
+        @baseRecord={{image}}
+        @baseModel='image'
+        @baseLabel='personImages'
+        @joinModel='person-image'
+        @targetModel='person'
+        @targetLabel='fullName'
+        @targetRoute='secure.people.person'
+      />
+    {{/if}}
+
     <h2>CDN files</h2>
 
     {{#if image.hasJPG}}
