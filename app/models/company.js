@@ -22,6 +22,7 @@ export default class CompanyModel extends Model {
   @attr('string') coreActivity;
   @attr('string') history;
   @attr('number') rankOnGroupWebsite;
+  @attr('number') headCount;
   @attr('boolean') showMarkets;
 
   @belongsTo('country') country;
@@ -43,9 +44,5 @@ export default class CompanyModel extends Model {
 
   get peopleCount() {
     return this.people.length;
-  }
-
-  get isInterfluxGroupMember() {
-    return this.businessName.startsWith('Interflux');
   }
 }
