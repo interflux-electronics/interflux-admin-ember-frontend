@@ -1,0 +1,36 @@
+{{#let @model.event as |event|}}
+  <Modal @id='event'>
+    <h1>{{if event.name event.name 'New event'}}</h1>
+
+    <h2>Details</h2>
+
+    <Field::String @label='Name' @record={{event}} @attribute='name' />
+    <Field::String @label='Location' @record={{event}} @attribute='location' />
+    <Field::String
+      @label='Start date'
+      @record={{event}}
+      @attribute='endDate'
+      @legend='Enter DD/MM/YYYY format'
+    />
+
+    <Field::String
+      @label='End date'
+      @record={{event}}
+      @attribute='startDate'
+      @legend='Enter DD/MM/YYYY format'
+    />
+
+    <Field::String
+      @label='Call to action'
+      @record={{event}}
+      @attribute='callToAction'
+    />
+
+    <Button
+      @text='Delete from database'
+      @onClick={{this.destroyRecord}}
+      @theme='danger-red'
+      @icon='warning'
+    />
+  </Modal>
+{{/let}}
