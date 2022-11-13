@@ -15,10 +15,10 @@ export default class EventCreateController extends Controller {
   get preventSave() {
     return (
       !this.event.name ||
-      !this.event.startDate ||
-      !this.event.endDate ||
-      !this.event.location ||
-      !this.event.callToAction
+      !this.event.dates ||
+      !this.event.city ||
+      !this.event.country.get('id') ||
+      !this.event.description
     );
   }
 
@@ -41,13 +41,7 @@ export default class EventCreateController extends Controller {
     this.event
       .save({
         adapterOptions: {
-          whitelist: [
-            'name',
-            'startDate',
-            'endDate',
-            'location',
-            'callToAction'
-          ]
+          whitelist: ['name', 'dates', 'city', 'country', 'description']
         }
       })
       .then(success)

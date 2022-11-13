@@ -1,9 +1,10 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, belongsTo } from '@ember-data/model';
 
 export default class EventModel extends Model {
   @attr('string') name;
-  @attr('string') startDate;
-  @attr('string') endDate;
-  @attr('string') location;
-  @attr('string') callToAction;
+  @attr('string') dates;
+  @attr('string') city;
+  @attr('string') description;
+
+  @belongsTo('country') country;
 }

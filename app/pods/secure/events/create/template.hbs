@@ -8,34 +8,34 @@
       @attribute='name'
       @localSave={{true}}
     />
-
     <Field::String
-      @label='Location'
+      @label='Dates'
       @record={{event}}
-      @attribute='location'
+      @attribute='dates'
+      @localSave={{true}}
+    />
+    <Field::String
+      @label='City'
+      @record={{event}}
+      @attribute='city'
+      @localSave={{true}}
+    />
+    <Field::OneToMany
+      @label='Country'
+      @baseRecord={{event}}
+      @baseLabel='country'
+      @targetModel='country'
+      @targetFilter='nameEnglish'
+      @minKeyStrokes='2'
       @localSave={{true}}
     />
 
     <Field::String
-      @label='Start date'
+      @label='Description'
       @record={{event}}
-      @attribute='endDate'
-      @legend='Enter DD/MM/YYYY format'
-      @localSave={{true}}
-    />
-
-    <Field::String
-      @label='End date'
-      @record={{event}}
-      @attribute='startDate'
-      @legend='Enter DD/MM/YYYY format'
-      @localSave={{true}}
-    />
-
-    <Field::String
-      @label='Call to action'
-      @record={{event}}
-      @attribute='callToAction'
+      @attribute='description'
+      @multiline='true'
+      @tools={{array 'bold' 'link' 'bullets'}}
       @localSave={{true}}
     />
 
