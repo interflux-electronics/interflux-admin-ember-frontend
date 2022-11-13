@@ -15,6 +15,7 @@ import { tracked } from '@glimmer/tracking';
 // />
 
 const bulletsTemplate = `
+
 * a
 * b
 * c
@@ -90,15 +91,45 @@ export default class StringFieldComponent extends FieldComponent {
 
   @action
   onToolClick(tool) {
-    if (tool === 'bullets') {
-      const textarea = document.getElementById(`textarea-${this.id}`);
-      if (textarea) {
-        const newValue = this.value + bulletsTemplate;
-        this.value = newValue;
-        textarea.innerText = newValue;
-        const ev = new KeyboardEvent('keyup');
-        textarea.dispatchEvent(ev);
-      }
+    const textarea = document.getElementById(`textarea-${this.id}`);
+
+    if (!textarea) {
+      return;
     }
+
+    const selection = window.getSelection();
+    const range = selection.isCollapsed ? null : selection.getRangeAt(0);
+    const start = selection.isCollapsed ? null : range.startOffset;
+    const end = selection.isCollapsed ? null : range.endOffset;
+
+    let value = this.value;
+
+    if (tool === 'bold' && range) {
+      value = [value.slice(0, start), '**', value.slice(start)].join('');
+      value = [value.slice(0, end + 2), '**', value.slice(end + 2)].join('');
+    }
+
+    if (tool === 'link' && range) {
+      value = [value.slice(0, start), '[', value.slice(start)].join('');
+      value = [
+        value.slice(0, end + 1),
+        '](https://somelink.com)',
+        value.slice(end + 1)
+      ].join('');
+    }
+
+    if (tool === 'bullets') {
+      value = value + bulletsTemplate;
+    }
+
+    // Set the value locally
+    this.value = value;
+
+    // Show value to the user
+    textarea.innerText = value;
+
+    // The parent component needs to be triggered because the value has changed.
+    const ev = new KeyboardEvent('keyup');
+    textarea.dispatchEvent(ev);
   }
 }
