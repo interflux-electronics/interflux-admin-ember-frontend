@@ -1,0 +1,21 @@
+<Page::Content @id='events'>
+  <h1>Events</h1>
+
+  {{#if @model.events}}
+    <Spreadsheet
+      @records={{@model.events}}
+      @linkRoute='secure.events.event'
+      @createRoute='secure.events.create'
+      @showCreateButton='true'
+      @columns={{array
+        (hash key='name' label='Name')
+        (hash key='dates' label='Dates')
+        (hash key='city' label='City')
+      }}
+    />
+  {{else}}
+    <p>No events found.</p>
+  {{/if}}
+</Page::Content>
+
+{{outlet}}

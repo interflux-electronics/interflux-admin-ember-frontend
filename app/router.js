@@ -58,6 +58,11 @@ Router.map(function () {
       this.route('webinar', { path: '/:id' });
     });
 
+    this.route('events', function () {
+      this.route('create');
+      this.route('event', { path: '/:id' });
+    });
+
     this.route('countries', function () {
       this.route('country', { path: '/:id' });
     });

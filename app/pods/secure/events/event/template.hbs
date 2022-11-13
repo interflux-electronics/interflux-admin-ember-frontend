@@ -1,0 +1,34 @@
+{{#let @model.event as |event|}}
+  <Modal @id='event'>
+    <h1>{{if event.name event.name 'New event'}}</h1>
+
+    <h2>Details</h2>
+
+    <Field::String @label='Name' @record={{event}} @attribute='name' />
+    <Field::String @label='Dates' @record={{event}} @attribute='dates' />
+    <Field::String @label='City' @record={{event}} @attribute='city' />
+    <Field::OneToMany
+      @label='Country'
+      @baseRecord={{event}}
+      @baseLabel='country'
+      @targetModel='country'
+      @targetFilter='nameEnglish'
+      @minKeyStrokes='2'
+    />
+
+    <Field::String
+      @label='Description'
+      @record={{event}}
+      @attribute='description'
+      @multiline='true'
+      @tools={{array 'bold' 'link' 'bullets'}}
+    />
+
+    <Button
+      @text='Delete from database'
+      @onClick={{this.destroyRecord}}
+      @theme='danger-red'
+      @icon='warning'
+    />
+  </Modal>
+{{/let}}
