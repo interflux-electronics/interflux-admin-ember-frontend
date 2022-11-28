@@ -1,0 +1,25 @@
+<div class='input multilingual {{this.classes}}'>
+  {{#each @languages as |lang|}}
+    <div class='wrapper'>
+      <input
+        value={{@value}}
+        type={{this.type}}
+        placeholder={{@placeholder}}
+        readonly={{@disabled}}
+        autocapitalize='off'
+        autocomplete='off'
+        autocorrect='off'
+        spellcheck='false'
+        {{on 'focus' this.onFocus}}
+        {{on 'blur' this.onBlur}}
+        {{on 'keydown' this.onKeyDown}}
+        {{on 'keyup' this.onKeyUp}}
+        {{on 'mouseover' this.onMouseOver}}
+        {{on 'mouseout' this.onMouseOut}}
+        {{on 'change' this.onChange}}
+        {{did-insert this.onInsert}}
+      />
+      <Tag @text={{lang}} @theme='blue regular' />
+    </div>
+  {{/each}}
+</div>

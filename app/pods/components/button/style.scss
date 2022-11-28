@@ -29,6 +29,7 @@ button {
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid $green-2;
       &:focus,
       &:hover {
         box-shadow: white 0 0 0 2px, 0 0 0 4px $green-1;

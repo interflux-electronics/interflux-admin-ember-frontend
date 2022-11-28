@@ -3,66 +3,102 @@ fieldset {
   padding: 0;
   margin: 0;
   transition: all 300ms $easeOutExpo;
-  .label-legend {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-    margin-top: -7px;
-    width: 100%;
-    label {
-      font-family: $bold;
-      font-size: 16px;
-      line-height: 150%;
-      color: $grey-7;
-      cursor: pointer;
-      user-select: none;
-      letter-spacing: 0.2px;
-      margin-right: 10px;
+
+  .field-header {
+    & + * {
       margin-top: 6px;
     }
-    legend {
-      font-family: $regular;
-      font-size: 16px;
-      line-height: 150%;
-      letter-spacing: 0.2px;
-      color: $grey-5;
-      margin-top: 6px;
-
-      // TODO: hover legend and make visible on focus only
-      // position: absolute;
-      // width: 240px;
-      // left: 105%;
-      // background: #6ea4de;
-      // color: white;
-      // padding: 20px;
-      // box-shadow: 3px 0 10px RGBA(0,0,0,0.1);
+    & + .pills {
+      margin-top: 12px;
+    }
+    .label-buttons {
+      display: flex;
+      gap: 6px;
+      label {
+        font-family: $bold;
+        font-size: 16px;
+        line-height: 150%;
+        color: $grey-7;
+      }
+      button {
+        background: none;
+        border: 0;
+        padding: 0;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        filter: grayscale(0);
+        &:hover,
+        &:focus,
+        &.active {
+          &.tooltip,
+          &.lock {
+            [fill] {
+              fill: $blue-0;
+            }
+          }
+          &.error {
+            [fill] {
+              fill: $orange-3;
+            }
+          }
+        }
+      }
+      svg {
+        height: auto;
+        [fill] {
+          fill: $grey-4;
+        }
+      }
+      svg.tooltip {
+        width: 18px;
+      }
+      svg.lock {
+        width: 17px;
+      }
+      svg.warning {
+        width: 20px;
+        transform: translateY(1px);
+      }
+    }
+    .tag {
+      transform: translate(3px);
+      margin: 8px 0 12px;
     }
   }
 
   & + fieldset {
     margin-top: 2px;
   }
+
   &.focus {
     background-color: rgba($blue-0, 0.1);
     position: relative;
     z-index: 1;
   }
+
   &.error {
     &.focus {
       background-color: rgba($red-1, 0.1);
     }
   }
+
   &.warning {
     &.focus {
       background-color: rgba($red-1, 0.1);
     }
   }
+
   &.dirty,
   &.saving {
     &.focus {
       background-color: rgba($green-1, 0.1);
     }
   }
+
   p + input {
     margin-top: 5px;
   }

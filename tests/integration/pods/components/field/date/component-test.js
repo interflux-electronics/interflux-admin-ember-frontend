@@ -23,11 +23,11 @@ module('Integration | Component | field/date', function (hooks) {
 
     const input = this.element.querySelector('input[type="datetime-local"]');
     const label = this.element.querySelector('label');
-    const legend = this.element.querySelector('legend');
+    const legend = this.element.querySelector('button.tooltip');
 
     assert.ok(input);
     assert.strictEqual(input.value, '2021-01-30T08:33');
     assert.strictEqual(label.innerText, 'Start time');
-    assert.strictEqual(legend.innerText, 'Enter UTC times.');
+    assert.ok(legend);
   });
 });

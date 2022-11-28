@@ -11,24 +11,17 @@
     "test": "tests"
   },
   "scripts": {
-    "lint:js:fix": "eslint . --fix",
     "start": "ember serve --environment=development",
     "serve": "ember serve --environment=development",
     "build": "ember build --environment=production",
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
-    "lint:hbs:fix": "ember-template-lint . --fix",
-    "lint:js": "eslint . --cache",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
     "lint:hbs": "ember-template-lint .",
-    "setup": "remote/setup.sh",
-    "deploy": "remote/deploy.sh",
-    "build-ios": "IOS_BUILD=true corber build --platform=ios --environment=production",
-    "build-android": "ANDROID_BUILD=true corber build --platform=android --environment=production",
-    "start-ios": "IOS_BUILD=true corber start --platform=ios",
-    "android": "ANDROID_BUILD=true ember s --port=4200 --live-reload-port=0 --output-path=dist-android/",
-    "start-android": "ANDROID_BUILD=true corber start --platform=android",
+    "lint:hbs:fix": "ember-template-lint . --fix",
     "format": "prettier --write"
   },
   "devDependencies": {

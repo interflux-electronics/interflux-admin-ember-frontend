@@ -1,0 +1,49 @@
+@keyframes file-uploading {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -2000px;
+  }
+}
+.file-uploader {
+  .right {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    gap: 3px;
+  }
+  .progress {
+    > p {
+      color: $grey-7;
+      padding: 0 16px;
+      border: 2px solid transparent;
+      user-select: none;
+    }
+    .green-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      min-width: 3%;
+      overflow: hidden;
+      transition: width 100ms $easeOutExpo;
+      border-radius: 3px;
+      border: 2px solid $green-2;
+      height: calc(100%);
+      box-sizing: border-box;
+      padding: 0 0 0 16px;
+      background: $green-1;
+      background-image: url('#{$cdn}/images/admin/diagonals-green.svg');
+      background-size: auto 100%;
+      background-position: 0 100%;
+      animation: file-uploading 40s linear infinite;
+      p {
+        color: white;
+        text-overflow: clip;
+        white-space: nowrap;
+        overflow: hidden;
+        user-select: none;
+      }
+    }
+  }
+}

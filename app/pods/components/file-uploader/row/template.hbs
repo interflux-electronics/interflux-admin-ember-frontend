@@ -1,0 +1,61 @@
+{{#if this.uploading}}
+  <li class='solid'>
+    <div class='progress'>
+      <div class='green-bar' style={{this.progressBarStyle}}>
+        <p>{{this.uploadFileName}}</p>
+      </div>
+      <p>{{this.uploadFileName}}</p>
+    </div>
+  </li>
+{{else}}
+  {{#if @cdnFile}}
+    <li class='solid'>
+      <div class='left'>
+        {{#if this.isDeleting}}
+          <span class='no-link'>Deleting...</span>
+        {{else if this.uploadFailed}}
+          <span class='no-link'>Failed...</span>
+        {{else}}
+          <Link
+            @label={{@cdnFile.label}}
+            @url='https://cdn-interflux.fra1.digitaloceanspaces.com/{{@cdnFile.path}}'
+          />
+        {{/if}}
+      </div>
+
+      <div class='right'>
+        {{#if @language}}
+          <LanguageTag @language={{@language}} />
+        {{/if}}
+
+        <DotDotDotMenu>
+          <Button
+            @icon='trash'
+            @text='remove'
+            @onClick={{this.onClickDelete}}
+          />
+        </DotDotDotMenu>
+      </div>
+    </li>
+  {{else}}
+    <li class='dashed'>
+      <div class='left'>
+        <span class='no-link'>...</span>
+      </div>
+
+      <div class='right'>
+        {{#if @language}}
+          <LanguageTag @language={{@language}} />
+        {{/if}}
+
+        <DotDotDotMenu>
+          <Button
+            @icon='upload'
+            @text='upload'
+            @onClick={{this.onClickUpload}}
+          />
+        </DotDotDotMenu>
+      </div>
+    </li>
+  {{/if}}
+{{/if}}

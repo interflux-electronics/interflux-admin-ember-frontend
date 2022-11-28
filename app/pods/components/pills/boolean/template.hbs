@@ -1,0 +1,12 @@
+<div class={{this.classes}}>
+  <Button
+    @text='yes'
+    @theme='pill {{if @selectedValue "selected" "idle"}}'
+    @onClick={{fn @onSelect true}}
+  />
+  <Button
+    @text='no'
+    @theme='pill {{if @selectedValue "idle" "selected"}}'
+    @onClick={{fn @onSelect false}}
+  />
+</div>

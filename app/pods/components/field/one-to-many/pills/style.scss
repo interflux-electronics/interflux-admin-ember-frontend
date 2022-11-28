@@ -1,0 +1,49 @@
+fieldset.one-to-many {
+  .right {
+    button.select {
+      margin-right: 4px;
+    }
+  }
+
+  .icon {
+    height: 46px;
+    width: 46px;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 20px;
+      height: auto;
+    }
+    &.lock {
+      svg {
+        [fill] {
+          fill: #ccc;
+        }
+      }
+    }
+    &.error {
+      svg {
+        [fill] {
+          fill: $red-1;
+        }
+      }
+    }
+  }
+
+  p.error {
+    background: $red-1;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    margin-top: 12px;
+    > a {
+      background: transparent !important;
+      color: white !important;
+      &:focus {
+        box-shadow: $red-1 0 0 0 1px, 0 0 0 3px white !important;
+      }
+    }
+  }
+}

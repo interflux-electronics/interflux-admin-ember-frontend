@@ -1,0 +1,53 @@
+<Modal @id='document-create'>
+  <h1>
+    <small>document</small>
+    <span>{{if @model.document.name @model.document.name 'new'}}</span>
+  </h1>
+
+  <hr />
+
+  <Field::OneToMany::Pills
+    @label='Document type'
+    @record={{@model.document}}
+    @selected={{@model.document.documentCategory}}
+    @belongsTo='documentCategory'
+    @options={{this.filteredCategories}}
+    @optionLabel='nameSingle'
+    @layout='vertical'
+    @localSave={{true}}
+  />
+
+  {{#if @model.document.documentCategory}}
+    <Field::String
+      @label='Document name'
+      @record={{@model.document}}
+      @attribute='name'
+      @localSave={{true}}
+      @onEnter={{this.onSave}}
+    />
+
+    <hr />
+
+    <Fieldset>
+      {{#if this.record}}
+        <p>
+          <span>Thid document already exists:</span>
+          <a
+            href={{href-to 'secure.documents.document' this.record.id}}
+            class='ds a'
+          >
+            follow link
+          </a>
+        </p>
+      {{else}}
+        <Button
+          @text={{if this.isSaving 'Creating' 'Create'}}
+          @theme='big-green'
+          @disabled={{this.preventSave}}
+          @isBusy={{this.isSaving}}
+          @onClick={{this.onSave}}
+        />
+      {{/if}}
+    </Fieldset>
+  {{/if}}
+</Modal>

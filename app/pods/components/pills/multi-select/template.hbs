@@ -1,0 +1,9 @@
+<div class={{this.classes}}>
+  {{#each this.options as |option|}}
+    <Button
+      @text={{option.label}}
+      @theme='pill {{if option.isSelected "selected" "idle"}}'
+      @onClick={{fn this.onSelect option}}
+    />
+  {{/each}}
+</div>

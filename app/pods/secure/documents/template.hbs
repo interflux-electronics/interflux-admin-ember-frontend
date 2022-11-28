@@ -4,10 +4,12 @@
   <Spreadsheet
     @records={{@model.documents}}
     @linkRoute='secure.documents.document'
+    @createRoute='secure.documents.create'
+    @showCreateButton='true'
     @columns={{array
+      (hash key='category.name' label='Type')
       (hash key='name' label='Name')
-      (hash key='category.name' label='Category')
-      (hash key='public' label='Shown on website')
+      (hash key='public' label='Online')
     }}
   />
 </Page::Content>

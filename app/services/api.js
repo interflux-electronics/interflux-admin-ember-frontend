@@ -33,6 +33,10 @@ export default class ApiService extends Service {
   //
   namespace = ENV.apiNamespace;
 
+  get url() {
+    return `${this.host}/${this.namespace}/`;
+  }
+
   // The headers to add to every request to our API.
   // Docs: https://guides.emberjs.com/release/models/customizing-adapters/
   get headers() {
