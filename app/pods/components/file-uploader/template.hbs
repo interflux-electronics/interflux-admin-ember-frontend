@@ -1,0 +1,13 @@
+<div class='file-uploader'>
+  <ul class='list'>
+    {{#each this.rows as |row|}}
+      <FileUploader::Row
+        @record={{@record}}
+        @cdnFile={{row.cdnFile}}
+        @language={{row.language}}
+        @cdnBasePath={{@cdnBasePath}}
+        @accept={{@accept}}
+      />
+    {{/each}}
+  </ul>
+</div>
