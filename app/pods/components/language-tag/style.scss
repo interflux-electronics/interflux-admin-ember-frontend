@@ -1,0 +1,33 @@
+.language-tag {
+  background-color: $blue-3;
+  display: flex;
+  &:hover {
+    .idle {
+      display: none;
+    }
+    .hover {
+      display: flex;
+    }
+  }
+  p {
+    color: white;
+    line-height: 22px;
+  }
+  .hover {
+    padding: 0 3px 0 5px;
+    display: none;
+    gap: 5px;
+    cursor: pointer;
+  }
+  .idle {
+    padding: 0 3px;
+    p {
+      text-transform: uppercase;
+      font-family: $semibold;
+    }
+  }
+  .flag {
+    width: 22px;
+    height: auto;
+  }
+}
