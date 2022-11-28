@@ -1,0 +1,17 @@
+<div class={{this.classes}}>
+  {{#if @selected.slug}}
+    <Button
+      @theme='pill selected'
+      @text='{{get @selected @optionLabel}}'
+      @onClick={{fn @onSelect null}}
+    />
+  {{else}}
+    {{#each @options as |option|}}
+      <Button
+        @theme='pill idle'
+        @text={{get option @optionLabel}}
+        @onClick={{fn @onSelect option}}
+      />
+    {{/each}}
+  {{/if}}
+</div>
