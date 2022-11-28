@@ -32,6 +32,7 @@ Router.map(function () {
     });
 
     this.route('documents', function () {
+      this.route('create');
       this.route('document', { path: '/:id' });
     });
 
