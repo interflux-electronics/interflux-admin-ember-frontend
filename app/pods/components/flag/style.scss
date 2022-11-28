@@ -1,0 +1,30 @@
+img.flag {
+  height: auto;
+  @include widescreen {
+    width: 24px;
+  }
+  @include desktop {
+    width: vw(24px);
+  }
+  @include tablet {
+    width: vw-tablet(24px);
+  }
+  @include mobile {
+    width: vw-mobile(24px);
+  }
+  &.bg,
+  &.cz,
+  &.fi,
+  &.id,
+  &.it,
+  &.kr,
+  &.ph,
+  &.pk,
+  &.pl,
+  &.rs,
+  &.ru,
+  &.sg,
+  &.si {
+    outline: 1px solid $grey-1;
+  }
+}
