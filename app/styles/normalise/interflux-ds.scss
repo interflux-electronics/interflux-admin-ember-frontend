@@ -1,0 +1,83 @@
+.ds {
+  &.h2 {
+    font-family: $light;
+    line-height: 140%;
+    color: $grey-7;
+    @include widescreen {
+      font-size: 32px;
+    }
+    @include desktop {
+      font-size: vw(32px);
+    }
+    @include tablet {
+      font-size: vw-tablet(32px);
+    }
+    @include mobile {
+      font-size: 7.6vw;
+    }
+  }
+  &.h3 {
+    font-family: $semibold;
+    line-height: 150%;
+    color: $grey-7;
+    @include widescreen {
+      font-size: 20px;
+    }
+    @include desktop {
+      font-size: vw(20px);
+    }
+    @include tablet {
+      font-size: vw-tablet(20px);
+    }
+    @include mobile {
+      font-size: vw-mobile(20px);
+    }
+  }
+  &.h4 {
+    font-family: $bold;
+    line-height: 180%;
+    color: $grey-7;
+    @include widescreen {
+      font-size: 16px;
+    }
+    @include desktop {
+      font-size: vw(16px);
+    }
+    @include tablet {
+      font-size: vw-tablet(16px);
+    }
+    @include mobile {
+      font-size: vw-mobile(16px);
+    }
+  }
+  &.p {
+    font-family: $regular;
+    line-height: 180%;
+    color: $grey-7;
+    margin: 0;
+    @include widescreen {
+      font-size: 16px;
+    }
+    @include desktop {
+      font-size: vw(16px);
+    }
+    @include tablet {
+      font-size: vw-tablet(16px);
+    }
+    @include mobile {
+      font-size: vw-mobile(16px);
+    }
+  }
+  &.a {
+    font-family: $regular;
+    color: $blue-0;
+    text-decoration: underline;
+    padding: 0;
+    border-radius: 2px;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
