@@ -11,7 +11,7 @@ export default class ButtonComponent extends Component {
   }
 
   get icon() {
-    return this.args.icon || 'no-icon';
+    return this.args.icon ? `has-icon ${this.args.icon}` : 'no-icon';
   }
 
   get text() {

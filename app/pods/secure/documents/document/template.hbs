@@ -1,59 +1,61 @@
-{{#let @model.document as |document|}}
-  <Modal @id='document'>
-    <h1>{{document.name}}</h1>
-    <h2>Properties</h2>
+<Modal @id='document'>
+  <h1>
+    <small>document</small>
+    <span>{{if @model.document.name @model.document.name 'no name'}}</span>
+  </h1>
 
-    <Field::String @label='Name' @record={{document}} @attribute='name' />
+  <hr />
 
-    <Field::OneToMany
-      @label='Category'
-      @baseRecord={{document}}
-      @baseLabel='documentCategory'
-      @targetModel='document-category'
-      @targetFilter='name'
-      @minKeyStrokes='0'
+  {{#if this.deleting}}
+    <Fieldset>
+      <p>Deleting ...</p>
+    </Fieldset>
+  {{else}}
+    <Field::OneToMany::Pills
+      @label='Document type'
+      @record={{@model.document}}
+      @selected={{@model.document.documentCategory}}
+      @belongsTo='documentCategory'
+      @options={{this.filteredCategories}}
+      @optionLabel='nameSingle'
+      @layout='vertical'
     />
 
-    <h2>Website</h2>
-
-    <Field::Boolean @record={{document}} @attribute='public'>
-      <label>Show on website</label>
-    </Field::Boolean>
-
-    <h2>CDN</h2>
+    <Field::String
+      @label='Document name'
+      @record={{@model.document}}
+      @attribute='name'
+      @afterSave={{this.updatePath}}
+    />
 
     <Fieldset
-      @label='Permanent CDN link'
-      @legend='Copy and paste this link in emails:'
+      @label='Files'
+      @legend='You can only upload PDFs and only 1 per language.'
     >
-      <ul class='list'>
-        {{#each document.files as |file|}}
-          <li>
-            <div class='left'>
-              <a href={{file.url}} target='_blank' rel='noreferrer noopener'>
-                {{file.label}}
-              </a>
-            </div>
-          </li>
-        {{/each}}
-      </ul>
+      <FileUploader
+        @record={{@model.document}}
+        @cdnFiles={{@model.document.cdnFiles}}
+        @cdnBasePath={{@model.document.path}}
+        @multilingual={{true}}
+        @accept='.pdf'
+      />
     </Fieldset>
 
-    <p>Instead of uploading PDFs in emails, copy paste the link above into
-      emails. This saves spaces in everyone's inbox and the link will always
-      open the most up-to-date version, unlike email attachments.</p>
-    <p>The Interflux Content Delivery Network (CDN) is where we store images,
-      videos and PDFs that need to be accessed by our websites, emails and apps.
-      This network is optimised to guarantee the fastest possible download
-      speeds, no matter where you are on the planet. Fast websites means happy
-      visitors and happy Google bots.</p>
-
-    <h2>Products</h2>
+    <Fieldset
+      @label='Online'
+      @legend='Choose "yes" and this document will be shown on our website. Choose "no" to take it offline.'
+    >
+      <Pills::Boolean
+        @layout='horizontal'
+        @onSelect={{fn (mut @model.document.public)}}
+        @selectedValue={{@model.document.public}}
+      />
+    </Fieldset>
 
     <Field::ManyToMany
       @label='Related products'
-      @legend='Add a product to this list if you want this documents to be shown on a particular product page.'
-      @baseRecord={{document}}
+      @legend='If you want this document to be shown on the page of certain product, select those products here.'
+      @baseRecord={{@model.document}}
       @baseModel='document'
       @baseLabel='productDocuments'
       @joinModel='product-document'
@@ -62,20 +64,15 @@
       @targetRoute='secure.products.product'
     />
 
-    <h2>Database</h2>
+    <hr />
 
-    <Field::String
-      @label='Variations'
-      @record={{document}}
-      @attribute='variations'
-      @disabled='true'
-    />
-
-    <Field::String
-      @label='Database ID'
-      @record={{document}}
-      @attribute='id'
-      @disabled='true'
-    />
-  </Modal>
-{{/let}}
+    <Fieldset>
+      <Button
+        @text='delete document'
+        @onClick={{this.deleteRecord}}
+        @theme='danger-red'
+        @icon='warning'
+      />
+    </Fieldset>
+  {{/if}}
+</Modal>

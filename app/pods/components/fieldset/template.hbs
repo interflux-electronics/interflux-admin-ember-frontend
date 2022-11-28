@@ -5,10 +5,51 @@
 >
   <div class='liner'>
     {{#if @label}}
-      <div class='label-legend'>
-        <label for='input-{{@id}}'>{{@label}}</label>
-        {{#if @legend}}
-          <legend>{{@legend}}</legend>
+      <div class='field-header'>
+        <div class='label-buttons'>
+          <label for='input-{{@id}}'>{{@label}}</label>
+
+          {{#if @legend}}
+            <button
+              onclick={{this.onClickTooltip}}
+              type='button'
+              class='tooltip {{if this.showTooltip "active"}}'
+            >
+              <Svg::Tooltip />
+            </button>
+          {{/if}}
+
+          {{#if @lock}}
+            <button
+              onclick={{this.onClickLock}}
+              type='button'
+              class='lock {{if this.showLock "active"}}'
+            >
+              <Svg::Lock />
+            </button>
+          {{/if}}
+
+          {{#if @error}}
+            <button
+              onclick={{this.onClickError}}
+              type='button'
+              class='error {{if this.showError "active"}}'
+            >
+              <Svg::Warning />
+            </button>
+          {{/if}}
+        </div>
+
+        {{#if this.showTooltip}}
+          <Tag @text={{@legend}} @theme='light-blue regular' />
+        {{/if}}
+
+        {{#if this.showLock}}
+          <Tag @text={{@lock}} @theme='light-blue regular' />
+        {{/if}}
+
+        {{#if this.showError}}
+          <Tag @text={{@error}} @theme='orange regular' />
         {{/if}}
       </div>
     {{/if}}

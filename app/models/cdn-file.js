@@ -3,10 +3,13 @@ import ENV from 'interflux/config/environment';
 
 export default class CdnFileModel extends Model {
   @attr('string') path;
+  @attr('string') locale;
+  @attr('string') originalFileName;
 
+  @belongsTo('user') user;
+  @belongsTo('document') document;
   @belongsTo('image') image;
   @belongsTo('video') video;
-  @belongsTo('document') document;
 
   get url() {
     return `${ENV.cdnHost}/${this.path}`;

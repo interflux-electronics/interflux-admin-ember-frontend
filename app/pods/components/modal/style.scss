@@ -43,10 +43,16 @@
       }
       > h1 {
         font-family: $extrabold;
-        font-size: 24px;
+        font-size: 26px;
         line-height: 130%;
-        text-align: center;
-        padding: 34px;
+        padding: 30px 40px;
+        text-align: left;
+        small {
+          display: block;
+          text-align: left;
+          font-family: $regular;
+          font-size: 16px;
+        }
       }
       > h2 {
         font-family: $semibold;
@@ -135,6 +141,17 @@
         padding: 0 40px 20px;
       }
       > ul.list + h2 {
+        margin-top: 20px;
+      }
+      hr {
+        border: 0;
+        border-top: 1px dashed $grey-2;
+        margin: 0 40px;
+      }
+      hr + fieldset {
+        margin-top: 20px;
+      }
+      fieldset + hr {
         margin-top: 20px;
       }
       ul.list {
@@ -226,8 +243,11 @@
           &:last-child {
             border-radius: 0 0 3px 3px;
           }
-          &:first-child:first-child {
+          &:first-child:last-child {
             border-radius: 3px;
+          }
+          &.solid + li.dashed {
+            border-top-style: solid;
           }
           &.dashed {
             border-style: dashed;

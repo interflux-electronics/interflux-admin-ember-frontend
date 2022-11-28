@@ -3,20 +3,26 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 export default class DocumentModel extends Model {
   @attr('string') path;
   @attr('string') name;
-  @attr('string') variations;
+  @attr('string') locale;
+  @attr('string') variations; // best way?
   @attr('boolean') public;
 
   @belongsTo('document-category') documentCategory;
 
-  @hasMany('product') products;
-  @hasMany('product-document') productDocuments;
   @hasMany('cdn-file') cdnFiles;
+  @hasMany('product-document') productDocuments;
+  @hasMany('product') products;
+
+  get files() {
+    return this.cdnFiles;
+  }
 
   get category() {
     return this.documentCategory;
   }
 
-  get files() {
-    return this.cdnFiles;
+  get cdnBasePath() {
+    const category = this.documentCategory.get('slug');
+    return `documents/${category}/${this.name}`.replace(/\s/g, '-');
   }
 }

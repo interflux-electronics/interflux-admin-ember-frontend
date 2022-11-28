@@ -66,7 +66,7 @@
   {{else}}
     <div class='columns {{@layout}}' {{did-insert this.onInsertData}}>
       {{#each @columns as |column|}}
-        <div class='column {{if (eq this.sortBy column.key) 'sort'}}'>
+        <div class='column {{if (eq this.sortBy column.key) "sort"}}'>
           <header role='button' {{on 'click' (fn this.setSortBy column.key)}}>
             <h2>{{column.label}}</h2>
             {{#if (eq this.sortBy column.key)}}

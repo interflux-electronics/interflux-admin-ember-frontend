@@ -30,7 +30,6 @@ export default class OneToManyFieldComponent extends FieldComponent {
 
   get chosenRecord() {
     const { baseRecord, baseLabel } = this.args;
-
     return baseRecord.get(baseLabel);
   }
 

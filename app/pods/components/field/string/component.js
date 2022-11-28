@@ -63,6 +63,10 @@ export default class StringFieldComponent extends FieldComponent {
     if (event.key === 'Enter' && !multiline) {
       this.save();
     }
+
+    if (event.key === 'Enter') {
+      this.args.onEnter();
+    }
   }
 
   get theme() {
