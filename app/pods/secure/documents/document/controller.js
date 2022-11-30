@@ -44,26 +44,14 @@ export default class DocumentController extends Controller {
 
   @action
   updatePath() {
-    console.warn('updating...');
-    const cdnFiles = this.document.cdnFiles;
-    const productDocuments = this.document.productDocuments;
-    const newPath = this.document.cdnBasePath;
-    this.document.path = newPath;
+    console.warn('updating path...');
+    this.document.setProperties({
+      path: this.document.cdnBasePath
+    });
     this.document.save({
       adapterOptions: {
         whitelist: ['path']
       }
     });
-    cdnFiles.forEach((file) => {
-      file.document = newPath;
-      file.save();
-    });
-    productDocuments.forEach((pd) => {
-      pd.document = newPath;
-      pd.save();
-    });
-    console.warn('updated');
-    console.warn('transitioning...');
-    this.router.transitionTo('secure.documents.document', this.document.path);
   }
 }
