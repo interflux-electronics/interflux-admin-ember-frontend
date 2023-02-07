@@ -1,0 +1,80 @@
+<div class='list-view'>
+  <aside>
+    <h1>{{@title}}</h1>
+
+    {{#each @filters as |filter|}}
+      {{#if (eq filter.type 'options')}}
+        <div class='options'>
+          {{#each filter.options as |option|}}
+            <button onclick={{fn @onFilter filter option}}>
+              {{#if option.selected}}
+                <Svg::OptionSelected />
+              {{else}}
+                <Svg::OptionUnselected />
+              {{/if}}
+              <span>{{option.label}}</span>
+            </button>
+          {{/each}}
+        </div>
+      {{/if}}
+
+      {{#if (eq filter.type 'checkboxes')}}
+        <div class='checkboxes'>
+          {{#each filter.checkboxes as |checkbox|}}
+            <button onclick={{fn @onFilter filter checkbox}}>
+              {{#if checkbox.checked}}
+                <Svg::CheckboxSelected />
+              {{else}}
+                <Svg::CheckboxUnselected />
+              {{/if}}
+              {{#if filter.colouredTags}}
+                <Tag
+                  @text={{checkbox.label}}
+                  @theme='{{checkbox.tagColour}} regular'
+                />
+              {{else}}
+                <span>{{checkbox.label}}</span>
+              {{/if}}
+            </button>
+          {{/each}}
+        </div>
+      {{/if}}
+
+      {{#if (eq filter.type 'search')}}
+        <input />
+      {{/if}}
+    {{/each}}
+  </aside>
+
+  <main>
+    <table>
+      <thead>
+        <tr>
+          {{#each @columns as |column|}}
+            <th>
+              {{column.label}}
+            </th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each @records as |record|}}
+          <tr onclick={{fn @onRecordClick record}}>
+            {{#each @columns as |column|}}
+              <td>
+                <p>{{get record column.property}}</p>
+              </td>
+            {{/each}}
+          </tr>
+        {{else}}
+          <tr class='no-data'>
+            <p>no data</p>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{#each @records as |record|}}{{/each}}
+  </main>
+
+  {{! <footer></footer> }}
+</div>

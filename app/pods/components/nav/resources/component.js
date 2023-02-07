@@ -74,6 +74,11 @@ export default class NavResourcesComponent extends Component {
         icon: 'svg/film'
       },
       {
+        label: 'Translations',
+        route: 'secure.translations',
+        icon: 'svg/translate'
+      },
+      {
         label: 'Webinars',
         route: 'secure.webinars',
         icon: 'svg/podcast'

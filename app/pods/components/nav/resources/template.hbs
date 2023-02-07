@@ -14,11 +14,7 @@
   </button>
 
   {{#each this.resources as |resource|}}
-    <a
-      href={{href-to resource.route}}
-      class={{resource.isActive}}
-      onclick={{this.collapse}}
-    >
+    <a href={{href-to resource.route}} class={{resource.isActive}}>
       <div class='clip'>
         <div class='fade'></div>
         <div class='icon'>
