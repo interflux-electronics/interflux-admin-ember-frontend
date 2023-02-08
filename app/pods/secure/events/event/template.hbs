@@ -5,8 +5,7 @@
     <h2>Details</h2>
 
     <Field::String @label='Name' @record={{event}} @attribute='name' />
-    <Field::String @label='Dates' @record={{event}} @attribute='dates' />
-    <Field::String @label='City' @record={{event}} @attribute='city' />
+
     <Field::OneToMany
       @label='Country'
       @baseRecord={{event}}
@@ -15,6 +14,24 @@
       @targetFilter='nameEnglish'
       @minKeyStrokes='2'
     />
+
+    <Field::String @label='City' @record={{event}} @attribute='city' />
+
+    <Field::DateString
+      @label='Start date'
+      @record={{event}}
+      @attribute='startDate'
+    />
+
+    <Field::DateString
+      @label='End date'
+      @record={{event}}
+      @attribute='endDate'
+    />
+
+    <p>Dates old: {{event.dates}}</p>
+    <p>Dates new: {{event.datesCombined}}</p>
+    <p>Has ended: {{event.hasEnded}}</p>
 
     <Field::String
       @label='Description'

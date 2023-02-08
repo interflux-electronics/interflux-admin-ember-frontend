@@ -1,0 +1,50 @@
+fieldset.date-string {
+  &.error {
+    .inputs {
+      input {
+        &:hover,
+        &:focus {
+          border-color: $red-1;
+        }
+      }
+    }
+  }
+  .inputs {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    input {
+      font-size: 16px;
+      line-height: 150%;
+      padding: 11px 0;
+      text-align: center;
+      width: 20px;
+      margin: 0;
+      border-radius: 3px;
+      border: 1px solid $grey-border;
+      outline: 0;
+      &:hover {
+        border-color: $blue-0;
+      }
+      &:focus {
+        border-color: $blue-0;
+        box-shadow: 0 2px 10px rgba(black, 0.15);
+      }
+      &:focus {
+        border-color: $blue-0;
+      }
+      &.YYYY {
+        width: 60px;
+      }
+      &.MM {
+        width: 45px;
+      }
+      &.DD {
+        width: 45px;
+      }
+    }
+    p {
+      color: $grey-7;
+    }
+  }
+}

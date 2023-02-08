@@ -13,6 +13,7 @@ fieldset {
     }
     .label-buttons {
       display: flex;
+      align-items: baseline;
       gap: 6px;
       label {
         font-family: $bold;
@@ -46,6 +47,13 @@ fieldset {
             }
           }
         }
+        &.error {
+          svg {
+            [fill] {
+              fill: $red-1;
+            }
+          }
+        }
       }
       svg {
         height: auto;
@@ -71,7 +79,7 @@ fieldset {
   }
 
   & + fieldset {
-    margin-top: 2px;
+    margin-top: 1px;
   }
 
   &.focus {
@@ -81,9 +89,7 @@ fieldset {
   }
 
   &.error {
-    &.focus {
-      background-color: rgba($red-1, 0.1);
-    }
+    background-color: rgba($red-1, 0.1);
   }
 
   &.warning {

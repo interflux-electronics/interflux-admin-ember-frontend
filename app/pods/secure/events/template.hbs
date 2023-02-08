@@ -8,9 +8,10 @@
       @createRoute='secure.events.create'
       @showCreateButton='true'
       @columns={{array
+        (hash key='startDate' label='Date')
         (hash key='name' label='Name')
-        (hash key='dates' label='Dates')
         (hash key='city' label='City')
+        (hash key='hasEnded' label='Ended')
       }}
     />
   {{else}}

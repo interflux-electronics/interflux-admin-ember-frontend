@@ -1,0 +1,60 @@
+<Fieldset
+  @id={{this.id}}
+  @label={{@label}}
+  @component='date-string'
+  @theme={{@theme}}
+  @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
+  @error={{this.error}}
+>
+  <div class='inputs'>
+    <input
+      class='DD'
+      placeholder='DD'
+      minlength='2'
+      maxlength='2'
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
+      onfocus={{this.onFocus}}
+      onblur={{this.onBlur}}
+      onkeyup={{this.onKeyUp}}
+      onkeydown={{this.onKeyDown}}
+      {{did-insert this.onInsert}}
+    />
+
+    <p>-</p>
+    <input
+      class='MM'
+      placeholder='MM'
+      minlength='2'
+      maxlength='2'
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
+      onfocus={{this.onFocus}}
+      onblur={{this.onBlur}}
+      onkeyup={{this.onKeyUp}}
+      onkeydown={{this.onKeyDown}}
+      {{did-insert this.onInsert}}
+    />
+    <p>-</p>
+    <input
+      class='YYYY'
+      placeholder='YYYY'
+      minlength='4'
+      maxlength='4'
+      autocapitalize='off'
+      autocomplete='off'
+      autocorrect='off'
+      spellcheck='false'
+      onfocus={{this.onFocus}}
+      onblur={{this.onBlur}}
+      onkeyup={{this.onKeyUp}}
+      onkeydown={{this.onKeyDown}}
+      {{did-insert this.onInsert}}
+    />
+  </div>
+</Fieldset>
