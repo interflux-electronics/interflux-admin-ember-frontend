@@ -53,6 +53,10 @@ export default class EventModel extends Model {
   }
 
   get hasEnded() {
+    if (!this.startDate) {
+      return true;
+    }
+
     const referenceDate = this.endDate || this.startDate;
     const split = referenceDate.split('-');
     const YYYY = split[0];
