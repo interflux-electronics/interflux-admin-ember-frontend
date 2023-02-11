@@ -13,7 +13,7 @@ const apiNamespace = 'v1/admin';
 // Where the Rails backend is located
 const apiHosts = {
   development: 'http://localhost:3000',
-  production: 'https://api.interflux.com'
+  production: 'https://rails.api.interflux.com'
 };
 
 // Where this Ember app is located
