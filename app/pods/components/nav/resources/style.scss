@@ -25,14 +25,7 @@ nav#resources {
     a,
     button {
       .clip {
-        width: 200px;
-        .icon {
-          svg {
-            [fill] {
-              fill: white;
-            }
-          }
-        }
+        width: 170px;
       }
     }
   }
@@ -93,7 +86,7 @@ nav#resources {
         left: 100%;
         width: 200%;
         height: 100%;
-        transition: left 1000ms $easeOutExpo;
+        transition: left 400ms $easeOutExpo;
         background: linear-gradient(
           to right,
           rgba($blue-4, 0) 0%,
@@ -116,7 +109,7 @@ nav#resources {
           max-width: 50%;
           max-height: 50%;
           [fill] {
-            transition: fill 1000ms $easeOutExpo;
+            transition: fill 400ms $easeOutExpo;
             fill: $blue-4;
           }
         }

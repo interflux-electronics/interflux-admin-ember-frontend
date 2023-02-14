@@ -54,6 +54,10 @@ Router.map(function () {
       this.route('video', { path: '/:id' });
     });
 
+    this.route('translations', function () {
+      this.route('translation', { path: '/:id' });
+    });
+
     this.route('webinars', function () {
       this.route('create');
       this.route('webinar', { path: '/:id' });

@@ -5,7 +5,7 @@ export default class NavUserComponent extends Component {
   @service auth;
 
   get userFirstName() {
-    return this.auth.user.person.get('firstName');
+    return this.auth.user?.person?.get('firstName') || 'Human';
   }
 
   openLiveChat() {

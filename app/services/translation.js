@@ -19,6 +19,15 @@ export default class TranslationService extends Service {
       }
     },
     {
+      locale: 'es',
+      nameEnglish: 'Spanish',
+      flag: 'ES',
+      country: {
+        id: 'ES',
+        nameEnglish: 'Spain'
+      }
+    },
+    {
       locale: 'fr',
       nameEnglish: 'French',
       country: {
@@ -27,12 +36,75 @@ export default class TranslationService extends Service {
       }
     },
     {
-      locale: 'es',
-      nameEnglish: 'Spanish',
-      flag: 'ES',
+      locale: 'zh',
+      nameEnglish: 'Chinese',
       country: {
-        id: 'ES',
-        nameEnglish: 'Spain'
+        id: 'CN',
+        nameEnglish: 'China'
+      }
+    },
+    {
+      locale: 'pl',
+      nameEnglish: 'Polish',
+      country: {
+        id: 'PL',
+        nameEnglish: 'Poland'
+      }
+    },
+    {
+      locale: 'tr',
+      nameEnglish: 'Turkish',
+      country: {
+        id: 'TR',
+        nameEnglish: 'Turkey'
+      }
+    },
+    {
+      locale: 'th',
+      nameEnglish: 'Thai',
+      country: {
+        id: 'TH',
+        nameEnglish: 'Thailand'
+      }
+    },
+    {
+      locale: 'ro',
+      nameEnglish: 'Romanian',
+      country: {
+        id: 'RO',
+        nameEnglish: 'Romania'
+      }
+    },
+    {
+      locale: 'id',
+      nameEnglish: 'Indonesian',
+      country: {
+        id: 'ID',
+        nameEnglish: 'Indonesia'
+      }
+    },
+    {
+      locale: 'pt',
+      nameEnglish: 'Portugese',
+      country: {
+        id: 'PT',
+        nameEnglish: 'Portugese'
+      }
+    },
+    {
+      locale: 'it',
+      nameEnglish: 'Italian',
+      country: {
+        id: 'IT',
+        nameEnglish: 'Itali'
+      }
+    },
+    {
+      locale: 'cs',
+      nameEnglish: 'Czech',
+      country: {
+        id: 'CZ',
+        nameEnglish: 'Czech'
       }
     }
   ];

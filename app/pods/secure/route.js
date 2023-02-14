@@ -31,18 +31,5 @@ export default class SecureRoute extends BaseRoute {
 
   afterModel(model) {
     this.auth.user = model.user;
-    // TODO: iframes and localstorage are not the way, use cross subdomain cookies instead
-    // this.auth.sync();
-
-    const name = model.user.name;
-    const email = model.user.email;
-
-    if (name && email && window.LiveChatWidget) {
-      window.LiveChatWidget.call('set_customer_name', name);
-      window.LiveChatWidget.call('set_customer_email', email);
-      window.LiveChatWidget.call('update_session_variables', {
-        isAdminUser: true
-      });
-    }
   }
 }

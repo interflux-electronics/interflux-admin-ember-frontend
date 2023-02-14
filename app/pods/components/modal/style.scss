@@ -1,4 +1,9 @@
 #modal {
+  &.wider {
+    .box {
+      width: 800px !important;
+    }
+  }
   > .overlay {
     position: fixed;
     background: rgba($blue-5, 0.8);
