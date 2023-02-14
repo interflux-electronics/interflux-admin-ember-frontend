@@ -6,7 +6,7 @@
       {{#if (eq filter.type 'options')}}
         <div class='options'>
           {{#each filter.options as |option|}}
-            <button onclick={{fn @onFilter filter option}}>
+            <button type='button' onclick={{fn @onFilter filter option}}>
               {{#if option.selected}}
                 <Svg::OptionSelected />
               {{else}}
@@ -21,7 +21,7 @@
       {{#if (eq filter.type 'checkboxes')}}
         <div class='checkboxes'>
           {{#each filter.checkboxes as |checkbox|}}
-            <button onclick={{fn @onFilter filter checkbox}}>
+            <button type='button' onclick={{fn @onFilter filter checkbox}}>
               {{#if checkbox.checked}}
                 <Svg::CheckboxSelected />
               {{else}}
@@ -59,7 +59,7 @@
       </thead>
       <tbody>
         {{#each @records as |record|}}
-          <tr onclick={{fn @onRecordClick record}}>
+          <tr role='button' onclick={{fn @onRecordClick record}}>
             {{#each @columns as |column|}}
               <td>
                 <p>{{get record column.property}}</p>
@@ -73,7 +73,6 @@
         {{/each}}
       </tbody>
     </table>
-    {{#each @records as |record|}}{{/each}}
   </main>
 
   {{! <footer></footer> }}

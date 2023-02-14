@@ -1,111 +1,109 @@
-{{#let @model.translation as |translation|}}
-  <Modal @id='translation' @theme='wider'>
-    <div class='fields'>
-      <div class='left'>
-        <div class='top'>
-          <label>English</label>
-        </div>
-
-        <div class='border'>
-          <p>{{this.english}}</p>
-        </div>
+<Modal @id='translation' @theme='wider'>
+  <div class='fields'>
+    <div class='left'>
+      <div class='top'>
+        <label>English</label>
       </div>
 
-      <Svg::ChevronRight />
-
-      <div class='right'>
-        <div class='top'>
-          <label>{{this.language}}</label>
-        </div>
-
-        <div class='border'>
-          <p
-            role='textbox'
-            contenteditable
-            aria-multiline
-            autocapitalize='off'
-            autocomplete='off'
-            autocorrect='off'
-            spellcheck='false'
-            rows='6'
-          >{{this.native}}</p>
-        </div>
+      <div class='border'>
+        <p>{{this.english}}</p>
       </div>
     </div>
 
-    <div class='tags'>
-      <Tag @text='to-translate' @theme='orange regular' />
-      <Tag @text='to-review' @theme='green-1 regular' />
-      <Tag @text='done' @theme='green-3 regular' />
-    </div>
+    <Svg::ChevronRight />
 
-    <div class='status'>
-      <div class='left'>
-        <label>Status</label>
-        <Tag @text='to-review' @theme='light-blue regular' />
-        <p>This translation was made by robot (DeepL Translator). It is probably
-          good enough to go live with. However a human should review and accept
-          / reject.</p>
+    <div class='right'>
+      <div class='top'>
+        <label>{{this.language}}</label>
       </div>
-      <div class='right'>
-        <Button @text='Accept' @theme='save' @onClick={{this.translate}} />
-        <Button @text='Reject' @theme='save' @onClick={{this.translate}} />
-      </div>
-    </div>
 
-    <div class='history'>
-      <label>History</label>
-    </div>
-
-    <div class='actions'>
-      <div class='left'></div>
-      <div class='right'>
-
-        <div class='actions'>
-          {{#if this.showIdle}}
-            <Button
-              @text='Auto-translate'
-              @theme='save'
-              @onClick={{this.translate}}
-            />
-            <Button @text='Accept' @theme='save' @onClick={{this.translate}} />
-            <Button @text='Reject' @theme='save' @onClick={{this.translate}} />
-          {{/if}}
-
-          {{#if this.showDone}}
-            <ul class='suggestions'>
-              {{#each this.suggestions as |suggestion|}}
-                <li>
-                  <Button
-                    @text='use'
-                    @theme='save'
-                    @onClick={{fn this.use suggestion}}
-                  />
-                  <p>{{suggestion}}</p>
-                </li>
-              {{/each}}
-            </ul>
-          {{/if}}
-
-          {{#if this.showBusy}}
-            <p>Translating ...</p>
-          {{/if}}
-
-          {{#if this.showError}}
-            <p>Sorry, something did not work as planned.</p>
-            <p>Please
-              <a href='mailto:jw@interflux.au'>ask Jan</a>
-              to investigate.</p>
-          {{/if}}
-        </div>
+      <div class='border'>
+        <p
+          role='textbox'
+          contenteditable
+          aria-multiline
+          autocapitalize='off'
+          autocomplete='off'
+          autocorrect='off'
+          spellcheck='false'
+          rows='6'
+        >{{this.native}}</p>
       </div>
     </div>
+  </div>
 
-    <h2>History</h2>
-    <Fieldset>
-      {{#each this.sortedEvents as |event|}}
-        <p>{{event.label}}</p>
-      {{/each}}
-    </Fieldset>
-  </Modal>
-{{/let}}
+  <div class='tags'>
+    <Tag @text='to-translate' @theme='orange regular' />
+    <Tag @text='to-review' @theme='green-1 regular' />
+    <Tag @text='done' @theme='green-3 regular' />
+  </div>
+
+  <div class='status'>
+    <div class='left'>
+      <label>Status</label>
+      <Tag @text='to-review' @theme='light-blue regular' />
+      <p>This translation was made by robot (DeepL Translator). It is probably
+        good enough to go live with. However a human should review and accept /
+        reject.</p>
+    </div>
+    <div class='right'>
+      <Button @text='Accept' @theme='save' @onClick={{this.translate}} />
+      <Button @text='Reject' @theme='save' @onClick={{this.translate}} />
+    </div>
+  </div>
+
+  <div class='history'>
+    <label>History</label>
+  </div>
+
+  <div class='actions'>
+    <div class='left'></div>
+    <div class='right'>
+
+      <div class='actions'>
+        {{#if this.showIdle}}
+          <Button
+            @text='Auto-translate'
+            @theme='save'
+            @onClick={{this.translate}}
+          />
+          <Button @text='Accept' @theme='save' @onClick={{this.translate}} />
+          <Button @text='Reject' @theme='save' @onClick={{this.translate}} />
+        {{/if}}
+
+        {{#if this.showDone}}
+          <ul class='suggestions'>
+            {{#each this.suggestions as |suggestion|}}
+              <li>
+                <Button
+                  @text='use'
+                  @theme='save'
+                  @onClick={{fn this.use suggestion}}
+                />
+                <p>{{suggestion}}</p>
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
+
+        {{#if this.showBusy}}
+          <p>Translating ...</p>
+        {{/if}}
+
+        {{#if this.showError}}
+          <p>Sorry, something did not work as planned.</p>
+          <p>Please
+            <a href='mailto:jw@interflux.au'>ask Jan</a>
+            to investigate.</p>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <h2>History</h2>
+  <Fieldset>
+    {{#each this.sortedEvents as |event|}}
+      <p>{{event.label}}</p>
+    {{/each}}
+  </Fieldset>
+</Modal>
