@@ -48,8 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     env:
-      PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
-      URL: bot@server.interflux.com
+      PRIVATE_KEY: ${{secrets.SSH_FRANKFURT}}
+      URL: admin@frankfurt.server.interflux.com
       ROOT: /var/www/admin.interflux.com
     steps:
       - uses: actions/checkout@v2
@@ -64,7 +64,7 @@ jobs:
       - run: 'echo "IdentityFile ~/.ssh/$URL" > ~/.ssh/config'
 
       # Add the remote server to trusted hosts
-      - run: ssh-keyscan -H server.interflux.com > ~/.ssh/known_hosts
+      - run: ssh-keyscan -H frankfurt.server.interflux.com > ~/.ssh/known_hosts
 
       # Set all SSH file permissions
       - run: chmod 0755 ~/.ssh/; chmod 600 ~/.ssh/$URL; chmod 644 ~/.ssh/known_hosts
