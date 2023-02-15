@@ -11,7 +11,7 @@ export default class TextareaComponent extends InputComponent {
   @action
   onInsert(element) {
     this.textarea = element;
-    this.textarea.innerText = this.args.value;
+    this.textarea.innerText = this.args.value || ''; // Prevent showing user "undefined"
     this.resize();
   }
 

@@ -15,9 +15,9 @@ export default class EventCreateController extends Controller {
   get preventSave() {
     return (
       !this.event.name ||
-      !this.event.dates ||
-      !this.event.city ||
       !this.event.country.get('id') ||
+      !this.event.city ||
+      !this.event.startDate ||
       !this.event.description
     );
   }
@@ -27,6 +27,7 @@ export default class EventCreateController extends Controller {
     this.isSaving = true;
 
     const success = () => {
+      window.scrollTo(0, 0);
       this.router.transitionTo('secure.events.event', this.event.id);
     };
 
@@ -41,7 +42,14 @@ export default class EventCreateController extends Controller {
     this.event
       .save({
         adapterOptions: {
-          whitelist: ['name', 'dates', 'city', 'country', 'description']
+          whitelist: [
+            'name',
+            'startDate',
+            'endDate',
+            'city',
+            'country',
+            'description'
+          ]
         }
       })
       .then(success)

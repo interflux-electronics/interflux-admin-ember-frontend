@@ -3,23 +3,12 @@
     <h1>Create new event</h1>
 
     <Field::String
-      @label='Name'
+      @label='Event name'
       @record={{event}}
       @attribute='name'
       @localSave={{true}}
     />
-    <Field::String
-      @label='Dates'
-      @record={{event}}
-      @attribute='dates'
-      @localSave={{true}}
-    />
-    <Field::String
-      @label='City'
-      @record={{event}}
-      @attribute='city'
-      @localSave={{true}}
-    />
+
     <Field::OneToMany
       @label='Country'
       @baseRecord={{event}}
@@ -29,6 +18,30 @@
       @minKeyStrokes='2'
       @localSave={{true}}
     />
+
+    <Field::String
+      @label='City'
+      @record={{event}}
+      @attribute='city'
+      @localSave={{true}}
+    />
+
+    <Field::DateString
+      @label='Start date'
+      @record={{event}}
+      @attribute='startDate'
+      @localSave={{true}}
+    />
+
+    <Field::DateString
+      @label='End date'
+      @record={{event}}
+      @attribute='endDate'
+      @localSave={{true}}
+    />
+
+    <p>Dates: {{event.datesCombined}}</p>
+    <p>Has ended: {{event.hasEnded}}</p>
 
     <Field::String
       @label='Description'

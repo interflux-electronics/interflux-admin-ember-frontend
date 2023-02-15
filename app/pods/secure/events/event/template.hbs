@@ -2,8 +2,6 @@
   <Modal @id='event'>
     <h1>{{if event.name event.name 'New event'}}</h1>
 
-    <h2>Details</h2>
-
     <Field::String @label='Name' @record={{event}} @attribute='name' />
 
     <Field::OneToMany
@@ -29,8 +27,7 @@
       @attribute='endDate'
     />
 
-    <p>Dates old: {{event.dates}}</p>
-    <p>Dates new: {{event.datesCombined}}</p>
+    <p>Dates: {{event.datesCombined}}</p>
     <p>Has ended: {{event.hasEnded}}</p>
 
     <Field::String
