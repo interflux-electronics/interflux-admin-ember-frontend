@@ -3,20 +3,27 @@
   min-height: 100vh;
   display: flex;
   padding: 30px;
-  gap: 10px;
+  gap: 12px;
+  height: 100%;
+  box-sizing: border-box;
   h1 {
     font-size: 20px;
     font-family: $bold;
     color: $grey-7;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     line-height: 100%;
   }
   aside {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    box-sizing: border-box;
     width: 180px;
+    flex-shrink: 0;
+    .sticky {
+      position: sticky;
+      top: 12px;
+      gap: 12px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
   }
   .options,
   .checkboxes {
@@ -56,40 +63,60 @@
     }
   }
   .checkboxes {
+    svg {
+      flex-shrink: 0;
+    }
+    span {
+      width: 100%;
+      text-align: left;
+    }
     .tag {
-      margin: 4px 0;
+      margin: 0 10px;
+      flex-shrink: 0;
+      .p {
+        font-size: 15px;
+        font-family: $semibold;
+        line-height: 20px;
+      }
+      .bg .word:after {
+        top: 0px;
+        bottom: 0px;
+        border-radius: 2px;
+      }
     }
   }
   main {
-    padding-top: 14px;
-    table {
-      width: calc(100vw - 460px);
-    }
+    margin-top: 40px;
+    width: 100%;
     thead {
       position: sticky;
       top: 0;
       z-index: 1;
+      border-top: 10px solid $grey-0;
+      background-color: $grey-0;
       tr {
         border-radius: 3px 3px 0 0;
-        border-bottom-width: 2px;
         position: relative;
         display: flex;
-        height: 35px;
+        height: 33px;
+        border: 1px solid $grey-1;
+        border-bottom-width: 3px;
+        background-color: white;
         th {
           display: flex;
           flex: 1;
-          max-width: 25%;
           font-size: 15px;
           align-items: center;
           padding: 0 12px;
-          background-color: $grey-0;
+          & + th {
+            border-left: 1px solid $grey-1;
+          }
         }
       }
     }
     tbody {
       position: relative;
       z-index: 0;
-      margin-top: 1px;
       tr {
         position: relative;
         display: flex;
@@ -97,12 +124,9 @@
         background-color: white;
         cursor: pointer;
         &:hover {
-          box-shadow: 0 0 0 1px $blue-0;
+          box-shadow: inset 0 0 0 1px $blue-0;
           border-color: $blue-0;
           z-index: 1;
-        }
-        &:first-child {
-          border-radius: 3px 3px 0 0;
         }
         &:last-child {
           border-radius: 0 0 3px 3px;
@@ -116,22 +140,21 @@
         td {
           display: flex;
           flex: 1;
-          max-width: 25%;
           font-size: 15px;
           align-items: center;
           padding: 0 12px;
-          height: 35px;
+          min-height: 33px;
           overflow: hidden;
-          p {
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
+          align-items: flex-start;
+          max-width: 400px;
+          p,
+          .tag {
+            margin: 6px 0;
           }
         }
       }
     }
     tr.no-data {
-      background-color: $grey-0;
       height: 400px;
       width: 100%;
       display: flex;

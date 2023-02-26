@@ -10,6 +10,16 @@
       }
     }
   }
+  &.blue-2 {
+    .bg {
+      .word {
+        color: $blue-2;
+        &:after {
+          background-color: $blue-2;
+        }
+      }
+    }
+  }
   &.light-blue {
     .bg {
       .word {
@@ -20,7 +30,7 @@
       }
     }
   }
-  &.orange {
+  &.orange-2 {
     .bg {
       .word {
         color: $orange-2;
@@ -30,7 +40,7 @@
       }
     }
   }
-  &.red {
+  &.red-1 {
     .bg {
       .word {
         color: $red-1;
@@ -91,6 +101,44 @@
       }
     }
   }
+  &.admin {
+    &.small {
+      .p {
+        line-height: 20px;
+        font-size: 15px;
+        font-family: $semibold;
+      }
+      .bg {
+        .word {
+          &:after {
+            left: -3px;
+            right: -3px;
+            top: 0px;
+            bottom: 0px;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+    &.medium {
+      .p {
+        line-height: 22px;
+        font-size: 16px;
+        font-family: $semibold;
+      }
+      .bg {
+        .word {
+          &:after {
+            left: -4px;
+            right: -4px;
+            top: 0px;
+            bottom: 0px;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
   .p {
     color: white;
     font-family: $bold;
@@ -114,11 +162,13 @@
     flex-wrap: wrap;
     .word {
       position: relative;
+      color: $grey-3;
       &:after {
         content: '';
         position: absolute;
         top: 0;
         bottom: 0;
+        background-color: $grey-3;
         @include widescreen {
           left: -8px;
           right: -8px;

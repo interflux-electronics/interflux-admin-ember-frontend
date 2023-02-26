@@ -17,7 +17,16 @@
       box-shadow: 0 0 0 2px $red-1, 0 0 0 4px white;
     }
   }
-  p + button {
+  p + button,
+  p + a {
     margin-top: 10px;
+  }
+  a {
+    display: flex;
+    color: white;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

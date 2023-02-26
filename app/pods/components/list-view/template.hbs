@@ -1,49 +1,51 @@
 <div class='list-view'>
   <aside>
+
     <h1>{{@title}}</h1>
 
-    {{#each @filters as |filter|}}
-      {{#if (eq filter.type 'options')}}
-        <div class='options'>
-          {{#each filter.options as |option|}}
-            <button type='button' onclick={{fn @onFilter filter option}}>
-              {{#if option.selected}}
-                <Svg::OptionSelected />
-              {{else}}
-                <Svg::OptionUnselected />
-              {{/if}}
-              <span>{{option.label}}</span>
-            </button>
-          {{/each}}
-        </div>
-      {{/if}}
+    <div class='sticky'>
+      {{#each @filters as |filter|}}
+        {{#if (eq filter.type 'options')}}
+          <div class='options'>
+            {{#each filter.options as |option|}}
+              <button type='button' onclick={{fn @onFilter filter option}}>
+                {{#if option.selected}}
+                  <Svg::OptionSelected />
+                {{else}}
+                  <Svg::OptionUnselected />
+                {{/if}}
+                <span>{{option.label}}</span>
+              </button>
+            {{/each}}
+          </div>
+        {{/if}}
 
-      {{#if (eq filter.type 'checkboxes')}}
-        <div class='checkboxes'>
-          {{#each filter.checkboxes as |checkbox|}}
-            <button type='button' onclick={{fn @onFilter filter checkbox}}>
-              {{#if checkbox.checked}}
-                <Svg::CheckboxSelected />
-              {{else}}
-                <Svg::CheckboxUnselected />
-              {{/if}}
-              {{#if filter.colouredTags}}
-                <Tag
-                  @text={{checkbox.label}}
-                  @theme='{{checkbox.tagColour}} regular'
-                />
-              {{else}}
+        {{#if (eq filter.type 'checkboxes')}}
+          <div class='checkboxes'>
+            {{#each filter.checkboxes as |checkbox|}}
+              <button type='button' onclick={{fn @onFilter filter checkbox}}>
+                {{#if checkbox.checked}}
+                  <Svg::CheckboxSelected />
+                {{else}}
+                  <Svg::CheckboxUnselected />
+                {{/if}}
                 <span>{{checkbox.label}}</span>
-              {{/if}}
-            </button>
-          {{/each}}
-        </div>
-      {{/if}}
+                {{#if checkbox.count}}
+                  <Tag
+                    @text={{checkbox.count.label}}
+                    @theme='{{checkbox.count.color}} admin small'
+                  />
+                {{/if}}
+              </button>
+            {{/each}}
+          </div>
+        {{/if}}
 
-      {{#if (eq filter.type 'search')}}
-        <input />
-      {{/if}}
-    {{/each}}
+        {{#if (eq filter.type 'search')}}
+          <input />
+        {{/if}}
+      {{/each}}
+    </div>
   </aside>
 
   <main>
@@ -62,7 +64,22 @@
           <tr role='button' onclick={{fn @onRecordClick record}}>
             {{#each @columns as |column|}}
               <td>
-                <p>{{get record column.property}}</p>
+                {{#if column.tags}}
+                  <Tag
+                    @text={{get
+                      (get column.tags (get record column.property))
+                      'label'
+                    }}
+                    @theme='{{get
+                      (get column.tags (get record column.property))
+                      "color"
+                    }} admin small'
+                  />
+                {{else}}
+                  {{#let (get record column.property) as |label|}}
+                    <p>{{if label label '-'}}</p>
+                  {{/let}}
+                {{/if}}
               </td>
             {{/each}}
           </tr>

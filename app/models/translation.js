@@ -1,17 +1,19 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr } from '@ember-data/model';
 
 export default class TranslationModel extends Model {
   @attr('string') location;
   @attr('string') language;
   @attr('string') native;
   @attr('string') english;
-  @attr('boolean') needsReview;
-  @attr('string') reviewCode;
-  @attr('string') customReviewMessage;
+  @attr('string') englishBefore;
+  @attr('string') status;
 
-  @hasMany('translation-event') translationEvents;
-
-  get events() {
-    return this.translationEvents;
+  get rank() {
+    return {
+      'to-translate': 1,
+      'to-update': 2,
+      'to-review': 3,
+      done: 4
+    }[this.status];
   }
 }

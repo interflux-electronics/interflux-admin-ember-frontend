@@ -1,90 +1,17 @@
 #secure #translations {
   padding: 0;
-  .liner {
-    max-width: 900px;
-  }
-  .header {
-    position: sticky;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    background-color: white;
-    h2 {
-      font-family: $light;
-      font-size: 24px;
-      color: $grey-7;
-      margin: 22px 0;
-    }
-    .languages {
-      gap: 5px;
-      padding: 5px;
-      display: flex;
-      .language-tag {
-        min-width: 32px;
-        height: 22px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-  a.status,
-  button.status {
-    width: 32px;
-    height: 22px;
-    overflow: hidden;
-    background-color: white;
-    border: 1px solid $grey-3;
-    box-sizing: border-box;
-    &.source,
-    &.translated-by-human,
-    &.approved-by-human {
-      background-color: $green-1;
-      border-color: $green-1;
-    }
-    &.translated-by-robot {
-      background-color: $green-1;
-      border-color: $green-1;
-      background-image: url('#{$cdn}/images/admin/rounded-diagonals-white.svg');
-      background-size: 30px 20px;
-      background-repeat: no-repeat;
-    }
-    &.no-record,
-    &.not-translated {
-      background-color: $grey-1;
-      border: 1px solid $grey-3;
-    }
-    &.source-changed {
-      background-color: $orange-1;
-      border-color: $orange-1;
-    }
-  }
-  ul.legend {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    li {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-  }
-  ul.keys {
-    li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 32px;
-      padding-left: 13px;
-      padding-right: 5px;
-      &:nth-child(odd) {
-        background-color: $grey-0;
-      }
-      .right {
-        display: flex;
-        gap: 5px;
+  .list-view {
+    tr {
+      td,
+      th {
+        flex: auto;
+        &:not(:first-child) {
+          width: 33%;
+        }
+        &:first-child {
+          flex-shrink: 0;
+          width: 80px;
+        }
       }
     }
   }
