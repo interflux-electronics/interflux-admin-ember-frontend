@@ -9,35 +9,37 @@
         <div class='label-buttons'>
           <label for='input-{{@id}}'>{{@label}}</label>
 
-          {{#if @legend}}
-            <button
-              onclick={{this.onClickTooltip}}
-              type='button'
-              class='tooltip {{if this.showTooltip "active"}}'
-            >
-              <Svg::Tooltip />
-            </button>
-          {{/if}}
+          <div class='right'>
+            {{#if @error}}
+              <button
+                onclick={{this.onClickError}}
+                type='button'
+                class='error {{if this.showError "active"}}'
+              >
+                <Svg::Warning />
+              </button>
+            {{/if}}
 
-          {{#if @lock}}
-            <button
-              onclick={{this.onClickLock}}
-              type='button'
-              class='lock {{if this.showLock "active"}}'
-            >
-              <Svg::Lock />
-            </button>
-          {{/if}}
+            {{#if @lock}}
+              <button
+                onclick={{this.onClickLock}}
+                type='button'
+                class='lock {{if this.showLock "active"}}'
+              >
+                <Svg::Lock />
+              </button>
+            {{/if}}
 
-          {{#if @error}}
-            <button
-              onclick={{this.onClickError}}
-              type='button'
-              class='error {{if this.showError "active"}}'
-            >
-              <Svg::Warning />
-            </button>
-          {{/if}}
+            {{#if @legend}}
+              <button
+                onclick={{this.onClickTooltip}}
+                type='button'
+                class='tooltip {{if this.showTooltip "active"}}'
+              >
+                <Svg::Tooltip />
+              </button>
+            {{/if}}
+          </div>
         </div>
 
         {{#if this.showTooltip}}

@@ -87,7 +87,7 @@
       .icon {
         svg {
           path {
-            fill: #ccc;
+            fill: $grey-4;
           }
         }
       }
@@ -96,6 +96,12 @@
     &.focus {
       .wrapper {
         z-index: 1;
+      }
+    }
+
+    &.disabled {
+      input {
+        cursor: no-drop;
       }
     }
 
@@ -113,7 +119,9 @@
     [role='textbox'] {
       font-size: 16px;
       line-height: 150%;
-      padding: 11px 44px 11px 15px;
+      padding: 11px 15px;
+      // TODO: needed?
+      // padding: 11px 44px 11px 15px;
       border: 0;
       max-width: 100%;
       outline: 0;

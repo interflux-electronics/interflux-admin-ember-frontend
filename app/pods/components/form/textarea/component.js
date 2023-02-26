@@ -12,7 +12,6 @@ export default class TextareaComponent extends InputComponent {
   onInsert(element) {
     this.textarea = element;
     this.textarea.innerText = this.args.value || ''; // Prevent showing user "undefined"
-    this.resize();
   }
 
   // Prevent HTML formatting from being pasted into the p.contenteditable.
@@ -34,13 +33,9 @@ export default class TextareaComponent extends InputComponent {
     if (this.args.onKeyUp) {
       this.args.onKeyUp(event);
     }
-
-    this.resize();
   }
 
-  @action
-  resize() {
-    const height = this.textarea.getBoundingClientRect().height;
-    this.textarea.parentElement.parentElement.style = `height: ${height}px;`;
+  get contenteditable() {
+    return this.args.disabled ? false : true;
   }
 }

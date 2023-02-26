@@ -10,6 +10,7 @@ export default class InputComponent extends Component {
     return [
       this.args.theme || 'primary',
       this.args.state || 'no-state',
+      this.args.disabled ? 'disabled' : 'enabled',
       this.hover ? 'hover' : 'no-hover',
       this.focus ? 'focus' : 'no-focus'
     ].join(' ');
@@ -37,6 +38,10 @@ export default class InputComponent extends Component {
 
   @action
   onFocus(event) {
+    if (this.args.disabled) {
+      return;
+    }
+
     this.focus = true;
 
     this.selectText(event.target);
@@ -57,6 +62,10 @@ export default class InputComponent extends Component {
 
   @action
   onMouseOver(event) {
+    if (this.args.disabled) {
+      return;
+    }
+
     this.hover = true;
 
     if (this.args.onMouseOver) {

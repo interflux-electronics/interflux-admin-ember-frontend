@@ -6,7 +6,7 @@
   @theme={{this.theme}}
   @state={{this.state}}
   @hasFocus={{this.hasFocus}}
-  @lock={{@lock}}
+  @lock={{this.lock}}
 >
   {{#if @multiline}}
     {{#if @tools}}
@@ -72,6 +72,7 @@
             @error={{this.error}}
             @onSave={{this.onSave}}
             @disabled={{@disabled}}
+            @hideSave={{@hideSave}}
           />
         </Form::Textarea>
       </div>
@@ -114,6 +115,7 @@
         @error={{this.error}}
         @onSave={{this.onSave}}
         @disabled={{@disabled}}
+        @hideSave={{@hideSave}}
       />
     </Form::Input>
   {{/if}}

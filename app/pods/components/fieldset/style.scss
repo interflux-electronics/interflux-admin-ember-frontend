@@ -5,6 +5,8 @@ fieldset {
   transition: all 300ms $easeOutExpo;
 
   .field-header {
+    display: flex;
+    flex-direction: column;
     & + * {
       margin-top: 6px;
     }
@@ -15,11 +17,17 @@ fieldset {
       display: flex;
       align-items: baseline;
       gap: 6px;
+      justify-content: space-between;
       label {
         font-family: $bold;
         font-size: 16px;
         line-height: 150%;
         color: $grey-7;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
       button {
         background: none;
@@ -75,6 +83,7 @@ fieldset {
     .tag {
       transform: translate(3px);
       margin: 8px 0 12px;
+      align-self: flex-end;
     }
   }
 

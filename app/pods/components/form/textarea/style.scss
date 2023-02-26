@@ -4,10 +4,12 @@
 .textarea {
   &.primary {
     height: auto;
-    min-height: calc(11px * 2 + 4 * 24px);
 
-    p[contenteditable] {
-      padding: 11px 15px 61px 15px;
+    &.disabled {
+      [role='textbox'],
+      textarea {
+        cursor: no-drop;
+      }
     }
 
     .action {
@@ -25,11 +27,11 @@
     textarea,
     [role='textbox'] {
       line-height: 150%;
-      padding: 11px 46px 11px 15px;
+      padding: 11px 15px;
       height: auto;
       display: block;
       resize: vertical;
-      min-height: calc(11px * 2 + 4 * 24px);
+      min-height: 46px;
     }
   }
 }

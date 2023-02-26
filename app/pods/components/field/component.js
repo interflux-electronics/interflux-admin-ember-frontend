@@ -13,7 +13,7 @@ export default class FieldComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.id = this.form.getUniqueId();
+    this.id = this.args.id || this.form.getUniqueId();
   }
 
   // STATE
@@ -50,7 +50,9 @@ export default class FieldComponent extends Component {
   @tracked error;
 
   get isDirty() {
-    return this.args.localSave ? false : this.value !== this.lastSavedValue;
+    return this.args.localSave || !this.args.noSave
+      ? false
+      : this.value !== this.lastSavedValue;
   }
 
   get warnings() {

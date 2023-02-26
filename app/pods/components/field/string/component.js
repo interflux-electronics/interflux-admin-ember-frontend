@@ -60,7 +60,7 @@ export default class StringFieldComponent extends FieldComponent {
     this.error = null;
 
     // On enter, save the attribute, unless it's a <Form::Textarea>
-    if (event.key === 'Enter' && !multiline) {
+    if (event.key === 'Enter' && !multiline && !this.args.noSave) {
       this.save();
     }
 
@@ -135,5 +135,12 @@ export default class StringFieldComponent extends FieldComponent {
     // The parent component needs to be triggered because the value has changed.
     const ev = new KeyboardEvent('keyup');
     textarea.dispatchEvent(ev);
+  }
+
+  get lock() {
+    return (
+      this.args.lock ||
+      (this.args.disabled ? 'This field has been locked.' : null)
+    );
   }
 }

@@ -1,24 +1,28 @@
 {{#if @disabled}}
-  <div class='icon lock'>
+  {{! <div class='icon lock'>
     <Svg::Lock />
-  </div>
+  </div> }}
 {{else}}
   {{#if (and (eq @state 'idle') @hasFocus)}}
-    <div class='icon'>
-      <Svg::Check />
-    </div>
+    {{#unless @hideSave}}
+      <div class='icon'>
+        <Svg::Check />
+      </div>
+    {{/unless}}
   {{/if}}
 
   {{#if (or (eq @state 'dirty') (eq @state 'saving'))}}
-    <div class='action'>
-      <Button
-        @theme='save'
-        @text={{if @isSaving null 'save'}}
-        @icon={{if @isSaving 'ellipsis'}}
-        @onClick={{@onSave}}
-        @isBusy={{@isSaving}}
-      />
-    </div>
+    {{#unless @hideSave}}
+      <div class='action'>
+        <Button
+          @theme='save'
+          @text={{if @isSaving null 'save'}}
+          @icon={{if @isSaving 'ellipsis'}}
+          @onClick={{@onSave}}
+          @isBusy={{@isSaving}}
+        />
+      </div>
+    {{/unless}}
   {{/if}}
 
   {{#if (eq @state 'warning')}}
