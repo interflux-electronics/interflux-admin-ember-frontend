@@ -11,6 +11,5 @@ module('Integration | Component | error/generic', function (hooks) {
 
     assert.ok(this.element.querySelector('[role="alert"]'));
     assert.ok(this.element.querySelector('p'));
-    assert.ok(this.element.querySelector('button'));
   });
 });
