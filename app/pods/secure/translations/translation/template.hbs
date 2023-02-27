@@ -169,7 +169,7 @@
     />
 
     {{#if this.showSuggestions}}
-      <Fieldset @label='Suggested translations (by robot)'>
+      <Fieldset @label='Suggested translation (by robot)'>
         {{#if this.loadingSuggestions}}
           <p>One moment ...</p>
         {{else}}
@@ -279,7 +279,7 @@
       <div class='left'>
         {{#unless this.showSuggestions}}
           <Button
-            @text='Suggest translations'
+            @text='Suggest translation'
             @theme='medium grey'
             @onClick={{this.onClickSuggest}}
           />
