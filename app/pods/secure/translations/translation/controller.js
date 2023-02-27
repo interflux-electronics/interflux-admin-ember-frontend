@@ -79,7 +79,8 @@ export default class TranslationController extends Controller {
   @action
   onClickSave() {
     this.record.status = this.record.native ? 'done' : 'to-translate';
-    this.isSaving = true;
+    // TODO: first changes view from to-translate to done, then shows "saving...". Bit akward UX.
+    // this.isSaving = true;
     this.record
       .save({
         adapterOptions: {
@@ -95,7 +96,7 @@ export default class TranslationController extends Controller {
         this.showError = true;
       })
       .finally(() => {
-        this.isSaving = false;
+        // this.isSaving = false;
         const input = document.querySelector('#input-native');
         if (input) {
           input.blur();
