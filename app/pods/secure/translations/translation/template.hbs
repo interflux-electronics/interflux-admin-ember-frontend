@@ -30,10 +30,9 @@
       <div class='left'>
         {{#if this.hasChanges}}
           <Button
-            @text={{if this.isSaving 'Saving...' 'Save'}}
-            @theme='medium green {{if this.isSaving "busy"}}'
+            @text='Save'
+            @theme='medium green'
             @onClick={{this.onClickSave}}
-            @isBusy={{this.isSaving}}
           />
 
           <Button
@@ -168,33 +167,13 @@
       @hideSave={{true}}
     />
 
-    {{#if this.showSuggestions}}
-      <Fieldset @label='Suggested translation (by robot)'>
-        {{#if this.loadingSuggestions}}
-          <p>One moment ...</p>
-        {{else}}
-          {{#if this.hasSuggestions}}
-            <Pills::SelectOne
-              @options={{this.suggestions}}
-              @optionLabel='label'
-              @layout='vertical'
-              @onSelect={{this.onClickSuggestion}}
-            />
-          {{else}}
-            <p>Sorry, no suggestions found ...</p>
-          {{/if}}
-        {{/if}}
-      </Fieldset>
-    {{/if}}
-
     <div class='actions'>
       <div class='left'>
         {{#if this.hasChanges}}
           <Button
-            @text={{if this.isSaving 'Saving...' 'Save changes'}}
-            @theme='medium green {{if this.isSaving "busy"}}'
+            @text='Save'
+            @theme='medium green'
             @onClick={{this.onClickSave}}
-            @isBusy={{this.isSaving}}
           />
         {{else}}
           <Button
@@ -204,13 +183,12 @@
           />
         {{/if}}
 
-        {{#unless this.showSuggestions}}
-          <Button
-            @text='Suggest translations'
-            @theme='medium grey'
-            @onClick={{this.onClickSuggest}}
-          />
-        {{/unless}}
+        <Button
+          @text={{if this.isTranslating 'Translating ...' 'Auto-translate'}}
+          @theme='medium grey {{if this.isTranslating "busy"}}'
+          @onClick={{this.onClickAutoTranslate}}
+          @isBusy={{this.isTranslating}}
+        />
       </div>
 
       <div class='right'>
@@ -256,43 +234,22 @@
       @multiline={{true}}
     />
 
-    {{#if this.showSuggestions}}
-      <Fieldset @label='Suggested translations (by robot)'>
-        {{#if this.loadingSuggestions}}
-          <p>One moment ...</p>
-        {{else}}
-          {{#if this.hasSuggestions}}
-            <Pills::SelectOne
-              @options={{this.suggestions}}
-              @optionLabel='label'
-              @layout='vertical'
-              @onSelect={{this.onClickSuggestion}}
-            />
-          {{else}}
-            <p>Sorry, no suggestions found ...</p>
-          {{/if}}
-        {{/if}}
-      </Fieldset>
-    {{/if}}
-
     <div class='actions'>
       <div class='left'>
-        {{#unless this.showSuggestions}}
-          <Button
-            @text='Suggest translation'
-            @theme='medium grey'
-            @onClick={{this.onClickSuggest}}
-          />
-        {{/unless}}
-
         {{#if this.hasChanges}}
           <Button
-            @text={{if this.isSaving 'Saving...' 'Save'}}
-            @theme='medium green {{if this.isSaving "busy"}}'
+            @text='Save'
+            @theme='medium green'
             @onClick={{this.onClickSave}}
-            @isBusy={{this.isSaving}}
           />
         {{/if}}
+
+        <Button
+          @text={{if this.isTranslating 'Translating ...' 'Auto-translate'}}
+          @theme='medium grey {{if this.isTranslating "busy"}}'
+          @onClick={{this.onClickAutoTranslate}}
+          @isBusy={{this.isTranslating}}
+        />
       </div>
 
       <div class='right'>

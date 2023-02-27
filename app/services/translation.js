@@ -1,6 +1,32 @@
 import Service from '@ember/service';
+import { service } from '@ember/service';
 
 export default class TranslationService extends Service {
+  @service api;
+
+  async translate(record) {
+    return new Promise((resolve, reject) => {
+      console.debug('translating', record.status, record.location);
+
+      fetch(`${this.api.url}/translate`, {
+        method: 'POST',
+        headers: this.api.headers,
+        body: JSON.stringify({
+          phrase: record.english,
+          source_lang: 'EN',
+          target_lang: record.language.toUpperCase()
+        })
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((response) => {
+          reject(response);
+        });
+    });
+  }
+
   languages = [
     {
       locale: 'en',

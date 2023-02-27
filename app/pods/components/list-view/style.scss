@@ -2,18 +2,38 @@
   background-color: $grey-0;
   min-height: 100vh;
   display: flex;
-  padding: 30px;
-  gap: 12px;
+  padding: 0 30px 30px;
   height: 100%;
   box-sizing: border-box;
-  h1 {
-    font-size: 20px;
-    font-family: $bold;
-    color: $grey-7;
-    margin-bottom: 30px;
-    line-height: 100%;
+  display: grid;
+  grid-template-columns: 180px auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'header header'
+    'aside main'
+    'footer footer';
+  column-gap: 12px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: header;
+    height: 80px;
+    h1 {
+      font-size: 20px;
+      font-family: $bold;
+      color: $grey-7;
+      line-height: 100%;
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
   aside {
+    grid-area: aside;
     width: 180px;
     flex-shrink: 0;
     .sticky {
@@ -86,8 +106,9 @@
     }
   }
   main {
-    margin-top: 40px;
+    margin-top: -10px;
     width: 100%;
+    grid-area: main;
     thead {
       position: sticky;
       top: 0;

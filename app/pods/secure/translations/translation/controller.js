@@ -4,14 +4,13 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class TranslationController extends Controller {
-  @service api;
+  // @service api;
   @service store;
   @service router;
+  @service translation;
 
-  @tracked loadingSuggestions = false;
-  @tracked suggestions = null;
-  @tracked isSaving = false;
   @tracked lastSavedNative = null;
+  @tracked isTranslating = false;
   @tracked showError = false;
 
   @action
@@ -59,28 +58,21 @@ export default class TranslationController extends Controller {
     return this.record.status === 'done';
   }
 
-  get showSuggestions() {
-    return this.loadingSuggestions || Array.isArray(this.suggestions);
-  }
-
-  get hasSuggestions() {
-    return Array.isArray(this.suggestions) && this.suggestions.length > 0;
-  }
-
   get hasChanges() {
     return this.lastSavedNative !== this.record.native;
   }
 
   @action
   onClickEdit() {
-    document.querySelector('#input-native').select();
+    const native = document.querySelector('#textarea-native');
+    if (native) {
+      native.focus();
+    }
   }
 
   @action
   onClickSave() {
     this.record.status = this.record.native ? 'done' : 'to-translate';
-    // TODO: first changes view from to-translate to done, then shows "saving...". Bit akward UX.
-    // this.isSaving = true;
     this.record
       .save({
         adapterOptions: {
@@ -96,10 +88,9 @@ export default class TranslationController extends Controller {
         this.showError = true;
       })
       .finally(() => {
-        // this.isSaving = false;
-        const input = document.querySelector('#input-native');
-        if (input) {
-          input.blur();
+        const native = document.querySelector('#textarea-native');
+        if (native) {
+          native.blur();
         }
       });
   }
@@ -108,56 +99,6 @@ export default class TranslationController extends Controller {
   onClickUndo() {
     this.record.native = this.lastSavedNative;
     this.lastSavedNative = this.record.native;
-  }
-
-  @action
-  onClickSuggest() {
-    console.log('onClickSuggest');
-
-    const sourceLang = 'EN';
-    const targetLang = this.record.language.toUpperCase();
-    const phrase = this.record.english;
-
-    this.suggestions = [];
-    this.showError = false;
-    this.loadingSuggestions = true;
-
-    fetch(`${this.api.url}/translate`, {
-      method: 'POST',
-      headers: this.api.headers,
-      body: JSON.stringify({ phrase, sourceLang, targetLang })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.debug(data);
-        if (data.success) {
-          console.debug('success');
-          console.debug(data.translations);
-          this.suggestions = data.translations.map((t) => {
-            return { label: t };
-          });
-        } else {
-          console.error('fail');
-          console.error(data);
-          this.showError = true;
-        }
-      })
-      .catch((response) => {
-        console.error('catch');
-        console.error(response);
-        this.showError = true;
-      })
-      .finally(() => {
-        this.loadingSuggestions = false;
-      });
-  }
-
-  @action
-  onClickSuggestion(suggestion) {
-    this.suggestions = null;
-    this.record.native = suggestion.label;
-    // HACK: the [contentetiable] textarea component does not update it's text when the value passed in changes...
-    // below is the workaround (temporary?)
     const native = document.querySelector('#textarea-native');
     if (native) {
       native.innerText = this.record.native;
@@ -268,5 +209,26 @@ export default class TranslationController extends Controller {
     }
 
     return `${this.languageFull} translation`;
+  }
+
+  @action
+  async onClickAutoTranslate() {
+    this.isTranslating = true;
+    const response = await this.translation.translate(this.record);
+    if (response?.success) {
+      console.debug('translation done');
+      console.debug(response);
+      if (response.translations.length > 0) {
+        this.record.native = response.translations[0]; // use first one
+        this.record.status = 'to-review';
+        this.record.save();
+      } else {
+        console.warn('no translation received...');
+      }
+    } else {
+      console.error('translation failed');
+      console.error(response);
+    }
+    this.isTranslating = false;
   }
 }

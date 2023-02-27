@@ -62,6 +62,24 @@ button {
             width: auto;
           }
         }
+        &.busy {
+          cursor: wait;
+          color: white;
+          border-color: $blue-1;
+          background-image: repeating-linear-gradient(
+            -45deg,
+            $blue-0,
+            $blue-0 4px,
+            $blue-1 4px,
+            $blue-1 8px
+          );
+          animation-name: move-background-right;
+          animation-duration: 30s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-fill-mode: backwards;
+          background-size: 1000px 1000px;
+        }
       }
 
       &.green {
@@ -83,6 +101,7 @@ button {
           box-shadow: none;
         }
         &.busy {
+          cursor: wait;
           background-image: repeating-linear-gradient(
             -45deg,
             $green-1,

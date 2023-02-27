@@ -1,5 +1,8 @@
 #secure #translations {
   padding: 0;
+  // HACK: to hide the user menu
+  // TODO: find better way... page service?
+  z-index: 2;
   .list-view {
     tr {
       td,
