@@ -107,6 +107,7 @@ export default class TranslationController extends Controller {
 
   @action
   onClickReject() {
+    const robotSuggestion = this.record.native;
     this.showError = false;
     this.record.native = null;
     this.record.status = 'to-translate';
@@ -118,6 +119,14 @@ export default class TranslationController extends Controller {
       })
       .then(() => {
         console.log('saved');
+        // The idea is to first delete native from the database, but then show it to the user.
+        // Why? Because the robot translation is often 90% correct and human wants to do small edit.
+        this.record.native = robotSuggestion;
+        this.lastSavedNative = null;
+        const native = document.querySelector('#textarea-native');
+        if (native) {
+          native.focus();
+        }
       })
       .catch((error) => {
         console.error('save failed', error);
