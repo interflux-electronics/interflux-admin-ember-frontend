@@ -62,7 +62,9 @@ export default class StringFieldComponent extends FieldComponent {
     }
 
     if (event.key === 'Enter') {
-      this.args.onEnter();
+      if (this.args.onEnter) {
+        this.args.onEnter();
+      }
     }
   }
 
