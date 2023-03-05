@@ -50,9 +50,13 @@ export default class FieldComponent extends Component {
   @tracked error;
 
   get isDirty() {
-    return this.args.localSave || !this.args.noSave
-      ? false
-      : this.value !== this.lastSavedValue;
+    if (this.args.localSave) {
+      return false;
+    }
+    if (this.args.noSave) {
+      return false;
+    }
+    return this.value === this.lastSavedValue ? false : true;
   }
 
   get warnings() {
