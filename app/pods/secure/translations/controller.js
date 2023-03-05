@@ -11,6 +11,8 @@ export default class TranslationsController extends Controller {
   @tracked language = 'de';
   @tracked statuses = 'to-translate,to-update,to-review,done';
 
+  queryParams = ['language', 'statuses'];
+
   get columns() {
     const language = this.translation.languages.find(
       (lang) => lang.locale === this.language
@@ -115,15 +117,16 @@ export default class TranslationsController extends Controller {
   onFilter(filter, option) {
     const { type } = filter;
     const { value } = option;
+    const queryParams = {};
 
     if (type === 'options') {
-      this[filter.property] = value;
+      queryParams[filter.property] = value;
     }
 
     if (type === 'checkboxes') {
       const arr = this[filter.property].split(',');
 
-      this[filter.property] = arr.includes(value)
+      queryParams[filter.property] = arr.includes(value)
         ? arr.filter((x) => x !== value).join(',')
         : [...arr, value].join(',');
     }
@@ -131,6 +134,8 @@ export default class TranslationsController extends Controller {
     if (type === 'search') {
       //
     }
+
+    this.router.transitionTo({ queryParams });
   }
 
   @action
