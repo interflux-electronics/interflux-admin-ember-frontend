@@ -10,12 +10,13 @@ fieldset.boolean {
       'left right'
       'footer footer';
   }
-  .label-legend {
+  .field-header {
     grid-area: header;
   }
   .checkbox {
     grid-area: left;
     position: relative;
+    margin-top: 8px;
     .icon {
       position: absolute;
       left: 0;
@@ -57,6 +58,7 @@ fieldset.boolean {
     cursor: text;
     margin: 0;
     padding: 0;
+    margin-top: 8px;
   }
   [role='alert'].error {
     grid-area: footer;
