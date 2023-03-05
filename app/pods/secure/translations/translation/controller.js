@@ -18,26 +18,6 @@ export default class TranslationController extends Controller {
     this.lastSavedNative = this.record.native;
   }
 
-  // When using the navigation arrows to switch between translations,
-  // the input fields do not update unless we use this hack below.
-  // HACK: the [contentetiable] textarea component does not update it's text when the value passed in changes...
-  // below is the workaround (temporary?)
-  @action
-  onUpdate() {
-    const source = document.querySelector('#textarea-source');
-    const native = document.querySelector('#textarea-native');
-    const last = document.querySelector('#textarea-last');
-    if (source) {
-      source.innerText = this.record.english;
-    }
-    if (native) {
-      native.innerText = this.record.native;
-    }
-    if (last) {
-      last.innerText = this.record.englishBefore;
-    }
-  }
-
   get record() {
     return this.model.translation;
   }

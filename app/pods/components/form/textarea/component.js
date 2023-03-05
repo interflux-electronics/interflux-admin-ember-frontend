@@ -1,17 +1,21 @@
 import InputComponent from '../input/component';
+import { htmlSafe } from '@ember/template';
 import { action } from '@ember/object';
 
+// NOTE: this component inherits most logic from <Form::Input>
+
 export default class TextareaComponent extends InputComponent {
-  // See <Form::Input> component
+  get value() {
+    return this.args.value || ''; // Prevent showing user "undefined"
+  }
 
-  // The contenteditable <p>
-  textarea;
+  // Text areas include \n line breaks when users enter. When you show this
+  // in <p> they do not break the line. Therefor we need to replace
+  // all \n with <br> so that the <textarea> will expand vertically on input.
+  get valueWithBreaks() {
+    const html = this.value.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
-  // On insert, add the @value to the p.contenteditable.
-  @action
-  onInsert(element) {
-    this.textarea = element;
-    this.textarea.innerText = this.args.value || ''; // Prevent showing user "undefined"
+    return htmlSafe(html);
   }
 
   // Prevent HTML formatting from being pasted into the p.contenteditable.

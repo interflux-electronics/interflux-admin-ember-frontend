@@ -4,14 +4,11 @@
 .textarea {
   &.primary {
     height: auto;
-
     &.disabled {
-      [role='textbox'],
       textarea {
         cursor: no-drop;
       }
     }
-
     .action {
       position: relative;
       display: flex;
@@ -23,15 +20,30 @@
         width: auto;
       }
     }
-
-    textarea,
-    [role='textbox'] {
+    .wrapper {
+      position: relative;
+    }
+    p.pusher {
+      color: red;
+      opacity: 0.2;
+      padding: 11px 15px;
+      line-height: 150%;
+      min-height: 46px;
+      box-sizing: border-box;
+    }
+    textarea {
       line-height: 150%;
       padding: 11px 15px;
       height: auto;
       display: block;
       resize: vertical;
       min-height: 46px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      resize: none;
+      overflow: hidden;
     }
   }
 }

@@ -50,11 +50,8 @@ export default class StringFieldComponent extends FieldComponent {
     const { multiline } = this.args;
     const element = event.target;
 
-    // If it's an <input> we grab the value. If it's a contenteditable <p>, we grab its innerText.
-    const value = multiline ? element.innerText : element.value;
-
     // Set the new value on the record
-    this.value = value;
+    this.value = element.value;
 
     // Reset errors
     this.error = null;
