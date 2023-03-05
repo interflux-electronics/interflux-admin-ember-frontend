@@ -8,15 +8,14 @@ fieldset {
     display: flex;
     flex-direction: column;
     & + * {
-      margin-top: 6px;
+      margin-top: 8px;
     }
     & + .pills {
       margin-top: 12px;
     }
     .label-buttons {
       display: flex;
-      align-items: baseline;
-      gap: 6px;
+      gap: 8px;
       justify-content: space-between;
       label {
         font-family: $bold;

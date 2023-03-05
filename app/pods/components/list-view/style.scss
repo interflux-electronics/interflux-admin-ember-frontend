@@ -13,6 +13,7 @@
     'aside main'
     'footer footer';
   column-gap: 12px;
+  align-content: flex-start;
 
   header {
     display: flex;
