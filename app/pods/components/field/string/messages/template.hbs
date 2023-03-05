@@ -1,59 +1,45 @@
-{{#if @disabled}}
-  {{! <div class='icon lock'>
-    <Svg::Lock />
-  </div> }}
-{{else}}
-  {{#if (and (eq @state 'idle') @hasFocus)}}
-    {{#unless @hideSave}}
-      <div class='icon'>
-        <Svg::Check />
-      </div>
-    {{/unless}}
-  {{/if}}
-
-  {{#if (or (eq @state 'dirty') (eq @state 'saving'))}}
-    {{#unless @hideSave}}
-      <div class='action'>
-        <Button
-          @theme='save'
-          @text={{if @isSaving null 'save'}}
-          @icon={{if @isSaving 'ellipsis'}}
-          @onClick={{@onSave}}
-          @isBusy={{@isSaving}}
-        />
-      </div>
-    {{/unless}}
-  {{/if}}
-
-  {{#if (eq @state 'warning')}}
-    <div class='icon'>
-      <Svg::Warning />
+{{#if (or (eq @state 'dirty') (eq @state 'saving'))}}
+  {{#unless @hideSave}}
+    <div class='action'>
+      <Button
+        @theme='save'
+        @text={{if @isSaving null 'save'}}
+        @icon={{if @isSaving 'ellipsis'}}
+        @onClick={{@onSave}}
+        @isBusy={{@isSaving}}
+      />
     </div>
-    {{#if @hasFocus}}
-      {{#if (eq @warning 'not-blank')}}
-        <p class='message'>Please enter a value.</p>
-      {{else if (eq @warning 'is-url')}}
-        <p class='message'>Please enter a URL which starts with "https://".</p>
-      {{else}}
-        <p class='message'>Please enter a valid value.</p>
-      {{/if}}
+  {{/unless}}
+{{/if}}
+
+{{#if (eq @state 'warning')}}
+  <div class='icon'>
+    <Svg::Warning />
+  </div>
+  {{#if @hasFocus}}
+    {{#if (eq @warning 'not-blank')}}
+      <p class='message'>Please enter a value.</p>
+    {{else if (eq @warning 'is-url')}}
+      <p class='message'>Please enter a URL which starts with "https://".</p>
+    {{else}}
+      <p class='message'>Please enter a valid value.</p>
     {{/if}}
   {{/if}}
+{{/if}}
 
-  {{#if (eq @state 'error')}}
-    <div class='icon'>
-      <Svg::Error />
-    </div>
-    {{#if @hasFocus}}
-      <p class='message'>Sorry, something didn't quite go as planned. Nobody
-        should ever see this message, so please
-        <a
-          href='mailto:j.werkhoven@interflux.com'
-          target='_blank'
-          rel='noreferrer noopener'
-        >tell Jan</a>
-        that you encounter
-        <strong>error {{@error}}</strong>.</p>
-    {{/if}}
+{{#if (eq @state 'error')}}
+  <div class='icon'>
+    <Svg::Error />
+  </div>
+  {{#if @hasFocus}}
+    <p class='message'>Sorry, something didn't quite go as planned. Nobody
+      should ever see this message, so please
+      <a
+        href='mailto:j.werkhoven@interflux.com'
+        target='_blank'
+        rel='noreferrer noopener'
+      >tell Jan</a>
+      that you encounter
+      <strong>error {{@error}}</strong>.</p>
   {{/if}}
 {{/if}}
