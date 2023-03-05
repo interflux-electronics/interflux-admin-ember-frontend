@@ -9,7 +9,7 @@ export default class TranslationsController extends Controller {
   @service translation;
 
   @tracked language = 'de';
-  @tracked statuses = 'to-translate,to-update,to-review,done';
+  @tracked statuses = 'to-translate,to-update,to-review,done,error';
 
   queryParams = ['language', 'statuses'];
 
@@ -27,6 +27,7 @@ export default class TranslationsController extends Controller {
           'to-update': { color: 'orange-2', label: 'to update' },
           'to-review': { color: 'blue-2', label: 'to review' },
           done: { color: 'green-1', label: 'done' },
+          error: { color: 'red-1', label: 'error' },
           unknown: { label: 'uknown' }
         }
       },
@@ -105,6 +106,17 @@ export default class TranslationsController extends Controller {
                 .filterBy('status', 'done')
                 .length.toString(),
               color: 'green-1'
+            }
+          },
+          {
+            label: 'error',
+            value: 'error',
+            checked: this.statuses.split(',').includes('error'),
+            count: {
+              label: this.sortedTranslationsForLanguage
+                .filterBy('status', 'error')
+                .length.toString(),
+              color: 'red-1'
             }
           }
         ]
@@ -189,7 +201,6 @@ export default class TranslationsController extends Controller {
   async autoTranslate() {
     console.log('auto-translate');
     this.isTranslating = true;
-    this.statuses = 'to-translate';
 
     let done = false;
 
@@ -200,22 +211,33 @@ export default class TranslationsController extends Controller {
       );
       if (allToTranslate.length > 0 && this.isTranslating) {
         const record = allToTranslate[0];
-        const response = await this.translation.translate(record);
-        if (response?.success) {
-          console.debug('translation done');
-          console.debug(record.location);
-          console.debug(record.english);
-          console.debug(response);
-          if (response.translations.length > 0) {
-            record.native = response.translations[0]; // use first one
-            record.status = 'to-review';
-            record.save();
-          } else {
-            console.warn('no translation received...');
-          }
+
+        if (record.english === '\n') {
+          console.count('LINE BREAK');
+          record.status = 'error';
+          record.error = 'Single line breaks cannot be translated.';
+          await record.save();
+          // if (record.location.startsWith('product')) {}
         } else {
-          console.error('translation failed');
-          console.error(response);
+          const response = await this.translation.translate(record);
+          if (response?.success) {
+            console.debug('translation done');
+            console.debug(record.location);
+            console.debug(record.english);
+            console.debug(response);
+            if (response.translations.length > 0) {
+              record.native = response.translations[0]; // use first one
+              record.status = 'to-review';
+              record.save();
+            } else {
+              console.warn('no translation received...');
+              record.status = 'error';
+            }
+          } else {
+            console.error('translation failed');
+            console.error(response);
+            record.status = 'error';
+          }
         }
       } else {
         done = true;
@@ -223,6 +245,5 @@ export default class TranslationsController extends Controller {
     }
 
     this.isTranslating = false;
-    this.statuses = 'to-review';
   }
 }

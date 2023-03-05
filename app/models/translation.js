@@ -7,6 +7,7 @@ export default class TranslationModel extends Model {
   @attr('string') english;
   @attr('string') englishBefore;
   @attr('string') status;
+  @attr('string') error;
 
   get rank() {
     return {

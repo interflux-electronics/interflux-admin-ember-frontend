@@ -268,5 +268,45 @@
     </div>
   {{/if}}
 
+  {{#if this.hasError}}
+    <div class='status'>
+      <Tag @text='error' @theme='red-1 admin medium' />
+    </div>
+
+    <p>
+      Auto-translation failed. Please notify Jan so he can he can resolve this
+      error and prevent similar issues from reocuring.
+    </p>
+
+    <p>English: {{this.record.english}}</p>
+    <p>{{this.languageFull}}: {{this.record.native}}</p>
+    <p>Location: {{this.record.location}}</p>
+    <p>Error: {{this.record.error}}</p>
+
+    <div class='actions'>
+      <div class='left'>
+        <Button
+          @text='Reset'
+          @theme='medium grey'
+          @onClick={{this.onClickReset}}
+        />
+      </div>
+
+      <div class='right'>
+        <Button
+          @icon='chevron-left'
+          @theme='medium grey'
+          @onClick={{this.onClickLeftArrow}}
+        />
+
+        <Button
+          @icon='chevron-right'
+          @theme='medium grey'
+          @onClick={{this.onClickRightArrow}}
+        />
+      </div>
+    </div>
+  {{/if}}
+
   <div {{did-insert this.onInsert}}></div>
 </Modal>

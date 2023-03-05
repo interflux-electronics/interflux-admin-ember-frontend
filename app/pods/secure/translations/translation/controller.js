@@ -38,6 +38,10 @@ export default class TranslationController extends Controller {
     return this.record.status === 'done';
   }
 
+  get hasError() {
+    return this.record.status === 'error';
+  }
+
   get hasChanges() {
     return this.lastSavedNative !== this.record.native;
   }
@@ -219,5 +223,11 @@ export default class TranslationController extends Controller {
       console.error(response);
     }
     this.isTranslating = false;
+  }
+
+  @action
+  onClickReset() {
+    this.record.status = 'to-translate';
+    this.record.save();
   }
 }
