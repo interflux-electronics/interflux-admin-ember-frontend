@@ -217,10 +217,16 @@ export default class TranslationController extends Controller {
         this.record.save();
       } else {
         console.warn('no translation received...');
+        this.record.status = 'error';
+        this.record.error = 'no translations received';
+        this.record.save();
       }
     } else {
       console.error('translation failed');
       console.error(response);
+      this.record.status = 'error';
+      this.record.error = 'auto-translation failed';
+      this.record.save();
     }
     this.isTranslating = false;
   }

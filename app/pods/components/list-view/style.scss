@@ -176,13 +176,15 @@
         }
       }
     }
-    tr.no-data {
+    tr.no-rows {
       height: 400px;
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 15px;
+      flex-direction: column;
+      gap: 20px;
       &:hover {
         cursor: auto;
         box-shadow: none;

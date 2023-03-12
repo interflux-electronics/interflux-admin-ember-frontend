@@ -100,8 +100,13 @@
             {{/each}}
           </tr>
         {{else}}
-          <tr class='no-data'>
-            <p>no data</p>
+          <tr class='no-rows'>
+            <p>No data.</p>
+            <Button
+              @text='reset filters'
+              @theme='medium grey'
+              @onClick={{@onClickResetFilters}}
+            />
           </tr>
         {{/each}}
       </tbody>

@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 export default class TranslationsController extends Controller {
   @service api;
   @service router;
+  @service store;
   @service translation;
 
   @tracked language = 'de';
@@ -14,9 +15,13 @@ export default class TranslationsController extends Controller {
   queryParams = ['language', 'statuses'];
 
   get columns() {
-    const language = this.translation.languages.find(
-      (lang) => lang.locale === this.language
+    const language = this.filters[0].options.find(
+      (opt) => opt.value === this.language
     );
+
+    if (!language) {
+      return [];
+    }
 
     return [
       {
@@ -31,7 +36,7 @@ export default class TranslationsController extends Controller {
           unknown: { label: 'uknown' }
         }
       },
-      { label: language.nameEnglish, property: 'native' },
+      { label: language.label, property: 'native' },
       { label: 'English', property: 'english' },
       { label: 'ID', property: 'location' }
     ];
@@ -209,41 +214,102 @@ export default class TranslationsController extends Controller {
         'status',
         'to-translate'
       );
-      if (allToTranslate.length > 0 && this.isTranslating) {
-        const record = allToTranslate[0];
 
-        if (record.english === '\n') {
-          console.count('LINE BREAK');
-          record.status = 'error';
-          record.error = 'Single line breaks cannot be translated.';
-          await record.save();
-          // if (record.location.startsWith('product')) {}
-        } else {
-          const response = await this.translation.translate(record);
-          if (response?.success) {
-            console.debug('translation done');
-            console.debug(record.location);
-            console.debug(record.english);
-            console.debug(response);
-            if (response.translations.length > 0) {
-              record.native = response.translations[0]; // use first one
-              record.status = 'to-review';
-              record.save();
-            } else {
-              console.warn('no translation received...');
-              record.status = 'error';
-            }
-          } else {
-            console.error('translation failed');
-            console.error(response);
-            record.status = 'error';
+      // If there is nothing to translate, then stop.
+      if (allToTranslate.length === 0) {
+        done = true;
+        continue;
+      }
+
+      // If something outside this loop whishes to interrupt it, it needs to set isTranslating to false
+      // For example the "Stop auto-translating" button does.
+      if (!this.isTranslating) {
+        done = true;
+        continue;
+      }
+
+      // Grab the first next record to translate.
+      const record = allToTranslate[0];
+
+      // In case the english sentence is an empty line break then Deepl Translator will fail.
+      if (record.english === '\n') {
+        console.warn('---');
+        console.warn('SINGLE LINE BREAK');
+
+        // A common place for \n issues is the product.pitch
+        if (record.location.startsWith('product.2.')) {
+          console.warn('fix product');
+          const id = record.location.split('.')[2];
+          const product = await this.store.findRecord('product', id);
+          if (product?.id) {
+            console.warn('product found');
+            product.pitch = null;
+            await product.save({
+              adapterOptions: {
+                whitelist: ['pitch']
+              }
+            });
+            console.warn('product pitch wiped');
+            await record.destroyRecord();
+            console.warn('translation record destroyed');
+            console.warn('---');
+            continue;
           }
+
+          console.warn('log error');
+          record.status = 'error';
+          record.error = 'Single line breaks. Product not found.';
+          await record.save();
+          console.warn('---');
+          continue;
+        }
+
+        // If it's not a product
+        console.warn('log error');
+        record.status = 'error';
+        record.error = 'Single line break.';
+        await record.save();
+        console.warn('---');
+
+        continue;
+      }
+
+      // Start auto-translation
+      const response = await this.translation.translate(record);
+
+      if (response?.success) {
+        console.debug('translation done');
+        console.debug(record.location);
+        console.debug(record.english);
+        console.debug(response);
+        if (response.translations.length > 0) {
+          record.native = response.translations[0]; // use first one
+          record.status = 'to-review';
+          record.save();
+        } else {
+          console.warn('no translation received...');
+          record.status = 'error';
         }
       } else {
-        done = true;
+        console.error('translation failed');
+        console.error(response);
+        record.status = 'error';
       }
     }
 
     this.isTranslating = false;
+  }
+
+  @action
+  onClickResetFilters() {
+    this.statuses = 'to-translate,to-update,to-review,done,error';
+
+    const language = this.filters[0].options.find(
+      (opt) => opt.value === this.language
+    );
+
+    if (!language) {
+      this.language = 'de';
+    }
   }
 }

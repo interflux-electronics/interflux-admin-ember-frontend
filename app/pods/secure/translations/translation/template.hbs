@@ -63,6 +63,10 @@
         />
       </div>
     </div>
+
+    {{#if this.showError}}
+      <Error::Generic />
+    {{/if}}
   {{/if}}
 
   {{#if this.isToReview}}
@@ -205,6 +209,10 @@
         />
       </div>
     </div>
+
+    {{#if this.showError}}
+      <Error::Generic />
+    {{/if}}
   {{/if}}
 
   {{#if this.isToTranslate}}
@@ -266,6 +274,10 @@
         />
       </div>
     </div>
+
+    {{#if this.showError}}
+      <Error::Generic />
+    {{/if}}
   {{/if}}
 
   {{#if this.hasError}}
@@ -274,14 +286,15 @@
     </div>
 
     <p>
-      Auto-translation failed. Please notify Jan so he can he can resolve this
-      error and prevent similar issues from reocuring.
+      There was an issue with this translation. Jan has been notified and will
+      look for a solution soon.
     </p>
 
-    <p>English: {{this.record.english}}</p>
-    <p>{{this.languageFull}}: {{this.record.native}}</p>
+    <p>ID: {{this.record.id}}</p>
     <p>Location: {{this.record.location}}</p>
     <p>Error: {{this.record.error}}</p>
+    <p>English: {{this.record.english}}</p>
+    <p>{{this.languageFull}}: {{this.record.native}}</p>
 
     <div class='actions'>
       <div class='left'>
