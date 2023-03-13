@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { htmlSafe } from '@ember/template';
 
 export default class TranslationController extends Controller {
   // @service api;
@@ -235,5 +236,26 @@ export default class TranslationController extends Controller {
   onClickReset() {
     this.record.status = 'to-translate';
     this.record.save();
+  }
+
+  get diff() {
+    const a = this.record.englishBefore;
+    const b = this.record.english;
+
+    const diff = window.patienceDiff(a.split(' '), b.split(' '));
+
+    const html = diff.lines
+      .map((line) => {
+        if (line.aIndex === -1) {
+          return `<ins>${line.line}</ins>`;
+        }
+        if (line.bIndex === -1) {
+          return `<del>${line.line}</del>`;
+        }
+        return line.line;
+      })
+      .join(' ');
+
+    return htmlSafe(html);
   }
 }

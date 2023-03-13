@@ -136,30 +136,19 @@
     </div>
 
     <p class='update-cta'>
-      This English phrase on our website has changed. Please update the
+      The English source of this translation has changed on our website. Please
+      update the
       {{this.languageFull}}
-      translation in the same way.
+      translation below in the same way. Words marked green are added. Words
+      marked red have been removed.
     </p>
 
-    <Field::String
-      @id='last'
-      @label='English before change'
-      @legend='This English phrase was visible on our website, before the update happened. For reference.'
-      @record={{this.record}}
-      @attribute='englishBefore'
-      @disabled={{true}}
-      @multiline={{true}}
-    />
-
-    <Field::String
-      @id='source'
-      @label='English now'
-      @legend='This English phrase is now visible on our website.'
-      @record={{this.record}}
-      @attribute='english'
-      @disabled={{true}}
-      @multiline={{true}}
-    />
+    <h3>English before change</h3>
+    <p>{{this.record.englishBefore}}</p>
+    <h3>English now</h3>
+    <p>{{this.record.english}}</p>
+    <h3>Changes</h3>
+    <p>{{this.diff}}</p>
 
     <Field::String
       @id='native'
