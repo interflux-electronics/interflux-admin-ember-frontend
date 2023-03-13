@@ -70,6 +70,16 @@
       }
     }
   }
+  &.grey-7 {
+    .bg {
+      .word {
+        color: $grey-7;
+        &:after {
+          background-color: $grey-7;
+        }
+      }
+    }
+  }
   &.regular {
     .p {
       font-family: $regular;

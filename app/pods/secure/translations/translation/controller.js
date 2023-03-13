@@ -242,6 +242,11 @@ export default class TranslationController extends Controller {
     const a = this.record.englishBefore;
     const b = this.record.english;
 
+    // We're using a third party script for finding differences between 2 strings.
+    // https://github.com/jonTrent/PatienceDiff
+    // https://stackoverflow.com/questions/57102484/find-difference-between-two-strings-in-javascript
+    // Loaded in via <script> element in app/index.html
+
     const diff = window.patienceDiff(a.split(' '), b.split(' '));
 
     const html = diff.lines
@@ -257,5 +262,12 @@ export default class TranslationController extends Controller {
       .join(' ');
 
     return htmlSafe(html);
+  }
+
+  @action
+  onClickSomethingIsWrong() {
+    this.record.status = 'error';
+    this.record.error = 'To update seems wrong.';
+    this.record.save();
   }
 }

@@ -11,6 +11,15 @@
     display: flex;
     justify-content: space-between;
     padding: 24px 40px 40px;
+    &.to-update {
+      .left {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .right {
+        align-items: flex-end;
+      }
+    }
     .left,
     .right {
       display: flex;
@@ -32,5 +41,8 @@
     border-left: 2px solid #97cb00;
     border-right: 2px solid #97cb00;
     text-decoration: none;
+  }
+  h3 {
+    padding-bottom: 6px;
   }
 }

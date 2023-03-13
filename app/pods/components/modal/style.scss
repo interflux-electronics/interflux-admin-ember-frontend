@@ -379,5 +379,19 @@
         }
       }
     }
+    details {
+      padding: 20px 40px;
+      &[open] {
+        summary {
+          margin-bottom: 20px;
+        }
+      }
+      summary {
+        cursor: pointer;
+        &:hover {
+          color: $blue-0;
+        }
+      }
+    }
   }
 }

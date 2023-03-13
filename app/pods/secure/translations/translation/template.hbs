@@ -160,17 +160,17 @@
       @hideSave={{true}}
     />
 
-    <div class='actions'>
+    <div class='actions to-update'>
       <div class='left'>
         {{#if this.hasChanges}}
           <Button
-            @text='Save'
+            @text='Save changes'
             @theme='medium green'
             @onClick={{this.onClickSave}}
           />
         {{else}}
           <Button
-            @text='No changes'
+            @text='Save without changes'
             @theme='medium grey'
             @onClick={{this.onClickSave}}
           />
@@ -181,6 +181,12 @@
           @theme='medium grey {{if this.isTranslating "busy"}}'
           @onClick={{this.onClickAutoTranslate}}
           @isBusy={{this.isTranslating}}
+        />
+
+        <Button
+          @text='Something is wrong...'
+          @theme='medium grey'
+          @onClick={{this.onClickSomethingIsWrong}}
         />
       </div>
 
@@ -271,18 +277,19 @@
 
   {{#if this.hasError}}
     <div class='status'>
-      <Tag @text='error' @theme='red-1 admin medium' />
+      <Tag @text='error' @theme='grey-7 admin medium' />
     </div>
 
     <p>
-      There was an issue with this translation. Jan has been notified and will
-      look for a solution soon.
+      There was a technical issue with this translation. Jan has been notified
+      and will look for a solution soon.
     </p>
 
     <p>ID: {{this.record.id}}</p>
     <p>Location: {{this.record.location}}</p>
     <p>Error: {{this.record.error}}</p>
-    <p>English: {{this.record.english}}</p>
+    <p>English (now): {{this.record.english}}</p>
+    <p>English (before): {{this.record.englishBefore}}</p>
     <p>{{this.languageFull}}: {{this.record.native}}</p>
 
     <div class='actions'>
@@ -309,6 +316,16 @@
       </div>
     </div>
   {{/if}}
+
+  {{#unless this.hasError}}
+    <hr />
+
+    <details>
+      <summary>More details</summary>
+      <p>ID: {{this.record.id}}</p>
+      <p>Location: {{this.record.location}}</p>
+    </details>
+  {{/unless}}
 
   <div {{did-insert this.onInsert}}></div>
 </Modal>

@@ -32,7 +32,7 @@ export default class TranslationsController extends Controller {
           'to-update': { color: 'orange-2', label: 'to update' },
           'to-review': { color: 'blue-2', label: 'to review' },
           done: { color: 'green-1', label: 'done' },
-          error: { color: 'red-1', label: 'error' },
+          error: { color: 'grey-7', label: 'error' },
           unknown: { label: 'uknown' }
         }
       },
@@ -70,25 +70,14 @@ export default class TranslationsController extends Controller {
         property: 'statuses',
         checkboxes: [
           {
-            label: 'to translate',
-            value: 'to-translate',
-            checked: this.statuses.split(',').includes('to-translate'),
+            label: 'done',
+            value: 'done',
+            checked: this.statuses.split(',').includes('done'),
             count: {
               label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'to-translate')
+                .filterBy('status', 'done')
                 .length.toString(),
-              color: 'red-1'
-            }
-          },
-          {
-            label: 'to update',
-            value: 'to-update',
-            checked: this.statuses.split(',').includes('to-update'),
-            count: {
-              label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'to-update')
-                .length.toString(),
-              color: 'orange-2'
+              color: 'green-1'
             }
           },
           {
@@ -103,14 +92,25 @@ export default class TranslationsController extends Controller {
             }
           },
           {
-            label: 'done',
-            value: 'done',
-            checked: this.statuses.split(',').includes('done'),
+            label: 'to update',
+            value: 'to-update',
+            checked: this.statuses.split(',').includes('to-update'),
             count: {
               label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'done')
+                .filterBy('status', 'to-update')
                 .length.toString(),
-              color: 'green-1'
+              color: 'orange-2'
+            }
+          },
+          {
+            label: 'to translate',
+            value: 'to-translate',
+            checked: this.statuses.split(',').includes('to-translate'),
+            count: {
+              label: this.sortedTranslationsForLanguage
+                .filterBy('status', 'to-translate')
+                .length.toString(),
+              color: 'red-1'
             }
           },
           {
@@ -121,7 +121,7 @@ export default class TranslationsController extends Controller {
               label: this.sortedTranslationsForLanguage
                 .filterBy('status', 'error')
                 .length.toString(),
-              color: 'red-1'
+              color: 'grey-7'
             }
           }
         ]
