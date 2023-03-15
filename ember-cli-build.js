@@ -36,5 +36,7 @@ module.exports = function (defaults) {
     }
   });
 
+  app.import('vendor/PatienceDiff.js');
+
   return app.toTree();
 };

@@ -34,6 +34,9 @@ module.exports = {
     'ember/no-actions-hash': 'warn',
     'ember/no-classic-classes': 'warn'
   },
+  globals: {
+    patienceDiff: 'readonly'
+  },
   overrides: [
     // node files
     {

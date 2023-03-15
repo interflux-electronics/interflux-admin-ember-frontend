@@ -247,7 +247,7 @@ export default class TranslationController extends Controller {
     // https://stackoverflow.com/questions/57102484/find-difference-between-two-strings-in-javascript
     // Loaded in via <script> element in app/index.html
 
-    const diff = window.patienceDiff(a.split(' '), b.split(' '));
+    const diff = patienceDiff(a.split(' '), b.split(' '));
 
     const html = diff.lines
       .map((line) => {
