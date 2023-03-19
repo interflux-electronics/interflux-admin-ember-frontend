@@ -8,7 +8,7 @@
           @placeholder='Email'
           @type='email'
           @theme='tertiary'
-          @disabled={{this.auth.getToken.isRunning}}
+          @disabled={{this.loading}}
           @onKeyDown={{this.onKeyDown}}
           @onKeyUp={{this.onKeyUp}}
         />
@@ -21,7 +21,7 @@
           @placeholder='Password'
           @type='password'
           @theme='tertiary'
-          @disabled={{this.auth.getToken.isRunning}}
+          @disabled={{this.loading}}
           @onKeyDown={{this.onKeyDown}}
           @onKeyUp={{this.onKeyUp}}
         />
