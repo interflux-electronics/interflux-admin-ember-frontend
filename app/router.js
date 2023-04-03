@@ -91,6 +91,8 @@ Router.map(function () {
       this.route('help');
       this.route('preferences');
     });
+
+    this.route('forbidden');
   });
 
   this.route('catchall', { path: '*:' });

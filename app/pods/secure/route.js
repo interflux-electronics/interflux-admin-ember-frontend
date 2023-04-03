@@ -33,4 +33,19 @@ export default class SecureRoute extends Route {
   afterModel(model) {
     this.auth.user = model.user;
   }
+
+  @action
+  error(response) {
+    console.error(response);
+    console.warn('Authentication failed...');
+    console.warn('Reseting authentication data');
+    console.warn('Showing user button to login.');
+
+    // Reset all auth tokens and data without redirecting to login.
+    this.auth.reset(false);
+
+    // Returning true allows the error to bubble up the route tree which triggers the error
+    // templates to show
+    return true;
+  }
 }

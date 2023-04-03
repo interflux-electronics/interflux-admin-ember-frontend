@@ -55,13 +55,15 @@ export default class AuthService extends Service {
   }
 
   @action
-  reset() {
+  reset(doTransition = true) {
     this.token = null;
     this.user = null;
     this.expiry = null;
     localStorage.clear();
     this.sync();
     this.store.unloadAll();
-    this.router.transitionTo('login');
+    if (doTransition) {
+      this.router.transitionTo('login');
+    }
   }
 }

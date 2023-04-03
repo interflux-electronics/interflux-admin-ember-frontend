@@ -96,6 +96,7 @@ export default class ApiService extends Service {
       this.auth.reset();
     } else if (response instanceof ForbiddenError) {
       console.error('403 - You are not allowed to make this request.');
+      this.router.transitionTo('secure.forbidden');
     } else if (response instanceof NotFoundError) {
       console.error('404 - The API does not know this route.');
     } else if (response instanceof ConflictError) {
