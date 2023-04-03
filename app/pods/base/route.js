@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 
 export default class BaseRoute extends Route {
   // These services are available in all routes which inherit BaseRoute.
+  @service auth;
   @service api;
   @service store;
   @service router;
@@ -20,6 +21,25 @@ export default class BaseRoute extends Route {
     super.activate();
     if (this.resetScroll) {
       window.scrollTo(0, 0);
+    }
+  }
+
+  // Not all users are able to see all of the resources on the left hand side of Admin.
+  // This bit of logic prevents users from seeing routes for which they are not authorised.
+  beforeModel() {
+    super.activate();
+
+    if (!this.needs) {
+      return;
+    }
+
+    const allowed = this.needs.every((ability) => {
+      return this.auth.user.can(ability);
+    });
+
+    if (!allowed) {
+      console.warn(`user is not allowed`);
+      this.router.transitionTo('secure.forbidden');
     }
   }
 

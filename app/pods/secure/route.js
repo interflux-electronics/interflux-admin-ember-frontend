@@ -1,10 +1,11 @@
-import BaseRoute from 'interflux/pods/base/route';
+import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { hash } from 'rsvp';
+import { action } from '@ember/object';
 
-export default class SecureRoute extends BaseRoute {
-  @service store;
+export default class SecureRoute extends Route {
   @service auth;
+  @service store;
 
   // Redirect user back to login if the auth token is missing
   beforeModel() {

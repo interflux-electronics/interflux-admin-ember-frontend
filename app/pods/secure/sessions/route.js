@@ -5,6 +5,8 @@ import { hash } from 'rsvp';
 export default class SessionsRoute extends BaseRoute {
   @service store;
 
+  needs = ['read_sessions'];
+
   model() {
     return hash({
       sessions: this.store.findAll('session'),

@@ -14,6 +14,7 @@ import {
 
 export default class ApiService extends Service {
   @service auth;
+  @service router;
 
   // Where the API lives
   // In production: https://api.interflux.com

@@ -5,9 +5,11 @@ import { hash } from 'rsvp';
 export default class ProductsRoute extends BaseRoute {
   @service store;
 
+  needs = ['read_products', 'read_product_families'];
+
   model() {
     return hash({
-      products: this.store.findAll('product'),
+      products: this.store.query('product'),
       families: this.store.findAll('product-family')
     });
   }

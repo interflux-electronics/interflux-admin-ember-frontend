@@ -1,9 +1,8 @@
 import BaseRoute from 'interflux/pods/base/route';
-import { service } from '@ember/service';
 import { hash } from 'rsvp';
 
 export default class DocumentsRoute extends BaseRoute {
-  @service store;
+  needs = ['read_documents'];
 
   model() {
     return hash({

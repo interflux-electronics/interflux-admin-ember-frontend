@@ -1,9 +1,8 @@
 import BaseRoute from 'interflux/pods/base/route';
-import { service } from '@ember/service';
 import { hash } from 'rsvp';
 
 export default class CountriesRoute extends BaseRoute {
-  @service store;
+  needs = ['read_countries'];
 
   model() {
     return hash({

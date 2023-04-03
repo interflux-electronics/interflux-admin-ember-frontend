@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class NavResourcesComponent extends Component {
+  @service auth;
   @service router;
 
   @tracked expanded = true;
@@ -31,67 +32,80 @@ export default class NavResourcesComponent extends Component {
       {
         label: 'Products',
         route: 'secure.products',
-        icon: 'svg/prescription-bottle'
+        icon: 'svg/prescription-bottle',
+        needs: ['read_products', 'read_product_families']
       },
       {
         label: 'Families',
         route: 'secure.families',
-        icon: 'svg/flask'
+        icon: 'svg/flask',
+        needs: ['read_product_families']
       },
       {
         label: 'Qualities',
         route: 'secure.qualities',
-        icon: 'svg/medal'
+        icon: 'svg/medal',
+        needs: ['read_qualities']
       },
       {
         label: 'Processes',
         route: 'secure.uses',
-        icon: 'svg/microchip'
+        icon: 'svg/microchip',
+        needs: ['read_uses']
       },
       {
         label: 'Documents',
         route: 'secure.documents',
-        icon: 'svg/document'
+        icon: 'svg/document',
+        needs: ['read_documents']
       },
       {
         label: 'Companies',
         route: 'secure.companies',
-        icon: 'svg/building'
+        icon: 'svg/building',
+        needs: ['read_companies']
       },
       {
         label: 'People',
         route: 'secure.people',
-        icon: 'svg/street-view'
+        icon: 'svg/street-view',
+        needs: ['read_people']
       },
       {
         label: 'Images',
         route: 'secure.images',
-        icon: 'svg/camera'
+        icon: 'svg/camera',
+        needs: ['read_images']
       },
       {
         label: 'Videos',
         route: 'secure.videos',
-        icon: 'svg/film'
+        icon: 'svg/film',
+        needs: ['read_videos']
       },
       {
         label: 'Translations',
         route: 'secure.translations',
-        icon: 'svg/translate'
+        icon: 'svg/translate',
+        needs: ['read_translations']
       },
       {
         label: 'Webinars',
         route: 'secure.webinars',
-        icon: 'svg/podcast'
+        icon: 'svg/podcast',
+        needs: ['read_webinars']
       },
       {
         label: 'Events',
         route: 'secure.events',
-        icon: 'svg/calendar'
+        icon: 'svg/calendar',
+        needs: ['read_events']
       },
       {
         label: 'Countries',
         route: 'secure.countries',
-        icon: 'svg/flag'
+        icon: 'svg/flag',
+        needs: ['read_countries']
       }
       // {
       //   label: 'Sessions',
@@ -118,5 +132,13 @@ export default class NavResourcesComponent extends Component {
     });
 
     return arr;
+  }
+
+  get resourcesForUser() {
+    return this.resources.filter((resource) => {
+      return resource.needs.every((ability) => {
+        return this.auth.user.can(ability);
+      });
+    });
   }
 }

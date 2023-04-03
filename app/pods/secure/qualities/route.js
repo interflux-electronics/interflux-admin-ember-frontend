@@ -5,6 +5,8 @@ import { hash } from 'rsvp';
 export default class QualitiesRoute extends BaseRoute {
   @service store;
 
+  needs = ['read_qualities'];
+
   model() {
     return hash({
       qualities: this.store.findAll('quality'),
