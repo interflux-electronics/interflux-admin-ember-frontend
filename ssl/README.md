@@ -1,3 +1,5 @@
+Note: These SSL keys are only used during development.
+
 Issue:
 https://medium.com/@fro_g/ember-js-cookies-over-ssl-9744921fd5d3
 
