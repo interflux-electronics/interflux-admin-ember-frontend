@@ -52,6 +52,6 @@ export default class BaseRoute extends Route {
 
     // Returning true allows the error to bubble up the route tree which triggers the error
     // templates to show
-    return true;
+    return false;
   }
 }
