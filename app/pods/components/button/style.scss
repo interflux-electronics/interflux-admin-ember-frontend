@@ -281,6 +281,9 @@ button {
         }
       }
       &.chevron-left {
+        span {
+          padding-left: 10px;
+        }
         svg {
           width: auto;
           height: 13px;
