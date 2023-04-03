@@ -1,17 +1,3 @@
-{{#if (or (eq @state 'dirty') (eq @state 'saving'))}}
-  {{#unless @hideSave}}
-    <div class='action'>
-      <Button
-        @theme='save'
-        @text={{if @isSaving null 'save'}}
-        @icon={{if @isSaving 'ellipsis'}}
-        @onClick={{@onSave}}
-        @isBusy={{@isSaving}}
-      />
-    </div>
-  {{/unless}}
-{{/if}}
-
 {{#if (eq @state 'warning')}}
   <div class='icon'>
     <Svg::Warning />

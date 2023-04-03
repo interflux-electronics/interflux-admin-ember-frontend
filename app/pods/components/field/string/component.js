@@ -45,9 +45,13 @@ export default class StringFieldComponent extends FieldComponent {
     this.args.record.set(this.args.attribute, value);
   }
 
+  get isDirty() {
+    return false; // override, always false to prevent green flashes each key stroke save
+  }
+
   @action
   onKeyUp(event) {
-    const { multiline } = this.args;
+    // const { multiline } = this.args;
     const element = event.target;
 
     // Set the new value on the record
@@ -56,8 +60,8 @@ export default class StringFieldComponent extends FieldComponent {
     // Reset errors
     this.error = null;
 
-    // On enter, save the attribute, unless it's a <Form::Textarea>
-    if (event.key === 'Enter' && !multiline && !this.args.noSave) {
+    // Save on every key stroke.
+    if (!this.args.noSave) {
       this.save();
     }
 

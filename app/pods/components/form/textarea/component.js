@@ -1,10 +1,20 @@
 import InputComponent from '../input/component';
 import { htmlSafe } from '@ember/template';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 // NOTE: this component inherits most logic from <Form::Input>
 
 export default class TextareaComponent extends InputComponent {
+  // HACK: Because we use the Ember component <Textarea> the value passed in has to be the start value, not a value which can update over time.
+  @tracked startValue = 'abc';
+
+  constructor() {
+    super(...arguments);
+
+    this.startValue = this.value;
+  }
+
   get value() {
     return this.args.value || ''; // Prevent showing user "undefined"
   }
