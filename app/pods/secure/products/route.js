@@ -9,7 +9,7 @@ export default class ProductsRoute extends BaseRoute {
 
   model() {
     return hash({
-      products: this.store.query('product'),
+      products: this.store.findAll('product'),
       families: this.store.findAll('product-family')
     });
   }
