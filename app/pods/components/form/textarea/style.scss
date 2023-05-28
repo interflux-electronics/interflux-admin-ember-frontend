@@ -24,12 +24,17 @@
       position: relative;
     }
     p.pusher {
-      color: red;
-      opacity: 0.2;
+      opacity: 0;
       padding: 11px 15px;
       line-height: 150%;
       min-height: 46px;
       box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+      // uncomment below when debugging
+      // color: red;
+      // opacity: 1;
+      // z-index: 3;
     }
     textarea {
       line-height: 150%;
@@ -39,6 +44,7 @@
       resize: vertical;
       min-height: 46px;
       position: absolute;
+      z-index: 2;
       left: 0;
       top: 0;
       height: 100%;

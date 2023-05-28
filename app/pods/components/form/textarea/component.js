@@ -52,4 +52,21 @@ export default class TextareaComponent extends InputComponent {
   get contenteditable() {
     return this.args.disabled ? false : true;
   }
+
+  // HACK: the text within the <textarea> does not update if the @value changes.
+  // To resolve we use a mutation observer to update the value manually.
+  @action
+  onInsert(pusher) {
+    const textarea = pusher.nextElementSibling;
+
+    const observer = new MutationObserver(() => {
+      textarea.value = this.args.value;
+    });
+
+    const config = {
+      childList: true
+    };
+
+    observer.observe(pusher, config);
+  }
 }

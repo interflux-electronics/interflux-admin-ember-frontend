@@ -1,6 +1,6 @@
 <div class='textarea {{this.classes}}'>
   <div class='wrapper'>
-    <p class='pusher'>
+    <p class='pusher' {{did-insert this.onInsert}}>
       {{this.valueWithBreaks}}
     </p>
     {{! The <p> above is hidden from the user, but helps expand the textarea vertically }}
