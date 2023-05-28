@@ -130,6 +130,7 @@ export default class TranslationController extends Controller {
         this.lastSavedNative = null;
         const native = document.querySelector('#textarea-native');
         if (native) {
+          native.value = robotSuggestion;
           native.focus();
         }
       })
