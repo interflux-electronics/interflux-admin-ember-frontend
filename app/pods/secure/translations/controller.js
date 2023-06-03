@@ -49,19 +49,30 @@ export default class TranslationsController extends Controller {
         property: 'language',
         options: [
           {
-            label: 'German',
-            value: 'de',
-            selected: this.language === 'de'
+            label: 'Chinese',
+            value: 'zh',
+            selected: this.language === 'zh'
           },
           {
-            label: 'Spanish',
-            value: 'es',
-            selected: this.language === 'es'
+            label: 'Dutch',
+            value: 'nl',
+            selected: this.language === 'nl'
           },
           {
             label: 'French',
             value: 'fr',
             selected: this.language === 'fr'
+          },
+          {
+            label: 'German',
+            value: 'de',
+            selected: this.language === 'de'
+          },
+
+          {
+            label: 'Spanish',
+            value: 'es',
+            selected: this.language === 'es'
           }
         ]
       },
