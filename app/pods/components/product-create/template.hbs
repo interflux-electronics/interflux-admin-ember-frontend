@@ -1,0 +1,34 @@
+<h1>
+  <small>product</small>
+  <span>{{if @product.name @product.name 'new'}}</span>
+</h1>
+
+<hr />
+
+<Field::String
+  @label='Product name'
+  @record={{@product}}
+  @attribute='name'
+  @localSave={{true}}
+/>
+
+<hr />
+
+<Fieldset>
+  {{#if this.record}}
+    <p>
+      <span>Thid product already exists:</span>
+      <a href={{href-to 'secure.products.product' this.record.id}} class='ds a'>
+        follow link
+      </a>
+    </p>
+  {{else}}
+    <Button
+      @text={{if this.isSaving 'Creating' 'Create'}}
+      @theme='big-green'
+      @disabled={{this.preventSave}}
+      @isBusy={{this.isSaving}}
+      @onClick={{this.onSave}}
+    />
+  {{/if}}
+</Fieldset>
