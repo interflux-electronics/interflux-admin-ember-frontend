@@ -12,7 +12,7 @@ const apiNamespace = 'v1/admin';
 
 // Where the Rails backend is located
 const apiHosts = {
-  development: 'https://localhost:3000',
+  development: 'http://localhost:3000',
   production: 'https://rails.api.interflux.com'
 };
 
@@ -23,7 +23,7 @@ const publicHosts = {
 };
 
 const adminHosts = {
-  development: 'https://localhost:4300',
+  development: 'http://localhost:4300',
   production: 'https://admin.interflux.com'
 };
 
