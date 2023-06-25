@@ -7,6 +7,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class WebinarController extends Controller {
   @tracked QR;
+  @tracked canDownload = false;
 
   get permalink() {
     return this.model.permalink;
@@ -17,7 +18,7 @@ export default class WebinarController extends Controller {
     this.QR = await new QrCodeWithLogo({
       image,
       width: 2000,
-      content: this.permalink.redirectFrom,
+      content: this.model.permalink.redirectFrom,
       logo: {
         src: 'https://cdn.interflux.com/images/logos/secondary-interflux-electronics-symbol-2.svg',
         logoSize: 0.22,
@@ -33,7 +34,9 @@ export default class WebinarController extends Controller {
       }
     });
 
-    this.QR.toImage();
+    this.QR.toImage().then(() => {
+      this.canDownload = true;
+    });
   }
 
   @action

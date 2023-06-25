@@ -1,7 +1,8 @@
 #permalink {
   #QR {
     position: relative;
-    cursor: pointer;
+    width: 500px;
+    height: 500px;
     img {
       max-width: 100%;
     }
@@ -14,6 +15,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
       &:hover {
         button {
           display: flex;

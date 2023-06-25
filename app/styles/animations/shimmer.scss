@@ -1,0 +1,18 @@
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+.shimmer {
+  animation: shimmer 3s infinite;
+  background: linear-gradient(
+    to right,
+    $grey-0 4%,
+    darken($grey-0, 2%) 25%,
+    $grey-0 36%
+  );
+  background-size: 1000px 1000px;
+}
