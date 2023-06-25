@@ -4,7 +4,7 @@
       <img alt='QR code' {{did-insert this.render}} />
 
       {{#if this.canDownload}}
-        <div class='buttons' {{on 'click' this.download}}>
+        <div class='buttons' {{on 'click' this.download}} role='button'>
           <Button
             @text='Download'
             @theme='secondary'
