@@ -1,0 +1,43 @@
+{{#let this.model.permalink as |permalink|}}
+  <Modal @id='webinar'>
+    <h1>Permalink {{permalink.slug}}</h1>
+
+    <p>
+      Scanning this QR with your phone will open the permanent link in your
+      browser. Our website will then redirect the visitor to the changable link.
+      The idea is that the permanent link should still work 10 years from now,
+      even though our web pages and PDFs we link to will change over time.
+    </p>
+
+    <Fieldset
+      @label='Permanent link'
+      @lock="This link cannot be edited. It's meant to be permanent."
+    >
+      <ul class='list'>
+        <li>
+          <div class='left'>
+            <Link
+              @url={{permalink.redirectFrom}}
+              @label={{permalink.redirectFrom}}
+            />
+          </div>
+        </li>
+      </ul>
+    </Fieldset>
+
+    <Field::String
+      @label='Changable link'
+      @record={{permalink}}
+      @attribute='redirectTo'
+      @legend='Enter a valid link which starts with: https://. Please take note where this QR is being currently being displayed. Think twice before changing this link.'
+    />
+
+    <Field::String
+      @label='Notes'
+      @record={{permalink}}
+      @attribute='notes'
+      @legend='For future reference, explain where the QR code will be displayed.'
+      @multiline='true'
+    />
+  </Modal>
+{{/let}}

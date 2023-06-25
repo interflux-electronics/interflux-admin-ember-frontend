@@ -102,11 +102,18 @@ export default class NavResourcesComponent extends Component {
         needs: ['read_events']
       },
       {
+        label: 'Permalinks',
+        route: 'secure.permalinks',
+        icon: 'svg/qr',
+        needs: ['read_permalinks']
+      },
+      {
         label: 'Countries',
         route: 'secure.countries',
         icon: 'svg/flag',
         needs: ['read_countries']
       }
+
       // {
       //   label: 'Sessions',
       //   route: 'secure.sessions',

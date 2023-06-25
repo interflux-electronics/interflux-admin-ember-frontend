@@ -1,0 +1,30 @@
+{{#let @model.permalink as |permalink|}}
+  <Modal @id='webinar-create'>
+    <h1>Create a permanent link</h1>
+
+    <Field::String
+      @label='To which URL?'
+      @record={{permalink}}
+      @attribute='redirectTo'
+      @localSave={{true}}
+      @legend='To which address should the permalink redirect? Please enter a valid URL which starts with: https://'
+    />
+
+    <Field::String
+      @label='Where will the QR code of this permanent link be displayed?'
+      @record={{permalink}}
+      @attribute='notes'
+      @localSave={{true}}
+      @legend='For future reference, please explain where the QR code of the permanent link will be displayed so that we know if it is still relevant or not.'
+      @multiline='true'
+    />
+
+    <Button
+      @text='Save'
+      @theme='big-green'
+      @disabled={{this.preventSave}}
+      @isBusy={{this.isSaving}}
+      @onClick={{this.onSave}}
+    />
+  </Modal>
+{{/let}}

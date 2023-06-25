@@ -76,14 +76,10 @@ Router.map(function () {
       this.route('session', { path: '/:id' });
     });
 
-    // this.route('leads', function () {
-    //   this.route('lead', { path: '/:id' });
-    // });
-
-    // this.route('orders', function () {
-    //   this.route('order', { path: '/:id' });
-    // });
-    //
+    this.route('permalinks', function () {
+      this.route('create');
+      this.route('permalink', { path: '/:id' });
+    });
 
     this.route('user', function () {
       this.route('download');

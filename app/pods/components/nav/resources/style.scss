@@ -108,6 +108,9 @@ nav#resources {
           height: 100%;
           max-width: 50%;
           max-height: 50%;
+          &.qr {
+            transform: scale(0.8);
+          }
           [fill] {
             transition: fill 400ms $easeOutExpo;
             fill: $blue-4;
