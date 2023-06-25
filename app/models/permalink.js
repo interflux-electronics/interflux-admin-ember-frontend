@@ -1,4 +1,5 @@
 import Model, { attr } from '@ember-data/model';
+import ENV from 'interflux/config/environment';
 
 export default class PermalinkModel extends Model {
   @attr('string') slug;
@@ -6,6 +7,6 @@ export default class PermalinkModel extends Model {
   @attr('string') notes;
 
   get redirectFrom() {
-    return `https://interflux.com/QR/${this.slug}`;
+    return `${ENV.publicHost}/QR/${this.slug}`;
   }
 }
