@@ -1,14 +1,10 @@
 {{#let this.model.permalink as |permalink|}}
   <Modal @id='permalink'>
     <div id='QR' {{on 'click' this.download}} role='button'>
-      <img {{did-insert this.render}} />
+      <img alt='QR code' {{did-insert this.render}} />
 
       <div class='buttons'>
-        <Button
-          @text='Download'
-          @theme='secondary'
-          @onClick={{fn this.download}}
-        >
+        <Button @text='Download' @theme='secondary' @onClick={{this.download}}>
           <div class='clickable-area'></div>
         </Button>
       </div>

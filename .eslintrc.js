@@ -35,7 +35,8 @@ module.exports = {
     'ember/no-classic-classes': 'warn'
   },
   globals: {
-    patienceDiff: 'readonly'
+    patienceDiff: 'readonly',
+    QrCodeWithLogo: 'readonly'
   },
   overrides: [
     // node files
