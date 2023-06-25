@@ -1,0 +1,10 @@
+// HACK: find better way
+#permalinks {
+  .columns {
+    .column:nth-child(2) {
+      p {
+        width: 500px;
+      }
+    }
+  }
+}
