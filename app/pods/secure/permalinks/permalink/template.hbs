@@ -1,6 +1,18 @@
 {{#let this.model.permalink as |permalink|}}
-  <Modal @id='webinar'>
-    <h1>Permalink {{permalink.slug}}</h1>
+  <Modal @id='permalink'>
+    <div id='QR' {{on 'click' this.download}} role='button'>
+      <img {{did-insert this.render}} />
+
+      <div class='buttons'>
+        <Button
+          @text='Download'
+          @theme='secondary'
+          @onClick={{fn this.download}}
+        >
+          <div class='clickable-area'></div>
+        </Button>
+      </div>
+    </div>
 
     <p>
       Scanning this QR with your phone will open the permanent link in your

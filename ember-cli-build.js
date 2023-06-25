@@ -37,6 +37,7 @@ module.exports = function (defaults) {
   });
 
   app.import('vendor/PatienceDiff.js');
+  app.import('vendor/QrCodeWithLogo.js');
 
   return app.toTree();
 };

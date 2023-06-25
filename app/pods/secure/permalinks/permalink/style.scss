@@ -1,0 +1,30 @@
+#permalink {
+  #QR {
+    position: relative;
+    cursor: pointer;
+    img {
+      max-width: 100%;
+    }
+    .buttons {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        button {
+          display: flex;
+        }
+      }
+      button {
+        position: unset;
+        display: none;
+        border: 2px solid white;
+        transform: translateY(130px);
+      }
+    }
+  }
+}
