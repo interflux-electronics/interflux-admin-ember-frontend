@@ -27,7 +27,7 @@ export default class WebinarController extends Controller {
         margin: 3,
         errorCorrectionLevel: 'Q', // L M Q H
         color: {
-          dark: '#163759',
+          dark: '#000000',
           light: '#ffffff'
         }
       }
