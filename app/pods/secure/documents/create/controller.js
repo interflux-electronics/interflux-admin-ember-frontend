@@ -65,7 +65,8 @@ export default class DocumentCreateController extends Controller {
       'certificates',
       'guides',
       'presentations',
-      'webinars'
+      'webinars',
+      'manuals'
     ].map((slug) => {
       return this.model.categories.find((c) => c.slug === slug);
     });
