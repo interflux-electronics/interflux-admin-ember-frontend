@@ -59,16 +59,6 @@ export default class DocumentCreateController extends Controller {
   }
 
   get filteredCategories() {
-    return [
-      'TD',
-      'declarations',
-      'certificates',
-      'guides',
-      'presentations',
-      'webinars',
-      'manuals'
-    ].map((slug) => {
-      return this.model.categories.find((c) => c.slug === slug);
-    });
+    return this.model.categories.rejectBy('hasToBeRequested');
   }
 }

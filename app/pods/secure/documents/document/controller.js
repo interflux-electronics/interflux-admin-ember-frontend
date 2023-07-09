@@ -13,16 +13,7 @@ export default class DocumentController extends Controller {
   }
 
   get filteredCategories() {
-    return [
-      'TD',
-      'declarations',
-      'certificates',
-      'guides',
-      'presentations',
-      'webinars'
-    ].map((slug) => {
-      return this.model.categories.find((c) => c.slug === slug);
-    });
+    return this.model.categories.rejectBy('hasToBeRequested');
   }
 
   @action

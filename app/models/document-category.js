@@ -6,4 +6,8 @@ export default class DocumentCategoryModel extends Model {
   @attr('string') nameSingle;
 
   @hasMany('document') documents;
+
+  get hasToBeRequested() {
+    return this.slug === 'REACH' || this.slug === 'SDS';
+  }
 }
