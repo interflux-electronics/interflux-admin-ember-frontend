@@ -28,29 +28,23 @@
       @afterSave={{this.updatePath}}
     />
 
-    <Fieldset
+    <Field::File
       @label='Files'
       @legend='You can only upload PDFs and only 1 per language.'
-    >
-      <FileUploader
-        @record={{@model.document}}
-        @cdnFiles={{@model.document.cdnFiles}}
-        @cdnBasePath={{@model.document.path}}
-        @multilingual={{true}}
-        @accept='.pdf'
-      />
-    </Fieldset>
+      @record={{@model.document}}
+      @cdnFiles={{@model.document.cdnFiles}}
+      @cdnBasePath={{@model.document.path}}
+      @multilingual={{true}}
+      @accept='.pdf'
+    />
 
-    <Fieldset
+    <Field::Boolean::Pills
       @label='Online'
       @legend='Choose "yes" and this document will be shown on our website. Choose "no" to take it offline.'
-    >
-      <Pills::Boolean
-        @layout='horizontal'
-        @onSelect={{fn (mut @model.document.public)}}
-        @selectedValue={{@model.document.public}}
-      />
-    </Fieldset>
+      @record={{@model.document}}
+      @attribute='public'
+      @layout='horizontal'
+    />
 
     <Field::ManyToMany
       @label='Related products'

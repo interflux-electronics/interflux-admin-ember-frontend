@@ -1,4 +1,9 @@
-<Fieldset @label={{@label}} @legend={{@legend}}>
+<Fieldset
+  @id={{this.id}}
+  @component='pills'
+  @label={{@label}}
+  @legend={{@legend}}
+>
   <Pills::SelectOne
     @options={{@options}}
     @optionLabel={{@optionLabel}}

@@ -45,6 +45,7 @@ export default class FileUploaderComponent extends Component {
         .forEach((cdnFile) => {
           arr.push({ cdnFile });
         });
+
       return arr;
     }
 
