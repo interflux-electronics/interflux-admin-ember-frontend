@@ -1,0 +1,13 @@
+<Fieldset
+  @id={{this.id}}
+  @component='field-boolean-pills'
+  @label={{@label}}
+  @legend={{@legend}}
+>
+  <Pills::Boolean
+    @layout={{@layout}}
+    {{!-- @onSelect={{fn (mut this.value)}} --}}
+    @onSelect={{this.onSelect}}
+    @selectedValue={{this.value}}
+  />
+</Fieldset>
