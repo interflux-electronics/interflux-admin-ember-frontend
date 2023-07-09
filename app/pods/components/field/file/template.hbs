@@ -1,0 +1,18 @@
+<Fieldset
+  @id={{this.id}}
+  @label={{@label}}
+  @legend={{@legend}}
+  @component='file'
+  @theme={{this.theme}}
+  @state={{this.state}}
+  @hasFocus={{this.hasFocus}}
+  @lock={{this.lock}}
+>
+  <FileUploader
+    @record={{@record}}
+    @cdnFiles={{@cdnFiles}}
+    @cdnBasePath={{@cdnBasePath}}
+    @multilingual={{@multilingual}}
+    @accept='.pdf'
+  />
+</Fieldset>
