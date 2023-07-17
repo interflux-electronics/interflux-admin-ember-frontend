@@ -9,161 +9,115 @@ export default class TranslationsController extends Controller {
   @service store;
   @service translation;
 
-  @tracked language = 'de';
+  @tracked search = null;
+  @tracked language = null;
   @tracked statuses = 'to-translate,to-update,to-review,done,error';
 
-  queryParams = ['language', 'statuses'];
+  queryParams = ['search', 'language', 'statuses'];
 
-  get columns() {
-    const language = this.filters[0].options.find(
-      (opt) => opt.value === this.language
-    );
+  get config() {
+    const language = this.filters
+      .find((f) => f.type === 'options')
+      .options.find((o) => o.value === this.language).label;
 
-    if (!language) {
-      return [];
-    }
-
-    return [
-      {
-        label: 'Status',
-        property: 'status',
-        tags: {
-          'to-translate': { color: 'red-1', label: 'to translate' },
-          'to-update': { color: 'orange-2', label: 'to update' },
-          'to-review': { color: 'blue-2', label: 'to review' },
-          done: { color: 'green-1', label: 'done' },
-          error: { color: 'grey-7', label: 'error' },
-          unknown: { label: 'uknown' }
-        }
-      },
-      { label: language.label, property: 'native' },
-      { label: 'English', property: 'english' },
-      { label: 'ID', property: 'location' }
-    ];
+    return {
+      labels: [
+        {
+          label: 'Status',
+          property: 'status',
+          tags: {
+            'to-translate': { color: 'red-1', label: 'to translate' },
+            'to-update': { color: 'orange-2', label: 'to update' },
+            'to-review': { color: 'blue-2', label: 'to review' },
+            done: { color: 'green-1', label: 'done' },
+            error: { color: 'grey-7', label: 'error' },
+            unknown: { label: 'uknown' }
+          }
+        },
+        { label: language, property: 'native' },
+        { label: 'English', property: 'english' },
+        { label: 'ID', property: 'location' }
+      ]
+    };
   }
 
   get filters() {
     return [
       {
+        type: 'search',
+        value: this.search
+      },
+      {
         type: 'options',
         property: 'language',
+        value: this.language,
         options: [
           {
             label: 'Chinese',
-            value: 'zh',
-            selected: this.language === 'zh'
+            value: 'zh'
           },
           {
             label: 'Dutch',
-            value: 'nl',
-            selected: this.language === 'nl'
+            value: 'nl'
           },
           {
             label: 'French',
-            value: 'fr',
-            selected: this.language === 'fr'
+            value: 'fr'
           },
           {
             label: 'German',
-            value: 'de',
-            selected: this.language === 'de'
+            value: 'de'
           },
 
           {
             label: 'Spanish',
-            value: 'es',
-            selected: this.language === 'es'
+            value: 'es'
           }
         ]
       },
       {
         type: 'checkboxes',
         property: 'statuses',
+        value: this.statuses,
         checkboxes: [
           {
             label: 'done',
             value: 'done',
-            checked: this.statuses.split(',').includes('done'),
             count: {
-              label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'done')
-                .length.toString(),
               color: 'green-1'
             }
           },
           {
             label: 'to review',
             value: 'to-review',
-            checked: this.statuses.split(',').includes('to-review'),
             count: {
-              label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'to-review')
-                .length.toString(),
               color: 'blue-2'
             }
           },
           {
             label: 'to update',
             value: 'to-update',
-            checked: this.statuses.split(',').includes('to-update'),
             count: {
-              label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'to-update')
-                .length.toString(),
               color: 'orange-2'
             }
           },
           {
             label: 'to translate',
             value: 'to-translate',
-            checked: this.statuses.split(',').includes('to-translate'),
             count: {
-              label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'to-translate')
-                .length.toString(),
               color: 'red-1'
             }
           },
           {
             label: 'error',
             value: 'error',
-            checked: this.statuses.split(',').includes('error'),
             count: {
-              label: this.sortedTranslationsForLanguage
-                .filterBy('status', 'error')
-                .length.toString(),
               color: 'grey-7'
             }
           }
         ]
       }
-      // { type: 'search' }
     ];
-  }
-
-  @action
-  onFilter(filter, option) {
-    const { type } = filter;
-    const { value } = option;
-    const queryParams = {};
-
-    if (type === 'options') {
-      queryParams[filter.property] = value;
-    }
-
-    if (type === 'checkboxes') {
-      const arr = this[filter.property].split(',');
-
-      queryParams[filter.property] = arr.includes(value)
-        ? arr.filter((x) => x !== value).join(',')
-        : [...arr, value].join(',');
-    }
-
-    if (type === 'search') {
-      //
-    }
-
-    this.router.transitionTo({ queryParams });
   }
 
   @action
@@ -171,16 +125,8 @@ export default class TranslationsController extends Controller {
     this.router.transitionTo('secure.translations.translation', record.id);
   }
 
-  get sortedTranslationsForLanguage() {
-    return this.model.translations
-      .filterBy('language', this.language)
-      .sortBy('location');
-  }
-
-  get shownTranslations() {
-    return this.sortedTranslationsForLanguage.filter((t) => {
-      return this.statuses.split(',').includes(t.status);
-    });
+  get records() {
+    return this.model.translations;
   }
 
   get buttons() {
@@ -309,18 +255,5 @@ export default class TranslationsController extends Controller {
     }
 
     this.isTranslating = false;
-  }
-
-  @action
-  onClickResetFilters() {
-    this.statuses = 'to-translate,to-update,to-review,done,error';
-
-    const language = this.filters[0].options.find(
-      (opt) => opt.value === this.language
-    );
-
-    if (!language) {
-      this.language = 'de';
-    }
   }
 }

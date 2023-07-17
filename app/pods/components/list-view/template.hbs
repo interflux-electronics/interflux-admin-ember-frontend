@@ -20,12 +20,30 @@
 
   <aside>
     <div class='sticky'>
+      <div class='search'>
+        <input
+          {{did-insert this.onInsertSearch}}
+          {{on 'keyup' this.onSearchKeyUp}}
+          {{on 'click' this.selectText}}
+          autocomplete='off'
+          autocorrect='off'
+          autocapitalize='off'
+          spellcheck='false'
+        />
+        <div class='icon'>
+          <Svg::Search />
+        </div>
+      </div>
+
       {{#each @filters as |filter|}}
         {{#if (eq filter.type 'options')}}
           <div class='options'>
             {{#each filter.options as |option|}}
-              <button type='button' onclick={{fn @onFilter filter option}}>
-                {{#if option.selected}}
+              <button
+                type='button'
+                onclick={{fn this.onFilter filter option.value}}
+              >
+                {{#if (eq filter.value option.value)}}
                   <Svg::OptionSelected />
                 {{else}}
                   <Svg::OptionUnselected />
@@ -39,7 +57,10 @@
         {{#if (eq filter.type 'checkboxes')}}
           <div class='checkboxes'>
             {{#each filter.checkboxes as |checkbox|}}
-              <button type='button' onclick={{fn @onFilter filter checkbox}}>
+              <button
+                type='button'
+                onclick={{fn this.onFilter filter checkbox.value}}
+              >
                 {{#if checkbox.checked}}
                   <Svg::CheckboxSelected />
                 {{else}}
@@ -56,60 +77,127 @@
             {{/each}}
           </div>
         {{/if}}
-
-        {{#if (eq filter.type 'search')}}
-          <input />
-        {{/if}}
       {{/each}}
+
+      <Button::Group @theme='stretch-evenly'>
+        {{#each @layouts as |layout|}}
+          <Button
+            @icon={{layout}}
+            @theme='medium grey {{if this.showTable "selected"}}'
+            @onClick={{fn (mut this.layout) layout}}
+          />
+        {{/each}}
+      </Button::Group>
     </div>
   </aside>
 
   <main>
-    <table>
-      <thead>
-        <tr>
-          {{#each @columns as |column|}}
-            <th>
-              {{column.label}}
-            </th>
-          {{/each}}
-        </tr>
-      </thead>
-      <tbody>
-        {{#each @records as |record|}}
-          <tr role='button' onclick={{fn @onClickRecord record}}>
-            {{#each @columns as |column|}}
-              <td>
-                {{#if column.tags}}
-                  <Tag
-                    @text={{get
-                      (get column.tags (get record column.property))
-                      'label'
-                    }}
-                    @theme='{{get
-                      (get column.tags (get record column.property))
-                      "color"
-                    }} admin small'
-                  />
-                {{else}}
-                  {{#let (get record column.property) as |label|}}
-                    <p>{{label}}</p>
-                  {{/let}}
-                {{/if}}
-              </td>
+    {{#if this.records}}
+      {{#if this.showTable}}
+        <table>
+          <thead>
+            <tr>
+              {{#each @config.labels as |column|}}
+                <th>
+                  {{column.label}}
+                </th>
+              {{/each}}
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each this.records as |record|}}
+              <tr role='button' onclick={{fn @onClickRecord record}}>
+                {{#each @config.labels as |column|}}
+                  <td>
+                    {{#if this.showList}}
+                      <p>{{column.label}}</p>
+                    {{/if}}
+
+                    {{#if column.tags}}
+                      <Tag
+                        @text={{get
+                          (get column.tags (get record column.property))
+                          'label'
+                        }}
+                        @theme='{{get
+                          (get column.tags (get record column.property))
+                          "color"
+                        }} admin'
+                      />
+                    {{else}}
+                      {{#let (get record column.property) as |label|}}
+                        <p>{{label}}</p>
+                      {{/let}}
+                    {{/if}}
+                  </td>
+                {{/each}}
+              </tr>
             {{/each}}
-          </tr>
-        {{else}}
-          <tr class='no-rows'>
-            <p>No data.</p>
-            <Button
-              @text='reset filters'
-              @theme='medium grey'
-              @onClick={{@onClickResetFilters}}
-            />
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      {{/if}}
+
+      {{#if this.showList}}
+        <ul class='list'>
+          {{#each this.records as |record|}}
+            <li role='button' onclick={{fn @onClickRecord record}}>
+              {{#if @config.image}}
+                <div class='image'>
+                  <img src={{get record @config.image}} aria-hidden='true' />
+                </div>
+              {{/if}}
+
+              <div class='labels'>
+                {{#each @config.labels as |label|}}
+                  {{#if label.tags}}
+                    <Tag
+                      @text={{get
+                        (get label.tags (get record label.property))
+                        'label'
+                      }}
+                      @theme='{{get
+                        (get label.tags (get record label.property))
+                        "color"
+                      }} admin'
+                    />
+                  {{else}}
+                    <p>{{label.label}}:
+                      {{mark this.search.value (get record label.property)}}
+                    </p>
+                  {{/if}}
+                {{/each}}
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+
+      {{#if this.showGrid}}
+        <ul class='grid'>
+          {{#each this.records as |record|}}
+            <li role='button' onclick={{fn @onClickRecord record}}>
+              {{#if @config.image}}
+                <div class='image'>
+                  <img src={{get record @config.image}} aria-hidden='true' />
+                </div>
+              {{/if}}
+
+              <div class='values'>
+                <p>
+                  {{#each @config.labels as |label|}}
+                    {{#let (get record label.property) as |value|}}
+                      {{#if value}}
+                        {{mark this.search.value value}}
+                      {{/if}}
+                    {{/let}}
+                  {{/each}}
+                </p>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    {{/if}}
   </main>
 </div>

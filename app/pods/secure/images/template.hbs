@@ -1,17 +1,13 @@
-<Page::Content @id='images'>
-  <h1>Images</h1>
-
-  <Spreadsheet
-    @records={{@model.images}}
-    @linkRoute='secure.images.image'
-    @layout='image-tiles'
-    @sortBy='category'
-    @onLoadQuery={{this.query}}
-    @columns={{array
-      (hash key='thumbURL' isImage='true')
-      (hash key='label')
-      (hash key='category')
-    }}
+<Page::Content @id='images' @theme='white'>
+  <ListView
+    @title='Images'
+    @records={{this.records}}
+    @config={{this.config}}
+    @filters={{this.filters}}
+    @buttons={{this.buttons}}
+    @layouts={{array 'grid' 'list'}}
+    @onClickRecord={{this.onClickRecord}}
+    @onClickButton={{this.onClickButton}}
   />
 </Page::Content>
 
