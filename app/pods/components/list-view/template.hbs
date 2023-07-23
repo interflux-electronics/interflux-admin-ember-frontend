@@ -6,7 +6,7 @@
 
     <div class='right'>
       {{#each @buttons as |button|}}
-        {{#unless button.hide}}
+        {{#unless button.hideIf}}
           <Button
             @text={{if button.isBusy button.busyLabel button.label}}
             @theme={{concat button.theme (if button.isBusy ' busy')}}

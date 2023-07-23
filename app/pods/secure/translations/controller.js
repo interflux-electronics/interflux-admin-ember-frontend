@@ -133,26 +133,31 @@ export default class TranslationsController extends Controller {
     return this.model.translations;
   }
 
+  get toTranslate() {
+    return this.records
+      .filterBy('language', this.language)
+      .filterBy('status', 'to-translate');
+  }
+
   get buttons() {
     return [
       {
         label: 'Stop',
         theme: 'medium grey',
-        hide: !this.isTranslating
+        hideIf: !this.isTranslating
       },
       {
         label: 'Auto-translate',
         theme: 'medium grey',
         isBusy: this.isTranslating,
-        busyLabel: 'Translating...'
+        busyLabel: 'Translating...',
+        hideIf: this.toTranslate.length === 0
       }
     ];
   }
 
   @action
   onClickButton(button) {
-    console.log('button clicked');
-
     if (button.label === 'Auto-translate') {
       this.autoTranslate();
     }
@@ -165,16 +170,18 @@ export default class TranslationsController extends Controller {
   @tracked isTranslating = false;
 
   async autoTranslate() {
-    console.log('auto-translate');
+    // Shrinks list to all records to those "to-translate"
+    this.statuses = 'to-translate';
+
+    // Shows loading state on button
     this.isTranslating = true;
 
     let done = false;
 
     while (!done) {
-      const allToTranslate = this.sortedTranslationsForLanguage.filterBy(
-        'status',
-        'to-translate'
-      );
+      const allToTranslate = this.toTranslate;
+
+      console.log(allToTranslate.length);
 
       // If there is nothing to translate, then stop.
       if (allToTranslate.length === 0) {
@@ -238,26 +245,28 @@ export default class TranslationsController extends Controller {
       // Start auto-translation
       const response = await this.translation.translate(record);
 
-      if (response?.success) {
-        console.debug('translation done');
-        console.debug(record.location);
-        console.debug(record.english);
-        console.debug(response);
-        if (response.translations.length > 0) {
-          record.native = response.translations[0]; // use first one
-          record.status = 'to-review';
-          record.save();
-        } else {
-          console.warn('no translation received...');
-          record.status = 'error';
-        }
-      } else {
+      if (
+        !response ||
+        !response.success ||
+        !response.translations ||
+        !response.translations.length === 0
+      ) {
         console.error('translation failed');
         console.error(response);
         record.status = 'error';
+        record.error = 'translation failed';
+        await record.save();
       }
+      console.debug('translation done');
+      console.debug(record.location);
+      console.debug(record.english);
+      console.debug(response);
+      record.native = response.translations[0]; // use first one
+      record.status = 'to-review';
+      await record.save();
     }
 
     this.isTranslating = false;
+    this.statuses = 'to-review';
   }
 }
