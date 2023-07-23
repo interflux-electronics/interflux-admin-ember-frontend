@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      {{#each @filters as |filter|}}
+      {{#each this.filters as |filter|}}
         {{#if (eq filter.type 'options')}}
           <div class='options'>
             {{#each filter.options as |option|}}
@@ -49,33 +49,38 @@
                   <Svg::OptionUnselected />
                 {{/if}}
                 <span>{{option.label}}</span>
+                {{#if (eq filter.value option.value)}}
+                  <Tag @text={{this.recordCount}} @theme='admin small' />
+                {{/if}}
               </button>
             {{/each}}
           </div>
         {{/if}}
 
         {{#if (eq filter.type 'checkboxes')}}
-          <div class='checkboxes'>
-            {{#each filter.checkboxes as |checkbox|}}
-              <button
-                type='button'
-                onclick={{fn this.onFilter filter checkbox.value}}
-              >
-                {{#if checkbox.checked}}
-                  <Svg::CheckboxSelected />
-                {{else}}
-                  <Svg::CheckboxUnselected />
-                {{/if}}
-                <span>{{checkbox.label}}</span>
-                {{#if checkbox.count}}
-                  <Tag
-                    @text={{checkbox.count.label}}
-                    @theme='{{checkbox.count.color}} admin small'
-                  />
-                {{/if}}
-              </button>
-            {{/each}}
-          </div>
+          {{#unless filter.hideIf}}
+            <div class='checkboxes'>
+              {{#each filter.checkboxes as |checkbox|}}
+                <button
+                  type='button'
+                  onclick={{fn this.onFilter filter checkbox.value}}
+                >
+                  {{#if checkbox.checked}}
+                    <Svg::CheckboxSelected />
+                  {{else}}
+                    <Svg::CheckboxUnselected />
+                  {{/if}}
+                  <span>{{checkbox.label}}</span>
+                  {{#if (and checkbox.checked checkbox.count)}}
+                    <Tag
+                      @text={{checkbox.count.label}}
+                      @theme='{{checkbox.count.color}} admin small'
+                    />
+                  {{/if}}
+                </button>
+              {{/each}}
+            </div>
+          {{/unless}}
         {{/if}}
       {{/each}}
 
@@ -127,7 +132,7 @@
                       />
                     {{else}}
                       {{#let (get record column.property) as |label|}}
-                        <p>{{label}}</p>
+                        <p>{{mark this.search.value label}}</p>
                       {{/let}}
                     {{/if}}
                   </td>

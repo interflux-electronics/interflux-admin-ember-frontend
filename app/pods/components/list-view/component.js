@@ -53,9 +53,22 @@ export default class ListViewComponent extends Component {
       if (filter.type === 'options') {
         records = records.filterBy(filter.property, filter.value);
       }
+
+      if (filter.type === 'checkboxes') {
+        const keepers = filter.value.split(',');
+        records = records.filter((record) => {
+          return keepers.some((v) => {
+            return record.get(filter.property) === v;
+          });
+        });
+      }
     });
 
     return records;
+  }
+
+  get recordCount() {
+    return this.records.length.toString();
   }
 
   get search() {
@@ -85,34 +98,64 @@ export default class ListViewComponent extends Component {
   }
 
   @action
-  onFilter(filter, value) {
+  onFilter(filter, newValue) {
     const { type } = filter;
     const queryParams = {};
 
     if (type === 'search') {
-      queryParams['search'] = value;
+      queryParams['search'] = newValue;
     }
 
     if (type === 'options') {
-      if (filter.value === value) {
+      if (filter.value === newValue) {
         queryParams[filter.property] = null;
       } else {
-        queryParams[filter.property] = value;
+        queryParams[filter.property] = newValue;
       }
     }
 
     if (type === 'checkboxes') {
-      const arr = this[filter.property].split(',');
+      const arr = filter.value.split(',');
+      const str = arr.includes(newValue)
+        ? arr.filter((x) => x !== newValue).join(',')
+        : [...arr, newValue].join(',');
 
-      queryParams[filter.property] = arr.includes(value)
-        ? arr.filter((x) => x !== value).join(',')
-        : [...arr, value].join(',');
+      queryParams[filter.queryParam] = str;
     }
 
     this.router.transitionTo({ queryParams });
   }
 
   @service router;
+
+  // Returns all filters + counters
+  get filters() {
+    return this.args.filters.map((f) => {
+      const filter = Object.assign({}, f);
+
+      if (filter.type === 'checkboxes') {
+        filter.checkboxes = filter.checkboxes.map((c) => {
+          const checkbox = Object.assign({}, c);
+          const records = this.records.filter((record) => {
+            return record
+              .get(filter.property)
+              .split(',')
+              .includes(checkbox.value);
+          });
+
+          checkbox.count = checkbox.count || {};
+          checkbox.count.label = records.length.toString();
+          checkbox.checked = filter.value?.split(',').includes(checkbox.value);
+
+          return checkbox;
+        });
+
+        return filter;
+      }
+
+      return filter;
+    });
+  }
 
   // SORT
 

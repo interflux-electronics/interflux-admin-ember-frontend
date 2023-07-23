@@ -16,9 +16,9 @@ export default class TranslationsController extends Controller {
   queryParams = ['search', 'language', 'statuses'];
 
   get config() {
-    const language = this.filters
+    const option = this.filters
       .find((f) => f.type === 'options')
-      .options.find((o) => o.value === this.language).label;
+      .options.find((o) => o.value === this.language);
 
     return {
       labels: [
@@ -34,7 +34,10 @@ export default class TranslationsController extends Controller {
             unknown: { label: 'uknown' }
           }
         },
-        { label: language, property: 'native' },
+        {
+          label: option ? option.label : 'Native',
+          property: 'native'
+        },
         { label: 'English', property: 'english' },
         { label: 'ID', property: 'location' }
       ]
@@ -68,7 +71,6 @@ export default class TranslationsController extends Controller {
             label: 'German',
             value: 'de'
           },
-
           {
             label: 'Spanish',
             value: 'es'
@@ -77,8 +79,10 @@ export default class TranslationsController extends Controller {
       },
       {
         type: 'checkboxes',
-        property: 'statuses',
+        property: 'status',
         value: this.statuses,
+        queryParam: 'statuses',
+        hideIf: !this.language,
         checkboxes: [
           {
             label: 'done',
