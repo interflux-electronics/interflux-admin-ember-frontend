@@ -49,11 +49,11 @@ export default class ApiService extends Service {
 
     // With the Accept header 'application/vnd.api+json' we say that what we
     // expect back from the API is JSON API compliant data.
-    headers['Accept'] = 'application/vnd.api+json';
+    // headers['Accept'] = 'application/vnd.api+json';
 
     // The Authorization header is a JWT token added to all requests and
     // verified by the back-end on each protected endpoint.
-    headers['Authorization'] = this.auth.token || 'no-token';
+    // headers['Authorization'] = this.auth.token || 'no-token';
 
     return headers;
   }
@@ -86,14 +86,9 @@ export default class ApiService extends Service {
     }
 
     if (response instanceof InvalidError) {
-      // https://emberjs.com/api/ember-data/3.0/classes/DS.InvalidError
-      // Ember Data expects a source/pointer
       console.error('422 - This request got rejected because of invalid data.');
     } else if (response instanceof UnauthorizedError) {
       console.error('401 - You are not authorised to make this request.');
-      console.warn('Reseting authentication data');
-      console.warn('Redirecting to login');
-      this.auth.reset();
     } else if (response instanceof ForbiddenError) {
       console.error('403 - You are not allowed to make this request.');
       this.router.transitionTo('secure.forbidden');
@@ -104,15 +99,10 @@ export default class ApiService extends Service {
     } else if (response instanceof ServerError) {
       console.error('500 - The server is down!');
     } else if (response instanceof TimeoutError) {
-      console.error(
-        '504 - The request timed out. Check your network and API load.'
-      );
+      console.error('504 - The request timed out..');
     } else {
       console.error('Unknown error');
       console.error(response);
-      console.debug(
-        'DEBUG: Is Rails running? If yes, check the terminal logs.'
-      );
     }
   }
 }

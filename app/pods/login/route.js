@@ -10,4 +10,11 @@ export default class LoginRoute extends BaseRoute {
       this.router.transitionTo('secure.index');
     }
   }
+
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.set('email', null);
+      controller.set('password', null);
+    }
+  }
 }
