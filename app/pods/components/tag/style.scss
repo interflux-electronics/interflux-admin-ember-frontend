@@ -112,39 +112,19 @@
     }
   }
   &.admin {
-    &.small {
-      .p {
-        line-height: 20px;
-        font-size: 15px;
-        font-family: $semibold;
-      }
-      .bg {
-        .word {
-          &:after {
-            left: -3px;
-            right: -3px;
-            top: 0px;
-            bottom: 0px;
-            border-radius: 2px;
-          }
-        }
-      }
+    .p {
+      line-height: 22px;
+      font-size: 16px;
+      font-family: $semibold;
     }
-    &.medium {
-      .p {
-        line-height: 22px;
-        font-size: 16px;
-        font-family: $semibold;
-      }
-      .bg {
-        .word {
-          &:after {
-            left: -4px;
-            right: -4px;
-            top: 0px;
-            bottom: 0px;
-            border-radius: 2px;
-          }
+    .bg {
+      .word {
+        &:after {
+          left: -4px;
+          right: -4px;
+          top: 0px;
+          bottom: 0px;
+          border-radius: 2px;
         }
       }
     }

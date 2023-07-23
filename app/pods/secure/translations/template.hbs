@@ -1,14 +1,13 @@
 <Page::Content @id='translations' @theme='white'>
   <ListView
     @title='Translations'
-    @columns={{this.columns}}
-    @records={{this.shownTranslations}}
+    @records={{this.records}}
+    @config={{this.config}}
     @filters={{this.filters}}
     @buttons={{this.buttons}}
-    @onFilter={{this.onFilter}}
+    @layouts={{array 'list' 'table'}}
     @onClickRecord={{this.onClickRecord}}
     @onClickButton={{this.onClickButton}}
-    @onClickResetFilters={{this.onClickResetFilters}}
   />
 </Page::Content>
 

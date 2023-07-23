@@ -75,7 +75,7 @@ export default class ImageModel extends Model {
       return `${ENV.cdnHost}/${path}.${ext}`;
     }
 
-    const optimalWidth = 180;
+    const optimalWidth = 600;
     const subset = variations.split(',').filter((x) => x.split('.')[1] === ext);
     const sizes = subset.map((x) => x.split('.')[0].replace('@', ''));
 

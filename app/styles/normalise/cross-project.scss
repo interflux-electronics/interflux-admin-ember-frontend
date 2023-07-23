@@ -50,29 +50,13 @@ button {
   }
 }
 
-// Semantically <table> is sometimes the best way to describe content.
-// When you do, always reset the display rules because they are unpredictable.
-// display: table;
-// display: table-row;
-// display: table-cell;
-table,
-thead,
-tbody,
-tr,
-th,
-td {
-  display: block;
-}
-th {
-  font-weight: normal; // We use font-families instead of weights
-}
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
+th,
 strong {
   font-weight: normal; // We use font-families instead of weights
   font-family: $bold;

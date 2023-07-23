@@ -1,51 +1,65 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import { hash } from 'rsvp';
 import { action } from '@ember/object';
 
+// This route is the gatekeeper of all authenticated routes.
+// It will fetch the auth user. If a user is returned, continue.
+// If no user is returned, redirect back to login.
+// The auth user is stored in an HTTP-only cookie which only the backend can access.
+
 export default class SecureRoute extends Route {
+  @service api;
   @service auth;
   @service store;
+  @service router;
 
-  // Redirect user back to login if the auth token is missing
-  beforeModel() {
-    if (!this.auth.token || !this.auth.uuid) {
-      console.warn('Missing auth token / UUID');
-      console.warn('Reseting authentication data');
-      console.warn('Redirecting to login');
-      this.auth.reset();
+  // Here we fetch the auth user.
+  model() {
+    const url = `${this.api.host}/v1/auth/user`;
+
+    const request = new Request(url, {
+      method: 'GET',
+      mode: 'cors',
+      headers: new Headers(this.api.headers),
+      credentials: 'include'
+    });
+
+    return fetch(request)
+      .then((response) => {
+        return response.ok ? response.json() : null;
+      })
+      .then((data) => {
+        if (data) {
+          this.store.pushPayload('user', data);
+          return this.store.peekRecord('user', data.data.id);
+        } else {
+          return null;
+        }
+      });
+  }
+
+  // Here we store the auth user in the auth service so all components and routes can access it.
+  afterModel(model) {
+    if (model) {
+      this.auth.user = model;
+    } else {
+      console.error('no auth user');
+      this.store.unloadAll();
+      this.router.transitionTo('login');
     }
   }
 
-  // Fetch the user record matching the auth token.
-  // In case the token is invalid or expired a 401 Unauthorized will come back.
-  // All 401 responses will automatically trigger a redirect to the login page
-  // and resets all authentication data.
-  // See: app/initializers/handle-route-errors.js
-  model() {
-    return hash({
-      user: this.store.findRecord('user', this.auth.uuid, {
-        include: ['person'].join(',')
-      })
-    });
-  }
-
-  afterModel(model) {
-    this.auth.user = model.user;
-  }
-
   @action
-  error(response) {
-    console.error(response);
-    console.warn('Authentication failed...');
-    console.warn('Reseting authentication data');
-    console.warn('Showing user button to login.');
+  error(msg) {
+    console.error('abc');
+    // this.store.unloadAll();
+    // this.router.transitionTo('login');
 
-    // Reset all auth tokens and data without redirecting to login.
-    this.auth.reset(false);
+    // Unload store and redirect user to login.
+    // this.auth.reset(false);
 
     // Returning true allows the error to bubble up the route tree which triggers the error
     // templates to show
-    return true;
+    return false;
   }
 }

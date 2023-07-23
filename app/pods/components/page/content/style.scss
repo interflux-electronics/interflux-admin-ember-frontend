@@ -1,5 +1,14 @@
 main.content {
+  &.blue {
+    background-color: $blue-4;
+    padding: 50px;
+  }
+
   &.white {
     background-color: white;
+    padding: 0;
+
+    // TODO: find better way... page service?
+    z-index: 2;
   }
 }

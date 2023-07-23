@@ -7,61 +7,52 @@ export default class LoginController extends Controller {
   @service api;
   @service router;
 
-  email;
-  password;
+  email = 'jw@interflux.au';
+  password = 'tbFRkgMfqQuDN9qeyEpzTC9kbnncsFHPFjYyMxwJnEGEPPJKXjiTjXd4AdQnyKnY';
   loading = false;
   error;
 
   @action
   submit() {
     this.logIn();
-    // this.auth.getToken.perform(this.email, this.password);
   }
 
   @action
   async logIn() {
+    this.loading = true;
+    this.error = null;
+
+    const fail = (error) => {
+      this.loading = false;
+      this.error = 'Something went wrong.';
+      console.error(error);
+    };
+
+    const error = (response) => {
+      this.loading = false;
+      this.error = `${response.status} ${response.statusText}`;
+      console.error(response);
+    };
+
     const { email, password } = this;
 
-    this.error = null;
-    this.loading = true;
-
-    const url = `${this.api.host}/${this.api.namespace}/auth-token`;
+    const url = `${this.api.host}/v1/auth/token`;
 
     const request = new Request(url, {
       method: 'POST',
       mode: 'cors',
       headers: new Headers(this.api.headers),
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
+      credentials: 'include'
     });
-
-    const fail = (error) => {
-      this.loading = false;
-      return console.error(error);
-    };
 
     const response = await fetch(request).catch(fail);
 
-    // Read the JSON from the Body (async promise)
-    // When back-end sends no JSON back, then status code should be 204
-    const body = await response.json().catch(fail);
-
-    this.loading = false;
-
-    if (response.status !== 200) {
-      console.warn('Could not log in');
-      console.warn({ response, body });
-      this.error = `${response.status} ${response.statusText}`;
+    if (response.status !== 201) {
+      console.error('Unable to authenticate');
+      error(response);
       return;
     }
-
-    const { token, expiry, uuid } = body.auth;
-
-    this.auth.remember('token', token);
-    this.auth.remember('expiry', expiry);
-    this.auth.remember('uuid', uuid);
-
-    this.email = null;
-    this.password = null;
 
     this.router.transitionTo('secure.index');
   }
