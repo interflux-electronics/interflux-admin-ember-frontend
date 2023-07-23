@@ -18,7 +18,9 @@ import { service } from '@ember/service';
 export default class ListViewComponent extends Component {
   constructor() {
     super(...arguments);
-    this.layout = this.args.layouts[0];
+    if (!this.args.loading) {
+      this.layout = this.args.layouts[0];
+    }
   }
 
   @tracked layout;
