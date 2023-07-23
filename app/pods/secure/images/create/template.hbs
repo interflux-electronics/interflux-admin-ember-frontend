@@ -1,0 +1,27 @@
+{{#let @model.person as |person|}}
+  <Modal @id='image-create'>
+    <h1>Upload image</h1>
+
+    {{!-- <Field::String
+      @label='First name'
+      @record={{person}}
+      @attribute='firstName'
+      @localSave={{true}}
+    />
+
+    <Field::String
+      @label='Last name'
+      @record={{person}}
+      @attribute='lastName'
+      @localSave={{true}}
+    />
+
+    <Button
+      @text='Save'
+      @theme='big-green'
+      @disabled={{this.preventSave}}
+      @isBusy={{this.isSaving}}
+      @onClick={{this.onSave}}
+    /> --}}
+  </Modal>
+{{/let}}

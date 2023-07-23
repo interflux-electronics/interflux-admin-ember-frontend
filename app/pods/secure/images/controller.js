@@ -74,17 +74,15 @@ export default class TranslationsController extends Controller {
     return [
       {
         label: 'Upload image',
-        theme: 'medium grey'
+        theme: 'medium green'
       }
     ];
   }
 
   @action
   onClickButton(button) {
-    console.log('button clicked');
-
     if (button.label === 'Upload image') {
-      console.log('upload image');
+      this.router.transitionTo('secure.images.create');
     }
   }
 }

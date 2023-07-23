@@ -152,13 +152,13 @@
     flex-wrap: wrap;
     .word {
       position: relative;
-      color: $grey-3;
+      color: $grey-4;
       &:after {
         content: '';
         position: absolute;
         top: 0;
         bottom: 0;
-        background-color: $grey-3;
+        background-color: $grey-4;
         @include widescreen {
           left: -8px;
           right: -8px;

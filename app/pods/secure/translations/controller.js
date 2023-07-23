@@ -148,7 +148,7 @@ export default class TranslationsController extends Controller {
       },
       {
         label: 'Auto-translate',
-        theme: 'medium grey',
+        theme: 'medium green',
         isBusy: this.isTranslating,
         busyLabel: 'Translating...',
         hideIf: this.toTranslate.length === 0

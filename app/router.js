@@ -47,6 +47,7 @@ Router.map(function () {
     });
 
     this.route('images', function () {
+      this.route('create');
       this.route('image', { path: '/:id' });
     });
 

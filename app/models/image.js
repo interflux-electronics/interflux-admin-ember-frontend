@@ -19,6 +19,9 @@ export default class ImageModel extends Model {
   @belongsTo('company') company;
 
   get category() {
+    if (!this.path) {
+      return null;
+    }
     return this.path.split('/')[1];
   }
 
