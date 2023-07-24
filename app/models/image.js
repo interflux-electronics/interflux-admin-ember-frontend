@@ -14,7 +14,11 @@ export default class ImageModel extends Model {
   @hasMany('product-image') productImages;
   @hasMany('person', { inverse: 'images' }) people;
   @hasMany('person-image') personImages;
-  @hasMany('cdn-files') files;
+  @hasMany('cdn-file') cdnFiles;
+
+  get files() {
+    return this.cdnFiles;
+  }
 
   @belongsTo('company') company;
 

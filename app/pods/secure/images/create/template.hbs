@@ -1,27 +1,92 @@
-{{#let @model.person as |person|}}
-  <Modal @id='image-create'>
-    <h1>Upload image</h1>
+<Modal @id='image-create'>
+  <h1>Upload image</h1>
 
-    {{!-- <Field::String
-      @label='First name'
-      @record={{person}}
-      @attribute='firstName'
-      @localSave={{true}}
+  <Fieldset @label='What is the subject of the photo?'>
+    <Pills::SelectOne
+      @options={{this.subjects}}
+      @optionLabel='label'
+      @layout='vertical'
+      @onSelect={{this.onSelectSubject}}
+      @selected={{this.subject}}
     />
+  </Fieldset>
 
-    <Field::String
-      @label='Last name'
-      @record={{person}}
-      @attribute='lastName'
-      @localSave={{true}}
-    />
+  {{#if (eq this.subject.id 'other')}}
+    <p>Sorry, at present you can only upload images of products and people. Do
+      ask Jan to extend support for other use cases.</p>
+  {{/if}}
 
-    <Button
+  {{#if (eq this.subject.id 'product')}}
+    {{#if this.loadingProducts}}
+      <p>Loading...</p>
+    {{else}}
+      <Fieldset @label='Which product?'>
+        <Pills::SelectOne
+          @options={{this.products}}
+          @optionLabel='name'
+          @layout='vertical'
+          @onSelect={{this.onSelectProduct}}
+          @selected={{this.product}}
+        />
+      </Fieldset>
+
+      {{#if this.product}}
+        {{#if this.loadingProductImages}}
+          <p>Loading...</p>
+        {{else}}
+
+          <Field::File
+            @label='Upload image'
+            @legend='Only upload PNGs or JPGs. Upload the biggest resolution you have. For the best result, upload a PNG of 2400x2400 pixels. '
+            @record={{@model.image}}
+            @cdnFiles={{@model.image.cdnFiles}}
+            @cdnBasePath={{this.cdnPath}}
+            @accept='.png, .jpg'
+          />
+
+          {{!-- {{#if this.product.productImages}}
+            <Fieldset
+              @label='These are the current images of {{this.product.name}}:'
+            >
+              <ul class='images'>
+                {{#each this.product.productImages as |relation|}}
+                  <li>
+                    {{#let relation.image as |image|}}
+                      <ResponsiveImage
+                        @path={{image.path}}
+                        @variations={{image.variations}}
+                      />
+                    {{/let}}
+                  </li>
+                {{/each}}
+              </ul>
+            </Fieldset>
+
+            <Fieldset @label='These are their names:'>
+              {{#each this.product.productImages as |relation|}}
+                {{#let relation.image as |image|}}
+                  <p>{{image.alt}}</p>
+                {{/let}}
+              {{/each}}
+            </Fieldset>
+          {{/if}} --}}
+
+          {{!-- <Field::String
+            @label='Please image you are about to upload, please choose a suitable name which includes the product name and family'
+            @record={{@model.image}}
+            @attribute='alt'
+            @localSave={{true}}
+          /> --}}
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  {{/if}}
+
+  {{!-- <Button
       @text='Save'
       @theme='big-green'
       @disabled={{this.preventSave}}
       @isBusy={{this.isSaving}}
       @onClick={{this.onSave}}
     /> --}}
-  </Modal>
-{{/let}}
+</Modal>

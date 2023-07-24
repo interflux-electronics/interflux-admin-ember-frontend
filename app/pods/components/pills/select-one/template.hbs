@@ -1,5 +1,5 @@
 <div class={{this.classes}}>
-  {{#if @selected.slug}}
+  {{#if (get @selected @optionLabel)}}
     <Button
       @theme='pill selected'
       @text='{{get @selected @optionLabel}}'

@@ -143,4 +143,11 @@ export default class ProductModel extends Model {
 
     return `${ENV.cdnHost}/${path}@${closestSize}.${ext}`;
   }
+
+  get familyLabel() {
+    const family = this.family.get('nameSingle');
+    const label = this.label;
+
+    return label ? label : family;
+  }
 }
