@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cookie Test</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script>
+      async function auth() {
+        console.log('auth()');
+
+        const headers = {
+          'Content-Type': 'application/vnd.api+json',
+          'Accept': 'application/vnd.api+json'
+        };
+
+        const fail = (error) => {
+          this.loading = false;
+          this.error = 'Something went wrong.';
+          console.error(error);
+        };
+    
+        const error = (response) => {
+          this.loading = false;
+          this.error = `${response.status} ${response.statusText}`;
+          console.error(response);
+        };
+    
+        const email = document.querySelector('input[type="email"]').value;
+        const password = document.querySelector('input[type="password"]').value;
+    
+        let url;
+        let request;
+        let response;
+    
+        // 1. GET AUTH TOKEN
+    
+        url = `http://localhost:3000/v1/auth/token`;
+    
+        request = new Request(url, {
+          method: 'POST',
+          mode: 'cors',
+          headers: new Headers(headers),
+          body: JSON.stringify({ email, password }),
+          credentials: 'include'
+        });
+    
+        response = await fetch(request).catch(fail);
+    
+        if (response.status !== 201) {
+          console.error('Unable to authenticate');
+          error(response);
+          return;
+        }
+    
+        // 2. GET AUTH USER
+    
+        url = `http://localhost:3000/v1/auth/user`;
+    
+        request = new Request(url, {
+          method: 'GET',
+          mode: 'cors',
+          headers: new Headers(headers),
+          credentials: 'include'
+        });
+
+        response = await fetch(request).catch(fail);
+    
+        if (response.status !== 200) {
+          console.error('Unable to get auth user');
+          error(response);
+          return;
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <input type="email" value="jw@interflux.au">
+    <input type="password" value="">
+
+    <button onclick="auth()">Submit</button>
+  </body>
+</html>  
