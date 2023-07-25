@@ -51,7 +51,7 @@ export default class SecureRoute extends Route {
 
   @action
   error(msg) {
-    console.error('abc');
+    console.error(msg);
     // this.store.unloadAll();
     // this.router.transitionTo('login');
 
