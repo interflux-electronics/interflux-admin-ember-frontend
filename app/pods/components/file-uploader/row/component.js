@@ -10,7 +10,6 @@ export default class FileUploaderRowComponent extends Component {
   // @arg cdnFile
   // @arg language
   // @arg accept
-  // @arg uploadTo
   // @arg fileNameBase
 
   @service api;

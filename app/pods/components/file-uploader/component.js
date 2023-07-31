@@ -5,7 +5,6 @@ import { service } from '@ember/service';
 //   @record={{this.document}}
 //   @cdnFiles={{this.document.files}}
 //   @multilingual={{true}}
-//   @uploadTo='documents/{{this.selectedCategory.value}}/'
 //   @accept='.pdf'
 // />
 
@@ -13,7 +12,6 @@ export default class FileUploaderComponent extends Component {
   // @args record
   // @args cdnFiles
   // @args multilingual
-  // @args uploadTo
   // @args accept
 
   @service translation;
