@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <script>
+      const apiHost = location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://rails.api.interflux.com'
+
       async function auth() {
         console.log('auth()');
 
@@ -36,7 +38,7 @@
     
         // 1. GET AUTH TOKEN
     
-        url = `https://rails.api.interflux.com/v1/auth/token`;
+        url = `${apiHost}/v1/auth/token`;
     
         request = new Request(url, {
           method: 'POST',
@@ -56,7 +58,7 @@
     
         // 2. GET AUTH USER
     
-        url = `https://rails.api.interflux.com/v1/auth/user`;
+        url = `${apiHost}/v1/auth/user`;
     
         request = new Request(url, {
           method: 'GET',
