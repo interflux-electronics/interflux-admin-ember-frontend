@@ -210,8 +210,6 @@ export default class ImageCreateController extends Controller {
 
   @action
   async onSave() {
-    debugger;
-
     this.isSaving = true;
 
     const success = () => {
