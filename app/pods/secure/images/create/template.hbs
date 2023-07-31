@@ -31,62 +31,89 @@
       </Fieldset>
 
       {{#if this.product}}
+
         {{#if this.loadingProductImages}}
           <p>Loading...</p>
         {{else}}
+          {{#let this.product.productImages as |images|}}
+            {{#if images}}
+              <Fieldset @label='Current images'>
+                <ul class='images'>
+                  {{#each images as |relation|}}
+                    <li>
+                      {{#let relation.image as |image|}}
+                        <ResponsiveImage
+                          @path={{image.path}}
+                          @variations={{image.variations}}
+                        />
+                      {{/let}}
+                    </li>
+                  {{/each}}
+                </ul>
+              </Fieldset>
+            {{/if}}
 
-          <Field::File
-            @label='Upload image'
-            @legend='Only upload PNGs or JPGs. Upload the biggest resolution you have. For the best result, upload a PNG of 2400x2400 pixels. '
-            @record={{@model.image}}
-            @cdnFiles={{@model.image.cdnFiles}}
-            @cdnBasePath={{this.cdnPath}}
-            @accept='.png, .jpg'
-          />
+            <p>Image uploader under construction...</p>
 
-          {{!-- {{#if this.product.productImages}}
-            <Fieldset
-              @label='These are the current images of {{this.product.name}}:'
-            >
-              <ul class='images'>
-                {{#each this.product.productImages as |relation|}}
-                  <li>
-                    {{#let relation.image as |image|}}
-                      <ResponsiveImage
-                        @path={{image.path}}
-                        @variations={{image.variations}}
-                      />
-                    {{/let}}
-                  </li>
-                {{/each}}
-              </ul>
-            </Fieldset>
+            {{!-- <input
+              type='file'
+              accept='png,.jpg'
+              class='button medium grey'
+              {{on 'change' this.onImageSelect}}
+            /> --}}
 
-            <Fieldset @label='These are their names:'>
-              {{#each this.product.productImages as |relation|}}
-                {{#let relation.image as |image|}}
-                  <p>{{image.alt}}</p>
-                {{/let}}
-              {{/each}}
-            </Fieldset>
-          {{/if}} --}}
+            {{!-- <Button
+              @text='Select image'
+              @theme='medium grey'
+              @onClick={{this.onClickSelectImage}}
+            /> --}}
 
-          {{!-- <Field::String
-            @label='Please image you are about to upload, please choose a suitable name which includes the product name and family'
-            @record={{@model.image}}
-            @attribute='alt'
-            @localSave={{true}}
-          /> --}}
+            {{!-- {{#if this.errorMessage}}
+              <p>{{this.errorMessage}}</p>
+            {{/if}} --}}
+
+            {{!-- <Field::BelongsTo::File
+              @label='New image'
+              @record={{@model.image}}
+              @recordModel='image'
+              @cdnBasePath={{this.image.id}}
+              @accept='.png, .jpg'
+            /> --}}
+
+            {{! <p>For the best result, upload a PNG of 2400x2400 pixels.</p>
+            <p>Allowed formats: PNGs or JPGs.</p> }}
+
+            {{!-- 
+            {{#if @model.image.cdnFile}}
+              <Fieldset @label='New image'>
+                <div class='image'>
+                  <img src={{@model.image.cdnFile.urlProd}} />
+                </div>
+              </Fieldset>
+
+              <p>Please give a meaningful, descriptive and unique name to the
+                image. For SEO, please always include the product name and
+                family.</p>
+
+              <Field::String
+                @label='Image name'
+                @record={{@model.image}}
+                @attribute='alt'
+                @localSave={{true}}
+              />
+
+              <Button
+                @text='Save'
+                @theme='big-green'
+                @disabled={{this.preventSave}}
+                @isBusy={{this.isSaving}}
+                @onClick={{this.onSave}}
+              />
+            {{/if}} 
+            --}}
+          {{/let}}
         {{/if}}
       {{/if}}
     {{/if}}
   {{/if}}
-
-  {{!-- <Button
-      @text='Save'
-      @theme='big-green'
-      @disabled={{this.preventSave}}
-      @isBusy={{this.isSaving}}
-      @onClick={{this.onSave}}
-    /> --}}
 </Modal>
