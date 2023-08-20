@@ -5,7 +5,10 @@ export default class ImageModel extends Model {
   @attr('string') path;
   @attr('string') alt;
   @attr('string') caption;
+  @attr('string') original;
   @attr('string') variations;
+  @attr('string') conversionErrorLog;
+  @attr('boolean') converting;
 
   @belongsTo('product', { inverse: 'image' }) product;
   @belongsTo('person', { inverse: 'image' }) person;
@@ -15,6 +18,9 @@ export default class ImageModel extends Model {
   @hasMany('person', { inverse: 'images' }) people;
   @hasMany('person-image') personImages;
   @hasMany('cdn-file') cdnFiles;
+
+  // Whoever uploaded the image
+  @belongsTo('user') user;
 
   get files() {
     return this.cdnFiles;
@@ -104,5 +110,22 @@ export default class ImageModel extends Model {
     });
 
     return `${ENV.cdnHost}/${path}@${closestSize}.${ext}`;
+  }
+
+  get originalURL() {
+    return `https://cdn-interflux.fra1.digitaloceanspaces.com/${this.path}${this.original}`;
+  }
+
+  get variationsHash() {
+    if (!this.variations) {
+      return [];
+    }
+
+    return this.variations.split(',').map((variation) => {
+      const url = `https://cdn-interflux.fra1.digitaloceanspaces.com/${this.path}${variation}`;
+      const label = variation;
+
+      return { url, label };
+    });
   }
 }

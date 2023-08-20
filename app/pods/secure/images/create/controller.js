@@ -2,11 +2,13 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
 import ENV from 'interflux/config/environment';
 
 export default class ImageCreateController extends Controller {
   @service api;
   @service auth;
+  @service cdn;
   @service store;
   @service router;
 
@@ -72,166 +74,217 @@ export default class ImageCreateController extends Controller {
     });
   }
 
-  // UPLOAD
+  // SELECT & PREVIEW IMAGE
 
-  @tracked uploading = false;
-  @tracked errorMessage = false;
-  @tracked imageURL;
-  @tracked progress;
+  @tracked file;
+  @tracked extension;
+  @tracked localImageURL;
+  @tracked width;
+  @tracked height;
+  @tracked n;
+  @tracked cdnBasePath;
 
   @action
-  async onImageSelect(event) {
-    const files = event.target.files;
-    const file = files[0];
-
-    if (!file) {
-      this.errorMessage = `No file selected...`;
-      return;
-    }
-
-    const maxSize = 10; // MB
-    const size = Math.round((file.size / 1024 / 1024).toFixed(4) * 10) / 10; // MB
-
-    if (size > maxSize) {
-      this.errorMessage = `File size is too large: ${size}MB.`;
-      return;
-    }
-
-    this.uploading = true;
-
-    this.imageURL = await this.uploadImage(file);
-
-    if (!this.imageURL) {
-      this.errorMessage = 'Sorry, we were unable to upload your file.';
-      console.error('image not uploaded!');
-      return;
-    }
+  async onClickSelectFile() {
+    this.file = await this.selectFile();
+    this.extension = this.file.name.split('.').pop(-1);
+    this.localImageURL = URL.createObjectURL(this.file);
   }
 
-  async uploadImage(file) {
-    console.log('uploadImage()');
-    console.log({ file });
-
-    const date = new Date()
-      .toLocaleString('sv', { timeZone: 'UTC' })
-      .replace(/:|\s/g, '-');
-    const fileExt = file.name.split('.').pop(-1);
-    const fileName = `${date}.${fileExt}`;
-
-    this.fakeProgress(3, 1);
-    this.fakeProgress(8, 500);
-    this.fakeProgress(12, 1000);
-    this.fakeProgress(19, 1500);
-    this.fakeProgress(23, 2000);
-    this.fakeProgress(27, 2500);
-    this.fakeProgress(31, 3000);
-    this.fakeProgress(36, 3500);
-
-    // Hit API for pre-signed URL
-    const response = await this.fetchUploadURL(fileName);
-
-    if (!response) {
-      console.warn('no response');
-      return null;
-    }
-
-    const { uploadURL, cdnPath } = response;
-
-    console.log({ uploadURL, cdnPath });
-
-    if (!uploadURL) {
-      console.warn('no uploadURL');
-      return null;
-    }
-
-    if (!cdnPath) {
-      console.warn('no cdnPath');
-      return null;
-    }
-
-    // Hit CDN API for uploading file
-    const uploadSuccess = await this.uploadFileToCDN(uploadURL, file);
-
-    console.debug({ uploadSuccess });
-
-    if (!uploadSuccess) {
-      console.warn('upload failed');
-      return null;
-    }
-
-    console.log('upload success');
-
-    return `https://cdn-interflux.fra1.digitaloceanspaces.com/${cdnPath}`;
-  }
-
-  // The start of the upload can be quite slow. For several seconds user get to see 0% and
-  // it then picks up speed. This fake progress aims to make people patient at the start.
-  async fakeProgress(fakeProgress, ms) {
-    await this.delay(ms);
-    if (this.progress < fakeProgress) {
-      this.progress = fakeProgress;
-    }
-  }
-
-  async fetchUploadURL(fileName) {
-    return new Promise((resolve, reject) => {
-      const { apiHost } = ENV;
-      const url = `${apiHost}/v1/public/simulation-requests/image-upload-url`;
-
-      console.log('---');
-      console.log('fetchUploadURL');
-      console.log({ apiHost, url, fileName });
-      console.log('---');
-
-      return fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({ fileName }),
-        headers: new Headers(this.api.headers)
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          resolve({
-            uploadURL: data['upload-url'],
-            cdnPath: data['cdn-path']
-          });
-        })
-        .catch((response) => {
-          console.error('failed to fetch upload URL');
-          console.error(response);
-          this.errorMessage = 'Sorry, we were unable to upload your image.';
-          reject();
-        });
+  selectFile() {
+    return new Promise((resolve) => {
+      let input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.png,.jpg';
+      input.onchange = () => {
+        const files = Array.from(input.files);
+        const file = files[0];
+        return resolve(file);
+      };
+      input.click();
     });
   }
 
-  get preventSave() {
-    return true;
+  @action
+  async onLocalImageLoad(event) {
+    const img = event.target;
+    this.width = img.naturalWidth;
+    this.height = img.naturalHeight;
+    this.cdnBasePath = await this.findUniquePath();
   }
+
+  async findUniquePath() {
+    let path = `/images/products/${this.product.id}/${this.product.id}`;
+
+    if (ENV.isDevelopment) {
+      path = `temporary${path}`;
+    }
+
+    this.n = 1;
+
+    let done = false;
+
+    while (!done) {
+      const temp = `${path}-${this.n}`;
+      console.log(temp);
+      const image = await this.store.findRecord('image', temp).catch(() => {
+        return null;
+      });
+      if (image) {
+        this.n += 1;
+      } else {
+        path = temp;
+        done = true;
+      }
+    }
+
+    return path;
+  }
+
+  // UPLOAD
+
+  @tracked uploadCommenced = false;
+  @tracked uploadError = false;
+  @tracked uploadSuccess = false;
+  @tracked uploadOptions = [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' }
+  ];
 
   @action
-  async onSave() {
-    this.isSaving = true;
-
-    const success = () => {
-      this.router.transitionTo('secure.images.image', this.image.id);
-    };
-
-    const fail = (error) => {
-      console.error('save failed', error);
-    };
-
-    const done = () => {
-      this.isSaving = false;
-    };
-
-    this.person
-      .save({
-        adapterOptions: {
-          whitelist: ['path', 'alt']
-        }
-      })
-      .then(success)
-      .catch(fail)
-      .finally(done);
+  onSelectUploadOption(option) {
+    if (option.value === 'no') {
+      this.localImageURL = null;
+    } else {
+      this.upload();
+    }
   }
+
+  get uploadProgressStyle() {
+    return htmlSafe(`width: ${this.cdn.uploadProgress}%`);
+  }
+
+  async upload() {
+    this.uploadCommenced = true;
+
+    try {
+      const { cdnBasePath, file, extension, width, height, n } = this;
+
+      const cdnPath = `${cdnBasePath}@${width}x${height}.original.${extension}`;
+
+      console.debug({ file });
+      console.debug({ cdnBasePath });
+      console.debug({ cdnPath });
+      console.debug('fetching upload URL');
+
+      const uploadURL = await this.cdn.fetchUploadURL(cdnPath);
+
+      console.debug({ uploadURL });
+
+      if (!uploadURL) {
+        throw new Error('no uploadURL');
+      }
+
+      console.debug('uploading file to CDN');
+
+      const uploadSuccess = await this.cdn.uploadFile(uploadURL, file);
+
+      console.debug({ uploadSuccess });
+
+      if (!uploadSuccess) {
+        throw new Error('upload failed');
+      }
+
+      console.debug('creating Image record');
+
+      const imageRecord = await this.store
+        .createRecord('image', {
+          path: cdnBasePath,
+          alt: `${this.product.name} #${n}`,
+          original: `@${width}x${height}.original.${extension}`,
+          variations: null, // These will be added later
+          uploadedBy: this.auth.user
+        })
+        .save();
+
+      console.debug({ imageRecord });
+
+      if (!imageRecord) {
+        throw new Error('unable to create Image');
+      }
+
+      const productImageRecord = await this.store
+        .createRecord('product-image', {
+          product: this.product,
+          image: imageRecord
+        })
+        .save();
+
+      console.debug({ productImageRecord });
+
+      if (!productImageRecord) {
+        throw new Error('unable to create ProductImage');
+      }
+
+      this.image = imageRecord;
+      this.uploadSuccess = true;
+    } catch (msg) {
+      console.error(msg);
+      this.uploadError = true;
+    }
+
+    this.convert();
+  }
+
+  // CONVERSION
+
+  @tracked conversionProgress = 0;
+  @tracked conversionError = false;
+  @tracked conversionSuccess = false;
+  @tracked conversionOptions = [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' }
+  ];
+
+  get conversionProgressStyle() {
+    return htmlSafe(`width: ${this.conversionProgress}%`);
+  }
+
+  // Conversion is done by a background task in Rails.
+  // The only way to know whether it has completed is to poll the backend for updates.
+  // In the mean time we move the progress bar at a rate similar to the average conversion of a 2400x2400 PNG.
+  async convert() {
+    let done = false;
+
+    while (!done) {
+      await this.delay(1000);
+      const image = await this.store.findRecord('image', this.image.id);
+
+      // Something is wrong
+      if (image.conversionErrorLog) {
+        this.conversionError = true;
+        done = true;
+        break;
+      }
+
+      // We're done!
+      if (!image.converting && image.variations) {
+        this.conversionSuccess = true;
+        this.conversionProgress = 100;
+        done = true;
+        break;
+      }
+
+      // Keep polling
+      let p = Math.round(this.conversionProgress + 1.3);
+      if (p > 98) {
+        p = 98;
+      }
+      this.conversionProgress = p;
+    }
+  }
+
+  // IMAGE
+
+  @tracked image;
 }

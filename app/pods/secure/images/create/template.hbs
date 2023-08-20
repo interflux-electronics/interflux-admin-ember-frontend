@@ -12,8 +12,8 @@
   </Fieldset>
 
   {{#if (eq this.subject.id 'other')}}
-    <p>Sorry, at present you can only upload images of products and people. Do
-      ask Jan to extend support for other use cases.</p>
+    <p>Sorry, at present you can only upload images of products. Do ask Jan to
+      extend support for other use cases.</p>
   {{/if}}
 
   {{#if (eq this.subject.id 'product')}}
@@ -31,87 +31,171 @@
       </Fieldset>
 
       {{#if this.product}}
-
         {{#if this.loadingProductImages}}
           <p>Loading...</p>
         {{else}}
-          {{#let this.product.productImages as |images|}}
-            {{#if images}}
-              <Fieldset @label='Current images'>
-                <ul class='images'>
-                  {{#each images as |relation|}}
-                    <li>
-                      {{#let relation.image as |image|}}
-                        <ResponsiveImage
-                          @path={{image.path}}
-                          @variations={{image.variations}}
-                        />
-                      {{/let}}
-                    </li>
-                  {{/each}}
-                </ul>
-              </Fieldset>
-            {{/if}}
+          {{#if this.product.productImages}}
+            <Fieldset @label='Current images'>
+              <ul class='images'>
+                {{#each this.product.productImages as |relation|}}
+                  <li>
+                    {{#let relation.image as |image|}}
+                      <ResponsiveImage
+                        @path={{image.path}}
+                        @variations={{image.variations}}
+                      />
+                    {{/let}}
+                  </li>
+                {{/each}}
+              </ul>
+            </Fieldset>
+          {{/if}}
 
-            <p>Image uploader under construction...</p>
-
-            {{!-- <input
-              type='file'
-              accept='png,.jpg'
-              class='button medium grey'
-              {{on 'change' this.onImageSelect}}
-            /> --}}
-
-            {{!-- <Button
-              @text='Select image'
-              @theme='medium grey'
-              @onClick={{this.onClickSelectImage}}
-            /> --}}
-
-            {{!-- {{#if this.errorMessage}}
-              <p>{{this.errorMessage}}</p>
-            {{/if}} --}}
-
-            {{!-- <Field::BelongsTo::File
-              @label='New image'
-              @record={{@model.image}}
-              @recordModel='image'
-              @cdnBasePath={{this.image.id}}
-              @accept='.png, .jpg'
-            /> --}}
-
-            {{! <p>For the best result, upload a PNG of 2400x2400 pixels.</p>
-            <p>Allowed formats: PNGs or JPGs.</p> }}
-
-            {{!-- 
-            {{#if @model.image.cdnFile}}
-              <Fieldset @label='New image'>
-                <div class='image'>
-                  <img src={{@model.image.cdnFile.urlProd}} />
-                </div>
-              </Fieldset>
-
-              <p>Please give a meaningful, descriptive and unique name to the
-                image. For SEO, please always include the product name and
-                family.</p>
-
-              <Field::String
-                @label='Image name'
-                @record={{@model.image}}
-                @attribute='alt'
-                @localSave={{true}}
-              />
-
+          {{#unless this.localImageURL}}
+            <Fieldset @label='New images'>
               <Button
-                @text='Save'
-                @theme='big-green'
-                @disabled={{this.preventSave}}
-                @isBusy={{this.isSaving}}
-                @onClick={{this.onSave}}
+                @text='Select file'
+                @theme='medium grey'
+                @onClick={{this.onClickSelectFile}}
               />
-            {{/if}} 
-            --}}
-          {{/let}}
+            </Fieldset>
+          {{else}}
+            <Fieldset @label='New images'>
+              <img
+                src={{this.localImageURL}}
+                onload={{this.onLocalImageLoad}}
+                class='preview'
+              />
+            </Fieldset>
+
+            {{#unless this.cdnBasePath}}
+              <p>One moment...</p>
+            {{else}}
+              {{#unless this.uploadCommenced}}
+                <Fieldset @label='Commence upload?'>
+                  <Pills::SelectOne
+                    @options={{this.uploadOptions}}
+                    @optionLabel='label'
+                    @layout='horizontal'
+                    @onSelect={{this.onSelectUploadOption}}
+                    @selected={{this.selectedUploadOption}}
+                  />
+                </Fieldset>
+              {{else}}
+                <Fieldset @label='Original image'>
+                  <ul class='list'>
+                    {{#if this.uploadError}}
+                      <li>
+                        <div class='left'>
+                          <span class='no-link'>Upload failed. Tell Jan.</span>
+                        </div>
+                      </li>
+                    {{else}}
+                      {{#if this.uploadSuccess}}
+                        <li>
+                          <div class='left'>
+                            <a
+                              href={{this.image.originalURL}}
+                              target='_blank'
+                              rel='noreferrer noopener'
+                            >
+                              {{this.image.original}}
+                            </a>
+                          </div>
+                        </li>
+                      {{else}}
+                        <li class='solid'>
+                          <div class='progress'>
+                            <div
+                              class='green-bar'
+                              style={{this.uploadProgressStyle}}
+                            >
+                              <p>Uploading... {{this.cdn.uploadProgress}}%</p>
+                            </div>
+                            <p>Uploading... {{this.cdn.uploadProgress}}%</p>
+                          </div>
+                        </li>
+                      {{/if}}
+                    {{/if}}
+                  </ul>
+                </Fieldset>
+
+                {{#if this.uploadSuccess}}
+                  <Fieldset @label='Converted images'>
+                    <ul class='list'>
+                      {{#if this.conversionError}}
+                        <li>
+                          <div class='left'>
+                            <span class='no-link'>
+                              Conversion failed. Tell Jan.
+                            </span>
+                          </div>
+                        </li>
+                      {{else}}
+                        {{#if this.conversionSuccess}}
+                          {{#each this.image.variationsHash as |hash|}}
+                            <li>
+                              <div class='left'>
+                                <a
+                                  href='{{hash.url}}'
+                                  target='_blank'
+                                  rel='noreferrer noopener'
+                                >
+                                  {{hash.label}}
+                                </a>
+                              </div>
+                            </li>
+                          {{/each}}
+                        {{else}}
+                          <li class='solid'>
+                            <div class='progress'>
+                              <div
+                                class='green-bar'
+                                style={{this.conversionProgressStyle}}
+                              >
+                                <p>Converting...
+                                  {{this.conversionProgress}}%</p>
+                              </div>
+                              <p>Converting...
+                                {{this.conversionProgress}}%</p>
+                            </div>
+                          </li>
+
+                        {{/if}}
+                      {{/if}}
+                    </ul>
+                  </Fieldset>
+
+                  {{#if this.conversionSuccess}}
+                    <hr />
+                    <p>Sucess!</p>
+                    <p>Your image was uploaded and converted to multiple sizes
+                      and formats for faster page loads.</p>
+                    <p>Next steps:</p>
+                    <p>1. Go to
+                      <a
+                        href={{href-to
+                          'secure.products.product'
+                          this.product.id
+                        }}
+                      >
+                        {{this.product.name}}
+                      </a>
+                      and make this image public, sort it and perhaps make it
+                      the avatar.
+                    </p>
+
+                    <p>2. Go to
+                      <a href={{href-to 'secure.images.image' this.image.id}}>
+                        image
+                      </a>
+                      and add a SEO friendly description.
+                    </p>
+                  {{/if}}
+                {{/if}}
+              {{/unless}}
+            {{/unless}}
+          {{/unless}}
         {{/if}}
       {{/if}}
     {{/if}}
