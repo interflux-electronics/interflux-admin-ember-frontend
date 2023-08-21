@@ -207,7 +207,7 @@ export default class ImageCreateController extends Controller {
           alt: `${this.product.name} #${n}`,
           original: `@${width}x${height}.original.${extension}`,
           variations: null, // These will be added later
-          uploadedBy: this.auth.user
+          user: this.auth.user
         })
         .save();
 
