@@ -58,8 +58,8 @@ export default class ImageCreateController extends Controller {
     this.loadingProductImages = true;
     this.product = await this.store.findRecord('product', this.product.id, {
       include: [
+        'images',
         'product_images',
-        'product_images.image',
         'product_family',
         'product_family.product_family'
       ].join(',')
