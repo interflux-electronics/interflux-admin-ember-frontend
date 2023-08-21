@@ -40,6 +40,10 @@ export default class ListViewComponent extends Component {
   get records() {
     let records = this.args.records;
 
+    // Prevent records from appearing when on create route;
+    records = records.rejectBy('isNew');
+
+    // Iterate over all filters (search, options, checkboxes) and apply.
     this.args.filters.forEach((filter) => {
       if (filter.type === 'search' && filter.value) {
         records = records.filter((record) => {

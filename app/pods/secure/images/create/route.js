@@ -16,4 +16,30 @@ export default class ImageCreateRoute extends ModalRoute {
       .filterBy('isNew')
       .forEach((rec) => rec.deleteRecord());
   }
+
+  resetController(controller, isExiting, transition) {
+    if (isExiting && transition.targetName !== 'error') {
+      controller.setProperties({
+        subject: null,
+        product: null,
+        products: null,
+        loadingProducts: true,
+        loadingProductImages: true,
+        file: null,
+        extension: null,
+        localImageURL: null,
+        width: null,
+        height: null,
+        n: null,
+        cdnBasePath: null,
+        uploadCommenced: false,
+        uploadError: false,
+        uploadSuccess: false,
+        conversionProgress: 0,
+        conversionError: false,
+        conversionSuccess: false,
+        image: null
+      });
+    }
+  }
 }

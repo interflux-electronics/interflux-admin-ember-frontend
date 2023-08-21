@@ -44,7 +44,7 @@ export default class ImageCreateController extends Controller {
     }
     if (subject.id === 'product') {
       this.loadingProducts = true;
-      this.products = await this.store.findAll('product');
+      this.products = await this.store.findAll('product').sortBy('name');
       this.loadingProducts = false;
     }
   }
