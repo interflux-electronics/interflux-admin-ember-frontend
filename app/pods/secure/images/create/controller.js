@@ -114,10 +114,10 @@ export default class ImageCreateController extends Controller {
   }
 
   async findUniquePath() {
-    let path = `/images/products/${this.product.id}/${this.product.id}`;
+    let path = `images/products/${this.product.id}/${this.product.id}`;
 
     if (ENV.isDevelopment) {
-      path = `temporary${path}`;
+      path = `temporary/${path}`;
     }
 
     this.n = 1;
