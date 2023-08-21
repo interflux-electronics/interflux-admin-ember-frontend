@@ -12,6 +12,8 @@ module.exports = {
     'no-potential-path-strings': 'warn',
     'no-heading-inside-button': 'warn',
     'require-presentational-children': 'warn',
-    'no-autofocus-attribute': 'warn'
+    'no-autofocus-attribute': 'warn',
+    'require-valid-alt-text': 'warn',
+    'simple-unless': 'warn'
   }
 };
