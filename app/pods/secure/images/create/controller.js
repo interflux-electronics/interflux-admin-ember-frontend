@@ -16,6 +16,10 @@ export default class ImageCreateController extends Controller {
   @tracked product = null;
   @tracked products = null;
 
+  get sortedProducts() {
+    return this.products.sortBy('name');
+  }
+
   @tracked loadingProducts = true;
   @tracked loadingProductImages = true;
 
@@ -44,7 +48,7 @@ export default class ImageCreateController extends Controller {
     }
     if (subject.id === 'product') {
       this.loadingProducts = true;
-      this.products = await this.store.findAll('product').sortBy('name');
+      this.products = await this.store.findAll('product');
       this.loadingProducts = false;
     }
   }
