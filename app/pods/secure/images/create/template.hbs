@@ -22,7 +22,7 @@
     {{else}}
       <Fieldset @label='Which product?'>
         <Pills::SelectOne
-          @options={{this.products}}
+          @options={{this.sortedProducts}}
           @optionLabel='name'
           @layout='vertical'
           @onSelect={{this.onSelectProduct}}
