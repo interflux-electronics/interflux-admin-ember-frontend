@@ -1,7 +1,9 @@
 import { helper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/template';
 
-export default helper(function markdown(params) {
+// <p>{{mark this.search.value label}}</p>
+
+export default helper(function mark(params) {
   const phrase = params[1];
 
   if (!phrase) {
