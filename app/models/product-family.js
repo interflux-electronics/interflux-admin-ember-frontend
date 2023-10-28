@@ -15,6 +15,9 @@ export default class ProductFamilyModel extends Model {
   @hasMany('product') products;
   @hasMany('product-family-image') productFamilyImages;
 
+  @hasMany('product', { inverse: 'mainFamily' }) productsWithMain;
+  @hasMany('product', { inverse: 'subFamily' }) productsWithSub;
+
   get url() {
     return `${ENV.publicHost}/en/products/${this.slug}`;
   }

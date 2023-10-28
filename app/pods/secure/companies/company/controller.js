@@ -28,4 +28,16 @@ export default class CompanyController extends Controller {
   get showDeleteInstructions() {
     return !this.company.canBeDeleted && this.userClickedDelete;
   }
+
+  @action
+  afterSavePublic() {
+    if (this.company.public) {
+      return;
+    }
+    this.company.setProperties({
+      shownOnMainWebsite: false,
+      shownOnGroupWebsite: false
+    });
+    this.company.save();
+  }
 }

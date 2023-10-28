@@ -107,81 +107,104 @@
       @targetRoute='secure.people.person'
     />
 
-    <h2>Interflux Electronics website</h2>
+    <h2>Visibility</h2>
 
-    <Field::Boolean @record={{company}} @attribute='public'>
-      <label>Show on Interflux Electronics website</label>
-    </Field::Boolean>
+    <Field::Boolean::Pills
+      @label='Available to our websites?'
+      @legend='To make this company available to our websites, choose "yes". To hide this company so that only Interflux admins can see them, choose "no".'
+      @record={{company}}
+      @attribute='public'
+      @layout='horizontal'
+      @afterSave={{this.afterSavePublic}}
+    />
 
     {{#if company.public}}
-      <Field::String
-        @label='Description'
-        @legend='Shown on the contact page of Interflux Electronics website.'
+      <Field::Boolean::Pills
+        @label='Shown on interflux.com?'
+        @legend='To make this company visible on our websites, choose "yes". To hide it so that only Interflux admins can see them, choose "no".'
         @record={{company}}
-        @attribute='description'
-        @multiline='true'
+        @attribute='shownOnMainWebsite'
+        @layout='horizontal'
       />
 
-      <Field::String
-        @label='Rank'
-        @legend='Enter an integer to sort companies on the Interflux Electronics website. Those with a rank are sorted above those without. Those without rank are sorted alphabetically.'
+      <Field::Boolean::Pills
+        @label='Shown on interflux.group?'
+        @legend='To make this company visible on our websites, choose "yes". To hide it so that only Interflux admins can see them, choose "no".'
         @record={{company}}
-        @attribute='order'
+        @attribute='shownOnGroupWebsite'
+        @layout='horizontal'
       />
-
-      <Field::Boolean
-        @record={{company}}
-        @attribute='isHeadquarter'
-        @legend='On the Interflux Electronics website, some companies receive a map marker with different shape.'
-      >
-        <label>Show headquarter icon on map</label>
-      </Field::Boolean>
     {{/if}}
 
-    <h2>Interflux Group website</h2>
+    {{#if company.public}}
+      {{#if company.shownOnMainWebsite}}
+        <h2>interflux.com</h2>
 
-    <Field::Boolean @record={{company}} @attribute='shownOnGroupWebsite'>
-      <label>Show on Interflux Group website</label>
-    </Field::Boolean>
+        <Field::String
+          @label='Description'
+          @legend='Shown on the contact page of Interflux Electronics website.'
+          @record={{company}}
+          @attribute='description'
+          @multiline='true'
+        />
 
-    {{#if company.shownOnGroupWebsite}}
-      <Field::String
-        @label='Core activity'
-        @legend='Shown on the Interflux Group website.'
-        @record={{company}}
-        @attribute='coreActivity'
-        @multiline='true'
-      />
+        <Field::String
+          @label='Rank'
+          @legend='Enter an integer to sort companies on the Interflux Electronics website. Those with a rank are sorted above those without. Those without rank are sorted alphabetically.'
+          @record={{company}}
+          @attribute='order'
+        />
 
-      <Field::String
-        @label='History'
-        @legend='Shown on the Interflux Group website.'
-        @record={{company}}
-        @attribute='history'
-        @multiline='true'
-      />
+        <Field::Boolean
+          @record={{company}}
+          @attribute='isHeadquarter'
+          @legend='On the Interflux Electronics website, some companies receive a map marker with different shape.'
+        >
+          <label>Show headquarter icon on map</label>
+        </Field::Boolean>
+      {{/if}}
 
-      <Field::String
-        @label='Rank'
-        @legend='Enter an integer to sort companies on the Interflux Group website.'
-        @record={{company}}
-        @attribute='rankOnGroupWebsite'
-      />
+      {{#if company.shownOnGroupWebsite}}
+        <h2>interflux.group</h2>
 
-      <Field::String
-        @label='Head count'
-        @legend='The total amount of people that work in this company.'
-        @record={{company}}
-        @attribute='headCount'
-      />
+        <Field::String
+          @label='Core activity'
+          @legend='Shown on the Interflux Group website.'
+          @record={{company}}
+          @attribute='coreActivity'
+          @multiline='true'
+        />
 
-      <Field::Boolean
-        @record={{company}}
-        @attribute='showMarkets'
-        @legend='Check this if you want the market countries to be shown on the Interflux Group website.'
-      >
-        <label>Show markets</label>
-      </Field::Boolean>
+        <Field::String
+          @label='History'
+          @legend='Shown on the Interflux Group website.'
+          @record={{company}}
+          @attribute='history'
+          @multiline='true'
+        />
+
+        <Field::String
+          @label='Rank'
+          @legend='Enter an integer to sort companies on the Interflux Group website.'
+          @record={{company}}
+          @attribute='rankOnGroupWebsite'
+        />
+
+        <Field::String
+          @label='Head count'
+          @legend='The total amount of people that work in this company.'
+          @record={{company}}
+          @attribute='headCount'
+        />
+
+        <Field::Boolean
+          @record={{company}}
+          @attribute='showMarkets'
+          @legend='Check this if you want the market countries to be shown on the Interflux Group website.'
+        >
+          <label>Show markets</label>
+        </Field::Boolean>
+      {{/if}}
     {{/if}}
 
     <h2>Notes</h2>
