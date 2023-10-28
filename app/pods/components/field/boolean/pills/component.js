@@ -1,7 +1,7 @@
 import FieldComponent from '../component';
 import { action } from '@ember/object';
 
-export default class FieldFileComponent extends FieldComponent {
+export default class FieldBooleanPillsComponent extends FieldComponent {
   @action
   onSelect(selectedValue) {
     this.value = selectedValue;

@@ -23,79 +23,6 @@
       @attribute='chineseName'
     />
 
-    <h2>Companies</h2>
-
-    <Field::ManyToMany
-      @label='Member of'
-      @baseRecord={{person}}
-      @baseModel='person'
-      @baseLabel='companyMembers'
-      @joinModel='company-member'
-      @joinRankKey='rankAmongCompanies'
-      @targetModel='company'
-      @targetLabel='businessName'
-      @targetRoute='secure.companies.company'
-    />
-
-    {{#each person.companyMembers as |companyMember|}}
-      <h2>{{companyMember.company.businessName}}</h2>
-
-      <Field::String
-        @label='Role at {{companyMember.company.businessName}}'
-        @record={{companyMember}}
-        @attribute='title'
-      />
-
-      <Field::String
-        @label='Company email'
-        @record={{companyMember}}
-        @attribute='email'
-      />
-
-      <Field::String
-        @label='Company mobile phone'
-        @record={{companyMember}}
-        @attribute='phone'
-      />
-
-      <Field::String
-        @label='Company landline phone'
-        @record={{companyMember}}
-        @attribute='landline'
-      />
-
-      <Field::Boolean @record={{companyMember}} @attribute='public'>
-        <label>Show
-          {{person.firstName}}
-          on the
-          <a
-            href='{{env "publicHosts"}}/en/contact'
-            target='_blank'
-            rel='noopener noreferrer'
-          >contact page</a>
-          of our website under
-          {{companyMember.company.businessName}}.</label>
-      </Field::Boolean>
-
-      {{#if companyMember.public}}
-        <Field::Boolean @record={{companyMember}} @attribute='publicTitle'>
-          <label>Show role</label>
-        </Field::Boolean>
-
-        <Field::Boolean @record={{companyMember}} @attribute='publicEmail'>
-          <label>Show email</label>
-        </Field::Boolean>
-
-        <Field::Boolean @record={{companyMember}} @attribute='publicPhone'>
-          <label>Show mobile phone</label>
-        </Field::Boolean>
-
-        <Field::Boolean @record={{companyMember}} @attribute='publicLandline'>
-          <label>Show landline phone</label>
-        </Field::Boolean>
-      {{/if}}
-    {{/each}}
-
     <h2>Images</h2>
 
     <Fieldset @label='All images with {{person.firstName}} in them'>
@@ -133,6 +60,103 @@
         {{/each}}
       </ul>
     </Fieldset>
+
+    <h2>Companies</h2>
+
+    <Field::ManyToMany
+      @label='Member of'
+      @baseRecord={{person}}
+      @baseModel='person'
+      @baseLabel='companyMembers'
+      @joinModel='company-member'
+      @joinRankKey='rankAmongCompanies'
+      @targetModel='company'
+      @targetLabel='businessName'
+      @targetRoute='secure.companies.company'
+    />
+
+    {{#each person.companyMembersSortedByCompany as |companyMember|}}
+      {{#let companyMember.company as |company|}}
+        <h2>{{company.businessName}}</h2>
+
+        <Field::String
+          @label='Role at {{company.businessName}}'
+          @record={{companyMember}}
+          @attribute='title'
+        />
+
+        {{#unless company.isInterfluxGroup}}
+          <Field::String
+            @label='Company email'
+            @record={{companyMember}}
+            @attribute='email'
+          />
+
+          <Field::String
+            @label='Company mobile phone'
+            @record={{companyMember}}
+            @attribute='phone'
+          />
+
+          <Field::String
+            @label='Company landline phone'
+            @record={{companyMember}}
+            @attribute='landline'
+          />
+        {{/unless}}
+
+        {{#if company.isInterfluxGroup}}
+          <Field::Boolean::Pills
+            @label='Shown on interflux.group?'
+            @legend='Choose "yes" if you want this person to appear on the Interflux Group website.'
+            @record={{companyMember}}
+            @attribute='public'
+            @layout='horizontal'
+            @afterSave={{fn this.afterSaveCompanyMember companyMember}}
+          />
+        {{else}}
+          <Field::Boolean::Pills
+            @label='Shown on interflux.com?'
+            @legend='Choose "yes" if you want this person to appear on the contact page of the Interflux Electronics website under the company {{company.businessName}}.'
+            @record={{companyMember}}
+            @attribute='public'
+            @layout='horizontal'
+          />
+        {{/if}}
+
+        {{#if companyMember.public}}
+          {{#unless company.isInterfluxGroup}}
+            <Field::Boolean::Pills
+              @label='Show role?'
+              @record={{companyMember}}
+              @attribute='publicTitle'
+              @layout='horizontal'
+            />
+
+            <Field::Boolean::Pills
+              @label='Show email?'
+              @record={{companyMember}}
+              @attribute='publicEmail'
+              @layout='horizontal'
+            />
+
+            <Field::Boolean::Pills
+              @label='Show mobile phone?'
+              @record={{companyMember}}
+              @attribute='publicPhone'
+              @layout='horizontal'
+            />
+
+            <Field::Boolean::Pills
+              @label='Show landline phone?'
+              @record={{companyMember}}
+              @attribute='publicLandline'
+              @layout='horizontal'
+            />
+          {{/unless}}
+        {{/if}}
+      {{/let}}
+    {{/each}}
 
     <h2>Personal</h2>
 

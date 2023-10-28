@@ -35,4 +35,8 @@ export default class PersonModel extends Model {
   get canBeDeleted() {
     return this.companyCount === 0 && !this.hasUser;
   }
+
+  get companyMembersSortedByCompany() {
+    return this.companyMembers.sortBy('rankAmongCompanies');
+  }
 }

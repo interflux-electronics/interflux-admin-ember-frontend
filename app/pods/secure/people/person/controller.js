@@ -34,4 +34,17 @@ export default class PersonController extends Controller {
       }
     });
   }
+
+  @action
+  afterSaveCompanyMember(record) {
+    record.setProperties({ publicTitle: record.public });
+
+    const options = {
+      adapterOptions: {
+        whitelist: ['publicTitle']
+      }
+    };
+
+    record.save(options);
+  }
 }

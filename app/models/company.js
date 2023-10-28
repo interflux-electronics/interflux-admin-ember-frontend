@@ -46,4 +46,8 @@ export default class CompanyModel extends Model {
   get peopleCount() {
     return this.people.length;
   }
+
+  get isInterfluxGroup() {
+    return this.businessName === 'Interflux Group';
+  }
 }
