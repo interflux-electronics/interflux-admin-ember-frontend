@@ -12,29 +12,26 @@ export default class ImageCreateController extends Controller {
   @service store;
   @service router;
 
+  // ASK THE SUBJECT OF THE IMAGE
+
   @tracked subject = null;
-  @tracked product = null;
-  @tracked products = null;
-
-  get sortedProducts() {
-    return this.products.sortBy('name');
-  }
-
-  @tracked loadingProducts = true;
-  @tracked loadingProductImages = true;
-
-  get image() {
-    return this.model.image;
-  }
 
   get subjects() {
     return [
       {
-        id: 'product',
-        label: 'a product'
+        id: '1',
+        model: 'product',
+        label: 'a product',
+        sort: 'name'
       },
       {
-        id: 'other',
+        id: '2',
+        model: 'person',
+        label: 'a person',
+        sort: 'fullName'
+      },
+      {
+        id: '3',
         label: 'something else'
       }
     ];
@@ -43,42 +40,64 @@ export default class ImageCreateController extends Controller {
   @action
   async onSelectSubject(subject) {
     this.subject = subject;
-    if (!subject) {
+    if (!subject || !subject.model) {
       return;
     }
-    if (subject.id === 'product') {
-      this.loadingProducts = true;
-      this.products = await this.store.findAll('product');
-      this.loadingProducts = false;
-    }
+    this.loadingOptions = true;
+    this.options = await this.store.findAll(this.subject.model);
+    this.loadingOptions = false;
+  }
+
+  // ASK WHICH SUBJECT RECORD TO LINK THE IMAGE TO
+
+  @tracked loadingOptions = null;
+  @tracked options = null;
+  @tracked selectedOption = null;
+
+  get sortedOptions() {
+    return this.options.sortBy(this.subject.sort);
   }
 
   @action
-  async onSelectProduct(product) {
-    this.product = product;
-    if (!product) {
+  async onSelectOption(option) {
+    this.selectedOption = option;
+    if (!option) {
       return;
     }
-    this.loadingProductImages = true;
-    this.product = await this.store.findRecord('product', this.product.id, {
-      include: [
-        'images',
-        'product_images',
-        'product_family',
-        'product_family.product_family'
-      ].join(',')
-    });
-    await this.delay(1000);
-    this.loadingProductImages = false;
+    this.loadingImages = true;
+    const { id } = this.selectedOption;
+
+    if (this.subject.model === 'product') {
+      const product = await this.store.findRecord('product', id, {
+        include: [
+          'images',
+          'product_images',
+          'product_family',
+          'product_family.product_family'
+        ].join(',')
+      });
+      this.selectedOption = product;
+      await this.delay(1000);
+      this.images = product.productImages.mapBy('image');
+    }
+
+    if (this.subject.model === 'person') {
+      const person = await this.store.findRecord('person', id, {
+        include: ['images', 'person_images'].join(',')
+      });
+      await this.delay(1000);
+      this.images = person.personImages.mapBy('image');
+    }
+
+    this.loadingImages = false;
   }
 
-  delay(ms) {
-    return new Promise((approve) => {
-      window.setTimeout(approve, ms);
-    });
-  }
+  // SHOW EXISTING IMAGES
 
-  // SELECT & PREVIEW IMAGE
+  @tracked loadingImages = true;
+  @tracked images = null;
+
+  // ASK TO SELECT FILE TO UPLOAD
 
   @tracked file;
   @tracked extension;
@@ -109,6 +128,8 @@ export default class ImageCreateController extends Controller {
     });
   }
 
+  // SHOW PREVIEW OF THE IMAGE SELECTED
+
   @action
   async onLocalImageLoad(event) {
     const img = event.target;
@@ -118,7 +139,24 @@ export default class ImageCreateController extends Controller {
   }
 
   async findUniquePath() {
-    let path = `images/products/${this.product.id}/${this.product.id}`;
+    let path = null;
+
+    if (this.subject.model === 'product') {
+      const product = this.selectedOption;
+
+      path = `images/products/${product.id}/${product.id}`;
+    }
+
+    if (this.subject.model === 'person') {
+      const person = this.selectedOption;
+
+      path = `images/people/${person.slug}/${person.slug}`;
+    }
+
+    if (!path) {
+      console.error('no path for image upload!');
+      return;
+    }
 
     if (ENV.isDevelopment) {
       path = `temporary/${path}`;
@@ -145,15 +183,9 @@ export default class ImageCreateController extends Controller {
     return path;
   }
 
-  // UPLOAD
+  // ASK WHETHER TO COMMENCE THE UPLOAD
 
-  @tracked uploadCommenced = false;
-  @tracked uploadError = false;
-  @tracked uploadSuccess = false;
-  @tracked uploadOptions = [
-    { label: 'Yes', value: 'yes' },
-    { label: 'No', value: 'no' }
-  ];
+  @tracked selectedUploadOption = null;
 
   @action
   onSelectUploadOption(option) {
@@ -163,6 +195,16 @@ export default class ImageCreateController extends Controller {
       this.upload();
     }
   }
+
+  // UPLOAD THE IMAGE TO THE CDN
+
+  @tracked uploadCommenced = false;
+  @tracked uploadError = false;
+  @tracked uploadSuccess = false;
+  @tracked uploadOptions = [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' }
+  ];
 
   get uploadProgressStyle() {
     return htmlSafe(`width: ${this.cdn.uploadProgress}%`);
@@ -201,10 +243,23 @@ export default class ImageCreateController extends Controller {
 
       console.debug('creating Image record');
 
+      let alt = null;
+      const { model } = this.subject;
+
+      if (model === 'product') {
+        const product = this.selectedOption;
+        alt = `${product.name} #${n}`;
+      }
+
+      if (model === 'person') {
+        const person = this.selectedOption;
+        alt = `${person.fullName} #${n}`;
+      }
+
       const imageRecord = await this.store
         .createRecord('image', {
           path: cdnBasePath,
-          alt: `${this.product.name} #${n}`,
+          alt,
           original: `@${width}x${height}.original.${extension}`,
           variations: null, // These will be added later
           user: this.auth.user
@@ -217,17 +272,32 @@ export default class ImageCreateController extends Controller {
         throw new Error('unable to create Image');
       }
 
-      const productImageRecord = await this.store
-        .createRecord('product-image', {
-          product: this.product,
+      let relation = null;
+
+      if (model === 'product') {
+        relation = this.store.createRecord('product-image', {
+          product: this.selectedOption,
           image: imageRecord
-        })
-        .save();
+        });
+      }
 
-      console.debug({ productImageRecord });
+      if (model === 'person') {
+        relation = this.store.createRecord('person-image', {
+          person: this.selectedOption,
+          image: imageRecord
+        });
+      }
 
-      if (!productImageRecord) {
-        throw new Error('unable to create ProductImage');
+      console.debug({ relation });
+
+      if (!relation) {
+        throw new Error('no relation');
+      }
+
+      await relation.save();
+
+      if (!relation) {
+        throw new Error('unable to create relation');
       }
 
       this.image = imageRecord;
@@ -290,5 +360,19 @@ export default class ImageCreateController extends Controller {
 
   // IMAGE
 
+  // TODO: do these conflict?
+
   @tracked image;
+
+  get image() {
+    return this.model.image;
+  }
+
+  // HELPER
+
+  delay(ms) {
+    return new Promise((approve) => {
+      window.setTimeout(approve, ms);
+    });
+  }
 }
