@@ -14,6 +14,7 @@ module.exports = {
     'require-presentational-children': 'warn',
     'no-autofocus-attribute': 'warn',
     'require-valid-alt-text': 'warn',
-    'simple-unless': 'warn'
+    'simple-unless': 'warn',
+    'no-implicit-this': { allow: ['cdn'] }
   }
 };
