@@ -39,7 +39,8 @@ export default class TextareaComponent extends InputComponent {
   // Unlike <Form::Input> we don't select the text on focus.
   @action
   selectText() {
-    document.execCommand('selectAll', false, null);
+    // BUG: this selects the entire page
+    // document.execCommand('selectAll', false, null);
   }
 
   @action
