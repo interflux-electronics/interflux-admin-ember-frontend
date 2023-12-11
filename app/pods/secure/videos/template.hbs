@@ -1,15 +1,13 @@
-<Page::Content @id='videos'>
-  <h1>Videos</h1>
-
-  <Spreadsheet
-    @records={{@model.videos}}
-    @linkRoute='secure.videos.video'
-    @sortBy='titleAdmin'
-    @onLoadQuery={{this.query}}
-    @columns={{array
-      (hash key='category' label='Category')
-      (hash key='titleAdmin' label='Title')
-    }}
+<Page::Content @id='videos' @theme='white'>
+  <ListView
+    @title='Videos'
+    @records={{this.records}}
+    @config={{this.config}}
+    @filters={{this.filters}}
+    @buttons={{this.buttons}}
+    @layouts={{array 'grid' 'list'}}
+    @onClickRecord={{this.onClickRecord}}
+    @onClickButton={{this.onClickButton}}
   />
 </Page::Content>
 

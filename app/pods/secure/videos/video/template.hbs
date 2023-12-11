@@ -1,73 +1,26 @@
 {{#let @model.video as |video|}}
   <Modal @id='video'>
+    <ResponsiveVideo @path={{video.path}} @variations={{video.variations}} />
 
-    <ResponsiveVideo @video={{video}} />
-
-    <h1>{{video.titleAdmin}}</h1>
-
-    <h2>Files</h2>
-
-    {{#if video.hasMP4}}
-      <Fieldset
-        @label='MP4s'
-        @legend='Compatible with all apps. Large file size. Good video and audio quality.'
-      >
-        <ul class='list'>
-          {{#each video.MP4s as |file|}}
-            <li>
-              <div class='left'>
-                <a
-                  href={{file.url}}
-                  target='_blank'
-                  rel='noreferrer noopener'
-                >{{file.label}}</a>
-              </div>
-            </li>
-          {{/each}}
-        </ul>
-      </Fieldset>
-    {{/if}}
-
-    {{#if video.hasWEBM}}
-      <Fieldset
-        @label='WEBMs'
-        @legend='30% smaller than MP4. Same quality as MP4. Designed for streaming on websites. Not compatible with all apps.'
-      >
-        <ul class='list'>
-          {{#each video.WEBMs as |file|}}
-            <li>
-              <div class='left'>
-                <a
-                  href={{file.url}}
-                  target='_blank'
-                  rel='noreferrer noopener'
-                >{{file.label}}</a>
-              </div>
-            </li>
-          {{/each}}
-        </ul>
-      </Fieldset>
-    {{/if}}
+    <h1>{{video.title}}</h1>
 
     <h2>Properties</h2>
 
     <Field::String
-      @label='Title as seen on interflux.com'
+      @label='Title'
       @record={{video}}
-      @attribute='titlePublic'
+      @attribute='title'
       @multiline='true'
     />
 
-    <Field::String
-      @label='Title as seen in Admin'
+    {{!-- <Field::String
+      @label='Notes'
       @record={{video}}
-      @attribute='titleAdmin'
+      @attribute='notes'
       @multiline='true'
-    />
+    /> --}}
 
-    {{#if video.isWebinar}}
-      <h2>The webinar seen in the video</h2>
-
+    {{!-- {{#if video.isWebinar}}
       <Fieldset @label='Webinar'>
         <ul class='list'>
           {{#if video.webinar.id}}
@@ -85,6 +38,95 @@
               </div>
             </li>
           {{/if}}
+        </ul>
+      </Fieldset>
+    {{/if}} --}}
+
+    <h2>Files</h2>
+
+    {{#if video.MP4s}}
+      <Fieldset
+        @label='MP4s'
+        @legend='Compatible with all apps. Large file size. Good video and audio quality.'
+      >
+        <ul class='list'>
+          {{#each video.MP4s as |variation|}}
+            <li>
+              <div class='left'>
+                <a
+                  href='{{cdn}}{{video.path}}{{variation}}'
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{variation}}</a>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
+
+    {{#if video.WEBMs}}
+      <Fieldset
+        @label='WEBMs'
+        @legend='30% smaller than MP4. Same quality as MP4. Designed for streaming on websites. Not compatible with all apps.'
+      >
+        <ul class='list'>
+          {{#each video.WEBMs as |variation|}}
+            <li>
+              <div class='left'>
+                <a
+                  href='{{cdn}}{{video.path}}{{variation}}'
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{variation}}</a>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
+
+    {{#if video.hasPoster}}
+      <Fieldset
+        @label='Posters'
+        @legend='These images are shown before the video starts playing.'
+      >
+        <ul class='list'>
+          {{#each video.PNGs as |variation|}}
+            <li>
+              <div class='left'>
+                <a
+                  href='{{cdn}}{{video.path}}{{variation}}'
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{variation}}</a>
+              </div>
+            </li>
+          {{/each}}
+
+          {{#each video.JPGs as |variation|}}
+            <li>
+              <div class='left'>
+                <a
+                  href='{{cdn}}{{video.path}}{{variation}}'
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{variation}}</a>
+              </div>
+            </li>
+          {{/each}}
+
+          {{#each video.WEBPs as |variation|}}
+            <li>
+              <div class='left'>
+                <a
+                  href='{{cdn}}{{video.path}}{{variation}}'
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{variation}}</a>
+              </div>
+            </li>
+          {{/each}}
         </ul>
       </Fieldset>
     {{/if}}

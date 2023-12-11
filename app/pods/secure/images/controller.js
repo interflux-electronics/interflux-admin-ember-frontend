@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 
-export default class TranslationsController extends Controller {
+export default class ImagesController extends Controller {
   @service api;
   @service router;
   @service store;

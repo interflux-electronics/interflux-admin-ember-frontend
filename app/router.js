@@ -52,6 +52,7 @@ Router.map(function () {
     });
 
     this.route('videos', function () {
+      this.route('create');
       this.route('video', { path: '/:id' });
     });
 

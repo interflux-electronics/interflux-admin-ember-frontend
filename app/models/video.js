@@ -1,37 +1,61 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import Model, { attr, belongsTo } from '@ember-data/model';
+import ENV from 'interflux/config/environment';
 
 export default class VideoModel extends Model {
   @attr('string') path;
   @attr('string') variations;
-  @attr('string') titleAdmin;
-  @attr('string') titlePublic;
-  @attr('string') posterUrl;
-
-  @hasMany('cdn-files') files;
+  @attr('string') title;
+  @attr('string') notes;
 
   @belongsTo('webinar') webinar;
 
-  get category() {
-    return this.path.split('/')[1];
+  get isWebinar() {
+    return this.path.split('/')[1] === 'webinars';
   }
 
-  get isWebinar() {
-    return this.category === 'webinars';
-  }
+  // VIDEOS
 
   get MP4s() {
-    return this.files.filterBy('isMP4').sortBy('width');
+    return this.variations?.split(',').filter((x) => x.endsWith('.mp4'));
   }
 
   get WEBMs() {
-    return this.files.filterBy('isWEBM').sortBy('width');
+    return this.variations?.split(',').filter((x) => x.endsWith('.webm'));
   }
 
-  get hasMP4() {
-    return this.MP4s.length > 0;
+  // POSTERS
+
+  get JPGs() {
+    return this.variations
+      ? this.variations.split(',').filter((x) => x.endsWith('.jpg'))
+      : [];
   }
 
-  get hasWEBM() {
-    return this.WEBMs.length > 0;
+  get WEBPs() {
+    return this.variations
+      ? this.variations.split(',').filter((x) => x.endsWith('.webp'))
+      : [];
+  }
+
+  get PNGs() {
+    return this.variations
+      ? this.variations.split(',').filter((x) => x.endsWith('.png'))
+      : [];
+  }
+
+  get posters() {
+    return [...this.WEBPs, ...this.JPGs, ...this.PNGs];
+  }
+
+  get hasPoster() {
+    return this.posters.length > 0;
+  }
+
+  get thumbURL() {
+    if (!this.hasPoster) {
+      return null;
+    }
+
+    return `${ENV.cdnHost}/${this.path}${this.posters[0]}`;
   }
 }

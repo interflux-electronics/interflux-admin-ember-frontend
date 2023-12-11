@@ -4,20 +4,8 @@ import { tracked } from '@glimmer/tracking';
 import ENV from 'interflux/config/environment';
 
 export default class ResponsiveVideoComponent extends Component {
-  get video() {
-    return this.args.video;
-  }
-
-  get path() {
-    return this.video.path;
-  }
-
-  get variations() {
-    return this.video.variations;
-  }
-
   get hasValidData() {
-    const valid = this.video && this.path && this.variations;
+    const valid = this.args.path && this.args.variations;
 
     if (!valid) {
       console.warn('<Video> invalid data');
@@ -33,12 +21,12 @@ export default class ResponsiveVideoComponent extends Component {
   }
 
   get ratio() {
-    if (!this.variations) {
+    if (!this.args.variations) {
       return null;
     }
 
     // First size found in variations
-    const size = this.variations.split(',')[0].split('@')[1].split('.')[0];
+    const size = this.args.variations.split(',')[0].split('@')[1].split('.')[0];
     const width = size.split('x')[0];
     const height = size.split('x')[1];
 
@@ -76,15 +64,15 @@ export default class ResponsiveVideoComponent extends Component {
   }
 
   get MP4s() {
-    return this.variations.split(',').filter((x) => x.split('.')[1] === 'mp4');
+    return this.args.variations.split(',').filter((x) => x.endsWith('.mp4'));
+  }
+
+  get WEBMs() {
+    return this.args.variations.split(',').filter((x) => x.endsWith('.webm'));
   }
 
   get MP4sizes() {
     return this.MP4s.map((x) => x.split('.')[0].replace('@', ''));
-  }
-
-  get WEBMs() {
-    return this.variations.split(',').filter((x) => x.split('.')[1] === 'webm');
   }
 
   get WEBMsizes() {
@@ -100,11 +88,11 @@ export default class ResponsiveVideoComponent extends Component {
   }
 
   get MP4src() {
-    return `${ENV.cdnHost}/${this.path}@${this.closestMP4size}.mp4`;
+    return `${ENV.cdnHost}/${this.args.path}@${this.closestMP4size}.mp4`;
   }
 
   get WEBMsrc() {
-    return `${ENV.cdnHost}/${this.path}@${this.closestWEBMsize}.webm`;
+    return `${ENV.cdnHost}/${this.args.path}@${this.closestWEBMsize}.webm`;
   }
 
   // Accepts and array of sizes "200x200".
@@ -129,5 +117,61 @@ export default class ResponsiveVideoComponent extends Component {
       const width = size.split('x')[0];
       return width - this.optimalWidth === closestDistance;
     });
+  }
+
+  // POSTER
+
+  get PNGs() {
+    return this.args.variations.split(',').filter((x) => x.endsWith('png'));
+  }
+
+  get JPGs() {
+    return this.args.variations.split(',').filter((x) => x.endsWith('jpg'));
+  }
+
+  get WEBPs() {
+    return this.args.variations.split(',').filter((x) => x.endsWith('webp'));
+  }
+
+  get PNGsizes() {
+    return this.PNGs.map((x) => x.split('.')[0].replace('@', ''));
+  }
+
+  get JPGsizes() {
+    return this.JPGs.map((x) => x.split('.')[0].replace('@', ''));
+  }
+
+  get WEBPsizes() {
+    return this.WEBPs.map((x) => x.split('.')[0].replace('@', ''));
+  }
+
+  get closestPoster() {
+    if (!this.args.variations) {
+      return null;
+    }
+
+    const size = this.closestPosterSize();
+
+    if (!size) {
+      return null;
+    }
+
+    return `${ENV.cdnHost}/${this.args.path}@${size}`;
+  }
+
+  closestPosterSize() {
+    if (this.WEBPs.length) {
+      return this.closestSize(this.WEBPsizes) + '.webp';
+    }
+
+    if (this.JPGs.length) {
+      return this.closestSize(this.JPGsizes) + '.jpg';
+    }
+
+    if (this.PNGs.length) {
+      return this.closestSize(this.PNGsizes) + '.png';
+    }
+
+    return null;
   }
 }

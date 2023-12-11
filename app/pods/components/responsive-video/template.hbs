@@ -10,8 +10,9 @@
     {{#if this.showVideo}}
       <video
         controls
-        width={{@video.optimalWidth}}
-        height={{@video.optimalHeight}}
+        width={{this.optimalWidth}}
+        height={{this.optimalHeight}}
+        poster={{this.closestPoster}}
       >
         {{#if this.closestWEBMsize}}
           <source src={{this.WEBMsrc}} type='video/webm' />
