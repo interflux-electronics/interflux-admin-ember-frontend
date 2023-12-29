@@ -29,6 +29,7 @@ export default class ProductModel extends Model {
   @belongsTo('image', { inverse: 'product' }) image;
 
   @hasMany('image', { inverse: 'products' }) images;
+  @hasMany('video', { inverse: 'products' }) videos;
   @hasMany('document') documents;
 
   get family() {
@@ -62,6 +63,7 @@ export default class ProductModel extends Model {
   }
 
   @hasMany('product-image') productImages;
+  @hasMany('product-video') productVideos;
   @hasMany('product-document') productDocuments;
   @hasMany('product-quality') productQualities;
   @hasMany('product-use') productUses;

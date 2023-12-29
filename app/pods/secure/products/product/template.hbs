@@ -154,7 +154,64 @@
       @tools={{array 'bullets'}}
     />
 
+    {{#if product.productVideos}}
+      <h2>Videos</h2>
+
+      <Fieldset
+        @label='Public video'
+        @legend='These are all the videos we currently show on interflux.com on the product page of {{product.name}}.'
+      >
+        <ul class='images'>
+          {{#each product.productVideos as |productVideo|}}
+            <li class='avatar'>
+              {{#let productVideo.video as |video|}}
+                <ResponsiveImage
+                  @path={{video.path}}
+                  @variations={{video.variations}}
+                />
+
+                <div class='buttons'>
+                  <Button
+                    @text='Go to video'
+                    @theme='secondary'
+                    @route='secure.videos.video'
+                    @model={{video.id}}
+                  />
+                </div>
+              {{/let}}
+            </li>
+          {{/each}}
+
+        </ul>
+      </Fieldset>
+    {{/if}}
+
     <h2>Images</h2>
+
+    <Fieldset
+      @label='Avatar'
+      @legend='The avatar is the one image which will represent {{product.name}} on all our websites, Google and social media links.'
+    >
+      <ul class='images'>
+        <li class='avatar'>
+          {{#let product.image as |image|}}
+            <ResponsiveImage
+              @path={{image.path}}
+              @variations={{image.variations}}
+            />
+          {{/let}}
+
+          <div class='buttons'>
+            <Button
+              @text='Go to image'
+              @theme='secondary'
+              @route='secure.images.image'
+              @model={{product.image.id}}
+            />
+          </div>
+        </li>
+      </ul>
+    </Fieldset>
 
     <Fieldset
       @label='Public images'
@@ -248,31 +305,6 @@
         {{else}}
           <p>- none -</p>
         {{/each}}
-      </ul>
-    </Fieldset>
-
-    <Fieldset
-      @label='Avatar'
-      @legend='The avatar is the one image which will represent {{product.name}} on all our websites, Google and social media links.'
-    >
-      <ul class='images'>
-        <li class='avatar'>
-          {{#let product.image as |image|}}
-            <ResponsiveImage
-              @path={{image.path}}
-              @variations={{image.variations}}
-            />
-          {{/let}}
-
-          <div class='buttons'>
-            <Button
-              @text='Go to image'
-              @theme='secondary'
-              @route='secure.images.image'
-              @model={{product.image.id}}
-            />
-          </div>
-        </li>
       </ul>
     </Fieldset>
 

@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import ENV from 'interflux/config/environment';
 
 export default class VideoModel extends Model {
@@ -8,6 +8,9 @@ export default class VideoModel extends Model {
   @attr('string') notes;
 
   @belongsTo('webinar') webinar;
+
+  @hasMany('product-video') productVideos;
+  @hasMany('product', { inverse: 'videos' }) products;
 
   get isWebinar() {
     return this.path.split('/')[1] === 'webinars';
@@ -21,6 +24,10 @@ export default class VideoModel extends Model {
 
   get WEBMs() {
     return this.variations?.split(',').filter((x) => x.endsWith('.webm'));
+  }
+
+  get OGGs() {
+    return this.variations?.split(',').filter((x) => x.endsWith('.ogg'));
   }
 
   // POSTERS

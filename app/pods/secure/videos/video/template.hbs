@@ -42,12 +42,25 @@
       </Fieldset>
     {{/if}} --}}
 
+    <Field::ManyToMany
+      @label='Products'
+      @legend='Select all products shown in this video.'
+      @baseRecord={{video}}
+      @baseModel='video'
+      @baseLabel='productVideos'
+      @joinModel='product-video'
+      {{! @joinRankKey='rankAmongVideos' }}
+      @targetModel='product'
+      @targetLabel='name'
+      @targetRoute='secure.products.product'
+    />
+
     <h2>Files</h2>
 
     {{#if video.MP4s}}
       <Fieldset
         @label='MP4s'
-        @legend='Compatible with all apps. Large file size. Good video and audio quality.'
+        @legend='Compatible with all apps. Large file size. Good video and audio quality. Proprietary.'
       >
         <ul class='list'>
           {{#each video.MP4s as |variation|}}
@@ -68,10 +81,31 @@
     {{#if video.WEBMs}}
       <Fieldset
         @label='WEBMs'
-        @legend='30% smaller than MP4. Same quality as MP4. Designed for streaming on websites. Not compatible with all apps.'
+        @legend='30% smaller than MP4. Same quality as MP4. Designed for streaming on websites. Only for web browsers. Royalty free.'
       >
         <ul class='list'>
           {{#each video.WEBMs as |variation|}}
+            <li>
+              <div class='left'>
+                <a
+                  href='{{cdn}}{{video.path}}{{variation}}'
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >{{variation}}</a>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </Fieldset>
+    {{/if}}
+
+    {{#if video.OGGs}}
+      <Fieldset
+        @label='OGGs'
+        @legend='Smaller than MP4 and WEBM. Designed for streaming on websites. Only for web browsers. Royalty free.'
+      >
+        <ul class='list'>
+          {{#each video.OGGs as |variation|}}
             <li>
               <div class='left'>
                 <a
