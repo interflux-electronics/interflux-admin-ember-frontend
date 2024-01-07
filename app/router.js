@@ -83,6 +83,12 @@ Router.map(function () {
       this.route('permalink', { path: '/:id' });
     });
 
+    this.route('visitors', function () {
+      this.route('who');
+      this.route('what');
+      this.route('how');
+    });
+
     this.route('user', function () {
       this.route('download');
       this.route('issue');
