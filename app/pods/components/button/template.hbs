@@ -12,11 +12,11 @@
    --}}
   {{#if @model}}
     <a href={{href-to @route @model}} class={{this.classes}}>
-      <Button::Content @text={{@text}} @icon={{@icon}} />
+      <Button::Content @text={{this.label}} @icon={{@icon}} />
     </a>
   {{else}}
     <a href={{href-to @route}} class={{this.classes}}>
-      <Button::Content @text={{@text}} @icon={{@icon}}>
+      <Button::Content @text={{this.label}} @icon={{@icon}}>
         {{yield}}
       </Button::Content>
     </a>
@@ -39,7 +39,7 @@
     rel='noopener noreferrer'
     class={{this.classes}}
   >
-    <Button::Content @text={{@text}} @icon={{@icon}}>
+    <Button::Content @text={{this.label}} @icon={{@icon}}>
       {{yield}}
     </Button::Content>
   </a>
@@ -67,7 +67,7 @@
     disabled={{this.isDisabled}}
     draggable={{@draggable}}
   >
-    <Button::Content @text={{@text}} @icon={{@icon}}>
+    <Button::Content @text={{this.label}} @icon={{@icon}}>
       {{yield}}
     </Button::Content>
   </button>

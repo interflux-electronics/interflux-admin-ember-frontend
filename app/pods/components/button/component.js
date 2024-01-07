@@ -2,6 +2,10 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 export default class ButtonComponent extends Component {
+  get label() {
+    return this.args.label || this.args.text;
+  }
+
   get classes() {
     return ['button', this.theme, this.icon, this.text, this.isBusy].join(' ');
   }
