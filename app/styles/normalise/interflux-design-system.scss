@@ -1,4 +1,29 @@
 .ds {
+  // A set of styles unique to Interflux Admin where nothing is responsive and thus no vw.
+  // Regardless the style is portable across Interflux projects and therefor part of the design system.
+  &.px {
+      &.h1 {
+        font-family: $extrabold;
+        font-size: 24px;
+        color: $grey-7;
+        line-height: 150%;
+      }
+      &.h2 {
+        font-family: $extrabold;
+        font-size: 20px;
+        color: $grey-7;
+        line-height: 150%;
+      }
+      &.h3 {
+        font-family: $bold;
+        font-size: 16px;
+        background-color: $blue-3;
+        color: white;
+        line-height: 150%;
+        padding: 0 8px;
+      }
+  }
+
   &.h2 {
     font-family: $light;
     line-height: 140%;
