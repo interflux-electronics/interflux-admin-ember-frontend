@@ -1,0 +1,19 @@
+<div class='tabs'>
+  <header>
+    <h1 class='ds px h1'>{{@title}}</h1>
+
+    {{#let this.router.currentRoute.name as |route|}}
+      {{#each @links as |link|}}
+        <Button
+          @label={{link.label}}
+          @route={{link.route}}
+          @theme={{if (eq link.route route) 'active' 'idle'}}
+        />
+      {{/each}}
+    {{/let}}
+  </header>
+
+  <article>
+    {{yield}}
+  </article>
+</div>
