@@ -1,5 +1,5 @@
 .tabs {
-  header {
+  nav.path {
     height: 70px;
     display: flex;
     align-items: center;
@@ -39,5 +39,9 @@
     align-items: flex-start;
     width: 810px;
     margin: 0 auto;
+    nav.params {
+      display: flex;
+      gap: 12px;
+    }
   }
 }

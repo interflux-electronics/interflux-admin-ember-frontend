@@ -1,0 +1,11 @@
+<div class='iterator'>
+  <Button @icon='chevron-left' @theme='medium grey' />
+
+  <select>
+    {{#each @options as |opt|}}
+      <option value={{opt}}>{{opt}}</option>
+    {{/each}}
+  </select>
+
+  <Button @icon='chevron-right' @theme='medium grey' />
+</div>
