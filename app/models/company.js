@@ -25,6 +25,7 @@ export default class CompanyModel extends Model {
   @attr('number') rankOnGroupWebsite;
   @attr('number') headCount;
   @attr('boolean') showMarkets;
+  @attr('boolean') approvedIcsfSupplier;
 
   @belongsTo('country') country;
 
