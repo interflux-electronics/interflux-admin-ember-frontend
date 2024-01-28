@@ -36,7 +36,8 @@ export default class CompanyController extends Controller {
     }
     this.company.setProperties({
       shownOnMainWebsite: false,
-      shownOnGroupWebsite: false
+      shownOnGroupWebsite: false,
+      shownOnIcsfWebsite: false
     });
     this.company.save();
   }

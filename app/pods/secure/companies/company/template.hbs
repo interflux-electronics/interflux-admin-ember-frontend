@@ -134,6 +134,15 @@
         @attribute='shownOnGroupWebsite'
         @layout='horizontal'
       />
+
+      <Field::Boolean::Pills
+        @label='Shown on jetfluxer.com?'
+        @legend='Select "yes" if this company is an approved ICSF supplier.'
+        @record={{company}}
+        @attribute='shownOnIcsfWebsite'
+        @layout='horizontal'
+      />
+
     {{/if}}
 
     {{#if company.public}}
