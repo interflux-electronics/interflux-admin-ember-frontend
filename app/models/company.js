@@ -20,6 +20,7 @@ export default class CompanyModel extends Model {
   @attr('boolean') isHeadquarter;
   @attr('boolean') shownOnMainWebsite;
   @attr('boolean') shownOnGroupWebsite;
+  @attr('boolean') shownOnIcsfWebsite;
   @attr('string') coreActivity;
   @attr('string') history;
   @attr('number') rankOnGroupWebsite;
