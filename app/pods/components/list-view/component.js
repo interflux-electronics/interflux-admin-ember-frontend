@@ -10,6 +10,8 @@ import { service } from '@ember/service';
 //   @filters={{this.filters}}
 //   @buttons={{this.buttons}}
 //   @layouts={{array 'grid' 'list'}}
+//   @sortBy='name'
+//   @sortAscending={{true}}
 //   @onFilter={{this.onFilter}}
 //   @onClickRecord={{this.onClickRecord}}
 //   @onClickButton={{this.onClickButton}}
