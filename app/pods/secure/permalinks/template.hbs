@@ -1,15 +1,14 @@
-<Page::Content @id='permalinks'>
-  <h1>Permalinks</h1>
-
-  <Spreadsheet
-    @records={{@model.permalinks}}
-    @linkRoute='secure.permalinks.permalink'
-    @createRoute='secure.permalinks.create'
-    @showCreateButton='true'
-    @columns={{array
-      (hash key='slug' label='ID')
-      (hash key='notes' label='notes')
-    }}
+<Page::Content @id='permalinks' @theme='white'>
+  <ListView
+    @title='Permalinks'
+    @records={{this.records}}
+    @config={{this.config}}
+    @filters={{this.filters}}
+    @buttons={{this.buttons}}
+    @layouts={{array 'table'}}
+    @sortBy='host'
+    @onClickRecord={{this.onClickRecord}}
+    @onClickButton={{this.onClickButton}}
   />
 </Page::Content>
 

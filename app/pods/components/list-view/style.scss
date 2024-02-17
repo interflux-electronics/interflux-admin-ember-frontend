@@ -134,8 +134,8 @@
       text-align: left;
     }
     .tag {
-      margin: 0 10px;
-      flex-shrink: 0;
+      position: absolute;
+      right: 10px;
       .p {
         font-size: 16px;
         font-family: $semibold;
@@ -145,6 +145,7 @@
         top: 0px;
         bottom: 0px;
         border-radius: 2px;
+        outline: 3px solid white;
       }
     }
   }
@@ -257,8 +258,21 @@
           text-align: left;
           font-family: $regular;
           cursor: pointer;
+          user-select: none;
           &:hover {
             box-shadow: 0 0 0 2px $blue-0;
+          }
+          span,
+          .sort {
+            display: inline-block;
+          }
+          .sort {
+            margin-left: 10px;
+            svg {
+              [fill] {
+                fill: $blue-0;
+              }
+            }
           }
         }
       }

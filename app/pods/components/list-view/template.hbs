@@ -62,7 +62,10 @@
                   {{/if}}
                   <span>{{option.label}}</span>
                   {{#if (eq filter.value option.value)}}
-                    <Tag @text={{this.recordCount}} @theme='admin small' />
+                    <Tag
+                      @text={{this.recordCount}}
+                      @theme='admin small {{option.count.color}}'
+                    />
                   {{/if}}
                 </button>
               {{/each}}
@@ -86,7 +89,7 @@
                     {{#if (and checkbox.checked checkbox.count)}}
                       <Tag
                         @text={{checkbox.count.label}}
-                        @theme='{{checkbox.count.color}} admin small'
+                        @theme='admin small {{checkbox.count.color}}'
                       />
                     {{/if}}
                   </button>
@@ -96,34 +99,48 @@
           {{/if}}
         {{/each}}
 
-        <Button::Group @theme='stretch-evenly'>
-          {{#each @layouts as |layout|}}
-            <Button
-              @icon={{layout}}
-              @theme='medium grey {{if this.showTable "selected"}}'
-              @onClick={{fn (mut this.layout) layout}}
-            />
-          {{/each}}
-        </Button::Group>
+        {{#if (gt @layouts.length 1)}}
+          <Button::Group @theme='stretch-evenly'>
+            {{#each this.layouts as |layout|}}
+              <Button
+                @icon={{layout.name}}
+                @theme='medium grey {{if layout.selected "selected"}}'
+                @onClick={{fn (mut this.layout) layout.name}}
+              />
+            {{/each}}
+          </Button::Group>
+        {{/if}}
       </div>
     </aside>
 
     <main>
-      {{#if this.records}}
+      {{#if this.sortedRecords}}
         {{#if this.showTable}}
           <table>
             <thead>
               <tr>
-                {{#each @config.labels as |column|}}
-                  <th>
-                    {{column.label}}
+                {{#each this.columns as |column|}}
+                  <th
+                    role='button'
+                    onclick={{fn this.onClickColumnHead column}}
+                  >
+                    <span>{{column.label}}</span>
+                    {{#if column.sorted}}
+                      <div class='sort'>
+                        {{#if this.sortAscending}}
+                          <Svg::SortUp />
+                        {{else}}
+                          <Svg::SortDown />
+                        {{/if}}
+                      </div>
+                    {{/if}}
                   </th>
                 {{/each}}
               </tr>
             </thead>
 
             <tbody>
-              {{#each this.records as |record|}}
+              {{#each this.sortedRecords as |record|}}
                 <tr role='button' onclick={{fn @onClickRecord record}}>
                   {{#each @config.labels as |column|}}
                     <td>
