@@ -10,6 +10,8 @@ import { service } from '@ember/service';
 //   @filters={{this.filters}}
 //   @buttons={{this.buttons}}
 //   @layouts={{array 'grid' 'list'}}
+//   @sortBy='name'
+//   @sortAscending={{true}}
 //   @onFilter={{this.onFilter}}
 //   @onClickRecord={{this.onClickRecord}}
 //   @onClickButton={{this.onClickButton}}
@@ -18,12 +20,46 @@ import { service } from '@ember/service';
 export default class ListViewComponent extends Component {
   constructor() {
     super(...arguments);
-    if (!this.args.loading) {
+
+    // On the loading routes, we render the <ListView @loading="true">.
+    // Do nothing when loading.
+    if (this.args.loading) {
+      return;
+    }
+
+    // On page load, always show the frist layout in the list.
+    // If no layouts are passed down, assume the table layout.
+    if (this.args.layouts) {
       this.layout = this.args.layouts[0];
+    } else {
+      this.layout === 'table';
+    }
+
+    // If @sortBy is not passed in, then assume sorting by the first column.
+    if (this.args.sortBy) {
+      this.sortBy = this.args.sortBy;
+    } else {
+      this.sortBy = this.args.config.labels[0].property;
+    }
+
+    // If @sortAscending is not passed in, then assume sorting ascending (alphabetically).
+    if (this.args.sortAscending) {
+      this.sortAscending = this.args.sortAscending;
+    } else {
+      this.sortAscending = true;
     }
   }
 
   @tracked layout;
+
+  get layouts() {
+    return this.args.layouts.map((l) => {
+      return {
+        name: l,
+        selected: this.layout === l
+      };
+    });
+  }
 
   get showTable() {
     return this.layout === 'table';
@@ -37,7 +73,7 @@ export default class ListViewComponent extends Component {
     return this.layout === 'grid';
   }
 
-  get records() {
+  get filteredRecords() {
     let records = this.args.records;
 
     // Prevent records from appearing when on create route;
@@ -56,7 +92,7 @@ export default class ListViewComponent extends Component {
         });
       }
 
-      if (filter.type === 'options') {
+      if (filter.type === 'options' && filter.value !== 'all') {
         records = records.filterBy(filter.property, filter.value);
       }
 
@@ -74,7 +110,7 @@ export default class ListViewComponent extends Component {
   }
 
   get recordCount() {
-    return this.records.length.toString();
+    return this.filteredRecords.length.toString();
   }
 
   get search() {
@@ -165,35 +201,60 @@ export default class ListViewComponent extends Component {
 
   // SORT
 
-  // @tracked sortBy;
-  // @tracked sortUp = true;
+  @tracked sortBy;
+  @tracked sortAscending = true;
 
-  // get sortedRecords() {
-  //   const arr = this.args.records.rejectBy('isNew').sortBy(this.sortBy);
-  //   const isBlank = (x) => {
-  //     return x[this.sortBy] === null || x[this.sortBy] === undefined;
-  //   };
-  //   const blanks = arr.filter(isBlank);
-  //   const values = arr.reject(isBlank);
-  //   const records = [...values, ...blanks];
+  // Sort the filtered records.
+  get sortedRecords() {
+    // Only show the filtered records
+    let records = this.filteredRecords;
 
-  //   if (this.sortUp) {
-  //     return records;
-  //   } else {
-  //     return records.reverse();
-  //   }
-  // }
+    console.log(records.length, 'X');
 
-  // @action
-  // setSortBy(key) {
-  //   if (this.sortBy === key) {
-  //     this.sortUp = !this.sortUp;
-  //   } else {
-  //     this.sortBy = key;
-  //     this.sortUp = true;
-  //   }
+    // Only show records which are not currently being created.
+    records = records.rejectBy('isNew');
 
-  //   // Always reset the highlight or it may jump down the list
-  //   this.highlighted = null;
-  // }
+    // Sort by chosen key
+    records = records.sortBy(this.sortBy);
+
+    // Reverse the order if needed
+    if (this.sortAscending === false) {
+      records = records.reverse();
+    }
+
+    // Make sure empty values appear at the end of the list.
+    // const isBlank = (x) => {
+    //   return x[this.sortBy] === null || x[this.sortBy] === undefined;
+    // };
+    // const blanks = arr.filter(isBlank);
+    // const values = arr.reject(isBlank);
+    // const records = [...values, ...blanks];
+
+    return records;
+  }
+
+  // COLUMNS
+
+  get columns() {
+    return this.args.config.labels.map((l) => {
+      const { label, property } = l;
+      const sorted = this.sortBy === property;
+
+      return { label, property, sorted };
+    });
+  }
+
+  @action
+  onClickColumnHead(column) {
+    const key = column.property;
+
+    // When user clicks column which is already the sorted column, then reverse the sort order.
+    // When user clicks columns which are not sorted, then sort that column ascending.
+    if (this.sortBy === key) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortBy = key;
+      this.sortAscending = true;
+    }
+  }
 }
