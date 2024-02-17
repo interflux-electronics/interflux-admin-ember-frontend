@@ -209,8 +209,6 @@ export default class ListViewComponent extends Component {
     // Only show the filtered records
     let records = this.filteredRecords;
 
-    console.log(records.length, 'X');
-
     // Only show records which are not currently being created.
     records = records.rejectBy('isNew');
 
