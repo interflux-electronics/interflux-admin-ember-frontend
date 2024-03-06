@@ -174,7 +174,7 @@
 
         {{#if this.showList}}
           <ul class='list'>
-            {{#each this.records as |record|}}
+            {{#each this.sortedRecords as |record|}}
               <li role='button' onclick={{fn @onClickRecord record}}>
                 {{#if @config.image}}
                   <div class='image'>
@@ -209,7 +209,7 @@
 
         {{#if this.showGrid}}
           <ul class='grid'>
-            {{#each this.records as |record|}}
+            {{#each this.sortedRecords as |record|}}
               <li role='button' onclick={{fn @onClickRecord record}}>
                 {{#if @config.image}}
                   <div class='image'>
