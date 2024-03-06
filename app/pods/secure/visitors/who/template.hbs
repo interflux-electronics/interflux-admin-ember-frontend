@@ -1,9 +1,81 @@
+<p>🚧 Under constructions 🚧</p>
+
 <nav class='params'>
-  <Form::Dropdown @options={{this.websites}} />
+  <Form::Dropdown @options={{this.hosts}} />
   <Form::Iterator @options={{this.years}} />
 </nav>
 
-<h2 class='ds px h2'>What did visitors do on interflux.com in 2024?</h2>
+<h2 class='ds px h2'>Who visited
+  <Link @url='https://{{this.host}}' @label={{this.host}} />
+  in
+  {{this.year}}?</h2>
+
 <h3 class='ds px h3'>1. Customers</h3>
+<div class='text'>
+  <p class='ds px p'>
+    Our website
+    <Link @url='https://{{this.host}}' @label={{this.host}} />
+    was visited
+    {{this.totalCustomers}}
+    times by customers in
+    {{this.year}}.<br />Anyone who is not a robot and who is not part of the
+    Interflux Group, is considered a "customer".<br />Each time our website is
+    opened up until it was closed counts as one "visit".</p>
+</div>
+
+{{#if @loading}}
+  <p>Loading</p>
+  <Chart @loading='true' />
+  <Table @loading='true' />
+{{else}}
+  <Chart @data={{this.data.customers.perMonth}} @type='bars' @theme='green' />
+  <Table
+    @data={{this.data.customers.perCountry}}
+    @columns={{this.customerColumns}}
+  />
+{{/if}}
+
 <h3 class='ds px h3'>2. Interflux</h3>
+<p class='ds px p'>
+  Our website
+  <Link @url='https://{{this.host}}' @label={{this.host}} />
+  was visited
+  {{this.totalInterfux}}
+  times by Interflux Group members
+  {{this.year}}.<br />Anyone who visits our website from known Interflux company
+  IP addresses will be considered "Interflux".<br />Also, if you are currently
+  logged into
+  <Link @url='https://admin.interflux.com' @label='admin.interflux.com' />
+  your visits are counted as "Interflux".</p>
+{{#if @loading}}
+  <p>Loading</p>
+  <Chart @loading='true' />
+  <Table @loading='true' />
+{{else}}
+  <Chart @data={{this.data.interflux.perMonth}} @type='bars' @theme='blue' />
+  <Table
+    @data={{this.data.interflux.perCompany}}
+    @columns={{this.interfluxColumns}}
+  />
+{{/if}}
+
 <h3 class='ds px h3'>3. Robots</h3>
+<p class='ds px p'>
+  Our website
+  <Link @url='https://{{this.host}}' @label={{this.host}} />
+  was visited
+  {{this.totalRobots}}
+  times by robots in
+  {{this.year}}.<br />When we mean computers who have been instructed to
+  automatically perform website visits. These are commonly referred to as
+  “bots”. Good bots for example are Googlebot and Interfluxbot. Bad bots are
+  hackers who scan the internet for vulnerabilities. The aim is to help good
+  bots and to block bad bots.</p>
+{{#if @loading}}
+  <p>Loading</p>
+  <Chart @loading='true' />
+  <Table @loading='true' />
+{{else}}
+  <Chart @data={{this.data.robots.perMonth}} @type='bars' @theme='orange' />
+  <Table @data={{this.data.robots.perSource}} @columns={{this.robotColumns}} />
+{{/if}}
