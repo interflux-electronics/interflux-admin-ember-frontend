@@ -1,0 +1,17 @@
+{{#if (eq @type 'bars')}}
+  <div class='bar-chart {{@theme}}'>
+    {{#if @loading}}
+      <p>Loading ...</p>
+    {{else}}
+      {{#each this.blocks as |block|}}
+        <div class='column'>
+          <p class='total'>{{block.total}}</p>
+          <div class='max'>
+            <div class='bar' style='height: {{block.height}}px;'></div>
+          </div>
+          <p class='label'>{{block.label}}</p>
+        </div>
+      {{/each}}
+    {{/if}}
+  </div>
+{{/if}}
