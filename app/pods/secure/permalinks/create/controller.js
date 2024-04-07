@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 
-export default class WebinarCreateController extends Controller {
+export default class PermalinkCreateController extends Controller {
   @service router;
   @service store;
 
