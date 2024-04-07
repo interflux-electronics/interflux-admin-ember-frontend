@@ -143,6 +143,24 @@
       > ul.list + h2 {
         margin-top: 20px;
       }
+      p + .buttons {
+        margin-top: 20px;
+      }
+      .buttons + .list {
+        margin-top: 20px;
+      }
+      > .error {
+        margin: 0 40px;
+      }
+      .buttons + .error {
+        margin-top: 20px;
+      }
+      .error + ul.list {
+        margin-top: 20px;
+      }
+      p + ul.list {
+        margin-top: 20px;
+      }
       hr {
         border: 0;
         border-top: 1px dashed $grey-2;
@@ -256,6 +274,14 @@
           .left {
             display: flex;
             align-items: center;
+            &.stacked {
+              flex-direction: column;
+              align-items: flex-start;
+              padding: 10px 14px;
+              p {
+                line-height: 150%;
+              }
+            }
             span.no-link {
               line-height: 46px;
               padding: 0 15px;
@@ -353,6 +379,13 @@
           line-height: 20px;
           text-align: center;
           padding: 0 4px;
+        }
+      }
+      > .buttons {
+        padding: 0 40px;
+        &.horizontal {
+          display: flex;
+          gap: 6px;
         }
       }
     }
