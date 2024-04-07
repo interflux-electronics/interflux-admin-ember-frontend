@@ -1,7 +1,7 @@
 <div class='dot-dot-dot-menu' {{did-insert this.onInsert}}>
   <Button @icon='ellipsis-vertical' @onClick={{this.onClick}} />
   {{#if this.showDropdown}}
-    <div class='dropdown'>
+    <div class='popout'>
       <div class='offset'>
         <div class='pane'>
           {{yield}}
