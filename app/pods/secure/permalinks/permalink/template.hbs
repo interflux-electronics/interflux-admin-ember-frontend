@@ -53,5 +53,15 @@
       @legend='For future reference, explain where the QR code will be displayed.'
       @multiline='true'
     />
+
+    <Field::OneToMany
+      @label='Event'
+      @baseRecord={{permalink}}
+      @baseLabel='event'
+      @targetModel='event'
+      @targetFilter='name'
+      @minKeyStrokes='2'
+      @targetRoute='secure.events.event'
+    />
   </Modal>
 {{/let}}
