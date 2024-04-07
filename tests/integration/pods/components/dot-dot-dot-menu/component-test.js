@@ -19,10 +19,10 @@ module('Integration | Component | dot-dot-dot-menu', function (hooks) {
     const button = this.element.querySelector('.button.ellipsis-vertical');
 
     assert.ok(button);
-    assert.notOk(this.element.querySelector('.dropdown'));
+    assert.notOk(this.element.querySelector('.popout'));
 
     await click('button');
 
-    assert.ok(this.element.querySelector('.dropdown'));
+    assert.ok(this.element.querySelector('.popout'));
   });
 });
