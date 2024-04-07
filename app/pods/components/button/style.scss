@@ -124,6 +124,7 @@ button {
     }
 
     // Used as save button modal form UIs
+    // TODO: rename to .button.small.green
     &.save {
       background: $green-1;
       color: white;

@@ -2,6 +2,8 @@
   <Modal @id='event'>
     <h1>{{if event.name event.name 'New event'}}</h1>
 
+    <h2>Event details</h2>
+
     <Field::String @label='Name' @record={{event}} @attribute='name' />
 
     <Field::OneToMany
@@ -38,11 +40,172 @@
       @tools={{array 'bold' 'link' 'bullets'}}
     />
 
-    <Button
-      @text='Delete from database'
-      @onClick={{this.destroyRecord}}
-      @theme='danger-red'
-      @icon='warning'
+    <h2>Registration</h2>
+
+    <Field::Boolean::Pills
+      @label='Has registration form'
+      @record={{event}}
+      @attribute='hasRegistrationForm'
+      @layout='horizontal'
     />
+
+    {{#if event.hasRegistrationForm}}
+      <Field::Boolean::Pills
+        @label='Ask first name'
+        @record={{event}}
+        @attribute='askFirstName'
+        @layout='horizontal'
+      />
+
+      <Field::Boolean::Pills
+        @label='Ask last name'
+        @record={{event}}
+        @attribute='askLastName'
+        @layout='horizontal'
+      />
+
+      <Field::Boolean::Pills
+        @label='Ask role'
+        @record={{event}}
+        @attribute='askRole'
+        @layout='horizontal'
+      />
+
+      <Field::Boolean::Pills
+        @label='Ask company'
+        @record={{event}}
+        @attribute='askCompany'
+        @layout='horizontal'
+      />
+
+      <h2>Registration links</h2>
+
+      <h3>Permalinks to registration forms</h3>
+
+      <p>To invite people to register for this event, please first create a
+        permalinks below, then copy paste these link or QRs into your email
+        campaigns.</p>
+
+      <p>Note that we have registration forms in multiple languages and that
+        each link can only point at one translated form at a time. Therefor,
+        create 1 link per language of your target audience.</p>
+
+      {{#unless this.hasAllLinks}}
+        <div class='buttons horizontal'>
+          {{#unless this.hasEnglishLink}}
+            <Button
+              @text='English'
+              @onClick={{fn this.createLink 'English'}}
+              @theme='save'
+            />
+          {{/unless}}
+
+          {{#unless this.hasFrenchLink}}
+            <Button
+              @text='French'
+              @onClick={{fn this.createLink 'French'}}
+              @theme='save'
+            />
+          {{/unless}}
+
+          {{#unless this.hasGermanLink}}
+            <Button
+              @text='German'
+              @onClick={{fn this.createLink 'German'}}
+              @theme='save'
+            />
+          {{/unless}}
+
+          {{#unless this.hasSpanishLink}}
+            <Button
+              @text='Spanish'
+              @onClick={{fn this.createLink 'Spanish'}}
+              @theme='save'
+            />
+          {{/unless}}
+        </div>
+      {{/unless}}
+
+      {{#if this.error}}
+        <Error::Generic />
+      {{/if}}
+
+      <ul class='list'>
+        {{#each this.links as |link|}}
+          <li class='solid'>
+            <div class='left'>
+              <a
+                href={{href-to 'secure.permalinks.permalink' link.permalink.id}}
+              >
+                {{link.label}}
+              </a>
+            </div>
+          </li>
+        {{else}}
+          <li class='dashed'>
+            <div class='left'>
+              <span class='no-link'>- none -</span>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+
+      <h2>Confirmation email</h2>
+
+      <Field::String
+        @label='Confirmation email subject'
+        @record={{event}}
+        @attribute='confirmationEmailSubject'
+      />
+
+      <Field::String
+        @label='Confirmation email BCC'
+        @record={{event}}
+        @multiline='true'
+        @attribute='confirmationEmailBcc'
+      />
+
+      <Field::String
+        @label='Confirmation email body'
+        @record={{event}}
+        @attribute='confirmationEmailBody'
+        @multiline='true'
+        @tools={{array 'bold' 'link' 'bullets'}}
+      />
+    {{/if}}
+
+    <h2>Attendees</h2>
+
+    <p>These are all the people who have completed the registration form:</p>
+
+    <ul class='list'>
+      {{#each event.eventAttendees as |attendee|}}
+        <li class='solid'>
+          <div class='left stacked'>
+            <p>Name: {{attendee.firstName}} {{attendee.lastName}}</p>
+            <p>Role: {{attendee.role}}</p>
+            <p>Company: {{attendee.company}}</p>
+            <p>Email: {{attendee.email}}</p>
+          </div>
+        </li>
+      {{else}}
+        <li class='dashed'>
+          <div class='left'>
+            <span class='no-link'>- none -</span>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+
+    <h2>Dangerzone</h2>
+
+    <Fieldset>
+      <Button
+        @text='Delete from database'
+        @onClick={{this.destroyRecord}}
+        @theme='danger-red'
+        @icon='warning'
+      />
+    </Fieldset>
   </Modal>
 {{/let}}

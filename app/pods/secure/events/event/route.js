@@ -5,7 +5,7 @@ export default class WebinarRoute extends ModalRoute {
   model(params) {
     return hash({
       event: this.store.findRecord('event', params.id, {
-        include: ['country'].join(',')
+        include: ['country', 'permalinks', 'event_attendees'].join(',')
       })
     });
   }
