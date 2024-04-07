@@ -54,7 +54,7 @@
       }
     }
   }
-  .dropdown {
+  .popout {
     position: absolute;
     height: 0;
     top: 50%;
@@ -77,7 +77,6 @@
       button {
         display: flex;
         align-items: center;
-        display: flex;
         background: white;
         height: 40px;
         padding: 0;

@@ -18,7 +18,7 @@
 // Normalise
 @import 'normalise/cross-browser';
 @import 'normalise/cross-project';
-@import 'normalise/interflux-ds';
+@import 'normalise/interflux-design-system';
 
 // Pages
 @import 'app/pods/index/style';
@@ -53,6 +53,11 @@
 @import 'app/pods/components/field/string/radio/style';
 @import 'app/pods/components/error/style';
 @import 'app/pods/components/pills/style';
+@import 'app/pods/components/tabs/style';
+@import 'app/pods/components/form/dropdown/style';
+@import 'app/pods/components/form/iterator/style';
+@import 'app/pods/components/chart/style';
+@import 'app/pods/components/table/style';
 
 // Forms
 @import 'app/pods/components/tag/style';

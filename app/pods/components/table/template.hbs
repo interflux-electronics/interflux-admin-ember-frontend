@@ -1,0 +1,32 @@
+{{#if @loading}}
+  <p>Loading ...</p>
+{{else}}
+  <table class='table'>
+    <thead>
+      <tr>
+        {{#each this.columns as |column|}}
+          <th>{{column.label}}</th>
+        {{/each}}
+        <th class='spacer'></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each this.rows as |row|}}
+        <tr>
+          {{#each row.cells as |cell|}}
+            <td>
+              <div class='content'>
+                {{#if cell.showFlag}}
+                  <Flag @country={{cell.country}} />
+                {{/if}}
+                <span>{{cell.label}}</span>
+              </div>
+            </td>
+          {{/each}}
+          <td class='spacer'></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}

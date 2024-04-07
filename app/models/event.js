@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class EventModel extends Model {
   @attr('string') name;
@@ -8,7 +8,20 @@ export default class EventModel extends Model {
   @attr('string') city;
   @attr('string') description;
 
+  @attr('boolean') hasRegistrationForm;
+  @attr('boolean') askFirstName;
+  @attr('boolean') askLastName;
+  @attr('boolean') askRole;
+  @attr('boolean') askCompany;
+
+  @attr('string') confirmationEmailSubject;
+  @attr('string') confirmationEmailBody;
+  @attr('string') confirmationEmailBcc;
+
   @belongsTo('country') country;
+
+  @hasMany('event-attendee') eventAttendees;
+  @hasMany('permalink') permalinks;
 
   get datesCombined() {
     if (!this.startDate) {

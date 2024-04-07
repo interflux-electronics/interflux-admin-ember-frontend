@@ -1,0 +1,27 @@
+// The <Search> is nearly identical to the <Form::Input> and thus inherits all its styles.
+// See the <Form::Input> CSS, except for these overwrites:
+
+.dropdown {
+  border: 1px solid $grey-2;
+  background-color: white;
+  display: flex;
+  position: relative;
+  border-radius: 3px;
+  padding-right: 33px;
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    line-height: 33px;
+    border: 0;
+    padding: 0 12px;
+    background-color: transparent;
+  }
+  button {
+    position: absolute;
+    right: 0;
+    line-height: 33px;
+    width: 33px;
+    height: 33px;
+    padding: 0;
+  }
+}

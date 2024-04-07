@@ -11,4 +11,12 @@ main.content {
     // TODO: find better way... page service?
     z-index: 2;
   }
+
+  &.grey {
+    background-color: $grey-0;
+    padding: 0;
+
+    // TODO: find better way... page service?
+    z-index: 2;
+  }
 }

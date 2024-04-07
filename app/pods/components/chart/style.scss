@@ -1,0 +1,74 @@
+.bar-chart {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid $grey-1;
+  background: white;
+  display: flex;
+  gap: 4px;
+  padding: 30px 30px 26px;
+  &.green {
+    .column {
+      .max {
+        .bar {
+          box-sizing: border-box;
+          border: 1px solid $green-2;
+          background: radial-gradient(ellipse at top right, $green-1, $green-2);
+        }
+      }
+    }
+  }
+  &.blue {
+    .column {
+      .max {
+        .bar {
+          box-sizing: border-box;
+          border: 1px solid $blue-2;
+          background: radial-gradient(ellipse at top right, $blue-1, $blue-2);
+        }
+      }
+    }
+  }
+  &.orange {
+    .column {
+      .max {
+        .bar {
+          box-sizing: border-box;
+          border: 1px solid $orange-3;
+          background: radial-gradient(
+            ellipse at top right,
+            $orange-1,
+            $orange-3
+          );
+        }
+      }
+    }
+  }
+  .column {
+    width: calc(100% / 12); // to be overriden by inline styles
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    .max {
+      width: 100%;
+      // height: 100px; // set with JS
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin: 10px 0;
+      .bar {
+        width: 100%;
+        height: 50%; // to be overriden by inline styles
+        background-color: $grey-5;
+        border-bottom: 1px solid $green-1;
+      }
+    }
+    .label {
+      font-size: 15px;
+      color: $grey-5;
+      text-align: center;
+      line-height: 20px;
+      height: 40px;
+    }
+  }
+}

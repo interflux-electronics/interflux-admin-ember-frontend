@@ -1,0 +1,19 @@
+// The <Search> is nearly identical to the <Form::Input> and thus inherits all its styles.
+// See the <Form::Input> CSS, except for these overwrites:
+
+.iterator {
+  display: flex;
+  height: 33px;
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    line-height: 33px;
+    padding: 0 12px;
+    border: 1px solid $grey-2;
+    border-top: 0;
+    border-bottom: 0;
+  }
+  button {
+    line-height: 33px;
+  }
+}
