@@ -7,6 +7,7 @@ export default class EventModel extends Model {
   @attr('string') endDate;
   @attr('string') city;
   @attr('string') description;
+  @attr('string') website;
 
   @attr('boolean') hasRegistrationForm;
   @attr('boolean') askFirstName;
