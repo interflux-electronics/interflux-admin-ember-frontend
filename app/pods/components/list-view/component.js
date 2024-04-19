@@ -178,7 +178,7 @@ export default class ListViewComponent extends Component {
       if (filter.type === 'checkboxes') {
         filter.checkboxes = filter.checkboxes.map((c) => {
           const checkbox = Object.assign({}, c);
-          const records = this.args.records.filter((record) => {
+          const records = this.filteredRecords.filter((record) => {
             return record
               .get(filter.property)
               .split(',')
