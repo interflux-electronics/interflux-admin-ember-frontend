@@ -154,26 +154,31 @@
 
       <h2>Confirmation email</h2>
 
-      <Field::String
+      <p>When visitors complete an event registration form, 3 confirmation
+        emails are sent: 1 to the visitor 1 to Steven and 1 to Jan.</p>
+      <p>For now the confirmation emails are available in French and English.</p>
+      <p>Please discuss with Jan how to further improve this feature.</p>
+
+      {{!-- <Field::String
         @label='Confirmation email subject'
         @record={{event}}
         @attribute='confirmationEmailSubject'
-      />
+      /> --}}
 
-      <Field::String
+      {{!-- <Field::String
         @label='Confirmation email BCC'
         @record={{event}}
         @multiline='true'
         @attribute='confirmationEmailBcc'
-      />
+      /> --}}
 
-      <Field::String
+      {{!-- <Field::String
         @label='Confirmation email body'
         @record={{event}}
         @attribute='confirmationEmailBody'
         @multiline='true'
         @tools={{array 'bold' 'link' 'bullets'}}
-      />
+      /> --}}
     {{/if}}
 
     <h2>Attendees</h2>
