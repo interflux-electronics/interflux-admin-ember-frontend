@@ -14,5 +14,9 @@ export default class OneToManyPillsComponent extends FieldComponent {
         whitelist: [belongsTo]
       }
     });
+
+    if (this.args.onSelect) {
+      this.args.onSelect();
+    }
   }
 }

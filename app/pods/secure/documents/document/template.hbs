@@ -19,13 +19,14 @@
       @options={{this.filteredCategories}}
       @optionLabel='nameSingle'
       @layout='vertical'
+      @onSelect={{this.onSelectCategory}}
     />
 
     <Field::String
       @label='Document name'
       @record={{@model.document}}
       @attribute='name'
-      @afterSave={{this.updatePath}}
+      @afterSave={{this.onSaveName}}
     />
 
     <Field::File

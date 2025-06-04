@@ -7,6 +7,7 @@ export default class DocumentController extends Controller {
   @service router;
 
   @tracked deleting = false;
+  @tracked renaming = false;
 
   get document() {
     return this.model.document;
@@ -33,16 +34,37 @@ export default class DocumentController extends Controller {
     this.router.transitionTo('secure.documents');
   }
 
-  @action
-  updatePath() {
-    console.warn('updating path...');
-    this.document.setProperties({
-      path: this.document.cdnBasePath
-    });
-    this.document.save({
-      adapterOptions: {
-        whitelist: ['path']
-      }
+  @action async onSelectCategory() {
+    if (!this.document.category.get('id')) {
+      return;
+    }
+
+    await this.delay(3000);
+
+    this.router.refresh();
+  }
+
+  @tracked count = 0;
+
+  @action async onSaveName() {
+    const n = this.count + 1;
+
+    this.count = n;
+
+    await this.delay(3000);
+
+    if (n < this.count) {
+      return;
+    }
+
+    this.router.refresh();
+  }
+
+  // HELPER
+
+  delay(ms) {
+    return new Promise((approve) => {
+      window.setTimeout(approve, ms);
     });
   }
 }
