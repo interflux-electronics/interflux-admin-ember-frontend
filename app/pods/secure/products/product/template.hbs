@@ -481,11 +481,11 @@
       @options={{this.lifeCycleOptions}}
     />
 
-    {{#if (or product.isOutdated product.isDiscontinued)}}
+    {{#if (or product.isReplaced product.isDiscontinued)}}
       <h2>Substitute</h2>
 
       <Field::OneToMany
-        @label='Is there a better product?'
+        @label='Replaced by?'
         @legend='In case there is a product which does the same thing as {{product.name}}, but better, then please find and select that product below. If {{product.name}} has the status "outdated" or "discontinued" and you have selected a better product below, then we will show a message on the product page of {{product.name}} to encourage visitors to look at the better product instead.'
         @baseRecord={{product}}
         @baseLabel='superiorProduct'

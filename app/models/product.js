@@ -87,8 +87,8 @@ export default class ProductModel extends Model {
     return this.lifeCycle === 'offline';
   }
 
-  get isOutdated() {
-    return this.lifeCycle === 'outdated';
+  get isReplaced() {
+    return this.lifeCycle === 'replaced';
   }
 
   get isDiscontinued() {

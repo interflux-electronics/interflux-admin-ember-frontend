@@ -87,32 +87,31 @@ export default class ProductController extends Controller {
     return [
       {
         value: 'popular',
-        label:
-          '**Popular** - These products have been best-sellers for years. Highly promoted on our website.'
+        label: '**Popular** - Best-sellers for years. On front page.'
       },
       {
         value: 'new',
-        label:
-          '**New** - Promising and in need of early adopters. Highly promoted on our website.'
+        label: '**New** - New and upcoming. On front page.'
       },
       {
-        value: 'recommended',
-        label:
-          '**Mainstream** - Most of our products. Can be ordered. Visible on website and in Google.'
+        value: 'promoted',
+        label: '**Promoted** - In view.'
       },
       {
-        value: 'outdated',
-        label:
-          '**Replaced** - Has been replaced by a better product. Can still be ordered. Can still be found on our website and via Google, though we do not actively promote it anymore. We suggest visitors to use a better product instead (if selected).'
+        value: 'demoted',
+        label: '**Demoted** - Hidden from view, but findable.'
+      },
+      {
+        value: 'replaced',
+        label: '**Replaced** - There is a better product.'
       },
       {
         value: 'discontinued',
-        label:
-          "`**Out of production** - Cannot be ordered. It can however still be found on our website and via Google, though we don't promote it any way. We suggest visitors to use a better product instead (if selected)."
+        label: '`**Discontinued** - End of life. Cannot be ordered.'
       },
       {
         value: 'offline',
-        label: '**Offline** - Hidden from website and Google.'
+        label: '**Offline** - Excluded from our public websites.'
       }
     ];
   }
