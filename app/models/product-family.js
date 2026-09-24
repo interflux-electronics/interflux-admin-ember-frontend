@@ -12,9 +12,6 @@ export default class ProductFamilyModel extends Model {
   @belongsTo('product-family', { inverse: 'children' }) productFamily;
   @hasMany('product-family', { inverse: 'productFamily' }) children;
 
-  @hasMany('product') products;
-  @hasMany('product-family-image') productFamilyImages;
-
   @hasMany('product', { inverse: 'mainFamily' }) productsWithMain;
   @hasMany('product', { inverse: 'subFamily' }) productsWithSub;
 
@@ -49,10 +46,6 @@ export default class ProductFamilyModel extends Model {
   }
 
   get productCount() {
-    return this.products.length;
-  }
-
-  get imagesCount() {
-    return this.productFamilyImages.length;
+    return this.productsWithMain.length + this.productsWithSub.length;
   }
 }

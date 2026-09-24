@@ -10,21 +10,6 @@ export default class FamilyController extends Controller {
     return this.model.family;
   }
 
-  get imageCount() {
-    if (!this.family.productFamilyImages) {
-      return 0;
-    }
-    return this.family.productFamilyImages.length;
-  }
-
-  get maxAvatarCountReached() {
-    return this.imageCount >= 4;
-  }
-
-  get sortedImages() {
-    return this.model.family.productFamilyImages.sortBy('rankAmongImages');
-  }
-
   get mainFamilies() {
     return this.model.families
       .filterBy('isMainFamily')
