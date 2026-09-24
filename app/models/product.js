@@ -25,16 +25,13 @@ export default class ProductModel extends Model {
   @attr('boolean') onFrontPage;
   @attr('number') frontPageRank;
 
-  @belongsTo('product-family') productFamily;
+  @belongsTo('product-family') mainFamily;
+  @belongsTo('product-family') subFamily;
   @belongsTo('image', { inverse: 'product' }) image;
 
   @hasMany('image', { inverse: 'products' }) images;
   @hasMany('video', { inverse: 'products' }) videos;
   @hasMany('document') documents;
-
-  get family() {
-    return this.productFamily;
-  }
 
   get productUsesSorted() {
     const rank = 'rankAmongUses';

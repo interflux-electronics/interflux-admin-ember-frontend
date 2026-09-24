@@ -6,13 +6,8 @@ export default class FamilyRoute extends ModalRoute {
     return hash({
       families: this.modelFor('secure.families').families,
       family: this.store.findRecord('product-family', params.id, {
-        include: [
-          'products',
-          'product_family_images',
-          'product_family_images.image'
-        ].join(',')
+        include: ['products'].join(',')
       })
-      // delay: new Promise((resolve, reject) => setTimeout(reject, 3000))
     });
   }
 }

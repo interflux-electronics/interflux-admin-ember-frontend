@@ -39,17 +39,29 @@
       />
     {{/if}}
 
+    {{!-- TODO: unbreak --}}
+
+    {{!-- 
+    {{#each family.productsWithMain as |product|}}
+      <p>{{product.name}}</p>
+    {{/each}}
+
+    {{#each family.productsWithSub as |product|}}
+      <p>{{product.name}}</p>
+    {{/each}}
+
     <Field::ManyToOne
       @label='Products belonging to this family'
       @legend='Drag to sort.'
       @baseRecord={{family}}
-      @baseLabel='products'
+      @baseLabel='productsWithSub'
       @targetModel='product'
       @targetLabel='name'
       @targetRank='rankAmongFamily'
       @targetForeignId='productFamily'
       @targetRoute='secure.products.product'
-    />
+    /> 
+    --}}
 
     {{#if family.isMainFamily}}
       <Field::Number
@@ -65,42 +77,6 @@
           <p>{{fam.rank}} - {{fam.namePlural}}</p>
         {{/if}}
       {{/each}}
-    {{/if}}
-
-    {{#if family.isMainFamily}}
-      <h2>Images</h2>
-
-      <Field::ManyToMany
-        @label='The 4 avatars'
-        @legend='On the product overview page we show 4 images to represent this product family.'
-        @baseRecord={{family}}
-        @baseModel='productFamily'
-        @baseLabel='productFamilyImages'
-        @joinModel='product-family-image'
-        @joinRankKey='rankAmongImages'
-        @targetModel='image'
-        @targetLabel='alt'
-        @targetRoute='secure.images.image'
-        @disabled={{this.maxAvatarCountReached}}
-      />
-
-      <Fieldset>
-        <ul class='images'>
-          {{#each this.sortedImages as |joinRecord|}}
-            <li>
-              <p>{{joinRecord.rankAmongImages}}</p>
-              {{#let joinRecord.image as |image|}}
-                <ResponsiveImage
-                  @path={{image.path}}
-                  @variations={{image.variations}}
-                  @caption={{image.caption}}
-                  @alt={{image.alt}}
-                />
-              {{/let}}
-            </li>
-          {{/each}}
-        </ul>
-      </Fieldset>
     {{/if}}
 
     <h2>Content</h2>

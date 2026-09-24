@@ -21,15 +21,31 @@
       @afterSave={{this.afterSaveName}}
     />
 
+    {{!-- TODO: only offer possible family options --}}
+
     <Field::OneToMany
-      @label='Family'
+      @label='Main family'
+      @legend='Choose flux, past, wire, alloy, auxiliaries or machines.'
       @baseRecord={{product}}
-      @baseLabel='productFamily'
+      @baseLabel='mainFamily'
       @targetModel='product-family'
       @targetFilter='nameSingle'
       @targetRoute='secure.families.family'
       @minKeyStrokes='0'
     />
+
+    {{#if product.mainFamily}}
+      <Field::OneToMany
+        @label='Sub family'
+        @legend='Choose family which belongs to main family.'
+        @baseRecord={{product}}
+        @baseLabel='subFamily'
+        @targetModel='product-family'
+        @targetFilter='nameSingle'
+        @targetRoute='secure.families.family'
+        @minKeyStrokes='0'
+      />
+    {{/if}}
 
     <Field::String
       @label='Family override'
@@ -542,11 +558,11 @@
         <li>
           <div class='left'>
             <a
-              href={{product.family.url}}
+              href={{product.mainFamily.url}}
               target='_blank'
               rel='noreferrer noopener'
             >
-              {{product.family.namePlural}}
+              {{product.mainFamily.namePlural}}
               page
             </a>
           </div>
