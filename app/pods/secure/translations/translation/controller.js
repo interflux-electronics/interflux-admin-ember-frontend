@@ -240,8 +240,8 @@ export default class TranslationController extends Controller {
   }
 
   get diff() {
-    const a = this.record.englishBefore;
-    const b = this.record.english;
+    const a = this.record.englishBefore || '';
+    const b = this.record.english || '';
 
     // We're using a third party script for finding differences between 2 strings.
     // https://github.com/jonTrent/PatienceDiff
