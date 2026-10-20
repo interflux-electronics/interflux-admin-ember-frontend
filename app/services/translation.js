@@ -45,20 +45,27 @@ export default class TranslationService extends Service {
       }
     },
     {
+      locale: 'fr',
+      nameEnglish: 'French',
+      country: {
+        id: 'FR',
+        nameEnglish: 'France'
+      }
+    },
+    {
       locale: 'es',
       nameEnglish: 'Spanish',
-      flag: 'ES',
       country: {
         id: 'ES',
         nameEnglish: 'Spain'
       }
     },
     {
-      locale: 'fr',
-      nameEnglish: 'French',
+      locale: 'ja',
+      nameEnglish: 'Japanese',
       country: {
-        id: 'FR',
-        nameEnglish: 'France'
+        id: 'JP',
+        nameEnglish: 'Japan'
       }
     },
     {
